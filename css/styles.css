@@ -1,0 +1,43 @@
+nav > ul{
+    display:flex;
+    justify-content: flex-end;
+}
+nav ul{
+    list-style: none;
+}
+
+nav > ul li:last-child{
+    margin-left: auto;
+}
+
+.nav-title{
+    font-weight: bold;
+}
+
+
+
+main article.contact{
+    margin: 50px;
+    height: 100px;
+    display:flex;
+    justify-content: space-between;
+}
+
+main article section.photo{
+    background: red;
+    height: 100%;
+    width: 15%;
+
+}
+
+main article section.photo{
+    height: 100%;
+    width: 15%;
+}
+
+
+main article section.description{
+    background: blue;
+    height: 100%;
+    width: 70%;
+}
