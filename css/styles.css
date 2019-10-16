@@ -17,30 +17,32 @@ nav > div:last-child{
 
 
 main {
-    margin: 200px 0 0 0
+    margin: 150px 0 0 0
 }
+
 
 main article.contact{
     margin: 50px;
-    height: 100px;
-    display:flex;
+    height: 150px;
+    display: flex;
     justify-content: space-between;
 }
 
 
 main article section.photo{
     background: red;
-    max-width: 100px;
-    min-width: 100px;
+    max-width: 150px;
+    min-width: 150px;
 }
 
 main article section.void{
-    max-width: 100px;
-    min-width: 100px;
+    max-width: 80px;
+    min-width: 20px;
 }
 
 main article section.description{
     background: blue;
     height: 100%;
-    width: 70%;
+    width: 80%;
+    min-width: 300px;
 }
