@@ -1,13 +1,14 @@
-nav > ul{
+nav{
     display:flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 nav ul{
     list-style: none;
 }
 
-nav > ul li:last-child{
+nav > div:last-child{
     margin-left: auto;
+    margin-right: 80px;
 }
 
 .nav-title{
@@ -15,6 +16,9 @@ nav > ul li:last-child{
 }
 
 
+main {
+    margin: 200px 0 0 0
+}
 
 main article.contact{
     margin: 50px;
@@ -23,18 +27,17 @@ main article.contact{
     justify-content: space-between;
 }
 
+
 main article section.photo{
     background: red;
-    height: 100%;
-    width: 15%;
-
+    max-width: 100px;
+    min-width: 100px;
 }
 
-main article section.photo{
-    height: 100%;
-    width: 15%;
+main article section.void{
+    max-width: 100px;
+    min-width: 100px;
 }
-
 
 main article section.description{
     background: blue;
