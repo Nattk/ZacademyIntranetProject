@@ -1,6 +1,7 @@
 @import url("../admin/admin.css");
 @import "../ma_formation/livretAccueil.css";
 @import "../admin/admin.css";
+@import "../admin/gestion_programmes.css";
 
 nav{
     display:flex;
