@@ -1,3 +1,5 @@
+@import url("../admin/admin.css");
+
 nav{
     display:flex;
     justify-content: flex-start;
@@ -46,3 +48,4 @@ main article section.description{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
