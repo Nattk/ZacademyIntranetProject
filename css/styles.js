@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+  'import': 'url("../admin/admin.css")',
   'import': '"../ma_formation/livretAccueil.css"',
   'import': '"../ma_formation/agenda.css"',
+  'import': '"../admin/admin.css"',
   'nav': {
     'display': 'flex',
     'justifyContent': 'flex-start'
