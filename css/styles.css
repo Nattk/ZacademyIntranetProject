@@ -3,9 +3,9 @@
 @import "../ma_formation/agenda.css";
 @import "../admin/admin.css";
 
-nav > div.dropdown-show{
-    margin: 10 !important;
-    padding: 10 !important;
+nav > div{
+  padding-left:1rem;
+  padding-right:1rem;
 }
 
 nav > button:last-child {
