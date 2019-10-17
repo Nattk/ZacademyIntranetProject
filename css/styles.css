@@ -44,3 +44,7 @@ main article section.description{
     height: 100%;
     width: 70%;
 }
+
+main.accueil{
+    margin: 0;
+}
