@@ -18,5 +18,10 @@ export default StyleSheet.create({
   },
   'notification-description': {
     'maxWidth': [{ 'unit': 'em', 'value': 25 }]
+  },
+  'google-calendar': {
+    'borderWidth': '0',
+    'width': [{ 'unit': '%H', 'value': 1 }],
+    'height': [{ 'unit': 'vh', 'value': 65 }]
   }
 });
