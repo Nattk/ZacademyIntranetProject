@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   'import': '"../ma_formation/livretAccueil.css"',
+  'import': '"../ma_formation/agenda.css"',
   'nav': {
     'display': 'flex',
     'justifyContent': 'flex-start'
