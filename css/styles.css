@@ -3,18 +3,14 @@
 @import "../ma_formation/agenda.css";
 @import "../admin/admin.css";
 
-nav {
-  display: flex;
-  justify-content: flex-start;
+nav > div{
+  padding-left:1rem;
+  padding-right:1rem;
 }
 
-nav ul {
-  list-style: none;
-}
-
-nav > div:last-child {
+nav > button:last-child {
   margin-left: auto;
-  margin-right: 80px;
+  margin-right: 50px;
 }
 
 .nav-title {
