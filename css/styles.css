@@ -1,52 +1,52 @@
-nav{
-    display:flex;
-    justify-content: flex-start;
+@import "../ma_formation/livretAccueil.css";
+
+nav {
+  display: flex;
+  justify-content: flex-start;
 }
-nav ul{
-    list-style: none;
+nav ul {
+  list-style: none;
 }
 
-nav > div:last-child{
-    margin-left: auto;
-    margin-right: 80px;
+nav > div:last-child {
+  margin-left: auto;
+  margin-right: 80px;
 }
 
-.nav-title{
-    font-weight: bold;
+.nav-title {
+  font-weight: bold;
 }
 
-#iframe-navbar{
-    width: 100vw;
-    height:11rem;
+#iframe-navbar {
+  width: 100vw;
+  height: 11rem;
 }
 
 main {
-    margin: 150px 0 0 0;
+  margin: 150px 0 0 0;
 }
 
-
-main article.contact{
-    margin: 50px;
-    height: 150px;
-    display: flex;
-    box-sizing: border-box;
+main article.contact {
+  margin: 50px;
+  height: 150px;
+  display: flex;
+  box-sizing: border-box;
 }
 
-
-main article section.photo{
-    background: red;
-    max-width: 150px;
-    min-width: 150px;
+main article section.photo {
+  background: red;
+  max-width: 150px;
+  min-width: 150px;
 }
 
-main article section.void{
-    max-width: 80px;
-    min-width: 20px;
+main article section.void {
+  max-width: 80px;
+  min-width: 20px;
 }
 
-main article section.description{
-    background: blue;
-    min-width: 300px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+main article section.description {
+  background: blue;
+  min-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
