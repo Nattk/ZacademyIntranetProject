@@ -1,9 +1,12 @@
+@import url("../admin/admin.css");
 @import "../ma_formation/livretAccueil.css";
+@import "../admin/admin.css";
 
-nav {
-  display: flex;
-  justify-content: flex-start;
+nav{
+    display:flex;
+    justify-content: flex-start;
 }
+
 nav ul {
   list-style: none;
 }
