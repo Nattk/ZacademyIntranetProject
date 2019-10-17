@@ -2,6 +2,7 @@
 @import "../ma_formation/livretAccueil.css";
 @import "../ma_formation/agenda.css";
 @import "../admin/admin.css";
+@import "../admin/gestion_programmes.css";
 
 nav > div{
   padding-left:1rem;
