@@ -28,10 +28,10 @@ nav > button:last-child {
 }
 
 
-
-main {
-  margin: 150px 0 0 0;
+main{
+  margin: 2em;
 }
+
 
 main article.contact {
   margin: 50px;
