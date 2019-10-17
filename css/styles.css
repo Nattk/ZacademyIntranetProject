@@ -1,30 +1,34 @@
 @import url("../admin/admin.css");
 @import "../ma_formation/livretAccueil.css";
+@import "../ma_formation/agenda.css";
 @import "../admin/admin.css";
 @import "../admin/gestion_programmes.css";
 
-nav{
-    display:flex;
-    justify-content: flex-start;
+nav > div{
+  padding-left:1rem;
+  padding-right:1rem;
 }
 
-nav ul {
-  list-style: none;
+#dropdownMenuLink{
+  background: #b21e3e;
+  border: #b21e3e;
 }
 
-nav > div:last-child {
+#bonjourjérémie{
+  background: #b21e3e;
+  border: #b21e3e;
+}
+
+nav > button:last-child {
   margin-left: auto;
-  margin-right: 80px;
+  margin-right: 50px;
 }
 
 .nav-title {
   font-weight: bold;
 }
 
-#iframe-navbar {
-  width: 100vw;
-  height: 11rem;
-}
+
 
 main {
   margin: 150px 0 0 0;
@@ -53,4 +57,9 @@ main article section.description {
   min-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+
+body{
+  background-image: url("../images/zenika.png")
 }
