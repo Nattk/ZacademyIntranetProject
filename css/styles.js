@@ -16,6 +16,10 @@ export default StyleSheet.create({
   'nav-title': {
     'fontWeight': 'bold'
   },
+  '#iframe-navbar': {
+    'width': [{ 'unit': 'vw', 'value': 100 }],
+    'height': [{ 'unit': 'rem', 'value': 11 }]
+  },
   'main': {
     'margin': [{ 'unit': 'px', 'value': 150 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }]
   },
