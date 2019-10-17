@@ -21,11 +21,6 @@ nav > div:last-child {
   font-weight: bold;
 }
 
-#iframe-navbar {
-  width: 100vw;
-  height: 11rem;
-}
-
 main {
   margin: 150px 0 0 0;
 }
