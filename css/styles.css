@@ -8,6 +8,16 @@ nav > div{
   padding-right:1rem;
 }
 
+#dropdownMenuLink{
+  background: #b21e3e;
+  border: #b21e3e;
+}
+
+#bonjourjérémie{
+  background: #b21e3e;
+  border: #b21e3e;
+}
+
 nav > button:last-child {
   margin-left: auto;
   margin-right: 50px;
@@ -16,6 +26,8 @@ nav > button:last-child {
 .nav-title {
   font-weight: bold;
 }
+
+
 
 main {
   margin: 150px 0 0 0;
@@ -44,4 +56,9 @@ main article section.description {
   min-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+
+body{
+  background-image: url("../images/zenika.png")
 }
