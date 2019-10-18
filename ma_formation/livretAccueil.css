@@ -17,54 +17,30 @@
   padding-right: 3rem;
   padding-left: 3rem;
 }
+
 .livretAccueil-pagination {
   margin-top: 1em;
   margin-left: auto;
   margin-right: auto;
 }
+
 .livreAccueil-title {
   color: rgb(33, 37, 41);
 }
-.livretAccueil-page-link {
-  color: #b21e3e;
-  position: relative;
 
-  display: block;
-
-  padding: 0.5rem 0.75rem;
-
-  margin-left: -1px;
-
-  line-height: 1.25;
-
-  background-color: #fff;
-
-  border: 1px solid #dee2e6;
-}
-.livretAccueil-page-link:hover {
-  z-index: 2;
-  color: #fff;
-  text-decoration: none;
-  background-color: #b21e3e;
-  border-color: #e6e1de;
-}
+.livretAccueil-page-link,
 .livretAccueil-page-link-number {
-  position: relative;
-
-  display: block;
-
-  padding: 0.5rem 0.75rem;
-
-  margin-left: -1px;
-
-  line-height: 1.25;
-
   color: #b21e3e;
-
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
   background-color: #fff;
-
   border: 1px solid #dee2e6;
 }
+
+.livretAccueil-page-link:hover,
 .livretAccueil-page-link-number:hover {
   z-index: 2;
   color: #fff;
