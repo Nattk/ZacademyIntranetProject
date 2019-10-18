@@ -2,10 +2,10 @@
 @import "../ma_formation/livretAccueil.css";
 @import "../ma_formation/agenda.css";
 @import "../admin/admin.css";
-
-nav > div{
-  padding-left:1rem;
-  padding-right:1rem;
+@import "../ma_formation/AccueilConnected.css";
+nav > div {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 nav > button:last-child {
