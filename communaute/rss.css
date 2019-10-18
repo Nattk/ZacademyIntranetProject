@@ -1,0 +1,15 @@
+#articles-RSS{
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+}
+
+div.card{
+    min-width: 60rem;
+}
+
+
+
+p.h1{
+    text-align: center;
+}

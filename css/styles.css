@@ -2,10 +2,22 @@
 @import "../ma_formation/livretAccueil.css";
 @import "../ma_formation/agenda.css";
 @import "../admin/admin.css";
+@import "../admin/gestion_programmes.css";
 @import "../ma_formation/AccueilConnected.css";
+
 nav > div {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+#dropdownMenuLink {
+  background: #b21e3e;
+  border: #b21e3e;
+}
+
+#bonjourjérémie {
+  background: #b21e3e;
+  border: #b21e3e;
 }
 
 nav > button:last-child {
@@ -18,7 +30,7 @@ nav > button:last-child {
 }
 
 main {
-  margin: 150px 0 0 0;
+  margin: 2em;
 }
 
 main article.contact {
@@ -44,4 +56,8 @@ main article section.description {
   min-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+body {
+  background-image: url("../images/zenika.png");
 }

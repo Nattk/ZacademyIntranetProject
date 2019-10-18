@@ -5,10 +5,19 @@ export default StyleSheet.create({
   'import': '"../ma_formation/livretAccueil.css"',
   'import': '"../ma_formation/agenda.css"',
   'import': '"../admin/admin.css"',
+  'import': '"../admin/gestion_programmes.css"',
   'import': '"../ma_formation/AccueilConnected.css"',
   'nav > div': {
     'paddingLeft': [{ 'unit': 'rem', 'value': 1 }],
     'paddingRight': [{ 'unit': 'rem', 'value': 1 }]
+  },
+  '#dropdownMenuLink': {
+    'background': '#b21e3e',
+    'border': [{ 'unit': 'string', 'value': '#b21e3e' }]
+  },
+  '#bonjourjérémie': {
+    'background': '#b21e3e',
+    'border': [{ 'unit': 'string', 'value': '#b21e3e' }]
   },
   'nav > button:last-child': {
     'marginLeft': [{ 'unit': 'string', 'value': 'auto' }],
@@ -18,7 +27,7 @@ export default StyleSheet.create({
     'fontWeight': 'bold'
   },
   'main': {
-    'margin': [{ 'unit': 'px', 'value': 150 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 0 }]
+    'margin': [{ 'unit': 'em', 'value': 2 }, { 'unit': 'em', 'value': 2 }, { 'unit': 'em', 'value': 2 }, { 'unit': 'em', 'value': 2 }]
   },
   'main articlecontact': {
     'margin': [{ 'unit': 'px', 'value': 50 }, { 'unit': 'px', 'value': 50 }, { 'unit': 'px', 'value': 50 }, { 'unit': 'px', 'value': 50 }],
@@ -40,5 +49,8 @@ export default StyleSheet.create({
     'minWidth': [{ 'unit': 'px', 'value': 300 }],
     'overflow': 'hidden',
     'textOverflow': 'ellipsis'
+  },
+  'body': {
+    'backgroundImage': 'url("../images/zenika.png")'
   }
 });
