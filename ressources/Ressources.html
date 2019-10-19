@@ -1,69 +1,80 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/styles.css">
-    <meta charset="UTF-8">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <meta charset="UTF-8" />
     <title>Ressources</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><strong>Ma Formation</strong>
-                    <ul>
-                        <li><a href="/ma_formation/agenda.html">Agenda</a></li>
-                        <li><a href="/ma_formation/contact_utiles.html">Contact utiles</a></li>
-                        <li><a href="/ma_formation/livret_accueil.html">Livret d'accueil</a></li>
-                    </ul>
-                </li>
-                <li><strong>Ressources</strong>
-                    <ul>
-                        <li>Formateurs</li>
-                        <li><a href="/ressources/interne_eleves.html">Interne élèves</a></li>
-                    </ul>
-                </li>
-                <li><strong>Communauté</strong>
-                    <ul>
-                        <li><a href="/communaute/slack.html">Slack academy</a></li>
-                        <li><a href="/communaute/RSS.html">RSS</a></li>
-                        <li><a href="/communaute/who_to_follow.html">who to follow</a></li>
-                    </ul>
-                </li>
-                <li><strong>LOGIN</strong></li>
-        </nav>
-    </header>
-    <main>
-        <h1>Ressources</h1>
-        <article class="card">
-            <header class="card-header d-flex flex-row justify-content-around">
-                <select class="custom-select">
-                    <option selected>Contributeurs</option>
-                    <option value="1">Elèves</option>
-                    <option value="2">Formateurs</option>
-                </select>
-                <select class="custom-select">
-                    <option selected>Promotions</option>
-                    <option value="1">Promo Rennes 2</option>
-                    <option value="2">Promo Paris 2</option>
-                </select>
-                <input type="text" placeholder="rechercher"/>      
-            </header>
-            <aside>
-                2 ressources trouvés
-            </aside>
-            <ul>
-               <li><a href="#">Ressource 1</a></li> 
-               <li><a href="#">Ressource 2</a></li>
-               <li><a href="#">Ressource 3</a></li> 
-               <li><a href="#">Ressource 4</a></li>  
-            </ul>
-            <footer>
-                <!-- bouton ajouter -->
-            </footer>
-            </article>
-        </article>
+  </head>
+  <body>
+    <header id="nav-placeholder"></header>
+    <main class="ressources">
+      <h1>Ressources</h1>
+      <article class="card d-flex flex-column justify-content-stretch">
+        <header class="card-header">
+          <div class="d-flex flex-row justify-content-between">
+            <select class="custom-select">
+              <option selected>Contributeurs</option>
+              <option value="1">Elèves</option>
+              <option value="2">Formateurs</option>
+            </select>
+            <select class="custom-select">
+              <option selected>Promotions</option>
+              <option value="1">Promo Rennes 2</option>
+              <option value="2">Promo Paris 2</option>
+              <option value="2">Promo Rio 1</option>
+            </select>
+            <div>
+              <i class="fa fa-search"></i>
+              <input type="text" placeholder="rechercher une ressource" />
+            </div>
+          </div>
+        </header>
+        <section class="card-body">
+          <aside class="align-self-stretch">
+            <i>4 ressources trouvées</i>
+          </aside>
+          <ul>
+            <li><a href="#">Ressource 1</a></li>
+            <li><a href="#">Ressource 2</a></li>
+            <li><a href="#">Ressource 3</a></li>
+            <li><a href="#">Ressource 4</a></li>
+          </ul>
+        </section>
+          <footer class="d-flex align-items-end">
+            <button type="button" class="btn btn-primary">
+              Ajouter une ressource
+            </button>
+          </footer>
+        </div>
+      </article>
     </main>
-</body>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/load_components.js"></script>
+  </body>
 </html>
