@@ -5,6 +5,7 @@ function navBar() {
     if (element != null) {
         document.getElementById('nav-placeholder-admin').innerHTML = 
         `<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <a class="btn btn-danger" href="/index.html"  id="bonjourjérémie" role="button">ACCUEIL</a>
     <div class="dropdown show">
         <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -30,25 +31,13 @@ function navBar() {
             <a class="dropdown-item" href="/admin/gestion_programmes.html">Modifier un utilisateur</a>
         </div>
     </div>
-    <div class="dropdown show">
-        <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Communauté
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="/communaute/slack.html"></a>
-            <a class="dropdown-item" href="/communaute/RSS.html">RSS</a>
-            <a class="dropdown-item" href="/communaute/who_to_follow.html">who to follow</a>
-        </div>
-    </div>
-    <button type="button" class="btn btn-danger" id="bonjourjérémie">LOGIN</button>
-
-
+    <a class="btn btn-danger" href="/utilisateur/mon_profil.html"  id="bonjourjérémie" role="button">PROFIL</a>
+    <a class="btn btn-danger" href="#"  id="bonjourjérémie" role="button">LOGOUT</a>
 </nav>`}
     else {
         document.getElementById('nav-placeholder').innerHTML = 
         `<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <a class="btn btn-danger" href="/admin/admin.html"  id="bonjourjérémie" role="button">ADMINISTRATION</a>
     <div class="dropdown show">
         <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -59,17 +48,7 @@ function navBar() {
             <a class="dropdown-item" href="/ma_formation/agenda.html">Agenda</a>
             <a class="dropdown-item" href="/ma_formation/contact_utiles.html">Contact utiles</a>
             <a class="dropdown-item" href="/ma_formation/livret_accueil.html">Livret d'accueil</a>
-        </div>
-    </div>
-    <div class="dropdown show">
-        <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Ressources
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="/ressources/formateurs.html">Formateurs</a>
-            <a class="dropdown-item" href="/ressources/interne_eleves.html">Interne élèves</a>
+            <a class="dropdown-item" href="/ressources/ressources.html">Ressources pédagogiques</a>
         </div>
     </div>
     <div class="dropdown show">
@@ -84,8 +63,7 @@ function navBar() {
             <a class="dropdown-item" href="/communaute/who_to_follow.html">who to follow</a>
         </div>
     </div>
-    <button type="button" class="btn btn-danger" id="bonjourjérémie">LOGIN</button>
-
-
+    <a class="btn btn-danger" href="/utilisateur/mon_profil.html"  id="bonjourjérémie" role="button">PROFIL</a>
+    <a class="btn btn-danger" href="#"  id="bonjourjérémie" role="button">LOGIN</a>
 </nav>`}
 }
