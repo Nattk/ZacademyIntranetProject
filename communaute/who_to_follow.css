@@ -1,0 +1,8 @@
+article[role]{
+    margin-top: 1em;
+}
+
+a.btn.btn-danger{
+    background: #b21e3e;
+    border: #b21e3e;
+}

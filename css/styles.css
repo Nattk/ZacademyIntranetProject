@@ -1,10 +1,10 @@
-@import url("../admin/admin.css");
 @import "../ma_formation/livretAccueil.css";
 @import "../ma_formation/agenda.css";
+@import "../ma_formation/contact_utiles.css";
 @import "../admin/admin.css";
 @import "../admin/gestion_programmes.css";
-@import "../ma_formation/contact_utiles.css";
-@import "../ressources/Ressources.css";
+@import "../ressources/ressources.css";
+@import "../communaute/who_to_follow.css";
 
 
 body {
