@@ -3,8 +3,14 @@
 @import "../ma_formation/agenda.css";
 @import "../admin/admin.css";
 @import "../admin/gestion_programmes.css";
-@import "../ma_formation/AccueilConnected.css";
+@import "../ma_formation/contact_utiles.css";
+@import "../ressources/Ressources.css";
 
+
+body {
+  background-image: url("../images/zenika.png");
+  --zenika-red: #b21e3e;
+}
 
 main {
   margin: 2em;
@@ -12,23 +18,20 @@ main {
 
 nav>div {
   padding-left: 1rem;
+}
+
+nav>a {
+  padding-left: 1rem;
   padding-right: 1rem;
 }
 
-nav>button:last-child {
+nav>a:nth-last-child(2) {
   margin-left: auto;
-  margin-right: 50px;
+  margin-right: 1rem;
 }
 
 .nav-title {
   font-weight: bold;
-}
-
-main article.contact {
-  margin: 50px;
-  height: 150px;
-  display: flex;
-  box-sizing: border-box;
 }
 
 main article section.photo {
@@ -47,11 +50,6 @@ main article section.description {
   min-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-
-body {
-  background-image: url("../images/zenika.png")
 }
 
 #dropdownMenuLink {
@@ -117,7 +115,6 @@ body {
 
 }
 
-
 .footer-bottom-text {
   text-align: center;
   background: #000;
@@ -125,7 +122,7 @@ body {
 
 }
 
-/* responsive css */
+/* responsive css footer */
 
 @media only screen and(min-width: 768px) and (max-width:991px) {
   .md-mb-30 {
