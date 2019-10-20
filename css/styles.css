@@ -3,14 +3,22 @@
 @import "../ma_formation/contact_utiles.css";
 @import "../admin/admin.css";
 @import "../admin/gestion_programmes.css";
+@import "../ma_formation/contact_utiles.css";
+@import "../ressources/Ressources.css";
+@import "../ressources/AjouterRessource.css";
+@import '../admin/multiSelect/base.min.css';
+@import "../admin//multiSelect/choices.min.css";
+@import "../admin/creation_programme.css";
+@import "../admin/creation_promotion.css";
 @import "../ressources/ressources.css";
 @import "../ressources/ajouterRessource.css";
 @import "../communaute/rss.css";
 @import "../communaute/slack.css";
 @import "../communaute/who_to_follow.css";
+@import "../utilisateur/mon_profil.css";
 
 body {
-  background-image: url("../images/zenika.png");
+  background-image: url("../images/zenika_70.png");
   --zenika-red: #b21e3e;
 }
 
