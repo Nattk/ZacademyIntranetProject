@@ -1,0 +1,17 @@
+.description-programme-span {
+  height: 13vh
+}
+
+.footer-programme-formulaire {
+  justify-content: space-evenly
+}
+
+.button-cancel-programme {
+  background-color: grey;
+  border-color: grey;
+}
+
+.button-create-programme {
+  background-color: #b21e3e;
+  border-color: #b21e3e;
+}
