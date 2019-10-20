@@ -15,10 +15,11 @@
 @import "../communaute/rss.css";
 @import "../communaute/slack.css";
 @import "../communaute/who_to_follow.css";
+@import "../utilisateur/mon_profil.css";
 
 
 body {
-  background-image: url("../images/zenika.png");
+  background-image: url("../images/zenika_70.png");
   --zenika-red: #b21e3e;
 }
 

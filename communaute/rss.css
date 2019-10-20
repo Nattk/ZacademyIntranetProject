@@ -5,10 +5,8 @@
 }
 
 div.card{
-    min-width: 60rem;
+    width: 100%;
 }
-
-
 
 p.h1{
     text-align: center;
