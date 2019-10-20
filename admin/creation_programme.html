@@ -2,61 +2,94 @@
 <html lang="fr">
 
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="./slack.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
-    <title>Creation Programme</title>
+    <title>Gestion Programmes</title>
+
 </head>
 
 <body>
-    <header>
-        <div id="nav-placeholder-admin"></div>
-    </header>
-    <main>
-        <article class="contact">
-            <section class="photo">
+    <header id="nav-placeholder-admin"></header>
+    <main class="d-flex justify-content-center">
+        <article class="gestionProgramme card">
+            <header class="card-header text-center">
+                Creation programme
+            </header>
 
-            </section>
-            <section class="void">
 
-            </section>
-            <section class="description">
+            <div class="container">
+                <!-- formulaire -->
+                <section class="section">
 
-            </section>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Titre</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"
+                            placeholder="Intitulé du programme">
+                    </div>
+                    <!-- multiselects -modules -->
+                    <div data-test-hook="groups">
+                        <label for="choices-groups">Choisir module(s)</label>
+                        <select class="form-control" name="choices-groups" id="choices-groups" multiple>
+                            <optgroup label="DEVOPS">
+                                <option value="Paris">Linux</option>
+                                <option value="Lyon">Mac</option>
+                            </optgroup>
+                            <optgroup label="JavaScript">
+                                <option value="JavaScript">JavaScript</option>
+                                <option value="React">React</option>
+                                <option value="Node">Node</option>
+                            </optgroup>
+                            <optgroup label="Basic">
+                                <option value="HTML">HTML</option>
+                                <option value="CSS">CSS</option>
+                                <option value="TypeScript">TypeScript</option>
+                            </optgroup>
+                            <optgroup label="Autres">
+                                <option value="Java">Java</option>
+                                <option value="Python">Pyhton</option>
+                                <option value="PHP">PHP</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <!-- description input -->
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text description-programme-span">Description</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+                    <!-- date du programme -->
+                    <div class="form-group">
+                        <label>Debut periode du programme</label>
+                        <input type="date" name="bday" max="3000-12-31" min="1000-01-01" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Fin periode du programme</label>
+                        <input type="date" name="bday" min="1000-01-01" max="3000-12-31" class="form-control">
+                    </div>
+                </section>
+                <!-- button cancel- created -->
+                <footer class="d-flex flex-row footer-programme-formulaire">
+                    <a href="/admin/gestion_programmes.html">
+                        <button type="button"
+                            class="btn btn-primary text-center button-cancel-programme">Annuler</button>
+                    </a>
+                    <a href="#">
+                        <button type="button" class="btn btn-primary text-center button-create-programme">Créer</button>
+                    </a>
+                </footer>
         </article>
-        <article class="contact">
-            <section class="photo">
-
-            </section>
-            <section class="void">
-
-            </section>
-            <section class="description">
-
-            </section>
-        </article>
-
-        <article class="contact">
-            <section class="photo">
-
-            </section>
-            <section class="void">
-
-            </section>
-            <section class="description">
-
-            </section>
-        </article>
-
-
-
     </main>
-
+    <footer id="footer"></footer>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -64,6 +97,10 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="../js/load_components.js"></script>
+    <script src="../js/multiSelect/choices.min.js"></script>
+    <script src="../js//multiSelect//loadMultiselect.js"></script>
+
+
 </body>
 
 </html>
