@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="./slack.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <title>Creation Utilisateur</title>
+
+</head>
+
+<body>
+    <header id="nav-placeholder-admin"></header>
+    <main class="d-flex justify-content-center">
+        <article class="gestionProgramme card">
+            <header class="card-header text-center">
+                Créer un Utilisateur
+            </header>
+
+            <div class="container">
+                <!-- formulaire -->
+                <section class="section">
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Nom</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"
+                            placeholder="Nom">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Prenom</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1"
+                                placeholder="Prénom">
+                    </div>
+
+                    <div class="form-group">
+                            <label for="exampleFormControlInput1">Email</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1"
+                                placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                            <label for="exampleFormControlInput1">Téléphone</label>
+                            <input type="Telephone" class="form-control" id="exampleFormControlInput1"
+                                placeholder="Telephone">
+                    </div>
+                   
+                    <div class="form-group">
+                            <label for="exampleFormControlSelect1">Selectionner une promotion</label>
+                            <select class="form-control" id="exampleFormControlSelect1" style="height: 5vh;">
+                                <optgroup label=" France">
+                                    <option value="Paris">Paris</option>
+                                    <option value="Lyon">Lyon</option>
+                                    <option value="Nantes">Nantes</option>
+                                    <option value="Rennes">Rennes</option>
+                                    <option value="Lille">Lille</option>
+                                    <option value="Toulouse">Toulouse</option>
+                                </optgroup>
+                                <optgroup label="Canada">
+                                    <option value="Montreal">Montreal</option>
+                                </optgroup>
+                                <optgroup label="Singapor">
+                                    <option value="Singapor">Singapor</option>
+                                </optgroup>
+                                <optgroup label="Maroc">
+                                    <option value="Casablanca">Casablanca</option>
+                                </optgroup>
+                            </select>
+                        </div>
+ 
+                <!-- button cancel- created -->
+                <footer class="d-flex flex-row footer-programme-formulaire">
+                    <a href="/admin/gestion_programmes.html">
+                        <button type="button"
+                            class="btn btn-primary text-center button-cancel-programme">Annuler</button>
+                    </a>
+                    <a href="#">
+                        <button type="button" class="btn btn-primary text-center button-create-programme">
+                            Créer Utilisateur
+                        </button>
+                    </a>
+                </footer>
+        </article>
+    </main>
+    <footer id="footer"></footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="../js/load_components.js"></script>
+    <script src="../js/multiSelect/choices.min.js"></script>
+    <script src="../js//multiSelect//loadMultiselect.js"></script>
+
+
+</body>
+
+</html>

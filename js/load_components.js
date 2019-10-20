@@ -16,7 +16,7 @@ function navBar() {
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" href="/admin/creation_programme.html">Créer un parcours</a>
             <a class="dropdown-item" href="/admin/creation_promotion.html">Créer une promotion</a>
-            <a class="dropdown-item" href="/admin/gestion_programmes.html">Créer un utilisateur</a>
+            <a class="dropdown-item" href="/admin/creation_utilisateur.html">Créer un utilisateur</a>
         </div>
     </div>
     <div class="dropdown show">
@@ -29,7 +29,7 @@ function navBar() {
             
             <a class="dropdown-item" href="/admin/gestion_promotion.html">Modifier  une promotion</a>
             <a class="dropdown-item" href="/admin/gestion_programmes.html">Modifier un programme</a>
-            <a class="dropdown-item" href="/admin/gestion_programmes.html">Modifier un utilisateur</a>
+            <a class="dropdown-item" href="/admin/gestion_utilisateurs.html">Modifier un utilisateur</a>
         </div>
     </div>
     <a class="btn btn-danger" href="/utilisateur/mon_profil.html"  id="bonjourjérémie" role="button">PROFIL</a>

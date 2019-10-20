@@ -6,7 +6,7 @@
 @import "../ma_formation/contact_utiles.css";
 @import "../ressources/Ressources.css";
 @import "../ressources/AjouterRessource.css";
-@import '../admin/multiSelect/base.min.css';
+@import "../admin/multiSelect/base.min.css";
 @import "../admin//multiSelect/choices.min.css";
 @import "../admin/creation_programme.css";
 @import "../admin/creation_promotion.css";
@@ -20,6 +20,7 @@
 body {
   background-image: url("../images/zenika_70.png");
   --zenika-red: #b21e3e;
+  overflow-x: hidden;
 }
 
 main {
