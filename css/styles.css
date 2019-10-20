@@ -1,6 +1,6 @@
-@import url("../admin/admin.css");
 @import "../ma_formation/livretAccueil.css";
 @import "../ma_formation/agenda.css";
+@import "../ma_formation/contact_utiles.css";
 @import "../admin/admin.css";
 @import "../admin/gestion_programmes.css";
 @import "../ma_formation/contact_utiles.css";
@@ -9,6 +9,12 @@
 @import '../admin/multiSelect/base.min.css';
 @import "../admin//multiSelect/choices.min.css";
 @import "../admin/creation_programme.css";
+@import "../ressources/ressources.css";
+@import "../ressources/ajouterRessource.css";
+@import "../communaute/rss.css";
+@import "../communaute/slack.css";
+@import "../communaute/who_to_follow.css";
+
 
 body {
   background-image: url("../images/zenika.png");
