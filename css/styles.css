@@ -3,8 +3,9 @@
 @import "../ma_formation/contact_utiles.css";
 @import "../admin/admin.css";
 @import "../admin/gestion_programmes.css";
+@import "../ma_formation/contact_utiles.css";
 @import "../ressources/ressources.css";
-@import "../communaute/who_to_follow.css";
+@import "../ressources/ajouterRessource.css";
 
 
 body {
@@ -16,16 +17,16 @@ main {
   margin: 2em;
 }
 
-nav > div {
+nav>div {
   padding-left: 1rem;
 }
 
-nav > a {
+nav>a {
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-nav > a:nth-last-child(2){
+nav>a:nth-last-child(2) {
   margin-left: auto;
   margin-right: 1rem;
 }
@@ -60,4 +61,86 @@ main article section.description {
 #bonjourjérémie {
   background: #b21e3e;
   border: #b21e3e;
+}
+
+/* footer */
+.footer-titre-h1 {
+  font-size: 1.6875rem;
+}
+
+
+.footer-color-white {
+  color: white;
+}
+
+.footer-color-white:hover {
+  color: white;
+}
+
+.footer-link {
+  color: white;
+  text-decoration: underline;
+}
+
+.footer-link:hover {
+  color: white;
+
+}
+
+.footer-link-decoration {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: .9375rem;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+}
+
+.footer-top {
+  background: #111;
+  padding: 1.25rem 0;
+}
+
+.segment-three a i {
+  font-size: 1.25rem;
+  color: #fff;
+  padding: .625rem .75rem;
+  ;
+
+}
+
+.segment-four {
+  color: white;
+  line-height: 1.5625rem;
+
+
+}
+
+.footer-bottom-text {
+  text-align: center;
+  background: #000;
+  line-height: 4.6875rem;
+
+}
+
+/* responsive css footer */
+
+@media only screen and(min-width: 768px) and (max-width:991px) {
+  .md-mb-30 {
+    margin-bottom: 1.875rem;
+    text-align: center !important;
+
+  }
+}
+
+@media only screen and(max-width: 767px) {
+  .sm-mb-30 {
+    margin-bottom: 1.875rem;
+    text-align: center !important;
+
+  }
+
+  .footer-top {
+    padding: 50px 0;
+  }
 }
