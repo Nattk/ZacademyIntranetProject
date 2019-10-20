@@ -5,6 +5,7 @@
 @import "../admin/gestion_programmes.css";
 @import "../ma_formation/contact_utiles.css";
 @import "../ressources/Ressources.css";
+@import "../ressources/AjouterRessource.css";
 
 main {
   margin: 2em;
