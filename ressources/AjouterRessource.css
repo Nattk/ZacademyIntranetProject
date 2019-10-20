@@ -1,0 +1,13 @@
+trix-editor {
+  height: 30rem;
+}
+
+main.ajouterRessource form {
+  background-color: white;
+}
+main.ajouterRessource form input.form-control {
+  margin-bottom: 1rem;
+}
+main.ajouterRessource article button.btn-primary {
+  background-color: var(--zenika-red);
+}
