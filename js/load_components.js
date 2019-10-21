@@ -1,11 +1,11 @@
 navBar()
 
 function navBar() {
-	let element = document.getElementById('nav-placeholder-admin')
-	if (element != null) {
-		document.getElementById(
-			'nav-placeholder-admin'
-		).innerHTML = `<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  let element = document.getElementById('nav-placeholder-admin')
+  if (element != null) {
+    document.getElementById(
+      'nav-placeholder-admin'
+    ).innerHTML = `<nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <a class="btn btn-danger" href="/index.html"  id="bonjourjérémie" role="button">ACCUEIL</a>
     <div class="dropdown show">
         <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
@@ -35,10 +35,10 @@ function navBar() {
     <a class="btn btn-danger" href="/utilisateur/mon_profil.html"  id="bonjourjérémie" role="button">PROFIL</a>
     <a class="btn btn-danger" href="#"  id="bonjourjérémie" role="button">LOGOUT</a>
 </nav>`
-	} else {
-		document.getElementById(
-			'nav-placeholder'
-		).innerHTML = `<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  } else {
+    document.getElementById(
+      'nav-placeholder'
+    ).innerHTML = `<nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <a class="btn btn-danger" href="/admin/admin.html"  id="bonjourjérémie" role="button">ADMINISTRATION</a>
     <div class="dropdown show">
         <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
@@ -68,13 +68,13 @@ function navBar() {
     <a class="btn btn-danger" href="/utilisateur/mon_profil.html"  id="bonjourjérémie" role="button">PROFIL</a>
     <a class="btn btn-danger" href="#"  id="bonjourjérémie" role="button">LOGIN</a>
 </nav>`
-	}
+  }
 }
 
 footer()
 
 function footer() {
-	document.getElementById('footer').innerHTML = `<div class="footer-top">
+  document.getElementById('footer').innerHTML = `<div class="footer-top">
 
     <div class="row align text-center">
   
