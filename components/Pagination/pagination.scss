@@ -1,0 +1,26 @@
+.livretAccueil-page-link,
+.livretAccueil-page-link-number {
+  color: #b21e3e;
+  position: relative;
+  display: block;
+  padding: .5rem .75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+}
+
+.livretAccueil-page-link-number:hover,
+.livretAccueil-page-link:hover {
+  z-index: 2;
+  color: #fff;
+  text-decoration: none;
+  background-color: #b21e3e;
+  border-color: #e6e1de;
+  cursor: pointer;
+}
+
+.pagination {
+  justify-content: center;
+}

@@ -1,15 +1,11 @@
-# ZENIKA INTRANET 
+# ZENIKA ACADEMY INTRANET
 
-## TECHNOLOGIES 
-This website is designed with simple HTML pages, vanilla JS for components and bootstrap for styling.
+This website is developed to serve as an internal solution for Zenika Academy students and teachers accross the world (of Zenika).
 
-## STYLING 
-Every page has its own styling with the same name placed in its folder. This page is then imported into the general styles.css sheet inside the css folder at the root of the project.
+## TECHNOLOGIES
+Designed with nextJS, you can find the pages in ./pages. They are composed of : 
+- layouts (from ./layouts) which are made from global components
+- specific components to personalize each page
 
-## COMPONENTS
-Our components are stored inside the "load_components.js" file in the "js" folder at the root of the project.
-
-Our components are:
-- Regular Navigation bar
-- Admin Navigation bar
-- Footer
+## STYLING
+Each component is with its own sass stylesheet.

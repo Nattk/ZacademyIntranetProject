@@ -1,0 +1,54 @@
+.livretAccueil {
+  display: flex;
+  flex-wrap: wrap;
+  border: 2px solid red;
+
+}
+
+.card-livretAccueil {
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+  text-align: center;
+}
+
+.card-livret-article {
+  margin: 3rem;
+}
+
+.section-livretAccueil {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+.section-livretAccueil-pagination {
+  margin-top: 1.5rem;
+
+}
+// Loading circle
+.loader {
+  border: 3px solid #f3f3f3;
+  /* Light grey */
+  border-top: 3px solid rgb(178, 30, 62);
+  /* Blue */
+  border-radius: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 1.3rem;
+  width: 100px;
+  justify-content: center;
+  height: 100px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
