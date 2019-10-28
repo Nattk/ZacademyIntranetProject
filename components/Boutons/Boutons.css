@@ -1,0 +1,20 @@
+.login:hover {
+  background-color: green;
+}
+
+.btn {
+  color: white;
+}
+
+.valider {
+  background-color: red;
+}
+
+.annuler {
+  background-color: gray;
+}
+
+.modifier {
+  background-color: blue;
+}
+/*# sourceMappingURL=Boutons.css.map */

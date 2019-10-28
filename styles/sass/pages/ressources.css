@@ -1,0 +1,31 @@
+.ressourceCarte a {
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.ressources {
+  width: 70rem;
+}
+
+.ressources .ressourcesList {
+  height: 20rem;
+  overflow-y: auto;
+}
+
+.ressources select {
+  width: 10rem;
+}
+
+article.gestionProgramme.card {
+  width: 70rem;
+}
+
+article.gestionProgramme.card .card-body li {
+  height: 5rem;
+}
+
+article.gestionProgramme.card footer {
+  padding: 1rem;
+}
+/*# sourceMappingURL=ressources.css.map */

@@ -1,0 +1,13 @@
+.ajouterRessource input {
+  width: 100%;
+}
+
+.ajouterRessource form {
+  width: 50rem;
+}
+
+.ajouterRessource textarea {
+  min-height: 10rem;
+  max-height: 20rem;
+}
+/*# sourceMappingURL=ajouterRessource.css.map */
