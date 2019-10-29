@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAEI,iBAFa,CAEb,KAAK,CAAA;EACD,KAAK,EAAC,IACV;CAAC;;AAJL,AAKI,iBALa,CAKb,IAAI,CAAA;EACA,KAAK,EAAC,KAAK;CACd;;AAPL,AAQI,iBARa,CAQb,QAAQ,CAAA;EACJ,UAAU,EAAE,KAAK;EACjB,UAAU,EAAE,KAAK;CACpB",
-    "sources": [
-        "ajouterRessource.scss"
-    ],
-    "names": [],
-    "file": "ajouterRessource.css"
-}
