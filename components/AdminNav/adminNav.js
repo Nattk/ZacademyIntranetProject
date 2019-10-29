@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 
-const AdminNav = (props) => (
+const AdminNav = () => (
   <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-    <Link href="/index_connecte"><a onClick={props.handleClick} className="btn btn-danger" id="bonjourjérémie" role="button">ACCUEIL</a></Link>
+    <Link href="/index_connecte"><a className="btn btn-danger" id="bonjourjérémie" role="button">ACCUEIL</a></Link>
     <div className="dropdown show">
       <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
