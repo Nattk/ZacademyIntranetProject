@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,iBAAiB,CAAC;EAEhB,MAAM,EAAE,MAAM;CAEf;;AAED,AAAA,gBAAgB,CAAC;EACf,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,IAAI;EACf,eAAe,EAAE,MAAM;EACvB,SAAS,EAAE,IAAI;CAEhB",
-    "sources": [
-        "agenda.scss"
-    ],
-    "names": [],
-    "file": "agenda.css"
-}

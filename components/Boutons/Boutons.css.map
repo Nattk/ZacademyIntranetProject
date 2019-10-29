@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,MAAM,AAAA,MAAM,CAAA;EACR,gBAAgB,EAAE,KAAK;CAC1B;;AAED,AAAA,IAAI,CAAA;EACA,KAAK,EAAC,KAAK;CACd;;AAED,AAAA,QAAQ,CAAA;EACJ,gBAAgB,EAAE,GAAG;CACxB;;AAED,AAAA,QAAQ,CAAA;EACJ,gBAAgB,EAAC,IAAI;CACxB;;AAED,AAAA,SAAS,CAAA;EACL,gBAAgB,EAAE,IAAI;CACzB",
-    "sources": [
-        "Boutons.scss"
-    ],
-    "names": [],
-    "file": "Boutons.css"
-}
