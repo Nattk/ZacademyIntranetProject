@@ -1,7 +1,10 @@
-/* eslint-disable no-tabs */
 import React from 'react'
 import Page from '../../../layouts/classic'
-import CalendrierReact from '../../../components/Calendrier/CalendrierReact'
+import dynamic from 'next/dynamic'
+const CalendrierReact = dynamic(
+  () => import('../../../components/Calendrier/CalendrierReact'),
+  { ssr: false }
+ )
 import '../../../styles/sass/styles.scss'
 
 const Agenda = () => (
