@@ -6,7 +6,7 @@ const Livret = () => {
 	return (
 		<Page title="livret">
 			<article className="article-livret">
-				<h1 className="text-center"> Livret Accueil</h1>
+				<h1 className="mainTitle"> Livret Accueil</h1>
 				<section className=" col-md-10 col-sm-12 col-xs-12 section-pdf">
 					<iframe title="pdf-livretAccueil" className="pdf-viewer" src={`/academy.pdf`} />
 				</section>

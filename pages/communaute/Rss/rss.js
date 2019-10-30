@@ -25,7 +25,7 @@ const elementCardRss = (
 const Rss = () => (
 	<Page title="Rss">
 		<section className="section-rss">
-			<h1 className="text-center pageRss-title"> Flux RSS Paris Promo 2</h1>
+			<h1 className="mainTitle"> Flux RSS </h1>
 			<section className="row">
 				<article className=" col-md-12 col-sm-12 col-xs-12">
 					<section className="col-md-5 col-sm-12 col-xs-12 section-rss">

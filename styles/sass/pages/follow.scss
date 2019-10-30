@@ -1,5 +1,5 @@
-.follow-mainTitle {
-  margin-top: 2.3rem;
+.mainTitle {
+  margin: 2.3rem;
 
 }
 
@@ -30,7 +30,7 @@
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
-
+  width: 10rem;
 }
 
 .card-follow-article {
@@ -60,21 +60,32 @@
   background-color: #00acee;
   border: 2px solid #00acee;
   color: #fff;
-  width: 6rem;
+  cursor: pointer;
+
 }
 
 .card-button-github {
   background-color: #000000;
   border: 2px solid #000000;
   color: #fff;
-  width: 6rem;
+  cursor: pointer;
+
 }
 
 .card-button-reddit {
   background-color: #FF4301;
   border: 2px solid #FF4301;
   color: #fff;
-  width: 6rem;
+  cursor: pointer;
+
+}
+
+.card-button-linkedin {
+  background-color: #2867B2;
+  border: 2px solid#2867B2;
+  color: #fff;
+  cursor: pointer;
+
 }
 
 .social-icon-card {
