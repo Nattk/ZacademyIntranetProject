@@ -17,7 +17,7 @@ const MonProfil = () => (
     <div className="card-body">
       <Link href="/"><button type="submit" className="btn btn-danger">Supprimer mon profil</button></Link>
     </div>
-    <div className="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1" aria-hidden="true">
+    <div className="modal fade" id="modal1" tabIndex="-1" role="dialog" aria-labelledby="modal1" aria-hidden="true">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
@@ -36,7 +36,7 @@ const MonProfil = () => (
         </div>
       </div>
     </div>
-    <div className="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modal2" aria-hidden="true">
+    <div className="modal fade" id="modal2" tabIndex="-1" role="dialog" aria-labelledby="modal2" aria-hidden="true">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
