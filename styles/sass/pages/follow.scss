@@ -1,25 +1,4 @@
-.mainTitle {
-  margin: 2.3rem;
-
-}
-
-.card-follow {
-  margin: 1rem;
-}
-
-.article-follow {
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-}
-
-.section-follow {
-  width: 100%;
-}
-
-.section-user-info {
+.section-card-user {
 
   margin: 1rem auto;
 }
@@ -33,25 +12,7 @@
   width: 10rem;
 }
 
-.card-follow-article {
-  margin: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.card-follow-user {
-  color: #000000;
-  text-decoration-color: #000000;
-
-  font-size: 1.5rem;
-
-}
-
-.card-follow-description {
-  text-align: left;
-}
-
-.img-follow {
+.img-socialMedia {
   height: 15vh;
   border-radius: 50%;
 }

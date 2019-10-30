@@ -6,17 +6,16 @@ import '../../../styles/sass/styles.scss'
 
 const Agenda = () => (
 	<Page title="Accueil">
-		<section>
+		<article className="container-article">
 			<h1 className="mainTitle">Agenda</h1>
-			<section className="row">
-				<article className="Agenda-viewport col-md-12 col-sm-12 col-xs-12 sm-mb-30">
-					<section className="col-md-5 col-sm-12 col-xs-12">
-						<CalendrierReact />
-					</section>
-					<section className="col-md-5	col-sm-12 col-xs-12 card-event" />
-				</article>
-			</section>
-		</section>
+
+			<div className=" col-md-12 col-sm-12 col-xs-12   container-card">
+				<section className="col-md-5 col-sm-12 col-xs-12">
+					<CalendrierReact />
+				</section>
+				<section className="col-md-6 col-sm-12 col-xs-12 card-event" />
+			</div>
+		</article>
 	</Page>
 )
 
