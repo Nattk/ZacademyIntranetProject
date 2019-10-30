@@ -13,9 +13,9 @@
 @import '../../components/Form/CreaProgramme/creation_programme.scss';
 @import '../../components/Form/CreaPromotion/creation_promotion.scss';
 @import '../../components/Form/CreaUtilisateur/creation_utilisateur.scss';
-@import '../../components/Pagination/pagination';
-@import '../../components/Nav/Navbar.scss';
+
 // Dossier Pages
+@import './pages/standard-styles.scss';
 @import './pages/agenda.scss';
 @import './pages/rss.scss';
 @import './pages/ressources.scss';
@@ -35,7 +35,7 @@ html {
   flex-direction: column;
   height: 100%;
   overflow-x: hidden;
-  font-family: Calibri, 'Trebuchet MS', 'Gill Sans', 'Gill Sans MT', sans-serif 3rem;
+  background-color: #fff;
 }
 
 .main {
