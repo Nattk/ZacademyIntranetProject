@@ -1,17 +1,18 @@
 import React, { Component } from "react"
 import Page from '../../../layouts/classic'
-import Card from '../../../components/Card/card'
-import Button from '../../../components/Boutons/Boutons'
+import Button from 'react-bootstrap/Card'
 import Link from 'next/link'
+import Card from '../../../components/Card/card';
+
 
 class Ressources extends Component{
 
   state = {
     ressources: [
-      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle" , promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:1 , contributeur:1, ressId:1},
-      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle" , promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:1 , contributeur:1, ressId:2},
-      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle",  promotion:"Promo Paris 2", auteur:"Nattan Kifoyi", promoId:2, contributeur:2, ressId:3},
-      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle",  promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", promoId:3, contributeur:2, ressId:4}
+      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle" , promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", date:"01/01/2019", promoId:1 , contributeur:1, ressId:1},
+      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle" , promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", date:"01/01/2019", promoId:1 , contributeur:1, ressId:2},
+      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle",  promotion:"Promo Paris 2", auteur:"Nattan Kifoyi", date:"01/01/2019", promoId:2, contributeur:2, ressId:3},
+      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle",  promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", date:"01/01/2019", promoId:3, contributeur:2, ressId:4}
     ],
     filtreContributeur : 0,
     filtrePromo: 0,
@@ -30,10 +31,7 @@ class Ressources extends Component{
   handleDelete = (ressId) =>{
     alert("ressource supprimé")
     const ress = this.state.ressources.filter(item => item.ressId !== ressId);
-    console.log(ress);
     this.setState({ressources : ress});
-
-
   }
 
   render(){
@@ -54,20 +52,23 @@ class Ressources extends Component{
     .map( (ressource, index) => (
       <Card styleName="ressourceCarte d-flex flex-column" key={index}>
         <Link href={ressource.lien}>
+          <div>
           <a>{ressource.titre}</a>
-        </Link>
-        <p>{ressource.promotion}</p>
-        <p>{ressource.auteur}</p>
+        <aside className="d-flex flex-row">       
+          <p> {ressource.auteur} / {ressource.promotion}</p>
+        </aside>
         <div class="d-flex flex-row">
-          <Button btnType="modifier"> <Link href="./ModifierRessource">Modifier</Link></Button>
-          <Button btnType="annuler" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
+          <Button> <Link href="./ModifierRessource">Modifier</Link></Button>
+          <Button onClick={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
         </div>
+        </div>
+        </Link>
       </Card>
     ))
     
     return(
     <Page title="Ressources">
-      <article className="ressources d-flex flex-column">
+      <article className="ressources d-flex flex-column flex-stretch justify-content-start">
       <h1>Ressources</h1>
         <header className="d-flex flex-row justify-content-between align-items-center">
             <select defaultValue="0" className="custom-select" id="selectContributeur" onChange={this.filtre}>
@@ -89,7 +90,7 @@ class Ressources extends Component{
         <aside className="align-self-stretch">
             <i>{this.state.ressources.length} ressources trouvées</i>
         </aside>
-        <section class="ressourcesList"> 
+        <section className="ressourcesList flex-grow-1"> 
             {ressourcesCartes}
         </section>
           <footer className="d-flex align-items-end">

@@ -1,4 +1,8 @@
 .ressourceCarte {
+    margin-top: 0.5rem;
+    padding: 1rem; 
+    cursor: pointer;
+
     a {
         color: black;
         font-size: 1.5rem;
@@ -6,17 +10,14 @@
     }
 }
 
-.ressources {
-    width: 70rem;
-
-    .ressourcesList {
-        height: 20rem;
-        overflow-y: auto;
-    }
-}
-
 .ressources select {
     width: 10rem;
+}
+
+article.ressources {
+    margin:1rem;
+    height: 100%;
+    width: 100%;
 }
 
 article.gestionProgramme.card {
@@ -29,5 +30,4 @@ article.gestionProgramme.card .card-body li {
 
 article.gestionProgramme.card footer {
     padding: 1rem;
-
 }
