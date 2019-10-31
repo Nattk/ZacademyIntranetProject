@@ -1,24 +1,33 @@
 import React from 'react'
 import Link from 'next/link'
+import { Card, Button } from 'react-bootstrap'
 
 const Newsfeed = () => (
-  <article className="card" id="newsfeed_accueil">
-    <section className="card-header">
-            Dernières actualités
-    </section>
-    <section className="card-body">
-      <p className="card-title">Ajout flux RSS par Jérémie Patonnier</p>
-      <Link href="/communaute/Rss/rss"><a className="btn btn-primary">Lien ressource</a></Link>
-    </section>
-    <section className="card-body">
-      <p className="card-title">BBL par Norbert</p>
-      <Link href="https://www.urbandictionary.com/define.php?term=soon%20%28tm%29"><a className="btn btn-primary">Lien ressource</a></Link>
-    </section>
-    <section className="card-body">
-      <p className="card-title">Support cours par Cédric Rup</p>
-      <Link href="https://www.valentinog.com/blog/jest/"><a className="btn btn-primary">Lien ressource</a></Link>
-    </section>
-  </article>
+
+  <Card id="newsfeed_accueil">
+    <Card.Header>Dernières actualités</Card.Header>
+    <Card.Body id="cartenewsaccueil">
+      <Card.Title>Ajout flux RSS par Jérémie Patonnier</Card.Title>
+      <Card.Text>
+        With supporting text below as a natural lead-in to additional content.
+      </Card.Text>
+      <Button variant="primary" aria-label="lien vers ressource">Lien ressource</Button>
+    </Card.Body>
+    <Card.Body id="cartenewsaccueil">
+      <Card.Title>BBL par Norbert</Card.Title>
+      <Card.Text>
+        With supporting text below as a natural lead-in to additional content.
+      </Card.Text>
+      <Button variant="primary" aria-label="lien vers ressource">Lien ressource</Button>
+    </Card.Body>
+    <Card.Body id="cartenewsaccueil">
+      <Card.Title>Support cours par Cédric Rup</Card.Title>
+      <Card.Text>
+        With supporting text below as a natural lead-in to additional content.
+      </Card.Text>
+      <Button variant="primary" aria-label="lien vers ressource">Lien ressource</Button>
+    </Card.Body>
+  </Card>
 )
 
 export default Newsfeed

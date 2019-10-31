@@ -6,7 +6,7 @@ const ContactsUtiles = () => (
     <h1>Equipe pedagogique</h1>
     <CardDeck id="lignecontactutiles">
       <Card>
-        <Card.Img variant="top" src="/firmin.jpg" alt="" />
+        <Card.Img variant="top" src="/firmin.jpg" alt="photo profil jeremy patonier" />
         <Card.Body>
           <Card.Title>J'ai Rémi Pas Tonier</Card.Title>
           <Card.Text>
@@ -16,7 +16,7 @@ const ContactsUtiles = () => (
         </Card.Body>
       </Card>
       <Card>
-        <Card.Img variant="top" src="/firmin.jpg" alt="" />
+        <Card.Img variant="top" src="/firmin.jpg" alt="photo profil joe nathan" />
         <Card.Body>
           <Card.Title>Joe Nathan</Card.Title>
           <Card.Text>
@@ -26,7 +26,7 @@ const ContactsUtiles = () => (
         </Card.Body>
       </Card>
       <Card>
-        <Card.Img variant="top" src="/firmin.jpg" alt="" />
+        <Card.Img variant="top" src="/firmin.jpg" alt="photo profil nathan joe" />
         <Card.Body>
           <Card.Title>Nathan Joe</Card.Title>
           <Card.Text>
@@ -40,7 +40,7 @@ const ContactsUtiles = () => (
     <h1>Administration</h1>
     <CardDeck id="lignecontactutiles">
       <Card>
-        <Card.Img variant="top" src="/firmin.jpg" alt="" />
+        <Card.Img variant="top" src="/firmin.jpg" alt="photo profil norbert" />
         <Card.Body>
           <Card.Title>Nord Bher</Card.Title>
           <Card.Text>
@@ -50,7 +50,7 @@ const ContactsUtiles = () => (
         </Card.Body>
       </Card>
       <Card>
-        <Card.Img variant="top" src="/firmin.jpg" alt="" />
+        <Card.Img variant="top" src="/firmin.jpg" alt="photo profil bras droit" />
         <Card.Body>
           <Card.Title>Bras droit</Card.Title>
           <Card.Text>
@@ -60,7 +60,7 @@ const ContactsUtiles = () => (
         </Card.Body>
       </Card>
       <Card>
-        <Card.Img variant="top" src="/firmin.jpg" alt="" />
+        <Card.Img variant="top" src="/firmin.jpg" alt="photo profil ratp" />
         <Card.Body>
           <Card.Title>RATP</Card.Title>
           <Card.Text>
@@ -69,7 +69,7 @@ const ContactsUtiles = () => (
           </Card.Text>
         </Card.Body>
       </Card>
-    </CardDeck></section>
+    </CardDeck></section><br></br>
   </article>
 )
 

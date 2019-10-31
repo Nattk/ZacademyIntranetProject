@@ -17,11 +17,12 @@
 @import '../../components/Nav/Navbar.scss';
 // Dossier Pages
 @import './pages/agenda.scss';
-@import './pages/rss.scss';
+@import '../../pages/communaute/Rss/rss.scss';
 @import './pages/ressources.scss';
 @import './pages/follow.scss';
 @import './pages/ajouterRessource.scss';
 @import './pages/livretAccueil.scss';
+@import '../../pages/ma_formation/Slack/slack.scss';
 
 // Calendar
 @import '~@fullcalendar/core/main.css';

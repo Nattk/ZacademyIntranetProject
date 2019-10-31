@@ -1,10 +1,11 @@
 import { Navbar, NavDropdown, Nav, FormControl, Button } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const NavbarUnconnected = () => (
   <Navbar bg="dark" id="navbarbody" expand="lg">
     <Navbar.Toggle aria-controls="basic-navbar-nav" id="menuburgeryo"/>
     <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto" id="bonjourjesuisflex">
+      <Nav className="mr-auto" id="bonjourjesuisflex">
         <Nav.Link className="navbarbuttonplease" href="/index_connecte">Accueil</Nav.Link>
         <NavDropdown className="navbarbuttonplease" title="Ma Formation" id="basic-nav-dropdown">
           <NavDropdown.Item href="/ma_formation/Agenda/agenda">Agenda</NavDropdown.Item>
@@ -23,7 +24,7 @@ const NavbarUnconnected = () => (
         <Nav.Link id="navbarbutton" href="/utilisateur/MonProfil/mon_profil">Profil</Nav.Link>
         <Nav.Link id="navbarbutton" href="/admin/Accueil/accueil" >ADMIN</Nav.Link>
         <Nav.Link id="navbarbutton" href="/" >Logout</Nav.Link>
-        </Nav>
+      </Nav>
     </Navbar.Collapse>
   </Navbar>
 )
