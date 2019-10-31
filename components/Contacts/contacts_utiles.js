@@ -9,7 +9,7 @@ const ContactsUtiles = () => (
         </div>
         <div className="col-md-8">
           <div className="card-body">
-            <h5 className="card-title">J'ai rémi Pas Tonier</h5>
+            <h1 className="card-title">J'ai rémi Pas Tonier</h1>
             <p className="card-text">This is a wider card with supporting text below as a natural lead-in to
                                 additional content. This content is a little bit longer.</p>
           </div>
@@ -23,7 +23,7 @@ const ContactsUtiles = () => (
         </div>
         <div className="col-md-8">
           <div className="card-body">
-            <h5 className="card-title">Nord Bher</h5>
+            <h1 className="card-title">Nord Bher</h1>
             <p className="card-text">This is a wider card with supporting text below as a natural lead-in to
                                 additional content. This content is a little bit longer.</p>
           </div>
@@ -37,7 +37,7 @@ const ContactsUtiles = () => (
         </div>
         <div className="col-md-8">
           <div className="card-body">
-            <h5 className="card-title">Phiir main J Ray</h5>
+            <h1 className="card-title">Phiir main J Ray</h1>
             <p className="card-text">This is a wider card with supporting text below as a natural lead-in to
                                 additional content. This content is a little bit longer.</p>
           </div>
