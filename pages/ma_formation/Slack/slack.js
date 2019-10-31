@@ -1,12 +1,17 @@
 /* eslint-disable no-tabs */
 import React from 'react'
 import Page from '../../../layouts/classic'
-import {Image} from 'react-bootstrap'
 
-export default function Slack() {
+export default function Slack () {
   return (
     <Page title="Accueil">
-      <Image src="/slack.jpg" id="image placeholder integration slack" fluid />
+      <img src="/slack.jpg" className="rounded mx-auto d-block" className="img-fluid" alt="my image" />
+      <style jsx>{`
+				img {
+					display: block;
+					margin: 2rem auto 2rem auto;
+				}
+			`}</style>
     </Page>
   )
 }

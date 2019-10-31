@@ -1,31 +1,37 @@
-import { Navbar, NavDropdown, Nav, FormControl, Button } from 'react-bootstrap'
+import React from 'react'
+import Link from 'next/link'
 
-const NavbarUnconnected = () => (
-  <Navbar bg="dark" id="navbarbody" expand="lg">
-    <Navbar.Toggle aria-controls="basic-navbar-nav" id="menuburgeryo"/>
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="mr-auto" id="bonjourjesuisflex">
-        <Nav.Link className="navbarbuttonplease" href="/index_connecte">Accueil</Nav.Link>
-        <NavDropdown className="navbarbuttonplease" title="Ma Formation" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/ma_formation/Agenda/agenda">Agenda</NavDropdown.Item>
-          <NavDropdown.Item href="/ma_formation/ContactUtiles/contact_utiles">contact_utiles</NavDropdown.Item>
-          <NavDropdown.Item href="/ma_formation/LivretAccueil/livret_accueil">Livret d'accueil</NavDropdown.Item>
-          <NavDropdown.Item href="/ma_formation/Slack/slack">Slack</NavDropdown.Item>
-        </NavDropdown>
-        <NavDropdown className="navbarbuttonplease" title="Communauté" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/communaute/Rss/rss">Rss</NavDropdown.Item>
-          <NavDropdown.Item href="/communaute/WhoToFollow/who_to_follow">Who To Follow</NavDropdown.Item>
-        </NavDropdown>
-        <NavDropdown className="navbarbuttonplease" title="Ressources" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/communaute/Ressources/ressources_formateur">Ressources Formateur</NavDropdown.Item>
-          <NavDropdown.Item href="/communaute/Ressources/ressources_eleve">Ressources Eleves</NavDropdown.Item>
-        </NavDropdown>
-        <Nav.Link id="navbarbutton" href="/utilisateur/MonProfil/mon_profil">Profil</Nav.Link>
-        <Nav.Link id="navbarbutton" href="/admin/Accueil/accueil" >ADMIN</Nav.Link>
-        <Nav.Link id="navbarbutton" href="/" >Logout</Nav.Link>
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
+const Nav = () => (
+  <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+    <Link href="/admin/Accueil/accueil"><a className="btn btn-danger" role="button">ADMINISTRATION</a></Link>
+    <div className="dropdown show">
+      <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Ma Formation
+      </a>
+
+      <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <Link href="/ma_formation/Agenda/agenda"><a role="button">Calendrier</a></Link><br></br>
+        <Link href="/ma_formation/ContactUtiles/contact_utiles"><a role="button">Contact utiles</a></Link><br></br>
+        <Link href="/ma_formation/LivretAccueil/livret_accueil"><a role="button">Livret d'accueil</a></Link><br></br>
+        <Link href="/ma_formation/Slack/slack"><a role="button">Slack academy</a></Link><br></br>
+      </div>
+    </div>
+    <div className="dropdown show">
+      <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Communauté
+      </a>
+
+      <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <Link href="/communaute/Ressources/ressources"><a role="button">Ressources</a></Link><br></br>
+        <Link href="/communaute/Rss/rss"><a role="button">RSS</a></Link><br></br>
+        <Link href="/communaute/WhoToFollow/who_to_follow"><a role="button">Who to follow</a></Link><br></br>
+      </div>
+    </div>
+    <Link href="/utilisateur/MonProfil/mon_profil"><a className="btn btn-danger" role="button">PROFIL</a></Link>
+    <Link href="/"><a className="btn btn-danger" id="bonjourjérémie" role="button">LOGOUT</a></Link>
+  </nav>
 )
 
-export default NavbarUnconnected
+export default Nav

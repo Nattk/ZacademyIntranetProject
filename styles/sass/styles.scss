@@ -21,7 +21,6 @@
 @import './pages/follow.scss';
 @import './pages/ajouterRessource.scss';
 @import './pages/livretAccueil.scss';
-@import '../../pages/ma_formation/Slack/slack.scss';
 
 // Calendar
 @import '~@fullcalendar/core/main.css';
@@ -34,10 +33,7 @@ html {
   flex-direction: column;
   height: 100%;
   overflow-x: hidden;
-<<<<<<< HEAD
   font-family: Calibri, 'Trebuchet MS', 'Gill Sans', 'Gill Sans MT', sans-serif 3rem;
-=======
->>>>>>> parent of 340de33... navbar
 }
 
 .main {
