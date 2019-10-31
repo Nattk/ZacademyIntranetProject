@@ -1,37 +1,27 @@
-.pageRss-title {
-  margin-top: 2.3rem;
-}
-
-.rss-article {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.section-rss {
-  width: 100%;
-}
-
-.card-rss {
-  margin: 2rem;
-}
-
-.card-rss-article {
-  margin: 1rem;
-}
-
 .card-rss-title {
   color: #000000;
   text-decoration-color: #000000;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
+
+}
+
+.card-rss-title:hover {
+  color: #000000;
+  text-decoration-color: #000000;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.1rem;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .card-rss-button {
-  background-color: rgb(178, 30, 62);
+  background-color: #f26522;
   color: #fff;
-  border: 2px solid rgb(178, 30, 62);
+  border: #f26522;
+  border-radius: 15%;
 }
