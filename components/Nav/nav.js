@@ -1,5 +1,4 @@
 import { Navbar, NavDropdown, Nav, FormControl, Button } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 const NavbarUnconnected = () => (
   <Navbar bg="dark" id="navbarbody" expand="lg">
