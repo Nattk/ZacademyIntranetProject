@@ -60,6 +60,7 @@ export default class CalendrierReact extends React.Component {
 
 `
 		const displayEvent = () => document.querySelector('.card-event').appendChild(newContainer)
+
 		const displaySpinner = () => document.querySelector('.card-event').appendChild(newSpinner)
 		const displayElement = {
 			display1() {

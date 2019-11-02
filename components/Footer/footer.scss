@@ -1,12 +1,12 @@
 .footer-decoration {
   background-color: #000000;
   color: white;
-  padding: 1rem;
+  padding: .3rem;
 
 }
 
 .footer-titre-h1 {
-  font-size: 1.6875rem;
+  font-size: 1.4875rem;
 }
 
 .footer-link-customization {
@@ -21,7 +21,7 @@
 .footer-link-decoration {
   text-transform: uppercase;
   font-weight: 300;
-  font-size: .9375rem;
+  font-size: .8375rem;
   justify-content: space-evenly;
   flex-wrap: wrap;
   color: white;
@@ -29,14 +29,13 @@
 
 }
 
-
 .footer-socialIcon {
   display: flex;
   justify-content: space-evenly;
   width: 13rem;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 0.5rem;
+  margin-bottom: .3rem;
 
 }
 
@@ -53,14 +52,11 @@
 }
 
 /* responsive css footer */
-
 @media only screen and(max-width: 767px) {
-
   .row1-position,
   .row3-position {
     margin-bottom: 1.875rem;
     text-align: center !important;
   }
-
 
 }
