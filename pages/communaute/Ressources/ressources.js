@@ -13,55 +13,55 @@ class Ressources extends Component{
       {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle",  promotion:"Promo Paris 2", auteur:"Nattan Kifoyi", promoId:2, contributeur:2, ressId:3},
       {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle",  promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", promoId:3, contributeur:2, ressId:4}
     ],
-    filtreContributeur : 0,
     filtrePromo: 0,
-    ressourcesDispo:0
+    ressourcesDispo:0,
+    formateurs: false,
     }
 
+
   filtre = (event) => {
-    if(event.target.id === "selectContributeur"){
-      this.setState({filtreContributeur: parseInt(event.target.value)})
-    }
-    else{
+
       this.setState({filtrePromo: parseInt(event.target.value)})
-    }
   }
 
   handleDelete = (ressId) =>{
     alert("ressource supprimé")
     const ress = this.state.ressources.filter(item => item.ressId !== ressId);
-    console.log(ress);
     this.setState({ressources : ress});
-
-
   }
 
   render(){
     const ressourcesCartes = this.state.ressources.filter(ressource => {
-      if(this.state.filtreContributeur === 0 && this.state.filtrePromo === 0){
+      if(this.state.filtrePromo === 0){
         return ressource
       }
-      else if(this.state.filtrePromo === 0){
-        return ressource.contributeur === this.state.filtreContributeur
-      }
-      else if(this.state.filtreContributeur === 0){
-        return ressource.promoId === this.state.filtrePromo
-      }
       else{
-        return ressource.contributeur === this.state.filtreContributeur && ressource.promoId === this.state.filtrePromo
+        return ressource.promoId === this.state.filtrePromo
       } 
     })
     .map( (ressource, index) => (
       <Card styleName="ressourceCarte d-flex flex-column" key={index}>
-        <Link href={ressource.lien}>
-          <a>{ressource.titre}</a>
-        </Link>
-        <p>{ressource.promotion}</p>
-        <p>{ressource.auteur}</p>
-        <div class="d-flex flex-row">
-          <Button btnType="modifier"> <Link href="./ModifierRessource">Modifier</Link></Button>
-          <Button btnType="annuler" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
-        </div>
+        <div className="d-flex flex-row">
+          <div>
+              <img
+                src="https://ca.slack-edge.com/TDKLZEH1B-UN6RVVAP3-g00f562b54f1-72"
+                alt="profile-user"
+                className="img-socialMedia"
+                aria-describedby="p1"
+              />
+            </div>
+            <section className="d-flex flex-column ressourceDetails">
+              <Link href={ressource.lien}>
+                <h2><a>{ressource.titre}</a></h2>
+              </Link>
+              <i>{ressource.auteur} . 12/12/2019 . {ressource.promotion}</i>
+              <i>#HTML #CSS</i>
+            </section>
+          </div>
+          <aside className="d-flex flex-row justify-content-end"> 
+            <Button btnType="modifier"> <Link href="./ModifierRessource"><a>Modifier</a></Link></Button>
+            <Button btnType="annuler" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
+          </aside>
       </Card>
     ))
     
@@ -70,26 +70,29 @@ class Ressources extends Component{
       <article className="ressources d-flex flex-column">
       <h1>Ressources</h1>
         <header className="d-flex flex-row justify-content-between align-items-center">
-            <select defaultValue="0" className="custom-select" id="selectContributeur" onChange={this.filtre}>
-              <option value="0">Contributeurs</option>
-              <option value="1">Elèves</option>
-              <option value="2">Formateurs</option>
-            </select>
             <select defaultValue="0" className="custom-select" id="selectPromo" onChange={this.filtre}>
               <option value="0">Promotions</option>
               <option value="1">Promo Rennes 2</option>
               <option value="2">Promo Paris 2</option>
               <option value="3">Promo Rio 1</option>
             </select>
-            <div>
-              <i className="fa fa-search"></i>
-              <input type="text" placeholder="rechercher une ressource" />
-            </div>
+            <select defaultValue="0" className="custom-select" id="selectKeywords" >
+              <option value="0">Modules</option>
+              <option value="1">Javscript</option>
+              <option value="2">Craft</option>
+            </select>
+            <Button btnType="valider">
+              <Link href="./AjouterRessource">
+                <a>
+                  Ajouter une ressource
+                </a>
+              </Link>
+            </Button>
         </header>
         <aside className="align-self-stretch">
             <i>{this.state.ressources.length} ressources trouvées</i>
         </aside>
-        <section class="ressourcesList"> 
+        <section className="ressourcesList"> 
             {ressourcesCartes}
         </section>
           <footer className="d-flex align-items-end">

@@ -1,22 +1,53 @@
-.ressourceCarte {
-    a {
-        color: black;
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
+.ressources {
+    padding: 1rem;
 }
 
-.ressources {
-    width: 70rem;
+.ressourceCarte {
+    height: 10rem;
+}
 
-    .ressourcesList {
-        height: 20rem;
-        overflow-y: auto;
+.ressourceCarte,
+.ressourceContent {
+    padding: 1rem;
+    min-width: 40rem;
+
+    img {
+        height: 4rem;
+    }
+
+    .btn {
+        font-weight: bold;
+        margin-left: 0.5rem;
+    }
+
+    .ressourceDetails {
+        margin: 0 1rem 0 1rem;
+
+        h2 {
+            margin: 0;
+            text-transform: initial;
+            text-align: initial;
+        }
+
+        h2 a {
+            font-size: 1.5rem;
+            color: black;
+            cursor: pointer;
+        }
+
+        i {
+            font-weight: bold;
+            color: gray;
+        }
     }
 }
 
 .ressources select {
     width: 10rem;
+}
+
+.ressourceContent {
+    padding: 2rem;
 }
 
 article.gestionProgramme.card {
@@ -30,4 +61,11 @@ article.gestionProgramme.card .card-body li {
 article.gestionProgramme.card footer {
     padding: 1rem;
 
+}
+
+.ajouterRessource input[type=text] {
+    background-color: unset;
+    color: black;
+    text-align: left;
+    padding: 0.5rem;
 }

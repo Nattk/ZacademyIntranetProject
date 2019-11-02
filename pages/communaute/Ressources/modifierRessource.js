@@ -15,14 +15,18 @@ class AjouterRessources extends Component {
           <h1>Modifier une ressource</h1>
           <section>
             <form className="form-group d-flex flex-column">
-              <label>Titre</label>
-              <input className="form-control" type="text" value="Apprendre le HTML en 5 min"/>
+              <label>Titre de la ressource</label>
+              <input className="form-control" type="text" value="" placeholder="Apprendre le html en 5 min"/>
               <label>Ressource</label>
               <textarea className="form-control">
                 Laborum magna eu exercitation aliquip adipisicing velit dolor pariatur duis esse. Do est aliquip id velit. Elit pariatur irure et sint quis qui. Lorem eiusmod voluptate exercitation sunt elit non dolore dolore pariatur do incididunt. Velit ullamco sint sit qui cupidatat aute fugiat fugiat ex sint.
               </textarea>
-              <label>Mots Clé</label>
-              <input className="form-control" type="text" value="HTML CSS"/>
+              <label>Modules associé</label>
+              <select className="form-control" type="text">
+                <option value="HTML">HTML</option>
+                <option value="CSS">Css</option>
+                <option value="Javascript">Javascript</option>
+              </select>
             </form>
             <Button btnType="annuler"><Link href="./ressources"> Annuler</Link></Button>
             <Button btnType="valider" clicked={this.handleValidation}>Valider</Button>

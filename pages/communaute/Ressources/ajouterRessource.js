@@ -20,7 +20,11 @@ class AjouterRessources extends Component {
               <textarea className="form-control">
               </textarea>
               <label>Mots Clé</label>
-              <input className="form-control" type="text"/>
+              <select className="form-control" type="text">
+                <option value="HTML">HTML</option>
+                <option value="CSS">Css</option>
+                <option value="Javascript">Javascript</option>
+              </select>
             </form>
             <Button btnType="valider" clicked={this.handleValidation}>Ajouter</Button>
           </section>
