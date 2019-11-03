@@ -2,10 +2,24 @@ import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
 import Link from 'next/link'
+import Modal from '../../../components/Modal/alert'
 
 class AjouterRessources extends Component {
-  handleValidation () {
-    alert('Votre Ressource a été Modifié')
+
+  state = {
+    modalShow: false
+  }
+
+  handleValidation = () => {
+
+    if(document.getElementById('titre').value != '' && document.getElementById('ressource').value !=""){
+      event.preventDefault();
+      this.setState({modalShow: true})
+      setTimeout(() => {
+        this.setState({ modalShow: false })
+        window.location.assign('/communaute/Ressources/ressources')
+      }, 5000)
+    }
   }
 
   render () {
@@ -14,20 +28,35 @@ class AjouterRessources extends Component {
         <article className="ajouterRessource">
           <h1>Modifier une ressource</h1>
           <section>
-            <form className="form-group d-flex flex-column">
-              <label>Titre</label>
-              <input className="form-control" type="text" value="Apprendre le HTML en 5 min"/>
-              <label>Ressource</label>
-              <textarea className="form-control">
-                Laborum magna eu exercitation aliquip adipisicing velit dolor pariatur duis esse. Do est aliquip id velit. Elit pariatur irure et sint quis qui. Lorem eiusmod voluptate exercitation sunt elit non dolore dolore pariatur do incididunt. Velit ullamco sint sit qui cupidatat aute fugiat fugiat ex sint.
-              </textarea>
-              <label>Mots Clé</label>
-              <input className="form-control" type="text" value="HTML CSS"/>
+            <form className="form-group d-flex flex-column" novalidate>
+              <label for="titre">Titre de la ressource</label>
+              <div class="d-flex flex-row">
+                <input id="titre" className="form-control" type="text" placeholder="Apprendre le html en 5 min" aria-required="true" required/>
+                <span>&nbsp;*</span>
+              </div>
+              <label for="ressource">Ressource</label>
+              <div className="d-flex flex-row">
+                <textarea id="ressource" className="form-control" aria-required="true" required>
+                  Laborum magna eu exercitation aliquip adipisicing velit dolor pariatur duis esse. Do est aliquip id velit. Elit pariatur irure et sint quis qui. Lorem eiusmod voluptate exercitation sunt elit non dolore dolore pariatur do incididunt. Velit ullamco sint sit qui cupidatat aute fugiat fugiat ex sint.
+                </textarea>
+                <span>&nbsp;*</span>
+              </div>
+              <label for="modules">Modules associé</label>
+              <select id="modules" className="form-control" type="text" aria-required="true" required>
+                <option value="HTML">HTML</option>
+                <option value="CSS">Css</option>
+                <option value="Javascript">Javascript</option>
+              </select>
+              <div className="d-flex flex-row justify-content-end">
+              <Button btnType="annuler" title="annuler"><Link href="./ressources"> Annuler</Link></Button>
+              <Button btnType="valider" title="valider" submit={true} clicked={this.handleValidation}>Valider</Button>
+            </div>
             </form>
-            <Button btnType="annuler"><Link href="./ressources"> Annuler</Link></Button>
-            <Button btnType="valider" clicked={this.handleValidation}>Valider</Button>
           </section>
         </article>
+        {this.state.modalShow ? (
+									<Modal show={this.state.modalShow} modalTitle="Ressource Modifié avec succés" />
+								) : null}      
       </Page>
     )
   }
