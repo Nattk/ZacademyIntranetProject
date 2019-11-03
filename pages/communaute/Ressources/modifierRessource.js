@@ -11,11 +11,15 @@ class AjouterRessources extends Component {
   }
 
   handleValidation = () => {
-    // this.setState({modalShow: true})
-    // setTimeout(() => {
-		// 	this.setState({ modalShow: false })
-		// 	window.location.assign('./ressources')
-		// }, 5000)
+
+    if(document.getElementById('titre').value != '' && document.getElementById('ressource').value !=""){
+      event.preventDefault();
+      this.setState({modalShow: true})
+      setTimeout(() => {
+        this.setState({ modalShow: false })
+        window.location.assign('/communaute/Ressources/ressources')
+      }, 5000)
+    }
   }
 
   render () {
@@ -24,7 +28,7 @@ class AjouterRessources extends Component {
         <article className="ajouterRessource">
           <h1>Modifier une ressource</h1>
           <section>
-            <form className="form-group d-flex flex-column">
+            <form className="form-group d-flex flex-column" novalidate>
               <label for="titre">Titre de la ressource</label>
               <div class="d-flex flex-row">
                 <input id="titre" className="form-control" type="text" placeholder="Apprendre le html en 5 min" aria-required="true" required/>
@@ -44,8 +48,8 @@ class AjouterRessources extends Component {
                 <option value="Javascript">Javascript</option>
               </select>
               <div className="d-flex flex-row justify-content-end">
-              <Button btnType="annuler"><Link href="./ressources"> Annuler</Link></Button>
-              <Button btnType="valider" submit={true} clicked={this.handleValidation}>Valider</Button>
+              <Button btnType="annuler" title="annuler"><Link href="./ressources"> Annuler</Link></Button>
+              <Button btnType="valider" title="valider" submit={true} clicked={this.handleValidation}>Valider</Button>
             </div>
             </form>
           </section>

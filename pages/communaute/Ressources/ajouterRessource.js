@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
+import Modal from '../../../components/Modal/alert'
+import Link from 'next/link'
 
 class AjouterRessources extends Component {
+    state = {
+      modalShow: false
+    }
+
   handleValidation () {
 
   }
@@ -31,10 +37,16 @@ class AjouterRessources extends Component {
                 <option value="CSS">Css</option>
                 <option value="Javascript">Javascript</option>
               </select>
-              <Button btnType="valider" submit={true} clicked={this.handleValidation}>Ajouter</Button>
+              <div class="d-flex flex-row justify-content-end">
+                <Button btnType="valider" title="ajouter une ressource" submit={true} clicked={this.handleValidation}>Ajouter</Button>
+                <Button btnType="annuler" title="annuler"> <Link href="./ressources"><a>Annuler</a></Link></Button>
+              </div>
             </form>
           </section>
         </article>
+        {this.state.modalShow ? (
+          <Modal show={this.state.modalShow} modalTitle="La ressource a été ajouté avec succés" />
+        ) : null}
       </Page>
     )
   }

@@ -58,7 +58,7 @@ class RessourceIndividuelle extends Component {
             Incididunt sit ut consectetur adipisicing culpa laborum Lorem nostrud pariatur laborum elit commodo commodo ex.<br/> 
             Culpa amet deserunt exercitation cupidatat exercitation Lorem.</p>
         </Card>
-        <Button btnType="annuler"><Link href="./ressources"><a>Retour à la liste des ressources</a></Link></Button>
+        <Button btnType="annuler" title="Retour à la liste des ressources"><Link href="./ressources"><a>Retour à la liste des ressources</a></Link></Button>
         </article>
       </Page>
     )

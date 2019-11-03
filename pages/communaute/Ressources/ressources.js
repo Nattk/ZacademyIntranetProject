@@ -59,8 +59,8 @@ class Ressources extends Component{
             </section>
           </div>
           <aside className="d-flex flex-row justify-content-end"> 
-            <Button btnType="modifier"> <Link href="./ModifierRessource"><a>Modifier</a></Link></Button>
-            <Button btnType="annuler" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
+            <Button btnType="modifier" title="Modifier"> <Link href="./ModifierRessource"><a>Modifier</a></Link></Button>
+            <Button btnType="annuler" title="Supprimer" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
           </aside>
       </Card>
     ))
