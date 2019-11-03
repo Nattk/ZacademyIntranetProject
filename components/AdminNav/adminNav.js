@@ -23,13 +23,13 @@ const AdminNav = () => (
       </a>
 
       <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <Link href="/admin/GestionProgramme/gestion_programme"><a role="button">Gestion Programme</a></Link><br></br>
-        <Link href="/admin/GestionPromotion/gestion_promotion"><a role="button">Gestion Promotion</a></Link><br></br>
-        <Link href="/admin/GestionUtilisateur/gestion_utilisateur"><a role="button">Gestion Utilisateur</a></Link><br></br>
+        <Link href="/admin/GestionProgramme/gestion_programme"><a role="button" alt="Lien pour gérer les programmes">Gestion Programme</a></Link><br></br>
+        <Link href="/admin/GestionPromotion/gestion_promotion"><a role="button" alt="Lien pour gérer les promotions">Gestion Promotion</a></Link><br></br>
+        <Link href="/admin/GestionUtilisateur/gestion_utilisateur"><a role="button" alt="Lien pour gérer les utilisateurs">Gestion Utilisateur</a></Link><br></br>
       </div>
     </div>
-    <Link href="/utilisateur/MonProfil/mon_profil"><a className="btn btn-danger" role="button">PROFIL</a></Link>
-    <Link href="/"><a className="btn btn-danger" href="#" id="bonjourjérémie" role="button">LOGOUT</a></Link>
+    <Link href="/utilisateur/MonProfil/mon_profil"><a className="btn btn-danger" role="button" alt="Lien vers mon profil">PROFIL</a></Link>
+    <Link href="/"><a className="btn btn-danger" href="#" id="bonjourjérémie" role="button" alt="Lien déconnexion">LOGOUT</a></Link>
   </nav>
 )
 
