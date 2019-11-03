@@ -16,8 +16,9 @@
 @import '../../components/Form/CreaUtilisateur/creation_utilisateur.scss';
 
 // Dossier Pages
+@import './pages/standard-styles.scss';
 @import './pages/agenda.scss';
-@import './pages/rss.scss';
+@import '../../pages/communaute/Rss/rss.scss';
 @import './pages/ressources.scss';
 @import './pages/follow.scss';
 @import './pages/ajouterRessource.scss';
