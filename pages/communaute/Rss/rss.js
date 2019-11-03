@@ -50,7 +50,7 @@ const elementCardRss = (
 	</article>
 )
 const Rss = () => (
-	<Page title="Rss">
+	<Page title="rss">
 		<article className="container-article">
 			<h1 className="mainTitle"> Flux RSS </h1>
 			<div className=" col-md-10 col-sm-12 col-xs-12 text-center container-card">
