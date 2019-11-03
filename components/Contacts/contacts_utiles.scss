@@ -1,15 +1,17 @@
 article#article_contact_utiles{
-    width: 40rem;
+    display: flex;
+    flex-flow: wrap;
+    max-width: 80rem;
     margin-top: 2rem;
+    margin: 2rem auto 2rem auto;
+    section{
+        min-width: 14rem;
+        max-width: 14rem;
+    }
 }
 
-
-img#img_contact_utiles{
-    width: 10rem;
-    height: 10rem;
-}
 
 h1.card-title{
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: bold;
 }
