@@ -4,7 +4,7 @@ import Button from '../../../components/Boutons/Boutons'
 
 class AjouterRessources extends Component {
   handleValidation () {
-    alert('Votre Ressource a été ajouté')
+
   }
 
   render () {
@@ -14,19 +14,25 @@ class AjouterRessources extends Component {
           <h1>Ajouter une ressource</h1>
           <section>
             <form className="form-group d-flex flex-column">
-              <label>Titre</label>
-              <input className="form-control" type="text"/>
-              <label>Ressource</label>
-              <textarea className="form-control">
-              </textarea>
-              <label>Mots Clé</label>
-              <select className="form-control" type="text">
+              <label for="titre">Titre</label>
+              <div className="d-flex flex-row">
+                <input id="titre" className="form-control" type="text" required/>
+                <span>&nbsp;*</span>
+              </div>
+              <label for="ressource">Ressource</label>
+              <div className="d-flex flex-row">
+                <textarea for="ressource" className="form-control" required>
+                </textarea>
+                <span>&nbsp;*</span>
+              </div>
+              <label for="modules" >Modules associés</label>
+              <select id="modules" className="form-control" type="text" required>
                 <option value="HTML">HTML</option>
                 <option value="CSS">Css</option>
                 <option value="Javascript">Javascript</option>
               </select>
+              <Button btnType="valider" submit={true} clicked={this.handleValidation}>Ajouter</Button>
             </form>
-            <Button btnType="valider" clicked={this.handleValidation}>Ajouter</Button>
           </section>
         </article>
       </Page>
