@@ -12,7 +12,7 @@ const elementCardRss = (
 		>
 			<section style={{ display: 'flex', flexWrap: 'wrap' }}>
 				<button className="card-rss-button">
-					<i class="fas fa-rss" />
+					<i className="fas fa-rss" />
 				</button>
 				&nbsp;
 				<h1 title="lien vers le flux" className="card-rss-title">
@@ -23,7 +23,7 @@ const elementCardRss = (
 	</article>
 )
 const Rss = () => (
-	<Page title="Rss">
+	<Page title="rss">
 		<section className="section-rss">
 			<h1 className="mainTitle"> Flux RSS </h1>
 			<section className="row">

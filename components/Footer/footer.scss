@@ -41,6 +41,7 @@
 
 .row1-position {
   text-align: left;
+  margin-top: .25rem;
 }
 
 .row2-position {
@@ -49,13 +50,13 @@
 
 .row3-position {
   text-align: right;
+  margin-top: .2rem;
 }
 
 /* responsive css footer */
 @media only screen and(max-width: 767px) {
   .row1-position,
   .row3-position {
-    margin-bottom: 1.875rem;
     text-align: center !important;
   }
 

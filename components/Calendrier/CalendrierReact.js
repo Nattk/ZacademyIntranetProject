@@ -1,97 +1,105 @@
 import React from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import listPlugin from '@fullcalendar/list'
 import interactionPlugin from '@fullcalendar/interaction' // needed for dayClick
+import googleCalendarPlugin from '@fullcalendar/google-calendar'
+import ModalEvent from '../Modal/modalEvent'
 import '../../styles/sass/styles.scss'
 
 export default class CalendrierReact extends React.Component {
-	render() {
-		return <FullCalendar dateClick={this.handleDateClick} plugins={[ dayGridPlugin, interactionPlugin ]} />
+	state = {
+		modalDataEvent: false,
+		modalShow: false,
+		idEvent: '',
+		headerTitle: '',
+		modalDescription: '',
+		modalTitle: '',
+		titleDescription: '',
+		addEventToGoogleCalendar: '',
+		startsAt: new Date().toISOString().substr(0, 10),
+		endsAt: new Date().toISOString().substr(0, 10),
+		modalLocation: 'Paris',
+		showAdd: true
 	}
 
-	handleDateClick = (arg) => {
-		// bind with an arrow function
-		let newContainer = document.createElement('div')
-		let newSpinner = document.createElement('div')
-		newSpinner.setAttribute('id', 'eventSpinner')
-		newContainer.setAttribute('id', 'eventNumber')
-		const replace = () => {
-			var divs = document.querySelectorAll('[id]')
-			for (var i = 0, len = divs.length; i < len; i++) {
-				var div = divs[i]
-				if (div.id.indexOf('eventNumber') > -1) {
-					div.parentNode.removeChild(div)
-				}
-			}
-		}
-		const detroySpinner = () => {
-			var divs = document.querySelectorAll('[id]')
-			for (var i = 0, len = divs.length; i < len; i++) {
-				var div = divs[i]
-				if (div.id.indexOf('eventSpinner') > -1) {
-					div.parentNode.removeChild(div)
-				}
-			}
-		}
-		replace()
+	showEvent = () => {
+		this.setState({ modalDataEvent: true })
+	}
 
-		const years = arg.dateStr.slice(0, 4)
-		const month = arg.dateStr.slice(5, 7)
-		const day = arg.dateStr.slice(8, 10)
-		console.log(day)
+	toggle = (info) => {
+		let dataHeaderTitle = JSON.stringify(info.event.start).substr(1, 10)
+		let dataModalDescription = JSON.stringify(info.event.extendedProps.description)
+		let dataModalTitle = JSON.stringify(info.event.title).slice(1, -1)
+		let datEventId = JSON.stringify(info.event.id).slice(1, -1)
+		this.setState((prevState) => ({
+			modalShow: !prevState.modal,
+			modalTitle: dataModalTitle,
+			headerTitle: dataHeaderTitle,
+			modalLocation: 'Paris',
+			modalDescription: dataModalDescription ? dataModalDescription.slice(1, -1) : dataModalDescription,
+			idEvent: datEventId,
+			startsAt: dataHeaderTitle,
+			endsAt: dataHeaderTitle
+		}))
 
-		newContainer.innerHTML = `
-		<Card>
-			<section>
-				<div class="main-card">
-    		<h1 class="h1_event"> ${day}-${month}-${years}</h1>
-				<h2  class="h2_event" > Meetup React - React Native</h2>
-    		<p  class="p_event">Le Lorem Ipsum est simplement du faux texte employé dans la composition &nbsp; et la
-				mise en page avant impression</p>
-				</div>
-			</section>
-	</Card>
+		info.jsEvent.preventDefault()
+	}
 
-			
-`
-		newSpinner.innerHTML = `
-		<div class="loader "></div>
+	handleEventClick = (info) => {
+		this.setState({
+			modalShow: true,
+			idEvent: null,
+			modalTitle: null,
+			modalLocation: null,
+			modalDescription: null,
+			headerTitle: info.dateStr,
+			startsAt: info.dateStr,
+			endsAt: info.dateStr
+		})
+	}
 
+	handleClose = () => {
+		this.setState({ modalShow: false })
+	}
 
-`
-		const displayEvent = () => document.querySelector('.card-event').appendChild(newContainer)
-
-		const displaySpinner = () => document.querySelector('.card-event').appendChild(newSpinner)
-		const displayElement = {
-			display1() {
-				setTimeout(() => {
-					displaySpinner()
-				})
-			},
-			display2() {
-				setTimeout(() => {
-					detroySpinner()
-					displayEvent()
-				}, 500)
-			}
-		}
-		displayElement.display1()
-		displayElement.display2()
-
-		// Backgroud-color
-		var styles = document.querySelectorAll('[style]')
-		for (var i = 0, len = styles.length; i < len; i++) {
-			var style = styles[i]
-			if (style.id.indexOf('rgb(178, 30, 62)') > -1) {
-				styles.parentNode.removeChild(style)
-			}
-		}
-		if (arg.dayEl.style.backgroundColor === 'rgb(178, 30, 62)') {
-			arg.dayEl.style.backgroundColor = '#fff'
-			replace()
-		} else arg.dayEl.style.backgroundColor = '#b21e3e'
-
-		if (arg.dateStr) {
-		}
+	render() {
+		return (
+			<React.Fragment>
+				<FullCalendar
+					timeZone="UTC, Paris"
+					googleCalendarApiKey="AIzaSyDzjuf_lV9IO6MD14emQWwra-RlE7iAC4c"
+					dateClick={this.handleEventClick}
+					eventSourcesClick={this.showEvent}
+					plugins={[ googleCalendarPlugin, dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin ]}
+					header={{
+						left: 'title ',
+						center: 'dayGridMonth,timeGridWeek',
+						right: 'prev,next,'
+					}}
+					footer={{
+						left: 'prevYear,nextYear'
+					}}
+					eventClick={this.toggle}
+					events={{ googleCalendarId: 'v2370j39rbre3q4ea6vjjctp7c@group.calendar.google.com' }}
+				/>
+				<ModalEvent
+					show={this.state.modalShow}
+					modalHeader
+					headerTitle={this.state.headerTitle}
+					modalTitle={this.state.modalTitle}
+					modalDescription={this.state.modalDescription}
+					modalLocation={this.state.modalLocation}
+					AddEvents
+					nameChildren={this.state.idEvent !== null ? "Modifier l'évènement" : 'Ajouter un évènement'}
+					startsAt={this.state.startsAt}
+					deleteEvent={this.state.idEvent !== null ? true : false}
+					endsAt={this.state.endsAt}
+					modalFooter
+					clicked={this.handleClose}
+				/>
+			</React.Fragment>
+		)
 	}
 }
