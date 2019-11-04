@@ -2,7 +2,6 @@
 @import '../../components/FontAwesomeIcon/fontawesome.scss';
 // Dossier Components
 @import '../../components/Footer/footer.scss';
-@import '../../components/Contacts/contacts_utiles.scss';
 @import '../../components/Index/Carousel/carousel.scss';
 @import '../../components/Index/Newsfeed/newsfeed.scss';
 @import '../../components/Login/login.scss';
@@ -10,19 +9,21 @@
 @import '../../components/Boutons/Boutons.scss';
 @import '../../components/Admin/admin.scss';
 @import '../../components/Modal/modalEvent.scss';
-@import '../../components/Profil/mon_profil.scss';
 @import '../../components/Form/CreaProgramme/creation_programme.scss';
 @import '../../components/Form/CreaPromotion/creation_promotion.scss';
 @import '../../components/Form/CreaUtilisateur/creation_utilisateur.scss';
 
 // Dossier Pages
 @import './pages/standard-styles.scss';
-@import './pages/agenda.scss';
+@import '../../pages/ma_formation/ContactUtiles/contacts_utiles.scss';
+@import '../../pages/utilisateur/MonProfil/mon_profil.scss';
+@import '../../pages/ma_formation/agenda.scss';
 @import '../../pages/communaute/Rss/rss.scss';
 @import './pages/ressources.scss';
 @import './pages/follow.scss';
 @import './pages/ajouterRessource.scss';
 @import './pages/livretAccueil.scss';
+
 
 // Calendar
 @import '~@fullcalendar/core/main.css';

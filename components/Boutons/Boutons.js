@@ -1,9 +1,5 @@
 import React from 'react'
-
 import './Boutons.scss'
-
-// btnType = ajout des classes necessaires/classes a mettre dans bouton.scss
-// cliked = envera enventuellement les props du bouton au component parent
 
 const Button = (props) => {
   return (
