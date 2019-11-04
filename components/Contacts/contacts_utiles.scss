@@ -1,4 +1,6 @@
-article #article_contact_utiles {
+article#article_contact_utiles{
+    margin: 0 auto 0 auto;
+    #div_contact_utiles {
     display: flex;
     flex-flow: wrap;
     max-width: 80rem;
@@ -9,6 +11,7 @@ article #article_contact_utiles {
         min-width: 14rem;
         max-width: 14rem;
     }
+}
 }
 
 

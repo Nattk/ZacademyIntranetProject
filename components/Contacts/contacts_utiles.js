@@ -1,9 +1,8 @@
 import React from 'react'
 
 const ContactsUtiles = () => (
-  <article className="profiles flex-column" role="liste des profiles" alt="profil contact utile" >
-    <h1>Contacts Utiles</h1>
-    <div id="article_contact_utiles">
+  <article className="profiles flex-column" role="liste des profiles" alt="profil contact utile" id="article_contact_utiles" >
+    <div id="div_contact_utiles">
       <section class="card" >
         <img src="/firmin.jpg" class="card-img-top" alt="image profil contact utile" />
         <div class="card-body">
