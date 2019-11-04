@@ -35,8 +35,8 @@ const Nav = () => (
       </a>
 
       <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <Link href="/communaute/Ressources/ressources"><a role="button" alt="Lien vers ressources formateur">Formateurs</a></Link><br></br>
-        <Link href="/communaute/Ressources/ressources"><a role="button" alt="Lien vers ressources élèves">Élèves</a></Link><br></br>
+        <Link href="/Ressources/ressources"><a role="button" alt="Lien vers ressources formateur">Formateurs</a></Link><br></br>
+        <Link href="/Ressources/ressources"><a role="button" alt="Lien vers ressources élèves">Élèves</a></Link><br></br>
       </div>
     </div>
     <Link href="/utilisateur/MonProfil/mon_profil"><a className="btn btn-danger" role="button" alt="Lien vers mon profil">PROFIL</a></Link>

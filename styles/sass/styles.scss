@@ -17,12 +17,12 @@
 @import './pages/standard-styles.scss';
 @import '../../pages/ma_formation/ContactUtiles/contacts_utiles.scss';
 @import '../../pages/utilisateur/MonProfil/mon_profil.scss';
-@import '../../pages/ma_formation/agenda.scss';
+@import '../../pages/ma_formation/Agenda/agenda.scss';
 @import '../../pages/communaute/Rss/rss.scss';
-@import './pages/ressources.scss';
-@import './pages/follow.scss';
-@import './pages/ajouterRessource.scss';
-@import './pages/livretAccueil.scss';
+@import '../../pages/communaute/WhoToFollow/follow.scss';
+@import '../../pages/Ressources/ressources.scss';
+@import '../../pages/Ressources/ajouterRessource.scss';
+@import '../../pages/ma_formation/LivretAccueil/livretAccueil.scss';
 
 
 // Calendar
@@ -42,4 +42,47 @@ html {
 .main {
   display: flex;
   flex: 1;
+}
+
+.mainTitle {
+  margin: 2.3rem;
+
+}
+
+.card {
+  margin: 1rem;
+}
+
+.container-card {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.card-article {
+  margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-title {
+  color: #000000;
+  text-decoration-color: #000000;
+  font-size: 1.5rem;
+
+}
+
+.card-description {
+  text-align: left;
+}
+
+article.container-article {
+  width: 100%;
+  align-self: unset;
+  margin: 0;
+  max-width: unset;
+
 }

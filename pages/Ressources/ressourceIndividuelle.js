@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Page from '../../../layouts/classic'
-import Button from '../../../components/Boutons/Boutons'
-import Card from '../../../components/Card/card'
+import Page from '../../layouts/classic'
+import Button from '../../components/Boutons/Boutons'
+import Card from '../../components/Card/card'
 import Link from 'next/link'
 
 class RessourceIndividuelle extends Component {

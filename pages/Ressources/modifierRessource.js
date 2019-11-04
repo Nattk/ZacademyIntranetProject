@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Page from '../../../layouts/classic'
-import Button from '../../../components/Boutons/Boutons'
+import Page from '../../layouts/classic'
+import Button from '../../components/Boutons/Boutons'
 import Link from 'next/link'
-import Modal from '../../../components/Modal/alert'
+import Modal from '../../components/Modal/alert'
 
 class AjouterRessources extends Component {
 
