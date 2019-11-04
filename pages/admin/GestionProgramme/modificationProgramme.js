@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Page from '../../../layouts/admin'
+import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
 import Link from 'next/link'
 

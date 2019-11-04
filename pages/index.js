@@ -1,16 +1,11 @@
 import React from 'react'
-import Page from '../layouts/accueil'
-import Carousel from '../components/Index/Carousel/carousel'
-import Login from '../components/Login/login'
-import { Button, ButtonToolbar } from 'react-bootstrap'
+import Page from '../layouts/classic'
 
 const Home = () => (
-	<React.Fragment>
-		<Page title="Accueil">
-			<Carousel />
-			<Login />
-		</Page>
-	</React.Fragment>
+  <React.Fragment>
+    <Page title="Accueil">
+    </Page>
+  </React.Fragment>
 )
 
 export default Home

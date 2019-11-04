@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Page from '../../../layouts/admin'
+import Page from '../../../layouts/classic'
 import Link from 'next/link'
 import Button from '../../../components/Boutons/Boutons'
 
@@ -140,12 +140,10 @@ class Admin extends Component {
                 }
               }).map((eleve,index)=>(
                 <article key={index} className="card">
-                <Link>  
                 <section className="card-body">
                 <p>Nom : {eleve.nom} | Prénom : {eleve.prenom}. Promotion : {eleve.promotion}</p>
                 </section>
-                </Link>
-                <div class="d-flex flex-row">
+                <div className="d-flex flex-row">
                 <Button btnType="annuler"><Link href="/utilisateur/MonProfil/mon_profil"><a>Voir Profil</a></Link></Button>
                 <Button btnType="modifier" clicked={this.handleDelete}>Supprimé profil</Button>
                 </div>
@@ -165,7 +163,7 @@ class Admin extends Component {
                 <section className="card-body">
                 <p>Nom : {formateur.nom} | Prénom : {formateur.prenom}. Promotion : {formateur.promotion}</p>
                 </section>
-                <div class="d-flex flex-row">
+                <div className="d-flex flex-row">
                 <Button btnType="annulé"><Link href="/utilisateur/MonProfil/mon_profil"><a>Voir Profil</a></Link></Button>
                 <Button btnType="modifier" clicked={this.handleDelete}>Supprimé profil</Button>
                 </div>

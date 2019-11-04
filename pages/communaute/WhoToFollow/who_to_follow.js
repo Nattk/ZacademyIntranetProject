@@ -1,5 +1,5 @@
 import React from 'react'
-import Page from '../../../layouts/classic'
+import Page from '../../../layouts/global'
 import Card from '../../../components/Card/card'
 import '../../../styles/sass/styles.scss'
 
