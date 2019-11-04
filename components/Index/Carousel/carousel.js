@@ -1,8 +1,8 @@
 import React from 'react'
 
 const Carousel = () => (
-  <article className="container fluid">
-    <section id="carouselExampleCaptions" className="carousel slide" data-ride="carousel"  alt="carousel formation">
+  <article className="container fluid carouselPromo">
+    <section id="carouselExampleCaptions" className="carousel slide" data-ride="carousel" alt="carousel formation">
       <ol className="carousel-indicators">
         <li data-target="#carouselExampleCaptions" data-slide-to="0" className="active"></li>
         <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -13,23 +13,23 @@ const Carousel = () => (
           <img src="/slide_1.png"
             className="d-block w-100 carousel-connected " alt="carousel slide 1" />
           <div className="carousel-caption d-none d-md-block">
-            <h5>First slide label</h5>
+            <h2>First slide label</h2>
             <p>Nulla vitae elit laibero, a pharetra augue mollis interdum.</p>
           </div>
         </div>
         <div className="carousel-item ">
           <img src="/slide_2.png"
-            className="d-block w-100 carousel-connected "  alt="carousel slide 2" />
+            className="d-block w-100 carousel-connected " alt="carousel slide 2" />
           <div className="carousel-caption d-none d-md-block">
-            <h5>Third slide label</h5>
+            <h2>Third slide label</h2>
             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
           </div>
         </div>
         <div className="carousel-item ">
           <img src="/slide_3.png"
-            className="d-block w-100 carousel-connected "  alt="carousel slide 3" />
+            className="d-block w-100 carousel-connected " alt="carousel slide 3" />
           <div className="carousel-caption d-none d-md-block">
-            <h5>Third slide label</h5>
+            <h2>Third slide label</h2>
             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
           </div>
         </div>
