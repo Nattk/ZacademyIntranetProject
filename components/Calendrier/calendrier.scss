@@ -1,46 +1,50 @@
-.loader {
-  border: 3px solid #f3f3f3;
-  /* Light grey */
-  border-top: 3px solid rgb(178, 30, 62);
-  /* Blue */
-  border-radius: 50%;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 1.3rem;
-  width: 100px;
-  height: 100px;
-  animation: spin 2s linear infinite;
+.addToCalendar,
+.chq-atc--button,
+.chq-atc--button svg {
+  box-shadow: none !important;
+  color: white !important;
+  background: #1a73e8 !important;
+  border: none !important;
+
 }
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+
+.chq-atc--dropdown a:hover {
+  background-color: rgb(178, 30, 62)!important;
+  color: #fff;
+}
+
+.chq-atc--button svg {
+  display: none;
+}
+
+.AddToCalendar-custom {
+  background-color: #fff !important;
+  color: #fff!important;
+}
+
+#icon-update {
+  .addToCalendar,
+  .chq-atc--button,
+  .chq-atc--button svg {
+    box-shadow: none !important;
+    background: #fff !important;
+    border: none !important;
+
   }
 
-  100% {
-    transform: rotate(360deg);
+  .chq-atc--dropdown a:hover {
+    background-color: rgb(178, 30, 62)!important;
+    color: #fff;
   }
 }
 
-.h2_event {
-  margin: 0 8px 10px;
-  color: rgb(178, 30, 62);
-  display: flex;
-  text-transform: none;
+.fc-toolbar h2 {
+  font-size: 1.7rem !important;
 }
-
-.p_event {
-  width: 25rem;
-
-}
-
-.card-event {
-  margin-top: 2rem;
-  height: 30vh;
-
-}
-@media only screen and(max-width: 983px) {
-  .card-event {
-    margin-top: 5rem;
+/* responsive css footer */
+@media only screen and(max-width: 767px) {
+  .fc-toolbar h2 {
+    font-size: 1rem !important;
   }
 
 }

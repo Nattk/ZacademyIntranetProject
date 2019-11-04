@@ -23,7 +23,6 @@ class UtilisateursGestion extends Component {
 		this.setState({ modalShow: false })
 
 		event.preventDefault()
-		// alert('Utilisateur supprimé !');
 	}
 	handleClose = (event) => {
 		this.setState({ modalShow: false })
