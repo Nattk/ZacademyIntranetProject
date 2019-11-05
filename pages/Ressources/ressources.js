@@ -8,10 +8,10 @@ class Ressources extends Component{
 
   state = {
     ressources: [
-      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle" , promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:1 , contributeur:1, ressId:1},
-      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle" , promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:1 , contributeur:1, ressId:2},
-      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle",  promotion:"Promo Paris 2", auteur:"Nattan Kifoyi", promoId:2, contributeur:2, ressId:3},
-      {titre:"Apprendre le HTML en 5min" , lien:"ressourceIndividuelle",  promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", promoId:3, contributeur:2, ressId:4}
+      {titre:"Apprendre le HTML en 5min" , lien:"ressource-individuelle" , promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:1 , contributeur:1, ressId:1},
+      {titre:"Apprendre le HTML en 5min" , lien:"ressource-individuelle" , promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:1 , contributeur:1, ressId:2},
+      {titre:"Apprendre le HTML en 5min" , lien:"ressource-individuelle",  promotion:"Promo Paris 2", auteur:"Nattan Kifoyi", promoId:2, contributeur:2, ressId:3},
+      {titre:"Apprendre le HTML en 5min" , lien:"ressource-individuelle",  promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", promoId:3, contributeur:2, ressId:4}
     ],
     filtrePromo: 0,
     ressourcesDispo:0,
