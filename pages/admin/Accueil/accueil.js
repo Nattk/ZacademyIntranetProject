@@ -53,68 +53,6 @@ class Admin extends Component {
     return (
       <Page title="Admin Accueil">
         <article className="admin_page">
-          {/* <section className="admin_page">
-            <section className="btn-group admin_page" role="promotions">
-              <button className="btn btn-danger btn-lg dropdown-toggle admin_page" type="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" >
-                    Paris
-              </button>
-              <div className="dropdown-menu">
-                <a className="dropdown-item" href="#">Promo 1</a>
-                <a className="dropdown-item" href="#">Promo 2</a>
-                <a className="dropdown-item" href="#">Promo 3</a>
-                <a className="dropdown-item" href="#">Promo 4</a>
-              </div>
-            </section>
-            <section className="btn-group admin_page" role="promotions">
-              <button className="btn btn-danger btn-lg dropdown-toggle admin_page" type="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" >
-                    Rennes
-              </button>
-              <div className="dropdown-menu">
-                <a className="dropdown-item" href="#">Promo 1</a>
-                <a className="dropdown-item" href="#">Promo 2</a>
-                <a className="dropdown-item" href="#">Promo 3</a>
-                <a className="dropdown-item" href="#">Promo 4</a>
-              </div>
-            </section>
-            <section className="btn-group admin_page" role="promotions">
-              <button className="btn btn-danger btn-lg dropdown-toggle admin_page" type="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" >
-                    Nantes
-              </button>
-              <div className="dropdown-menu">
-                <a className="dropdown-item" href="#">Promo 1</a>
-                <a className="dropdown-item" href="#">Promo 2</a>
-                <a className="dropdown-item" href="#">Promo 3</a>
-                <a className="dropdown-item" href="#">Promo 4</a>
-              </div>
-            </section>
-            <section className="btn-group admin_page" role="promotions">
-              <button className="btn btn-danger btn-lg dropdown-toggle admin_page" type="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" >
-                    Casablanca
-              </button>
-              <div className="dropdown-menu">
-                <a className="dropdown-item" href="#">Promo 1</a>
-                <a className="dropdown-item" href="#">Promo 2</a>
-                <a className="dropdown-item" href="#">Promo 3</a>
-                <a className="dropdown-item" href="#">Promo 4</a>
-              </div>
-            </section>
-            <section className="btn-group admin_page" role="promotions">
-              <button className="btn btn-danger btn-lg dropdown-toggle admin_page" type="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" >
-                    Montréal
-              </button>
-              <div className="dropdown-menu">
-                <a className="dropdown-item" href="#">Promo 1</a>
-                <a className="dropdown-item" href="#">Promo 2</a>
-                <a className="dropdown-item" href="#">Promo 3</a>
-                <a className="dropdown-item" href="#">Promo 4</a>
-              </div>
-            </section>
-          </section> */}
             <select defaultValue="0" className="custom-select" id="selectVille" onChange={this.filtre}>
               <option value="0">Ville</option>
               <option value="Paris">Paris</option>
@@ -140,13 +78,11 @@ class Admin extends Component {
                 }
               }).map((eleve,index)=>(
                 <article key={index} className="card">
-                <Link>  
                 <section className="card-body">
                 <p>Nom : {eleve.nom} | Prénom : {eleve.prenom}. Promotion : {eleve.promotion}</p>
                 </section>
-                </Link>
-                <div class="d-flex flex-row">
-                <Button btnType="annuler"><Link href="/utilisateur/MonProfil/mon_profil"><a>Voir Profil</a></Link></Button>
+                <div className="d-flex flex-row">
+                <Button btnType="annuler"><Link href="/utilisateur/mon-profil/mon-profil"><a>Voir Profil</a></Link></Button>
                 <Button btnType="modifier" clicked={this.handleDelete}>Supprimé profil</Button>
                 </div>
                 </article>
@@ -166,7 +102,7 @@ class Admin extends Component {
                 <p>Nom : {formateur.nom} | Prénom : {formateur.prenom}. Promotion : {formateur.promotion}</p>
                 </section>
                 <div class="d-flex flex-row">
-                <Button btnType="annulé"><Link href="/utilisateur/MonProfil/mon_profil"><a>Voir Profil</a></Link></Button>
+                <Button btnType="annulé"><Link href="/utilisateur/mon-profil/mon-profil"><a>Voir Profil</a></Link></Button>
                 <Button btnType="modifier" clicked={this.handleDelete}>Supprimé profil</Button>
                 </div>
                 </article>
@@ -174,7 +110,6 @@ class Admin extends Component {
             </div>
           </div>
         </article>
-
       </Page>
     )
   }
