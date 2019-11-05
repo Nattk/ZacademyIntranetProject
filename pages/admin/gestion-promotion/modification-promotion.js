@@ -1,6 +1,5 @@
 import React, { Component } from "react"
-import Page from '../../../layouts/admin'
-import Button from '../../../components/Boutons/Boutons'
+import Page from '../../../layouts/classic'
 import Link from 'next/link'
 
 class ModificationPromotion extends Component {
