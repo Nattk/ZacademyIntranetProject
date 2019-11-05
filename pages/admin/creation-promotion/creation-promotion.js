@@ -75,7 +75,7 @@ const CreaPromotion = () => (
           </div>
         </section>
         <section className="d-flex flex-row footer-programme-formulaire">
-          <button type="button" className="btn btn-primary text-center button-cancel-programme"><Link href="../GestionPromotion/gestion_promotion">Annuler</Link></button>
+          <button type="button" className="btn btn-primary text-center button-cancel-programme"><Link href="../gestion-promotion/gestion-promotion">Annuler</Link></button>
           <a href="#">
             <button type="submit" className="btn btn-primary text-center button-create-programme">Valider promotion</button>
           </a>

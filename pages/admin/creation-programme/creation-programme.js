@@ -48,7 +48,7 @@ const CreaProgramme = () => (
           </div>
         </section>
         <section className="d-flex flex-row footer-programme-formulaire">
-          <button type="button" className="btn btn-primary text-center button-cancel-programme"><Link href="../GestionProgramme/gestion_programme">Annuler</Link></button>
+          <button type="button" className="btn btn-primary text-center button-cancel-programme"><Link href="../gestion-programme/gestion-programme">Annuler</Link></button>
           <a href="#">
             <button type="submit" className="btn btn-primary text-center button-create-programme">Valider programme</button>
           </a>

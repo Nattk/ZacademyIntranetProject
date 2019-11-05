@@ -89,7 +89,7 @@ class ModificationPromotion extends Component {
             </section>
             <section class="d-flex flex-row footer-programme-formulaire">
                 <button type="button"
-                    class="btn btn-primary text-center button-cancel-programme"><Link href="./gestion_promotion">Annuler</Link></button>
+                    class="btn btn-primary text-center button-cancel-programme"><Link href="./gestion-promotion">Annuler</Link></button>
                 <a href="#">
                 <button type="submit" onClick={this.handleUpdate} class="btn btn-primary text-center button-create-programme">Modifier promotion</button>
                 </a>

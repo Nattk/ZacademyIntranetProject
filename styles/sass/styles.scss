@@ -3,21 +3,22 @@
 // Dossier Components
 @import '../../components/Footer/footer.scss';
 @import '../../components/Index/Carousel/carousel.scss';
-@import '../../components/Index/Newsfeed/newsfeed.scss';
 @import '../../components/Login/login.scss';
 @import '../../components/Calendrier/calendrier.scss';
 @import '../../components/Boutons/Boutons.scss';
-@import '../../components/Admin/admin.scss';
 @import '../../components/Modal/modalEvent.scss';
 
 // Dossier Pages
-@import '../../pages/admin/CreationUtilisateur/creation-utilisateur.scss';
-@import '../../pages/admin/CreationPromotion/creation-promotion.scss';
-@import '../../pages/admin/CreationProgramme/creation-programme.scss';
+@import '../../pages/index-connecte.scss';
+@import '../../pages/index.scss';
+@import '../../pages/admin/Accueil/accueil-admin.scss';
+@import '../../pages/admin/creation-utilisateur/creation-utilisateur.scss';
+@import '../../pages/admin/creation-promotion/creation-promotion.scss';
+@import '../../pages/admin/creation-programme/creation-programme.scss';
 @import '../../pages/ma-formation/Contact-Utiles/contacts-utiles.scss';
-@import '../../pages/utilisateur/MonProfil/mon-profil.scss';
+@import '../../pages/utilisateur/mon-profil/mon-profil.scss';
 @import '../../pages/communaute/Rss/rss.scss';
-@import '../../pages/communaute/WhoToFollow/follow.scss';
+@import '../../pages/communaute/who-to-follow/who-to-follow.scss';
 @import '../../pages/ressources/ressources.scss';
 @import '../../pages/ressources/ajouter-ressource.scss';
 @import '../../pages/ma-formation/Livret-Accueil/livret-accueil.scss';

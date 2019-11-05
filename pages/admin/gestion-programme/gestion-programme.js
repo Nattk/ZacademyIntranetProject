@@ -40,13 +40,13 @@ class ProgrammeGestion extends Component {
                 <a href="#">{programme.name}</a>
                 <Button btnType="dupliquer" clicked={(progId) => this.handleDuplication(programme.progId)}><a>Dupliquer</a></Button>
                 <Button btnType="annuler" clicked={(progId) => this.handleDelete(programme.progId)}>Supprimer</Button>
-                <Button btnType="modifier"><Link href="./modificationProgramme"><a>Modifier</a></Link></Button>
+                <Button btnType="modifier"><Link href="./modification-programme"><a>Modifier</a></Link></Button>
               </li>
             ))}
           </ul>
         </section> 
         <footer className="d-flex flex-row align-items-end justify-content-center">
-          <Link href="/admin/CreationProgramme/creation_programme">
+          <Link href="/admin/creation-programme/creation-programme">
             <button type="button" className="btn btn-primary">
             Ajouter un programme
             </button></Link>

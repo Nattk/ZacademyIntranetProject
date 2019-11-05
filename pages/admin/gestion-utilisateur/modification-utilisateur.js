@@ -24,7 +24,7 @@ class ModificationUtilisateur extends Component {
 		this.setState({ modalShow: true })
 		setTimeout(() => {
 			this.setState({ modalShow: false })
-			window.location.assign('/admin/GestionUtilisateur/gestion_utilisateur')
+			window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
 		}, 2000)
 
 		event.preventDefault()
@@ -118,8 +118,8 @@ class ModificationUtilisateur extends Component {
 							className="d-flex flex-row footer-programme-formulaire col-md-12 mb-5"
 							style={{ justifyContent: 'space-evenly' }}
 						>
-							<a href="/admin/gestion_programmes.html">
-								<Link href="./gestion_utilisateur">
+							<a href="/admin/gestion-programmes.html">
+								<Link href="./gestion-utilisateur">
 									<a>
 										<Button
 											btnType="annuler"

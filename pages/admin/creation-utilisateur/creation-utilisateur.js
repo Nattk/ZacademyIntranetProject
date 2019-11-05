@@ -60,7 +60,7 @@ const CreaUtilisateur = () => (
           </div>
         </section>
         <section className="d-flex flex-row footer-programme-formulaire">
-          <button type="button" className="btn btn-primary text-center button-cancel-programme"><Link href="../GestionUtilisateur/gestion_utilisateur">Annuler</Link></button>
+          <button type="button" className="btn btn-primary text-center button-cancel-programme"><Link href="../gestion-utilisateur/gestion-utilisateur">Annuler</Link></button>
           <a href="#">
             <button type="submit" className="btn btn-primary text-center button-create-programme">Ajouter utilisateur</button>
           </a>

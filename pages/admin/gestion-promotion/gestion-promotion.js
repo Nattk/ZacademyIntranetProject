@@ -32,13 +32,13 @@ class PromotionGestion extends Component {
                 <p>{promotion.name}</p>
                 <p>Ville : {promotion.ville}</p>
                 <Button btnType="annuler" clicked={(promoId) => this.handleDelete(promotion.promoId)}>Supprimer</Button>
-                <Button btnType="modifier"><Link href="./modificationPromotion"><a>Modifier</a></Link></Button>
+                <Button btnType="modifier"><Link href="./modification-promotion"><a>Modifier</a></Link></Button>
               </li>
             ))}
           </ul>
         </section> 
         <footer className="d-flex flex-row align-items-end justify-content-center">
-          <Link href="/admin/CreationPromotion/creation_promotion">
+          <Link href="/admin/creation-promotion/creation-promotion">
             <button type="button" className="btn btn-primary">
             Ajouter une promotion
             </button></Link>

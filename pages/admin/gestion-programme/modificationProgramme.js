@@ -64,7 +64,7 @@ class ModificationProgramme extends Component {
 						</section>
 						<section class="d-flex flex-row footer-programme-formulaire">
 							<button type="button" class="btn btn-primary text-center button-cancel-programme">
-								<Link href="./gestion_programme">Annuler</Link>
+								<Link href="./gestion-programme">Annuler</Link>
 							</button>
 							<a href="#">
 								<button type="submit" class="btn btn-primary text-center button-create-programme">
