@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Nav from '../Nav/nav'
 import AdminNav from '../AdminNav/adminNav'
-import Login from '../Login/login'
+import Login from '../../components/Login/login'
 
 const SuperNav = () => {
   const [isAdmin, SetAdmin] = useLocalStorage('isAdmin', false)
