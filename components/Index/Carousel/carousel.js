@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Carousel = () => (
-  <article className="container fluid carouselPromo">
+  <article className="container fluid carouselPromo" data-pause="hover">
     <section id="carouselExampleCaptions" className="carousel slide" data-ride="carousel" alt="carousel formation">
       <ol className="carousel-indicators">
         <li data-target="#carouselExampleCaptions" data-slide-to="0" className="active"></li>

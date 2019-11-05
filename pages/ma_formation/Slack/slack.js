@@ -4,7 +4,7 @@ import Page from '../../../layouts/classic'
 
 export default function Slack () {
   return (
-    <Page title="Accueil">
+    <Page title="Slack">
       <img src="/slack.jpg" className="rounded mx-auto d-block" className="img-fluid" alt="my image" />
       <style jsx>{`
 				img {
