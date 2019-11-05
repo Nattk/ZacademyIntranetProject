@@ -9,19 +9,18 @@
 @import '../../components/Boutons/Boutons.scss';
 @import '../../components/Admin/admin.scss';
 @import '../../components/Modal/modalEvent.scss';
-@import '../../components/Form/CreaProgramme/creation_programme.scss';
-@import '../../components/Form/CreaPromotion/creation_promotion.scss';
-@import '../../components/Form/CreaUtilisateur/creation_utilisateur.scss';
 
 // Dossier Pages
-@import './pages/standard-styles.scss';
-@import '../../pages/ma_formation/ContactUtiles/contacts_utiles.scss';
-@import '../../pages/utilisateur/MonProfil/mon_profil.scss';
+@import '../../pages/admin/CreationUtilisateur/creation-utilisateur.scss';
+@import '../../pages/admin/CreationPromotion/creation-promotion.scss';
+@import '../../pages/admin/CreationProgramme/creation-programme.scss';
+@import '../../pages/ma_formation/ContactUtiles/contacts-utiles.scss';
+@import '../../pages/utilisateur/MonProfil/mon-profil.scss';
 @import '../../pages/ma_formation/Agenda/agenda.scss';
 @import '../../pages/communaute/Rss/rss.scss';
 @import '../../pages/communaute/WhoToFollow/follow.scss';
 @import '../../pages/Ressources/ressources.scss';
-@import '../../pages/Ressources/ajouterRessource.scss';
+@import '../../pages/Ressources/ajouter-ressource.scss';
 @import '../../pages/ma_formation/LivretAccueil/livretAccueil.scss';
 
 
