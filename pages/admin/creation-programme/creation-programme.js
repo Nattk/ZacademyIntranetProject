@@ -1,5 +1,5 @@
 import React from 'react'
-import Page from '../../../layouts/admin'
+import Page from '../../../layouts/classic'
 import Link from 'next/link'
 
 const CreaProgramme = () => (

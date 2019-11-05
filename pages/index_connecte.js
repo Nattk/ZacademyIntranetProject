@@ -17,11 +17,11 @@ export default function IndexConnected () {
         </section>
         <section className="card-body" alt="dernière actualité formation">
           <p className="card-title">BBL par Norbert</p>
-          <Link href="https://www.urbandictionary.com/define.php?term=soon%20%28tm%29"><a className="btn btn-primary">Lien ressource</a></Link>
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" className="btn btn-primary">Lien ressource</a>
         </section>
         <section className="card-body" alt="dernière actualité formation">
           <p className="card-title">Support cours par Cédric Rup</p>
-          <Link href="https://www.valentinog.com/blog/jest/"><a className="btn btn-primary">Lien ressource</a></Link>
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" className="btn btn-primary">Lien ressource</a>
         </section>
       </article>
     </Page>

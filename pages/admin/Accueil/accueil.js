@@ -78,12 +78,10 @@ class Admin extends Component {
                 }
               }).map((eleve,index)=>(
                 <article key={index} className="card">
-                <Link>  
                 <section className="card-body">
                 <p>Nom : {eleve.nom} | Prénom : {eleve.prenom}. Promotion : {eleve.promotion}</p>
                 </section>
-                </Link>
-                <div class="d-flex flex-row">
+                <div className="d-flex flex-row">
                 <Button btnType="annuler"><Link href="/utilisateur/mon-profil/mon-profil"><a>Voir Profil</a></Link></Button>
                 <Button btnType="modifier" clicked={this.handleDelete}>Supprimé profil</Button>
                 </div>
