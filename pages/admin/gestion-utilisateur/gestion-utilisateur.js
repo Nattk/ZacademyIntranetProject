@@ -56,7 +56,7 @@ class UtilisateursGestion extends Component {
 											modalFooter={true}
 										/>
 									) : null}
-									<Link href="./modificationUtilisateur">
+									<Link href="./modification-utilisateur">
 										<a>
 											<Button btnType="valider">Modifier</Button>
 										</a>
