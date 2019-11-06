@@ -4,25 +4,16 @@ import Button from '../../../components/Boutons/Boutons'
 import Alert from '../../../components/Modal/alert'
 class CreaProgramme extends Component {
   state = {
-    name: '',
+
     show: false
   }
 
   handleUpdate = () => {
-    // if (name === '' || undefined) {
-    //   this.setState({ show: false })
-    // } else {
-    return this.setState({ show: false })
-    // }
+    this.setState({ show: true })
   }
 
   handleConfirmForm = () => {
     window.location.assign('/admin/gestion-programme/gestion-programme')
-  }
-  onTodoChange(value) {
-    this.setState({
-      name: value
-    });
   }
   handleClose = () => {
     this.setState({ show: false })
@@ -31,9 +22,6 @@ class CreaProgramme extends Component {
     window.location.assign('/admin/gestion-programme/gestion-programme')
   }
 
-  handleSubmit = (event) => {
-    console.log(event)
-  }
   render() {
     return (
 
@@ -42,16 +30,16 @@ class CreaProgramme extends Component {
           <header className="card-header text-center">
             Creation programme
       </header>
-          <form className="container"  >
+          <form className="container" >
             <section className="section">
               <div className="form-group">
                 <label htmlFor="programtitle">Titre</label><br></br>
-                <input type="text" name="programtitle" required className="form-control" id="exampleFormControlInput1" value={this.state.name} onChange={e => this.onTodoChange(e.target.value)}
+                <input type="text" name="programtitle" required={true} className="form-control" id="exampleFormControlInput1"
                   placeholder="Intitulé du programme" />
               </div>
               <div data-test-hook="groups">
                 <label htmlFor="modules">Choisir module(s)</label>
-                <select className="form-control" name="modules" id="choices-groups" multiple required >
+                <select className="form-control" name="modules" id="choices-groups" multiple>
                   <optgroup label="DEVOPS">
                     <option value="Paris">Linux</option>
                     <option value="Lyon">Mac</option>
@@ -78,7 +66,7 @@ class CreaProgramme extends Component {
                 <div className="input-group-prepend">
                   <span className="input-group-text description-programme-span">Description</span>
                 </div>
-                <textarea className="form-control" name="description" aria-label="With textarea" required ></textarea>
+                <textarea className="form-control" name="description" aria-label="With textarea"></textarea>
               </div>
             </section>
             <section className="d-flex flex-row footer-programme-formulaire">
@@ -92,7 +80,7 @@ class CreaProgramme extends Component {
 							</Button>
               <Button
                 btnType="valider"
-                // submit="submit"
+                // type="submit"
                 clicked={this.handleUpdate}
 
               >
