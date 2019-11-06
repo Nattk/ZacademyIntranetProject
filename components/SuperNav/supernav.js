@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Nav from '../Nav/nav'
 import AdminNav from '../AdminNav/adminNav'
 import Login from '../../components/Login/login'

@@ -6,6 +6,7 @@
 @import '../../components/Calendrier/calendrier.scss';
 @import '../../components/Boutons/Boutons.scss';
 @import '../../components/Modal/modalEvent.scss';
+@import '../../components/SuperNav/supernav.scss';
 
 // Dossier Pages
 @import '../../pages/index-connecte.scss';
@@ -42,6 +43,8 @@ html {
 .main {
   display: flex;
   flex: 1;
+  position: sticky;
+  margin: 7rem;
 }
 
 .mainTitle {
