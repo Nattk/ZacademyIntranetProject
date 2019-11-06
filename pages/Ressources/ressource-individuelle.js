@@ -19,7 +19,7 @@ class RessourceIndividuelle extends Component {
 
   render () {
     return (
-      <Page title={this.state.ressource.titre} >
+      <Page title={this.state.ressource.titre}>
         <article className="ressourceIndividuelle">
           <Card styleName="ressourceContent">
             <h1>{this.state.ressource.titre}</h1>

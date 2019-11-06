@@ -6,7 +6,7 @@ import '../../../styles/sass/styles.scss'
 
 const Agenda = () => {
 	return (
-		<Page title="Agenda">
+		<Page title="Agenda" contextePage="Agenda">
 			<article className="col-md-9 col-sm-12 col-xs-12 AgendaPage-custom">
 				<CalendrierReact />
 			</article>

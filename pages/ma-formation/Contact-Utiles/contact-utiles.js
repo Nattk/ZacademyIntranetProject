@@ -40,7 +40,7 @@ const ContactsUtiles = (props) => {
   )
 
   return (
-    <Page title="Contact Utiles">
+    <Page title="Contact Utiles" contextePage="Contact Utiles">
       <article className="profiles flex-column" role="liste des profiles" alt="profil contact utile" id="article_contact_utiles" >
         <div id="div_contact_utiles">
           {Rows()}
