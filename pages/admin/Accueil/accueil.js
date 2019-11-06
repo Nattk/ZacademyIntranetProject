@@ -46,11 +46,6 @@ class Admin extends Component {
 
   render () {
     return (
-<<<<<<< HEAD
-      <Page title="Admin Accueil" contextePage="Accueil administration">
-        <article className="admin_page">
-            <select defaultValue="0" className="custom-select" id="selectVille" onChange={this.filtre}>
-=======
       <Page title="Admin Accueil">
         <article id="admin-page">
           {/* //<button>Ajouter une promotion</button> */}
@@ -86,7 +81,6 @@ class Admin extends Component {
           </table>
           </section>
             {/* <select defaultValue="0" className="custom-select" id="selectVille" onChange={this.filtre}>
->>>>>>> Accueil admin table with filter name
               <option value="0">Ville</option>
               <option value="Paris">Paris</option>
               <option value="Rennes">Rennes</option>
