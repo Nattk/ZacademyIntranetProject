@@ -1,5 +1,5 @@
 import React from 'react'
-import Page from '../../../layouts/admin'
+import Page from '../../../layouts/classic'
 import CreaProgramme from '../../../components/Form/CreaProgramme/creation_programme'
 
 export default function CreationProgramme () {
