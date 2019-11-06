@@ -1,51 +1,16 @@
-article.admin_page{
+#admin-page{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border: 1px;
-    border-radius: 1rem;
-    margin-top: 1rem;
+    flex-grow: 1;
+    padding: 1rem;
+
+    p{
+        max-width: 5rem;
+    }
+
+    .promotion-row{
+        padding: 1rem;
+    }
+    
 }
 
-article > section.admin_page{
-    border: 1px;
-    border-radius: 1rem;
-    background: rgba(201, 201, 201, 0.7);
-}
-
-article > section.admin_page > section{
-    padding: 1rem 1rem 1rem 1rem;
-}
-
-article div.admin_listing{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-
-article div div.listing_eleves{
-    align-self: flex-start;
-    margin: 3rem;
-    min-width: 20rem;
-    max-width: 23rem;
-}
-
-article div div.listing_eleves article.card section{
-    padding-bottom: 0;
-}
-
-article div div.listing_formateurs article.card section{
-    padding-bottom: 0;
-}
-
-article div div.listing_formateurs{
-    align-self: flex-end;
-    margin: 3rem;
-    min-width: 20rem;
-    max-width: 23rem;
-}
-
-button.btn.btn-danger{
-    background: #b21e3e;
-    border: #b21e3e;
-}
