@@ -72,7 +72,7 @@ export default class CalendrierReact extends React.Component {
 					googleCalendarApiKey="AIzaSyDzjuf_lV9IO6MD14emQWwra-RlE7iAC4c"
 					dateClick={this.handleEventClick}
 					eventSourcesClick={this.showEvent}
-					plugins={[ googleCalendarPlugin, dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin ]}
+					plugins={[googleCalendarPlugin, dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin]}
 					header={{
 						left: 'title ',
 						center: 'dayGridMonth,timeGridWeek',
