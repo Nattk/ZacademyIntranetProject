@@ -34,9 +34,9 @@ class Admin extends Component {
     ]
   }
 
-  filtre = () => {
+  filtre = (type) => {
     const arrayFiltered = [...this.state.Promotions]
-    arrayFiltered.sort( (a, b) => a.promotion > b.promotion ? 1 : -1)
+    arrayFiltered.sort( (a, b) => a[type] > b[type] ? 1 : -1)
     this.setState({Promotions : arrayFiltered})
   }
 
@@ -55,14 +55,18 @@ class Admin extends Component {
         <article id="admin-page">
           {/* //<button>Ajouter une promotion</button> */}
           <h1>Promotions en cours</h1>
+          <section>
+            <input type="text" placeholder="Rechercher"/>
+          </section>
+          <section>
           <table className="table table-hover">
             <thead>
               <tr>
-                <th onClick={this.filtre}>Nom</th>
-                <th>Ville</th>
-                <th>Programme</th>
-                <th>Date</th>
-                <th>Actions</th>
+                <th  onClick={(type)=>this.filtre("nom")}><div className="d-flex flex-row justify-content-between align-items-baseline">Nom <i class="fas fa-sort"></i></div></th>
+                <th  onClick={(type)=>this.filtre("ville")}><div className="d-flex flex-row justify-content-between align-items-baseline">Ville <i class="fas fa-sort"></i></div></th>
+                <th  onClick={(type)=>this.filtre("programme")}><div className="d-flex flex-row justify-content-between align-items-baseline">Programme <i class="fas fa-sort"></i></div></th>
+                <th  onClick={(type)=>this.filtre("date")}><div className="d-flex flex-row justify-content-between align-items-baseline">Date <i class="fas fa-sort"></i></div></th>
+                <th  onClick={(type)=>this.filtre("actions")}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -73,13 +77,14 @@ class Admin extends Component {
                   <td>{promo.programme}</td>
                   <td>{promo.date}</td>
                   <td>
-                    <button>Voir</button>
+                    <button><i className="fas fa-eye" title="Voir détails"></i></button>
                     <button>Ghost</button>
                   </td>
                 </tr>
               )))}
             </tbody>
           </table>
+          </section>
             {/* <select defaultValue="0" className="custom-select" id="selectVille" onChange={this.filtre}>
 >>>>>>> Accueil admin table with filter name
               <option value="0">Ville</option>
