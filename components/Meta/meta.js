@@ -27,6 +27,7 @@ const Meta = (props) => (
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossOrigin="anonymous"
     />
+
     <title>{props.title}</title>
   </Head>
 )

@@ -21,13 +21,18 @@ class ModificationUtilisateur extends Component {
 	}
 
 	handleUpdate = (event) => {
-		this.setState({ modalShow: true })
-		setTimeout(() => {
-			this.setState({ modalShow: false })
-			window.location.assign('/admin/GestionUtilisateur/gestion_utilisateur')
-		}, 2000)
+		// setTimeout(() => {
+		// this.setState({ modalShow: false })
+		window.location.assign('/admin/GestionUtilisateur/gestion_utilisateur')
+		// }, 2000)
 
 		event.preventDefault()
+	}
+	open = () => {
+		this.setState({ modalShow: true })
+	}
+	handleClose = () => {
+		this.setState({ modalShow: false })
 	}
 
 	render() {
@@ -134,13 +139,13 @@ class ModificationUtilisateur extends Component {
 							<a href="#">
 								<Button
 									btnType="valider"
-									clicked={this.handleUpdate}
-									// className="btn btn-primary text-center button-create-programme"
+									clicked={this.open}
+								// className="btn btn-primary text-center button-create-programme"
 								>
 									Modifier
 								</Button>
 								{this.state.modalShow ? (
-									<Alert show={this.state.modalShow} modalTitle="Utilisateur modifié avec succés" />
+									<Alert show={this.state.modalShow} handleClose={this.handleClose} handleUpdate={this.handleUpdate} modalTitle="Utilisateur modifié avec succés" modalFooterRedirection />
 								) : null}
 							</a>
 						</section>

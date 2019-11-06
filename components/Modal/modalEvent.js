@@ -1,115 +1,83 @@
 import React from 'react'
-import { Modal , OverlayTrigger, Tooltip, Button, ButtonToolbar } from 'react-bootstrap'
-
+import Button from '../Boutons/Boutons'
+import Modal from 'react-responsive-modal'
 import AddToCalendar from '@culturehq/add-to-calendar'
 import '@culturehq/add-to-calendar/dist/styles.css'
 import '../../styles/sass/styles.scss'
 
 const ModalEvent = (props) => {
   return (
-    <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
-      {props.modalHeader ? (
-        <Modal.Header className="modalHeader">
-          <section className="sectionmodalHeader">
-            <Modal.Title className="customModalTitle">
-              <h1 className="customModalTitle-H1">{props.modalTitle}</h1>
-            </Modal.Title>
-            {props.deleteEvent ? (
-              <div className="sectionModalDeleteEvent">
-                <ButtonToolbar>
-                  <OverlayTrigger
-                    key="bottom"
-                    placement="bottom"
-                    overlay={<Tooltip id={'tooltip-bottom'}>Supprimer</Tooltip>}
-                  >
-                    <Button className="modal-button-icon">
-                      {' '}
-                      <i class="fas fa-trash " />
-                    </Button>
-                  </OverlayTrigger>
-                </ButtonToolbar>
-              </div>
-            ) : null}
+    <Modal open={props.show} center>
 
-            <ButtonToolbar>
-              <OverlayTrigger
-                key="bottom"
-                placement="bottom"
-                overlay={<Tooltip id={'tooltip-bottom'}>Fermer</Tooltip>}
-              >
-                <Button
-                  onClick={props.clicked}
-                  className="close-button-icon"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </Button>
-              </OverlayTrigger>
-            </ButtonToolbar>
-          </section>
-        </Modal.Header>
-      ) : null}
-      <Modal.Body>
+      <header>
+        <h1 className="customModalTitle-H1">{props.modalTitle}</h1>
+        <span aria-hidden="true" onClick={props.onClose} className=" containerModalHeaderRight close-modal-icon">&times;</span>
+      </header>
+      <hr></hr>
+      <main>
         <article>
-          <h2 className="customModalTitle-H2">
-            <i
-              class="far fa-clock"
-              style={{ color: '#5f6368', fill: '#5f6368', fontSize: '1.25rem' }}
-            />{' '}
-						&nbsp;
-            {props.headerTitle}
-          </h2>
-
+          {props.headerTitle ? (
+            <section>
+              <h2 className="customModalTitle-H2">
+                <i class="far fa-clock" />
+								&nbsp; {props.headerTitle}
+              </h2>
+            </section>) : null}
           {props.modalLocation ? (
-            <ButtonToolbar>
-              <OverlayTrigger
-                key="bottom"
-                placement="left"
-                overlay={<Tooltip id={'tooltip-bottom'}>Location</Tooltip>}
-              >
-                <p>
-                  <i class="fas fa-map-marker-alt" />
-									&nbsp; &nbsp; {props.modalLocation}{' '}
-                </p>
-              </OverlayTrigger>
-            </ButtonToolbar>
-          ) : null}
+            <section>
+              <p>
+                <i class="fas fa-map-marker-alt" />
+								&nbsp; {props.modalLocation}{' '}
+              </p>
+            </section>) : null}
           {props.modalDescription ? (
-            <ButtonToolbar>
-              <OverlayTrigger
-                key="bottom"
-                placement="left"
-                overlay={<Tooltip id={'tooltip-bottom'}>Description</Tooltip>}
-              >
+            <section >
+              <p>
                 <i class="fas fa-bars" />
-              </OverlayTrigger>
-              <p> &nbsp; &nbsp;{props.modalDescription} </p>
-            </ButtonToolbar>
+								&nbsp; {props.modalDescription}
+              </p>
+            </section>
           ) : null}
         </article>
-      </Modal.Body>
-      {props.modalFooter ? (
-        <Modal.Footer>
-          <Button onClick={props.clicked} className="modal-button-footer">
-						Annuler
-          </Button>
 
-          {props.AddEvents ? (
-            <AddToCalendar
-              children={props.nameChildren}
-              event={{
-                name: props.modalTitle,
-                details: props.modalDescription,
-                location: props.modalLocation,
-                startsAt: props.startsAt ? props.startsAt : new Date().toISOString().substr(0, 10),
-                endsAt: props.endsAt ? props.endsAt : new Date().toISOString().substr(0, 10)
-              }}
-            />
-          ) : null}
-        </Modal.Footer>
-      ) : null}
-    </Modal>
+      </main>
+
+      {
+        props.modalFooter ? (
+          <footer className='footerStyle'>
+
+            <Button clicked={props.onClose} btnType="event-button-cancel">
+							Annuler
+            </Button>
+            {props.AddEvents ? (
+              <AddToCalendar
+                children={props.nameChildren}
+                event={{
+                  name: props.modalTitle,
+                  details: props.modalDescription,
+                  location: props.modalLocation,
+                  startsAt: props.startsAt ? props.startsAt : new Date().toISOString().substr(0, 10),
+                  endsAt: props.endsAt ? props.endsAt : new Date().toISOString().substr(0, 10)
+                }}
+              />
+            ) : null}
+            {props.manageEvents ? (
+
+              <Button clicked={props.handleManageEvent} btnType="url_evenement">
+								Gérer l'évènement
+              </Button>
+            ) : null}
+            {props.refreshEvents ? (
+              <Button clicked={props.handleRefreshCalendar} btnType="valider">
+								Actualiser
+              </Button>
+            ) : null}
+
+          </footer>
+        ) : null
+      }
+
+    </Modal >
   )
 }
 export default ModalEvent

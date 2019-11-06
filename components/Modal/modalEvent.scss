@@ -22,7 +22,8 @@
 
 .customModalTitle-H1 {
   color: #1a73e8;
-  min-width: 100%;
+
+  float: left;
   font-size: 1.3rem;
   font-weight: 500;
   line-height: 2.25rem;
@@ -33,22 +34,98 @@
   font-size: 1.25rem;
   color: #3c4043;
   font-weight: 400;
-  margin: 0;
+  font-size: 1.20rem;
+
+  margin: 0 0 .3125rem;
   font-family: inherit;
 }
 
-.close-button-icon,
-.modal-button-footer,
-.modal-button-icon {
-  background-color: blue;
-  color: white;
-  border: 1px solid #fff;
+.styles_closeIcon__1QwbI {
+  display: none;
 }
 
-.close-button-icon:hover,
-.modal-button-footer:hover,
-.modal-button-icon:hover {
-  background-color: #fff;
-  color: gray;
-  border: 1px solid #fff;
+.closeModalIcon {
+  float: right;
+}
+
+.styles_modal__gNwvD {
+  width: 35rem;
+
+}
+
+.descriptionDisplayNone {
+  display: none;
+}
+
+.footerStyle {
+  float: right;
+}
+
+.containerModalHeaderRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.customTitle-H1 {
+
+  float: left;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 2.25rem;
+  letter-spacing: .0156rem;
+}
+
+.customTitle-H2 {
+  font-size: 1.2rem;
+  color: #3c4043;
+  font-weight: 400;
+  margin: 0 0 .3125rem;
+  font-family: inherit;
+}
+
+.customTitle-p {
+  font-size: 1.2rem;
+  color: #3c4043;
+  font-weight: 400;
+  margin: 0 0 .3125rem;
+  font-family: inherit;
+}
+
+.styles_overlay__CLSq- {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0003;
+
+  /* responsive css footer */
+}
+@media only screen and(max-width: 47.9375rem) {
+  .styles_modal__gNwvD {
+    min-width: unset;
+  }
+
+}
+
+.url_evenement {
+
+  text-decoration: unset;
+  background-color: #1a73e8;
+  color: #fff;
+  margin: 1rem;
+  padding: 4px 10px;
+  border-radius: 5px;
+}
+
+.url_evenement:hover {
+
+  background-color: #1a73e8;
+  color: #fff;
+
+}
+
+.close-modal-icon {
+  cursor: pointer;
 }
