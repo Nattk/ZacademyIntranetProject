@@ -1,8 +1,18 @@
 #admin-page{
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     padding: 1rem;
+
+    table{
+        th{
+            cursor:pointer;
+            i{
+                font-size: 0.9rem;
+                line-height: unset;
+            }
+        }
+
+    }
 
     p{
         max-width: 5rem;
@@ -10,6 +20,10 @@
 
     .promotion-row{
         padding: 1rem;
+    }
+
+    h1{
+        font-size: 1.5rem;
     }
     
 }
