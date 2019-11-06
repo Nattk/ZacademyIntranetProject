@@ -52,18 +52,19 @@ const CreaUtilisateur = () => (
             </select>
           </div>
           <div classNameName="form-group">
-            <label for="roles">Selectionner un rôle</label>
-            <select classNameName="form-control" id="role">
+            <label for="role-utilisateur">Selectionner un rôle</label>
+            <select className="form-control" name="role-utilisateur" id="role">
               <option value="Eleve">Eleve</option>
               <option value="Formateur">Formateur</option>
+              <option value="Admin">Admin</option>
             </select>
           </div>
         </section>
         <section className="d-flex flex-row footer-programme-formulaire">
           <button type="button" className="btn btn-primary text-center button-cancel-programme"><Link href="../gestion-utilisateur/gestion-utilisateur">Annuler</Link></button>
-          <a href="#">
-            <button type="submit" className="btn btn-primary text-center button-create-programme">Ajouter utilisateur</button>
-          </a>
+
+          <button type="submit" className="btn btn-primary text-center button-create-programme">Ajouter utilisateur</button>
+
         </section>
       </form>
     </article>
