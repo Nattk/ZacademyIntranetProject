@@ -1,7 +1,6 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
-import Link from 'next/link'
 import Alert from '../../../components/Modal/alert'
 
 class ModificationUtilisateur extends Component {
@@ -17,17 +16,22 @@ class ModificationUtilisateur extends Component {
 				userId: 1
 			}
 		],
-		modalShow: false
+		show: false
 	}
 
-	handleUpdate = (event) => {
-		this.setState({ modalShow: true })
-		setTimeout(() => {
-			this.setState({ modalShow: false })
-			window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
-		}, 2000)
+	handleUpdate = () => {
+		this.setState({ show: true })
+	}
 
-		event.preventDefault()
+	handleConfirmForm = () => {
+		window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
+	}
+
+	handleClose = () => {
+		this.setState({ show: false })
+	}
+	previousPage = () => {
+		window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
 	}
 
 	render() {
@@ -118,31 +122,45 @@ class ModificationUtilisateur extends Component {
 							className="d-flex flex-row footer-programme-formulaire col-md-12 mb-5"
 							style={{ justifyContent: 'space-evenly' }}
 						>
-							<a href="/admin/gestion-programmes.html">
-								<Link href="./gestion-utilisateur">
-									<a>
-										<Button
-											btnType="annuler"
-											type="button"
-											className="btn btn-primary text-center button-cancel-programme"
-										>
-											Annuler
-										</Button>
-									</a>
-								</Link>
-							</a>
-							<a href="#">
-								<Button
-									btnType="valider"
-									clicked={this.handleUpdate}
-									// className="btn btn-primary text-center button-create-programme"
-								>
-									Modifier
+
+
+
+							<Button
+								btnType="annuler"
+								type="button"
+								clicked={this.previousPage}
+								className="btn btn-primary text-center button-cancel-programme"
+							>
+								Annuler
+							</Button>
+
+
+
+
+							<Button
+								btnType="valider"
+								clicked={this.handleUpdate}
+
+							>
+								Modifier
 								</Button>
-								{this.state.modalShow ? (
-									<Alert show={this.state.modalShow} modalTitle="Utilisateur modifié avec succés" />
-								) : null}
-							</a>
+							{this.state.show ? (
+								<Alert
+									show={this.state.show}
+									handleClose={this.handleClose}
+
+									headerTitle="Modification utilisateur"
+									modalDescription="Etes vous sûr de vouloir modifier cet utilisateur ?"
+									modalHeader={true}
+									modalBody={true}
+									modalFooterRedirection
+									handleConfirmForm={this.handleConfirmForm}
+								/>
+
+							) : null
+							}
+
+
 						</section>
 					</form>
 				</article>

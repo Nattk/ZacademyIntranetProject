@@ -49,3 +49,47 @@
 	color: gray;
 	border: 1px solid #fff;
 }
+.link-button-valider {
+	background-color: green;
+	color: #fff;
+	padding: 0.45rem;
+	padding-right: 1rem;
+	padding-left: 1rem;
+	border-radius: 1%;
+}
+.link-button-valider:hover {
+	text-decoration: none;
+	color: #fff;
+}
+.link-button-supprimer {
+	background-color: rgb(178, 30, 62);
+	color: #fff;
+	margin: 0;
+	// padding: 0.3rem;
+	// padding-right: 1rem;
+	// padding-left: 1rem;
+	// border-radius: 10%;
+}
+.link-button-supprimer:hover {
+	text-decoration: none;
+	color: #fff;
+}
+.link-button-duppliquer {
+	background-color: yellow;
+	color: #fff;
+	padding: 0.4rem;
+	border-radius: 10%;
+}
+.link-button-duppliquer:hover {
+	text-decoration: none;
+	color: #fff;
+}
+.link-button-creation {
+	background-color: black;
+	color: #fff;
+	padding: 0.6rem;
+}
+.link-button-creation:hover {
+	text-decoration: none;
+	color: #fff;
+}

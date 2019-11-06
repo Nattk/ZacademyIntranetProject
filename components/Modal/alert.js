@@ -47,21 +47,20 @@ const Alert = (props) => {
         {props.modalFooter ? (
           <section>
             <Button clicked={props.handleClose} btnType="annuler">
-							Annuler
+              Annuler
             </Button>
-
             <Button btnType="valider" clicked={props.handleDelete}>
-							Supprimer
+              Supprimer
             </Button>
           </section>) : null}
 
         {props.modalFooterRedirection ? (
           <section>
             <Button clicked={props.handleClose} btnType="annuler">
-							Revenir
+              Revenir
             </Button>
-            <Button clicked={props.handleUpdate} btnType="valider">
-							Quitter
+            <Button clicked={props.handleConfirmForm} btnType="valider">
+              Confirmer
             </Button>
           </section>) : null}
 

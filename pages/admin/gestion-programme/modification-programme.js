@@ -1,15 +1,26 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
-import Link from 'next/link'
-
+import Alert from '../../../components/Modal/alert'
 class ModificationProgramme extends Component {
 	state = {
-		programme: [ { name: 'Developpeur Javascript' } ]
+		programme: [{ name: 'Developpeur Javascript' }],
+		show: false
 	}
 
 	handleUpdate = () => {
-		alert('Utilisateur Modifié !')
+		this.setState({ show: true })
+	}
+
+	handleConfirmForm = () => {
+		window.location.assign('/admin/gestion-programme/gestion-programme')
+	}
+
+	handleClose = () => {
+		this.setState({ show: false })
+	}
+	previousPage = () => {
+		window.location.assign('/admin/gestion-programme/gestion-programme')
 	}
 
 	render() {
@@ -63,14 +74,35 @@ class ModificationProgramme extends Component {
 							</div>
 						</section>
 						<section class="d-flex flex-row footer-programme-formulaire">
-							<button type="button" class="btn btn-primary text-center button-cancel-programme">
-								<Link href="./gestion-programme">Annuler</Link>
-							</button>
-							<a href="#">
-								<button type="submit" class="btn btn-primary text-center button-create-programme">
-									Valider programme
-								</button>
-							</a>
+
+							<Button
+								btnType="annuler"
+								type="button"
+								clicked={this.previousPage}
+								className="btn btn-primary text-center button-cancel-programme"
+							>
+								Annuler
+							</Button>
+							<Button
+								btnType="valider"
+								clicked={this.handleUpdate}
+
+							>
+								Modifier
+								</Button>
+							{this.state.show ? (
+								<Alert
+									show={this.state.show}
+									handleClose={this.handleClose}
+
+									headerTitle="Modification programme"
+									modalDescription="Etes vous sûr de vouloir modifier ce programme ?"
+									modalHeader={true}
+									modalBody={true}
+									modalFooterRedirection
+									handleConfirmForm={this.handleConfirmForm}
+								/>
+							) : null}
 						</section>
 					</form>
 				</article>
