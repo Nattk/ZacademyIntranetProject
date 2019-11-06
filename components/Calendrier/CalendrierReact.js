@@ -97,7 +97,7 @@ export default class CalendrierReact extends React.Component {
 					deleteEvent={this.state.idEvent !== null ? true : false}
 					endsAt={this.state.endsAt}
 					modalFooter
-					clicked={this.handleClose}
+					onClose={this.handleClose}
 				/>
 			</React.Fragment>
 		)
