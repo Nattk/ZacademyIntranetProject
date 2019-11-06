@@ -28,11 +28,7 @@ const AdminNav = (props) => (
         <Link href="/admin/gestion-utilisateur/gestion-utilisateur"><a role="button" alt="Lien pour gérer les utilisateurs">Gestion Utilisateur</a></Link><br></br>
       </div>
     </div>
-<<<<<<< HEAD
-    <Link href="/utilisateur/MonProfil/mon_profil"><a className="btn btn-danger" role="button" alt="Lien vers mon profil">PROFIL</a></Link>
-=======
     <Link href="/utilisateur/mon-profil/mon-profil"><a className="btn btn-danger" role="button" alt="Lien vers mon profil">PROFIL</a></Link>
->>>>>>> 7d4f607562448002db97ea92c2790755e657b9b6
     <Link href="/"><a className="btn btn-danger" href="#" id="bonjourjérémie" role="button" alt="Lien déconnexion" onClick={props.offline}>LOGOUT</a></Link>
   </nav>
 )
