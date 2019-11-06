@@ -3,7 +3,7 @@ import Page from '../../../layouts/classic'
 import Link from 'next/link'
 
 const CreaPromotion = () => (
-  <Page title="Création promotion">
+  <Page title="Création promotion" contextePage="Créer une promotion">
     <article className="gestionProgramme card" id="form_creation_promotion">
       <header className="card-header text-center">
         Creation une promotion

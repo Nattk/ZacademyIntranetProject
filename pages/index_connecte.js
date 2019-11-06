@@ -5,7 +5,7 @@ import Carousel from '../components/Carousel/carousel'
 
 export default function IndexConnected () {
   return (
-    <Page title="Accueil">
+    <Page title="Accueil" contextePage="Accueil">
       <Carousel />
       <article className="card" id="newsfeed_accueil">
         <section className="card-header">

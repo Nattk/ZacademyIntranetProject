@@ -15,9 +15,8 @@ class AjouterRessources extends Component {
 
   render () {
     return (
-      <Page title="Ajouter Ressources">
+      <Page title="Ajouter Ressources" contextePage="Ajouter une ressource">
         <article className="ajouterRessource">
-          <h1>Ajouter une ressource</h1>
           <section>
             <form className="form-group d-flex flex-column">
               <label for="titre">Titre</label>

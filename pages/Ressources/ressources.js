@@ -66,9 +66,8 @@ class Ressources extends Component{
     ))
     
     return(
-    <Page title="Ressources">
+    <Page title="Ressources" contextePage="Ressources">
       <article className="ressources d-flex flex-column">
-      <h1>Ressources</h1>
         <header className="d-flex flex-row justify-content-between align-items-center">
             <select defaultValue="0" className="custom-select" id="selectPromo" onChange={this.filtre}>
               <option value="0">Promotions</option>

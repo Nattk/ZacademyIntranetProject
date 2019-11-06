@@ -1,5 +1,5 @@
 import React from 'react'
-import Page from '../../../layouts/global'
+import Page from '../../../layouts/classic'
 import Card from '../../../components/Card/card'
 import '../../../styles/sass/styles.scss'
 
@@ -52,9 +52,8 @@ const followCard = (
 	</article>
 )
 const Follow = () => (
-	<Page title="Follow">
+	<Page title="Influenceurs" contextePage="Influenceurs">
 		<article className="container-article">
-			<h1 className="mainTitle">Who to Follow!</h1>
 			<div className="text-center col-md-10 col-sm-12 col-xs-12 container-card ">
 				<Card styleName="card">{followCard}</Card>
 				<Card styleName="card">{followCard}</Card>

@@ -51,7 +51,7 @@ class Admin extends Component {
 
   render () {
     return (
-      <Page title="Admin Accueil">
+      <Page title="Admin Accueil" contextePage="Accueil administration">
         <article className="admin_page">
             <select defaultValue="0" className="custom-select" id="selectVille" onChange={this.filtre}>
               <option value="0">Ville</option>
