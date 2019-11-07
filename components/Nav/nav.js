@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const Nav = (props) => (
   <nav className="navbar navbar-expand-lg navbar-light bg-dark" id="navbar">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
+    <button class="navbar-toggler" type="button" title="menu burger" data-toggle="collapse" data-target="#navbarSupportedContent15"
       aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent15">
     <Link href="/index_connecte"><a className="btn btn-danger bouton-navbar" role="button">ACCUEIL</a></Link>
