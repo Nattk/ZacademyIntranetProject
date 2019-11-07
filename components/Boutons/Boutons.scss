@@ -1,51 +1,106 @@
 .btn {
-	color: white;
-	font-weight: bold;
-	margin: .3rem;
+  color: white;
+  font-weight: bold;
+  margin: .3rem;
 
-	a {
-		text-decoration: none;
-		color: white;
-		font-weight: bold;
-	}
+  a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+  }
 }
 
 .valider {
-	background-color: #2e8b57;
+  background-color: #2e8b57;
 }
 
 .valider:hover {
-	background-color: rgb(24, 77, 47);
+  background-color: rgb(24, 77, 47);
 }
 
 .annuler {
-	background-color: #cc4949;
+  background-color: #cc4949;
 }
 
 .annuler:hover {
-	background-color: #a12a2a;
+  background-color: #a12a2a;
 }
 
 .event-button-cancel {
-	background-color: #fff;
-	border: 1px solid #fff;
-	color: gray;
+  background-color: #fff;
+  border: 1px solid #fff;
+  color: gray;
 }
 
 .event-button-cancel:hover {
-	background-color: #fff;
-	border: 1px solid #fff;
-	color: gray;
+  background-color: #fff;
+  border: 1px solid #fff;
+  color: gray;
 }
 
 .close-button-icon {
-	background-color: #fff;
-	color: gray;
-	border: none;
+  background-color: #fff;
+  color: gray;
+  border: none;
 }
 
 .close-button-icon {
-	background-color: #fff;
-	color: gray;
-	border: 1px solid #fff;
+  background-color: #fff;
+  color: gray;
+  border: 1px solid #fff;
+}
+
+.link-button-valider {
+  background-color: green;
+  color: #fff;
+  padding: .45rem 1rem;
+  border-radius: 1%;
+}
+
+.link-button-valider:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.link-button-supprimer {
+  background-color: rgb(178, 30, 62);
+  color: #fff;
+  margin: 0;
+  // padding: 0.3rem;
+  // padding-right: 1rem;
+  // padding-left: 1rem;
+  // border-radius: 10%;
+}
+
+.link-button-supprimer:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.link-button-duppliquer {
+  background-color: yellow;
+  color: #fff;
+  padding: .4rem;
+  border-radius: 10%;
+}
+
+.link-button-duppliquer:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.link-button-creation {
+  background-color: black;
+  color: #fff;
+  padding: .6rem;
+}
+
+.link-button-creation:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.deleteRssButton {
+  display: none;
+
 }

@@ -37,6 +37,19 @@ const Alert = (props) => {
                 {props.modalDescription}
               </p>
             </section>) : null}
+          {props.input ? (
+            <div className="form-group">
+              <label for="username">Flux RSS</label>
+              <input
+                type="text"
+                name="rss"
+                placeholder="Inserer l'adresse du flux rss"
+                className="form-control"
+                id="exampleFormControlInput1"
+                value="https://fr.khanacademy.org/computing/computer-programming"
+
+              />
+            </div>) : null}
 
         </article>
 
@@ -47,21 +60,20 @@ const Alert = (props) => {
         {props.modalFooter ? (
           <section>
             <Button clicked={props.handleClose} btnType="annuler">
-							Annuler
+              Annuler
             </Button>
-
             <Button btnType="valider" clicked={props.handleDelete}>
-							Supprimer
+              Supprimer
             </Button>
           </section>) : null}
 
         {props.modalFooterRedirection ? (
           <section>
             <Button clicked={props.handleClose} btnType="annuler">
-							Revenir
+              Revenir
             </Button>
-            <Button clicked={props.handleUpdate} btnType="valider">
-							Quitter
+            <Button clicked={props.handleConfirmForm} btnType="valider">
+              Confirmer
             </Button>
           </section>) : null}
 
