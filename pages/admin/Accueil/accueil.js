@@ -46,10 +46,9 @@ class Admin extends Component {
 
   render () {
     return (
-      <Page title="Admin Accueil">
+      <Page title="Admin Accueil" contextePage="Promotions en cours">
         <article id="admin-page">
           {/* //<button>Ajouter une promotion</button> */}
-          <h1>Promotions en cours</h1>
           <section>
             <input type="text" placeholder="Rechercher"/>
           </section>
@@ -57,11 +56,11 @@ class Admin extends Component {
           <table className="table table-hover">
             <thead>
               <tr>
-                <th  onClick={(type)=>this.filtre("nom")}><div className="d-flex flex-row justify-content-between align-items-baseline">Nom <i class="fas fa-sort"></i></div></th>
-                <th  onClick={(type)=>this.filtre("ville")}><div className="d-flex flex-row justify-content-between align-items-baseline">Ville <i class="fas fa-sort"></i></div></th>
-                <th  onClick={(type)=>this.filtre("programme")}><div className="d-flex flex-row justify-content-between align-items-baseline">Programme <i class="fas fa-sort"></i></div></th>
-                <th  onClick={(type)=>this.filtre("date")}><div className="d-flex flex-row justify-content-between align-items-baseline">Date <i class="fas fa-sort"></i></div></th>
-                <th  onClick={(type)=>this.filtre("actions")}>Actions</th>
+                <th onClick={(type)=>this.filtre("nom")}><div className="d-flex flex-row justify-content-between align-items-baseline">Nom <i class="fas fa-sort"></i></div></th>
+                <th onClick={(type)=>this.filtre("ville")}><div className="d-flex flex-row justify-content-between align-items-baseline">Ville <i class="fas fa-sort"></i></div></th>
+                <th onClick={(type)=>this.filtre("programme")}><div className="d-flex flex-row justify-content-between align-items-baseline">Programme <i class="fas fa-sort"></i></div></th>
+                <th onClick={(type)=>this.filtre("date")}><div className="d-flex flex-row justify-content-between align-items-baseline">Date <i class="fas fa-sort"></i></div></th>
+                <th onClick={(type)=>this.filtre("actions")}>Actions</th>
               </tr>
             </thead>
             <tbody>
