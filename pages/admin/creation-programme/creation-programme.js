@@ -12,7 +12,7 @@ class CreaProgramme extends Component {
     // if (name === '' || undefined) {
     //   this.setState({ show: false })
     // } else {
-    return this.setState({ show: false })
+    return this.setState({ show: true })
     // }
   }
 

@@ -37,6 +37,19 @@ const Alert = (props) => {
                 {props.modalDescription}
               </p>
             </section>) : null}
+          {props.input ? (
+            <div className="form-group">
+              <label for="username">Flux RSS</label>
+              <input
+                type="text"
+                name="rss"
+                placeholder="Inserer l'adresse du flux rss"
+                className="form-control"
+                id="exampleFormControlInput1"
+                value="https://fr.khanacademy.org/computing/computer-programming"
+
+              />
+            </div>) : null}
 
         </article>
 
