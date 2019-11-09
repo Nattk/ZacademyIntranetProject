@@ -9,7 +9,7 @@ import ModalEvent from '../Modal/modalEvent'
 import momentPlugin from '@fullcalendar/moment';
 import frLocale from '@fullcalendar/core/locales/fr';
 import '../../styles/sass/styles.scss'
-
+import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 export default class CalendrierReact extends React.Component {
 	state = {
 		modalDataEvent: false,
@@ -90,13 +90,15 @@ export default class CalendrierReact extends React.Component {
 					timeZone="UTC, Paris"
 					locales={[frLocale]}
 					locale='fr'
+					timeZone='Europe/Paris'
 					googleCalendarApiKey="AIzaSyDzjuf_lV9IO6MD14emQWwra-RlE7iAC4c"
 					dateClick={this.handleEventClick}
 					eventSourcesClick={this.showEvent}
-					plugins={[googleCalendarPlugin, dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin, momentPlugin]}
+
+					plugins={[googleCalendarPlugin, dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin, momentPlugin, momentTimezonePlugin]}
 					header={{
 						left: 'title ',
-						center: 'dayGridMonth,timeGridWeek',
+						center: 'dayGridMonth,timeGridWeek,list',
 						right: 'prev,next,'
 					}}
 					footer={{
