@@ -59,7 +59,7 @@ class Ressources extends Component{
             </section>
           </div>
           <aside className="d-flex flex-row justify-content-end"> 
-            <Button btnType="modifier" title="Modifier"> <Link href="./ModifierRessource"><a>Modifier</a></Link></Button>
+            <Button btnType="modifier" title="Modifier"> <Link href="./modifier-ressource"><a>Modifier</a></Link></Button>
             <Button btnType="annuler" title="Supprimer" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
           </aside>
       </Card>
@@ -81,7 +81,7 @@ class Ressources extends Component{
               <option value="2">Craft</option>
             </select>
             <Button btnType="valider">
-              <Link href="./AjouterRessource">
+              <Link href="./ajouter-ressource">
                 <a>
                   Ajouter une ressource
                 </a>
@@ -96,7 +96,7 @@ class Ressources extends Component{
         </section>
           <footer className="d-flex align-items-end">
             <Button btnType="valider">
-              <Link href="./AjouterRessource">
+              <Link href="./ajouter-ressource">
                 <a>
                   Ajouter une ressource
                 </a>

@@ -20,7 +20,7 @@ class RessourceIndividuelle extends Component {
   render () {
     return (
       <Page title={this.state.ressource.titre}>
-        <article className="ressourceIndividuelle">
+        <article className="ressourceIndividuelle d-flex flex-column">
           <Card styleName="ressourceContent">
             <h1>{this.state.ressource.titre}</h1>
             <div className="d-flex flex-row">

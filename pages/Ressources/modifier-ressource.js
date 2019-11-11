@@ -1,7 +1,7 @@
-import React, { Component } from './node_modules/react'
+import React, { Component } from 'react'
 import Page from '../../layouts/classic'
 import Button from '../../components/Boutons/Boutons'
-import Link from './node_modules/next/link'
+import Link from 'next/link'
 import Modal from '../../components/Modal/alert'
 
 class AjouterRessources extends Component {
@@ -17,7 +17,7 @@ class AjouterRessources extends Component {
       this.setState({modalShow: true})
       setTimeout(() => {
         this.setState({ modalShow: false })
-        window.location.assign('/communaute/Ressources/ressources')
+        window.location.assign('/Ressources/ressources')
       }, 5000)
     }
   }
