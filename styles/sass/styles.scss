@@ -7,6 +7,7 @@
 @import '../../components/Boutons/Boutons.scss';
 @import '../../components/Modal/modalEvent.scss';
 @import '../../components/SuperNav/supernav.scss';
+@import '../../components//rss/rssCard.scss';
 
 // Dossier Pages
 @import '../../pages/index-connecte.scss';
@@ -24,8 +25,6 @@
 @import '../../pages/ma-formation/Livret-Accueil/livret-accueil.scss';
 @import '../../pages/ma-formation/Agenda/agenda.scss';
 
-
-
 // Calendar
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
@@ -40,11 +39,10 @@ html {
   background-color: #fff;
 }
 
-h1#context-page{
+h1#context-page {
   margin-top: 6rem;
   text-align: center;
 }
-  
 
 .main {
   display: flex;

@@ -1,41 +1,77 @@
 
 import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
-import Card from '../../../components/Card/card'
 import Button from '../../../components/Boutons/Boutons'
 import Alert from '../../../components/Modal/alert'
+import RssCard from '../../../components/rss/rssCard'
 import '../../../styles/sass/styles.scss'
+import AddRss from './adRss'
 
 class Rss extends Component {
   state = {
     fluxs: [
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://fr.khanacademy.org/computing/computer-programming", fluxId: 1 },
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://facebook.github.io/react-native/", fluxId: 2 },
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://medium.com/", fluxId: 3 },
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://fr.khanacademy.org/computing/computer-programming", fluxId: 4 },
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://facebook.github.io/react-native/", fluxId: 5 },
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://medium.com/", fluxId: 6 }
+      { imgRss: 'https://miro.medium.com/max/2968/1*u3DHI-FgD_VZhL073T_bVg.jpeg', titre: 'How Data Creates a Collective Storytelling Voice on a Global Issue', description: ' A short reflection on how an animated bar chart on student immigration in Australia sparked off an enriching discussion', link: "https://towardsdatascience.com/how-data-sparks-a-global-discussion-on-a-global-issue-f66f43e330d5", id: 1 },
+      {
+        imgRss: 'https://miro.medium.com/max/12000/1*OTjOW6xkXCNJ1WmZMWcSlQ.jpeg', titre: 'How To Fake Being a Good Programmer', description: ` Programmers are wizards— poor, ragged characters turning coffee into code. I don’t know magic, I‘m merely an illusionist. My job is to be more authentic in being a fake programmer than real programmers are in being themselves.
+      I’m great what I do, an absolute beast of a charlatan. I’ve tricked businessmen into asking me to be their…
+      `, link: "https://facebook.github.io/react-native/", id: 2
+      },
+      {
+        imgRss: 'https://miro.medium.com/max/10368/0*spWyBwNlrLhUc3Ie', titre: 'Stop Using i++ in Your Loops', description: ` If you’ve written a for-loop before, then you have almost definitely used i++ before to increment your loop variable.However, have you ever thought about why you choose to do it like that?
+      Clearly, the end result of i++ is that i is one higher than it was before — which is what we want.But, there are many ways to accomplish this, such as ++i, i++, and even i = i + 1.`, link: "https://medium.com/", id: 3
+      },
+      { imgRss: 'https://miro.medium.com/max/980/1*AfhfnLpsi9TdYF-kax8vcw.png', titre: 'Secure a Spring Boot REST API with JSON Web Token', description: ' In this piece, I am going to walk you through how to secure a Spring Boot REST API with JSON Web Token (JWT) to exchange claims between a server and a client. This is Part two of a collaborative effort between my colleague Julia Passynkova and myself demonstrating how to secure an Angular 2+ application using Spring', link: "https://medium.com/better-programming/secure-a-spring-boot-rest-api-with-json-web-token-reference-to-angular-integration-e57a25806c50", id: 4 },
+      { imgRss: 'https://www.icsi-eu.org/photos/masteres/264/13/linkedin.jpg', titre: 'sciosjpnsso', description: ' Apprenez en plus sur Javascript !', link: "https://facebook.github.io/react-native/", id: 5 },
+      { imgRss: 'https://www.icsi-eu.org/photos/masteres/264/13/linkedin.jpg', titre: 'sciosjpnsso', description: ' Apprenez en plus sur Javascript !', link: "https://medium.com/", id: 6 }
+
     ],
+    titre: '',
+    link: '',
     showAdd: false,
     show: false
   }
 
-  handleModal = () => {
+  handleModal = (id) => {
     this.setState({ show: true })
+    for (var i = 0; i < this.state.fluxs.length; i++) {
+      if (this.state.fluxs[i].id == id) {
+        this.state.fluxs.splice(i, 1);
+        break;
+      }
+    }
   }
 
-  handleModalAddFlux = () => {
+  handleModalAdd = () => {
     this.setState({ showAdd: true })
   }
   addRss = (event) => {
-    this.state.fluxs.push({ descriptionFlux: ' Apprenez en plus React et node !', linkFlux: "https://fr.khanacademy.org/computing/computer-programming", fluxId: 7 })
-    this.setState({ showAdd: false })
+    this.setState({
+      titre: console.log(event.target.titre),
+      imgRss: 'https://www.icsi-eu.org/photos/masteres/264/13/linkedin.jpg',
+      description: ' Apprenez en plus React et node !',
+      link: this.state.link,
+      Id: 7
+    }),
+
+      console.log(this.state.titre)
+    this.setState({ showAdd: false, titre: event.target.titre })
     event.preventDefault()
   }
 
-  handleDelete = (fluxId) => {
-    const flus = this.state.fluxs.filter((item) => item.fluxId !== fluxId)
-    this.setState({ fluxs: flus, show: false })
+  handleDelete = (id) => {
+
+    for (var i = 0; i < this.state.fluxs.length; i++) {
+      if (this.state.fluxs[i].id == id) {
+        this.state.fluxs.splice(i, 1);
+        break;
+      }
+    }
+
+
+
+    this.setState({})
+
+
     event.preventDefault()
   }
 
@@ -48,10 +84,11 @@ class Rss extends Component {
   render() {
 
     return (
-      <Page title="Flux RSS" contextePage="Flux RSS">
+      <Page title=" RSS" contextePage=" RSS" >
 
         <article className="container-article">
-          <Button btnType="annuler" clicked={this.handleModalAddFlux} title="ajout-flux" className="link-button-creation" style={{ margin: '2rem' }} >
+
+          <Button btnType="annuler" clicked={this.handleModalAdd} title="ajout-" className="link-button-creation" style={{ margin: '2rem' }} >
             Ajouter un flux
 							</Button>
           {this.state.showAdd ? (
@@ -59,51 +96,40 @@ class Rss extends Component {
               show={this.state.showAdd}
               handleClose={this.handleClose}
               handleConfirmForm={this.addRss}
-              headerTitle="Ajout flux"
+              headerTitle="Ajout "
               input
+
               modalHeader={true}
               modalBody={true}
               modalFooterRedirection={true}
             />
           ) : null}
-          <section className=" col-md-10 col-sm-12 col-xs-12 text-center container-card">
+          <section className=" col-md-10 col-sm-12 col-xs-12 text-center container-rssCard" >
 
-            {this.state.fluxs.map((flux, index) => (
-              <Card styleName="card-rss col-md-5 col-sm-12 col-xs-12 " >
+            {this.state.fluxs.map((flux, id) => (
 
-                <div className="edit" onClick={this.handleModal}><i className="fa fa-close edit" title="supprimer ce flux"></i>
+              <RssCard
+                className="  card-rss  col-md-3 col-sm-12 col-xs-12 "
+                key={id}
+
+                titre={flux.titre}
+                imgRss={flux.imgRss}
+                description={flux.description.substring(0, 70) + '...'}
+                link={flux.link}
+                remove={<div onClick={() => this.handleDelete(flux.id)} className="edit" style={{ textAlign: 'right', cursor: 'pointer' }}><i class="far fa-trash-alt" title="supprimer ce flux "></i>
+
                 </div>
-                <article key={index} className="card-article">
-                  <a
-                    title="lien vers le flux"
-                    href={`${flux.linkFlux}`}
-                    target="_blank"
-                    style={{ color: '#fff' }}
-                  >
-                    <p title="lien vers le flux" className="card-rss-title">
-                      <i className="fas fa-rss card-rss-button" />    {flux.descriptionFlux}
-                    </p>
-                  </a>
-                  <aside>
-                    <span aria-hidden="true" onClick={this.handleModal} className="deleteRssButton" title="supprimer">&times;</span>
-                    {this.state.show ? (
-                      <Alert
-                        show={this.state.show}
-                        handleClose={this.handleClose}
-                        handleDelete={() => this.handleDelete(flux.fluxId)}
-                        headerTitle="Suppression flux"
-                        modalDescription="Etes vous sûr de vouloir supprimer ce flux ?"
-                        modalHeader={true}
-                        modalBody={true}
-                        modalFooter={true}
-                      />
-                    ) : null}
-                  </aside>
-                </article>
-              </Card>
+                }
+
+              />
             ))}
+            <AddRss />
+
           </section>
+
         </article>
+
+
       </Page>
     )
   }

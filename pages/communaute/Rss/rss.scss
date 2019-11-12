@@ -47,12 +47,20 @@
 }
 
 .edit {
-  padding-top: 7px;
-  padding-right: 7px;
+
   position: absolute;
   right: 0;
   top: 0;
   display: none;
-  color: #cc4949;
+  color: rgba(0, 0, 0, 0.342);
   cursor: pointer;
+}
+
+.container-rssCard {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+
 }
