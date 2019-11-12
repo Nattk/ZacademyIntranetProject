@@ -1,50 +1,92 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Nav from '../Nav/nav'
 import AdminNav from '../AdminNav/adminNav'
-import loginService from '../../services/login'
-import axios from 'axios'
+import usersService from '../../services/users'
 
-const baseUrl = 'http://localhost:3001/users'
+const useLocalStorage = (key, initialValue) => {
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key)
+      return item ? JSON.parse(item) : initialValue
+    } catch (error) {
+      console.log(error)
+      return initialValue
+    }
+  })
+  const setValue = value => {
+    try {
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value
+      setStoredValue(valueToStore)
+      window.localStorage.setItem(key, JSON.stringify(valueToStore))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  return [storedValue, setValue]
+}
+
+const Notification = ({ message }) => {
+  if (message === null) {
+    return null
+  }
+
+  return (
+    <div className="error">
+      {message}
+    </div>
+  )
+}
 
 const SuperNav = () => {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState(null)
+  const [role, setRole] = useLocalStorage('role', '')
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    const user = await loginService.login({
-      username, password, role
-    })
-    setRole(user.role)
-    setUsername('')
-    setPassword('')
+    const users = await usersService.getAll()
+    const user = users.find(n => n.mail === email && n.password === password)
+    try {
+      setRole(user.role)
+      setEmail('')
+      setPassword('')
+    } catch (e) {
+      setErrorMessage("MAUVAIS LOGIN HAHAHAHAHA")
+    }
+
   }
 
-  if (true) {
+  const offlineClick = () => {
+    setRole("")
+  }
+
+  if (!role) {
     return (
-      <form onSubmit={handleLogin}>
-        <div>
-          username
-          <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
+
+      <form className="wrapper fadeInDown" onSubmit={handleLogin}>
+        <Notification message={errorMessage} />
+        <div id="formContent">
+          <div className="fadeIn first">
+            <img src="/zenika_icon.png" id="icon" alt="User Icon" />
+          </div>
+          <form>
+            <label></label>
+            <input type="email" id="login" className="fadeIn" name="usename" placeholder="email" value={email} onChange={({ target }) => setEmail(target.value)} required />
+            <label></label>
+            <input type="password" id="password" className="fadeIn" name="login" placeholder="mot de passe" value={password} onChange={({ target }) => setPassword(target.value)} required />
+            <label></label>
+            <input type="submit" id="submit-login" className="fadeIn" value="Log In" />
+          </form>
+
         </div>
-        <div>
-          password
-          <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type="submit">login</button>
       </form>
     )
+  } else if (role === 'eleve') {
+    return <Nav offline={offlineClick} />
+  } else {
+    return <AdminNav offline={offlineClick} />
   }
 }
 

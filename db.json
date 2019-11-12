@@ -4,65 +4,33 @@
       "id": 1,
       "firstname": "Norbert",
       "name": "Nadir",
-      "password": "norbert",
+      "mail" : "norbert@zenika.com",
+      "password": "Norbert",
       "role": "superadmin"
     },
     {
       "id": 2,
       "firstname": "Admin",
       "name": "Admin",
-      "password": "admin",
+      "mail" : "admin@zenika.com",
+      "password": "Admin",
       "role": "admin"
     },
     {
       "id": 3,
       "firstname": "Jérémie",
       "name": "Patonnier",
-      "password": "jérémie",
+      "mail" : "jérémie@zenika.com",
+      "password": "Jérémie",
       "role": "formateur"
     },
     {
       "id": 4,
       "firstname": "Firmin",
       "name": "Giret",
-      "password": "firmin",
+      "mail" : "firmin@zenika.com",
+      "password": "Firmin",
       "role": "eleve"
-    },
-    {
-      "username": "norbert",
-      "password": "norbert",
-      "role": null,
-      "id": 5
-    },
-    {
-      "username": "",
-      "password": "",
-      "role": null,
-      "id": 6
-    },
-    {
-      "username": "",
-      "password": "",
-      "role": null,
-      "id": 7
-    },
-    {
-      "username": "",
-      "password": "",
-      "role": null,
-      "id": 8
-    },
-    {
-      "username": "",
-      "password": "",
-      "role": null,
-      "id": 9
-    },
-    {
-      "username": "norbert",
-      "password": "norbert",
-      "role": null,
-      "id": 10
     }
   ],
   "comments": [
