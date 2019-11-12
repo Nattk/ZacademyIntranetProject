@@ -80,6 +80,17 @@ class Ressources extends Component{
               <option value="1">Javscript</option>
               <option value="2">Craft</option>
             </select>
+            <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+            </div>
             <Button btnType="valider">
               <Link href="./ajouter-ressource">
                 <a>
