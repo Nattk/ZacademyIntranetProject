@@ -29,16 +29,15 @@ const SuperNav = () => {
     SetConnected(true)
     SetAdmin(true)
   }
-  
+
   if (!isConnected) {
     return <Login online={handleOnline} both={handleboth}/>
   }
   if (isAdmin) {
     return <AdminNav adminClick={handleAdminOFF} offline={handleOffline} />
-  }else {
+  } else {
     return <Nav adminClick={handleAdminON} offline={handleOffline}/>
   }
-
 }
 
 function useLocalStorage (key, initialValue) {

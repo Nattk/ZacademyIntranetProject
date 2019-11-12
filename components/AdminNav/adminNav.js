@@ -11,7 +11,7 @@ const AdminNav = (props) => (
         <a className="btn btn-danger dropdown-toggle bouton-navbar" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Créer
-      </a>
+        </a>
 
         <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <Link href="/admin/creation-programme/creation-programme"><a role="button">Creation Programme</a></Link><br></br>
@@ -23,7 +23,7 @@ const AdminNav = (props) => (
         <a className="btn btn-danger dropdown-toggle bouton-navbar" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Modifier
-      </a>
+        </a>
 
         <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <Link href="/admin/gestion-programme/gestion-programme"><a role="button" alt="Lien pour gérer les programmes">Gestion Programme</a></Link><br></br>
@@ -32,9 +32,9 @@ const AdminNav = (props) => (
         </div>
       </div>
       <div id="end-of-navbar">
-      <Link href="/admin/Accueil/accueil"><a className="btn btn-danger bouton-navbar" role="button" >ADMINISTRATION</a></Link>    
-      <Link href="/utilisateur/mon-profil/mon-profil"><a className="btn btn-danger bouton-navbar" role="button" alt="Lien vers mon profil">PROFIL</a></Link>
-      <Link href="/"><a className="btn btn-danger bouton-navbar" href="#" role="button" alt="Lien déconnexion" onClick={props.offline}>LOGOUT</a></Link>
+        <Link href="/admin/Accueil/accueil"><a className="btn btn-danger bouton-navbar" role="button" >ADMINISTRATION</a></Link>
+        <Link href="/utilisateur/mon-profil/mon-profil"><a className="btn btn-danger bouton-navbar" role="button" alt="Lien vers mon profil">PROFIL</a></Link>
+        <Link href="/"><a className="btn btn-danger bouton-navbar" href="#" role="button" alt="Lien déconnexion" onClick={props.offline}>LOGOUT</a></Link>
       </div></div></nav>
 )
 
