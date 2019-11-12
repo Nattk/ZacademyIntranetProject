@@ -1,9 +1,68 @@
 {
-  "posts": [
+  "users": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "firstname": "Norbert",
+      "name": "Nadir",
+      "password": "norbert",
+      "role": "superadmin"
+    },
+    {
+      "id": 2,
+      "firstname": "Admin",
+      "name": "Admin",
+      "password": "admin",
+      "role": "admin"
+    },
+    {
+      "id": 3,
+      "firstname": "Jérémie",
+      "name": "Patonnier",
+      "password": "jérémie",
+      "role": "formateur"
+    },
+    {
+      "id": 4,
+      "firstname": "Firmin",
+      "name": "Giret",
+      "password": "firmin",
+      "role": "eleve"
+    },
+    {
+      "username": "norbert",
+      "password": "norbert",
+      "role": null,
+      "id": 5
+    },
+    {
+      "username": "",
+      "password": "",
+      "role": null,
+      "id": 6
+    },
+    {
+      "username": "",
+      "password": "",
+      "role": null,
+      "id": 7
+    },
+    {
+      "username": "",
+      "password": "",
+      "role": null,
+      "id": 8
+    },
+    {
+      "username": "",
+      "password": "",
+      "role": null,
+      "id": 9
+    },
+    {
+      "username": "norbert",
+      "password": "norbert",
+      "role": null,
+      "id": 10
     }
   ],
   "comments": [
