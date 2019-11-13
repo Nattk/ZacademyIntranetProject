@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Nav from '../Nav/nav'
 import AdminNav from '../AdminNav/adminNav'
 import usersService from '../../services/users'
@@ -53,13 +53,12 @@ const SuperNav = () => {
       setEmail('')
       setPassword('')
     } catch (e) {
-      setErrorMessage("MAUVAIS LOGIN HAHAHAHAHA")
+      setErrorMessage('MAUVAIS LOGIN HAHAHAHAHA')
     }
-
   }
 
   const offlineClick = () => {
-    setRole("")
+    setRole('')
   }
 
   if (!role) {
