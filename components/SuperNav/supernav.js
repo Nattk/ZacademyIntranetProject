@@ -67,15 +67,15 @@ const SuperNav = () => {
       <form className="wrapper" onSubmit={handleLogin}>
         <Notification message={errorMessage} />
         <div id="form-content">
-          <div className="fadeIn first">
+          <div className="first">
             <img src="/zenika_icon.png" id="icon" alt="User Icon" />
           </div>
           <form>
             <label for="login">Email</label><br></br>
-            <input type="email" id="login" className="fadeIn login-form" name="usename" placeholder="email" value={email} onChange={({ target }) => setEmail(target.value)} required />
+            <input type="email" id="login" className="login-form" name="usename" placeholder="email" value={email} onChange={({ target }) => setEmail(target.value)} required />
             <label for="password">Mot de passe</label>
-            <input type="password" id="password" className="fadeIn  login-form" name="login" placeholder="mot de passe" value={password} onChange={({ target }) => setPassword(target.value)} required />
-            <input type="submit" id="submit-login" className="fadeIn  login-form" value="Log In" />
+            <input type="password" id="password" className="login-form" name="login" placeholder="mot de passe" value={password} onChange={({ target }) => setPassword(target.value)} required />
+            <input type="submit" id="submit-login" className="login-form" value="Log In" />
           </form>
 
         </div>
