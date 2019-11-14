@@ -23,6 +23,17 @@ const Nav = (props) => (
       <div className="dropdown show">
         <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
+          Ressources
+        </a>
+
+        <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <Link href="/ressources/ressources"><a role="button" alt="Lien vers ressources formateur">Formateurs</a></Link><br></br>
+          <Link href="/ressources/ressources"><a role="button" alt="Lien vers ressources élèves">Élèves</a></Link><br></br>
+        </div>
+      </div>
+      <div className="dropdown show">
+        <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           Communauté
         </a>
 
@@ -30,17 +41,6 @@ const Nav = (props) => (
           <Link href="/ma-formation/Slack/slack"><a role="button" alt="Lien vers slack academy">Slack academy</a></Link><br></br>
           <Link href="/communaute/Rss/rss"><a role="button" alt="Lien vers flux rss">RSS</a></Link><br></br>
           <Link href="/communaute/who-to-follow/who-to-follow"><a role="button" alt="Lien vers who to follow">Who to follow</a></Link><br></br>
-        </div>
-      </div>
-      <div className="dropdown show">
-        <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Ressources
-        </a>
-
-        <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <Link href="/ressources/ressources"><a role="button" alt="Lien vers ressources formateur">Formateurs</a></Link><br></br>
-          <Link href="/ressources/ressources"><a role="button" alt="Lien vers ressources élèves">Élèves</a></Link><br></br>
         </div>
       </div>
       <div id="end-of-navbar">

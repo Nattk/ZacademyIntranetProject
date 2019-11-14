@@ -33,7 +33,6 @@ const AdminNav = (props) => (
       </div>
       <div id="end-of-navbar">
         <Link href="/admin/Accueil/accueil"><a className="btn btn-danger bouton-navbar" role="button" >ADMINISTRATION</a></Link>
-        <Link href="/utilisateur/mon-profil/mon-profil"><a className="btn btn-danger bouton-navbar" role="button" alt="Lien vers mon profil">PROFIL</a></Link>
         <Link href="/"><a className="btn btn-danger bouton-navbar" href="#" role="button" alt="Lien déconnexion" onClick={props.offline}>LOGOUT</a></Link>
       </div></div></nav>
 )
