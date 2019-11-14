@@ -30,6 +30,7 @@
 		"@zeit/next-sass": "^1.0.1",
 		"axios": "^0.19.0",
 		"bootstrap": "^4.3.1",
+		"cors": "^2.8.5",
 		"css-loader": "^3.2.0",
 		"json-server": "^0.15.1",
 		"moment": "^2.24.0",

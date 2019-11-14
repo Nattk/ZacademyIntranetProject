@@ -1,9 +1,36 @@
 {
-  "posts": [
+  "users": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "firstname": "Norbert",
+      "name": "Nadir",
+      "mail" : "norbert@zenika.com",
+      "password": "Norbert",
+      "role": "superadmin"
+    },
+    {
+      "id": 2,
+      "firstname": "Admin",
+      "name": "Admin",
+      "mail" : "admin@zenika.com",
+      "password": "Admin",
+      "role": "admin"
+    },
+    {
+      "id": 3,
+      "firstname": "Jérémie",
+      "name": "Patonnier",
+      "mail" : "jérémie@zenika.com",
+      "password": "Jérémie",
+      "role": "formateur"
+    },
+    {
+      "id": 4,
+      "firstname": "Firmin",
+      "name": "Giret",
+      "mail" : "firmin@zenika.com",
+      "password": "Firmin",
+      "role": "eleve"
     }
   ],
   "comments": [

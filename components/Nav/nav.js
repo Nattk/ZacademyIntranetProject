@@ -23,6 +23,17 @@ const Nav = (props) => (
       <div className="dropdown show">
         <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
+          Ressources
+        </a>
+
+        <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <Link href="/ressources/ressources"><a role="button" alt="Lien vers ressources formateur">Formateurs</a></Link><br></br>
+          <Link href="/ressources/ressources"><a role="button" alt="Lien vers ressources élèves">Élèves</a></Link><br></br>
+        </div>
+      </div>
+      <div className="dropdown show">
+        <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           Communauté
         </a>
 
@@ -32,19 +43,7 @@ const Nav = (props) => (
           <Link href="/communaute/who-to-follow/who-to-follow"><a role="button" alt="Lien vers who to follow">Who to follow</a></Link><br></br>
         </div>
       </div>
-      <div className="dropdown show">
-        <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Ressources
-        </a>
-
-        <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <Link href="/ressources/ressources"><a role="button" alt="Lien vers ressources formateur">Formateurs</a></Link><br></br>
-          <Link href="/ressources/ressources"><a role="button" alt="Lien vers ressources élèves">Élèves</a></Link><br></br>
-        </div>
-      </div>
       <div id="end-of-navbar">
-        <Link href="/admin/Accueil/accueil"><a className="btn btn-danger bouton-navbar" role="button" onClick={props.adminClick}>ADMINISTRATION</a></Link>
         <Link href="/utilisateur/mon-profil/mon-profil"><a className="btn btn-danger bouton-navbar" role="button" alt="Lien vers mon profil">PROFIL</a></Link>
         <Link href="/"><a className="btn btn-danger bouton-navbar" role="button" alt="Lien déconnexion" onClick={props.offline}>LOGOUT</a></Link>
       </div></div>

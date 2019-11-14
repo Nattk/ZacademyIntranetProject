@@ -6,7 +6,7 @@ const AdminNav = (props) => (
     <button class="navbar-toggler" type="button" title="menu burger" data-toggle="collapse" data-target="#navbarSupportedContent15"
       aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent15">
-      <Link href="/index_connecte"><a className="btn btn-danger bouton-navbar" role="button" onClick={props.adminClick}>ACCUEIL</a></Link>
+      <Link href="/index_connecte"><a className="btn btn-danger bouton-navbar" role="button" >ACCUEIL</a></Link>
       <div className="dropdown show">
         <a className="btn btn-danger dropdown-toggle bouton-navbar" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
@@ -33,7 +33,6 @@ const AdminNav = (props) => (
       </div>
       <div id="end-of-navbar">
         <Link href="/admin/Accueil/accueil"><a className="btn btn-danger bouton-navbar" role="button" >ADMINISTRATION</a></Link>
-        <Link href="/utilisateur/mon-profil/mon-profil"><a className="btn btn-danger bouton-navbar" role="button" alt="Lien vers mon profil">PROFIL</a></Link>
         <Link href="/"><a className="btn btn-danger bouton-navbar" href="#" role="button" alt="Lien déconnexion" onClick={props.offline}>LOGOUT</a></Link>
       </div></div></nav>
 )
