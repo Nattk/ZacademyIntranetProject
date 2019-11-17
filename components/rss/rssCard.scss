@@ -1,11 +1,68 @@
-.card-img-top-rss {
-  height: 17vh;
+.card-rss {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin: .1rem .1rem 2rem;
+  text-align: left;
 }
 
-.card-text {
-  font-size: .9rem;
+.header-card-rss {
+  height: 7vh;
+  margin-bottom: .5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.card-rss-title {
+.title-card-rss {
+  color: #000;
+  margin-top: .8rem;
   font-size: 1rem;
+  text-align: left;
+}
+
+.link-card-rss {
+  color: #000;
+}
+
+.link-card-rss:hover {
+  text-decoration: underline;
+  color: rgb(178, 30, 62);
+}
+
+// delete rss Modal
+
+.header-modal-delete-rss {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.description-modal-delete-rss {
+  margin: 1rem;
+}
+
+.footer-style {
+  float: right;
+}
+// Add rss Modal
+.customTitle-H1 {
+  float: left;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 3.25rem;
+  letter-spacing: .0156rem;
+}
+
+.header-modal-add-rss {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.form-group-rss {
+  margin-top: 1rem;
+}
+
+.footer-style {
+  margin-top: 1rem;
+  float: right;
+}
+
+.rss-input {
+  margin-bottom: 1rem;
 }

@@ -15,10 +15,10 @@ const followCard = (
     </section>
     <section className="col-md-9  col-xs-12 section-card-user">
       <h1 className="card-title" id="p1">
-				Jeremie Patonnier
+        Jeremie Patonnier
       </h1>
       <p className="card-description">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit voluptatem ullam sint vitae eligendi
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit voluptatem ullam sint vitae eligendi
 				illum asperiores quis, quam temporibus perspiciatis repellendus voluptate? Nihil numquam, doloribus
 				reprehenderit voluptatibus cum perspiciatis tempore!
       </p>

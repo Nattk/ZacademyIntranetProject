@@ -37,52 +37,6 @@ const Alert = (props) => {
                 {props.modalDescription}
               </p>
             </section>) : null}
-          {props.input ? (
-            <div className="form-group" >
-              <label for="username">Titre Flux RSS</label>
-              <input
-                type="text"
-                name="rss"
-                style={{ marginBottom: '1rem' }}
-                placeholder="Inserer un titre"
-                className="form-control"
-                id="exampleFormControlInput1"
-                value={props.titre}
-
-              />
-              <label for="username">Lien Flux RSS</label>
-              <input
-                type="text"
-                name="rss"
-                style={{ marginBottom: '1rem' }}
-                placeholder="Inserer l'adresse du flux rss"
-                className="form-control"
-                id="exampleFormControlInput1"
-                value="https://fr.khanacademy.org/computing/computer-programming"
-
-              />
-
-              <label for="username">Upload image</label>
-
-              {/* <div class="custom-file" style={{ marginBottom: '1rem' }}>
-                <input type="file" class="custom-file-input" id="inputGroupFile01" value="" />
-                <label class="custom-file-label" for="inputGroupFile01" >Choose file</label>
-              </div> */}
-
-              <label for="username">Description</label>
-
-              {/* <textarea
-                type="text"
-                name="rss"
-                cols="40" rows="5"
-
-                placeholder="Inserer une description du flux rss"
-                className="form-control"
-                id="exampleFormControlInput1"
-                value={props.valueInputDescription}
-
-              /> */}
-            </div>) : null}
 
         </article>
 
@@ -112,7 +66,7 @@ const Alert = (props) => {
 
       </footer>
 
-    </Modal >
+    </Modal>
   )
 }
 export default Alert
