@@ -1,63 +1,55 @@
-.section-card-user {
-  margin: 1rem auto;
-}
-
-.button-follow {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  margin-left: auto;
-  margin-right: auto;
-  width: 10rem;
-}
-
-.img-socialMedia {
-  height: 15vh;
-  border-radius: 50%;
-}
-
-.card-button-twitter {
-  background-color: #00acee;
-  border: 2px solid #00acee;
-  color: #fff;
-  cursor: pointer;
-
-}
-
-.card-button-github {
-  background-color: #000000;
-  border: 2px solid #000000;
-  color: #fff;
-  cursor: pointer;
-
-}
-
-.card-button-reddit {
-  background-color: #FF4301;
-  border: 2px solid #FF4301;
-  color: #fff;
-  cursor: pointer;
-
-}
-
-.card-button-linkedin {
-  background-color: #2867B2;
-  border: 2px solid#2867B2;
-  color: #fff;
-  cursor: pointer;
-
-}
-
-.social-icon-card {
-  color: #fff;
-}
-@media only screen and(max-width: 1025px) {
-  .img-follow {
-    height: 12vh;
-    border-radius: 50%;
+#who2follow {
+  .card-article {
+    display: flex;
   }
 
-  .card-follow-description {
-    margin: 4rem;
+  .card-rss-button {
+    background-color: #f26522;
+    color: #fff;
+    border: #f26522;
+    margin: 1rem;
+    padding: .1rem;
+    border-radius: 15%;
+  }
+
+  .section-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .header-article-rss {
+    height: max-content;
+  }
+
+  .section-article-rss {
+    display: flex;
+    flex-wrap: wrap;
+    height: max-content;
+  }
+
+  .card-rss .edit {
+    display: block;
+  }
+
+  .edit {
+    text-align: right;
+    position: absolute;
+    right: .3rem;
+    top: .3rem;
+    display: none;
+    color: rgba(0, 0, 0, 0.342);
+    cursor: pointer;
+  }
+
+  .remove-icon {
+    color: #cc4949;
+
+    font-size: 1.5rem;
+  }
+
+  .button-position {
+    margin-left: 2rem;
+    margin-bottom: 2rem;
   }
 }

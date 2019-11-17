@@ -1,0 +1,161 @@
+.article-card-who2follow {
+  margin: 1rem;
+}
+
+.card-who2follow {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  margin: .1rem .1rem 2rem;
+  text-align: left;
+
+}
+
+.imgUser-card-who2follow {
+  height: 17vh;
+  width: 100%;
+
+}
+
+.header-card-who2follow {
+  height: 7vh;
+  margin-bottom: .5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.title-card-who2follow {
+  color: #000;
+  margin-top: .8rem;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.sectionUser-card-who2follow {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-bottom: 1px solid white;
+}
+
+.nameUser-card-who2follow {
+  margin-top: .5rem;
+  font-size: 1.3rem;
+  color: #000;
+}
+
+.functionUser-card-who2follow {
+  font-size: 1rem;
+  color: rgba(11, 11, 29, 0.678);
+  text-align: left;
+}
+
+.descriptionUser-card-who2follow {
+  height: 8vh;
+}
+
+.footer-card-who2follow {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-top: none;
+}
+
+.sectionFooter-card-who2follow {
+  // margin-left: auto;
+}
+
+.deleteUserIcon-card-who2follow {
+  float: right;
+  margin-right: 1rem;
+  color: #cc4949;
+  cursor: pointer;
+}
+
+// delete user2follow Modal
+
+.header-modal-delete-who2follow {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.description-modal-delete-who2follow {
+  margin: 1rem;
+}
+
+.footer-style {
+  float: right;
+}
+// Add user2follow Modal
+.customTitle-H1 {
+  float: left;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 3.25rem;
+  letter-spacing: .0156rem;
+}
+
+.header-modal-add-who2follow {
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.form-group-who2follow {
+  margin-top: 1rem;
+}
+
+.footer-style {
+  margin-top: 1rem;
+  float: right;
+}
+
+.who2follow-input {
+  margin-bottom: 1rem;
+}
+// 
+.section-card-user {
+  margin: 1rem auto;
+}
+
+.button-follow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.img-socialMedia {
+  height: 15vh;
+
+}
+
+.card-button-twitter {
+  color: #00acee;
+  cursor: pointer;
+  margin: .3rem .3rem 0;
+}
+
+.card-button-github {
+  color: #000000;
+  cursor: pointer;
+  margin: .3rem .3rem 0;
+}
+
+.card-button-reddit {
+  color: #FF4301;
+  cursor: pointer;
+  margin: .3rem .3rem 0;
+}
+
+.card-button-linkedin {
+  color: #2867B2;
+  cursor: pointer;
+  margin: .3rem .3rem 0;
+}
+
+.social-icon-card {
+  color: #fff;
+}
+@media only screen and(max-width: 1025px) {
+  .img-follow {
+    height: 12vh;
+    border-radius: 50%;
+  }
+
+  .card-follow-description {
+    margin: 4rem;
+  }
+}
