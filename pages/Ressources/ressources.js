@@ -9,17 +9,18 @@ class Ressources extends Component{
 
   state = {
     ressources: [
-      {titre:"Apprendre le JAVA", lien:"ressource-individuelle" , promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:1 , contributeur:1, ressId:1},
-      {titre:"Les algorithmes JAVA", lien:"ressource-individuelle" , promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:1 , contributeur:1, ressId:2},
-      {titre:"Revue de code en JAVA", lien:"ressource-individuelle",  promotion:"Promo Paris 2", auteur:"Nattan Kifoyi", promoId:2, contributeur:2, ressId:3},
-      {titre:"TDD", lien:"ressource-individuelle",  promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", promoId:2, contributeur:2, ressId:4},
-      {titre:"Les collections", lien:"ressource-individuelle",  promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", promoId:3, contributeur:2, ressId:5},
-      {titre:"Les dates", lien:"ressource-individuelle",  promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", promoId:3, contributeur:2, ressId:6}
+      {titre:"Apprendre le JAVA", lien:"ressource-individuelle" ,promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:3 , contributeur:1, ressId:1, modId:0},
+      {titre:"Les algorithmes JAVA", lien:"ressource-individuelle" ,promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:3 , contributeur:1, ressId:2, modId:0},
+      {titre:"Revue de code en JAVA", lien:"ressource-individuelle", promotion:"Promo Paris 2", auteur:"Nattan Kifoyi", promoId:1, contributeur:2, ressId:3, modId:3},
+      {titre:"TDD", lien:"ressource-individuelle",promotion:"Promo Casablanca 1", auteur:"Nattan Kifoyi", promoId:2, contributeur:2, ressId:4, modId:3},
+      {titre:"Les collections", lien:"ressource-individuelle",promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", promoId:4, contributeur:2, ressId:5, modId:1},
+      {titre:"Les dates", lien:"ressource-individuelle",promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", promoId:4, contributeur:2, ressId:6, modId:1}
     ],
     Promotions: [
       {ville:"Paris", id:1, promotion:"Paris 01", programme:'Consultant Javascript', date:'12/12/19'},
-      {ville:"Casablanca", id:3, promotion:"Casablanca 01", programme:'Consultant Java', date:'12/12/19'},
-      {ville:"Rennes", id:5, promotion:"Rennes 02", programme:'Consultant Java', date:'12/12/19'},
+      {ville:"Casablanca", id:2, promotion:"Casablanca 01", programme:'Consultant Java', date:'12/12/19'},
+      {ville:"Rennes", id:3, promotion:"Rennes 02", programme:'Consultant Java', date:'12/12/19'},
+      {ville:"Rio", id:4, promotion:"Rio 01", programme:'Consultant Java', date:'12/12/19'}
     ],
 
     Modules: [
@@ -36,18 +37,71 @@ class Ressources extends Component{
       {id:5, idModules:3, name:'TDD'},
       {id:6, idModules:3, name:'TDD'}
     ],
-    filtrePromo: [],
-    filtreModules: [],
-    filtreSequence: [],
+    ressourcesFiltered:[],
+    ressourcesModules: [],
+    ressourcesPromotions:[],
+    sequencesDispo: [],
     ressourcesDispo:0,
     formateurs: false
     }
 
+  doublonsRessources(ressId){
+    const doublon = this.state.ressourcesFiltered.filter( ressfilter => ressfilter.ressId === ressId)
+    if(doublon.length){
+      return false
+    }
+    else {
+      return true
+    } 
+  }
 
-  filtre = (event) => {
-    // event.map(content => (
-    //   this.setState({filtrePromo : })
-    // ))
+  filtre = (selecteur, event) => {
+    let filtered = [...this.state.ressourcesFiltered]
+    let modules = [...this.state.ressourcesModules]
+    let promotions = [...this.state.ressourcesPromotions]
+
+    if(event.action === "select-option" && event.name === "Promotions" && selecteur){
+      for(let i = 0, length = selecteur.length; i<length; i++){
+        promotions.push(...this.state.ressources.filter( ress => (
+           ress.promoId === selecteur[i].id && this.doublonsRessources(ress.ressId)
+        )).filter( ress => ress.promoId ))
+      }
+      this.setState({ressourcesPromotions : promotions})
+    }
+    else if(event.action === "remove-value" && event.name === "Promotions"){
+      promotions = promotions.filter( promo => (
+        promo.promoId != event.removedValue.id
+      ))
+      this.setState({ressourcesPromotions : promotions})
+    }
+    else if(event.action === "clear" && event.name === "Promotions"){
+      promotions = []
+      this.setState({ressourcesPromotions : promotions})
+    }
+
+    if(event.action === "select-option" && event.name === "Modules" && selecteur){
+      for(let i = 0, length = selecteur.length; i<length; i++){
+        modules.push(...this.state.ressources.filter( ress => (
+           ress.modId === selecteur[i].id && this.doublonsRessources(ress.ressId)
+        )))
+        
+      }
+      this.setState({ressourcesModules : modules})
+    }
+    else if(event.action === "remove-value" && event.name === "Modules"){
+      modules = modules.filter( modules => (
+        modules.modId != event.removedValue.id
+      ))
+      this.setState({ressourcesModules : modules})
+    }
+    else if(event.action === "clear" && event.name === "Modules"){
+      modules = []
+      this.setState({ressourcesModules : modules})
+    }
+
+
+    filtered = [...promotions, ...modules]
+    this.setState({ressourcesFiltered: filtered})
   }
 
   handleDelete = (ressId) =>{
@@ -57,15 +111,7 @@ class Ressources extends Component{
   }
 
   render(){
-    const ressourcesCartes = this.state.ressources.filter(ressource => {
-      if(this.state.filtrePromo === 0){
-        return ressource
-      }
-      else{
-        return ressource.promoId === this.state.filtrePromo
-      } 
-    })
-    .map( (ressource, index) => (
+    const ressourcesCartes = this.state.ressourcesFiltered.map( (ressource, index) => (
       <Card styleName="ressourceCarte d-flex flex-column" key={index}>
         <div className="d-flex flex-row">
           <div>
@@ -102,23 +148,27 @@ class Ressources extends Component{
             placeholder="Promotions"
             getOptionLabel={(option) => option.promotion}
             getOptionValue={(option) => option.id}
-            onChange={this.filtre}
+            onChange={(selecteur, event) => this.filtre(selecteur, event)}
+            name='Promotions'
           ></Select>
           <Select className="select-component" options={this.state.Modules} isMulti={true}
           formatCreateLabel={(inputValue) => `Modules`}
           noOptionsMessage={(inputValues) => `${inputValues.inputValue} cette optio...`}
-          defaultValue="Promotion"
+          defaultValue="Modules"
           placeholder="Modules"
           getOptionLabel={(option) => option.name}
           getOptionValue={(option) => option.id}
+          onChange={(selecteur, event) => this.filtre(selecteur, event)}
+          name='Modules'
           ></Select>
-          <Select className="select-component" options={this.state.Sequences} isMulti={true}
+          <Select className="select-component" options={this.state.sequencesDispo} isMulti={true}
           formatCreateLabel={(inputValue) => `Sequences`}
           noOptionsMessage={(inputValues) => `${inputValues.inputValue} cette optio...`}
           defaultValue="Promotion"
           placeholder="Séquences"
           getOptionLabel={(option) => option.name}
           getOptionValue={(option) => option.id}
+          name='Sequences'
           ></Select>
           <Button btnType="valider">
             <Link href="./ajouter-ressource">
@@ -129,7 +179,7 @@ class Ressources extends Component{
           </Button>
         </header>
         <aside className="align-self-stretch">
-            <i>{this.state.ressources.length} ressources trouvées</i>
+            <i>{this.state.ressourcesFiltered.length} ressources trouvées</i>
         </aside>
         <section className="ressourcesList"> 
             {ressourcesCartes}
