@@ -40,6 +40,7 @@ class Ressources extends Component{
     ressourcesFiltered:[],
     ressourcesModules: [],
     ressourcesPromotions:[],
+    promoId:[],
     sequencesDispo: [],
     ressourcesDispo:0,
     formateurs: false
@@ -55,43 +56,52 @@ class Ressources extends Component{
     } 
   }
 
+
   filtre = (selecteur, event) => {
     let filtered = [...this.state.ressourcesFiltered]
     let modules = [...this.state.ressourcesModules]
     let promotions = [...this.state.ressourcesPromotions]
+    let promoId = [...this.state.promoId]
+    let moduleId = []
 
     if(event.action === "select-option" && event.name === "Promotions" && selecteur){
       for(let i = 0, length = selecteur.length; i<length; i++){
+        promoId.push(selecteur[i].id)
+
         promotions.push(...this.state.ressources.filter( ress => (
            ress.promoId === selecteur[i].id && this.doublonsRessources(ress.ressId)
         )).filter( ress => ress.promoId ))
       }
       this.setState({ressourcesPromotions : promotions})
+      this.setState({promoId: promoId})
     }
     else if(event.action === "remove-value" && event.name === "Promotions"){
+      promoId = promoId.filter( id => id !== event.removedValue.id )
       promotions = promotions.filter( promo => (
         promo.promoId != event.removedValue.id
       ))
       this.setState({ressourcesPromotions : promotions})
+      this.setState({promoId: promoId})
     }
     else if(event.action === "clear" && event.name === "Promotions"){
       promotions = []
+      promoId = []
       this.setState({ressourcesPromotions : promotions})
+      this.setState({promoId: promoId})
     }
 
     if(event.action === "select-option" && event.name === "Modules" && selecteur){
       for(let i = 0, length = selecteur.length; i<length; i++){
-        modules.push(...this.state.ressources.filter( ress => (
-           ress.modId === selecteur[i].id && this.doublonsRessources(ress.ressId)
-        )))
-        
+        moduleId.push(selecteur[i].id)
+        modules.push(...this.state.ressources.filter( ress => {
+          return ress.modId === selecteur[i].id && this.doublonsRessources(ress.ressId)
+      }))
       }
       this.setState({ressourcesModules : modules})
     }
     else if(event.action === "remove-value" && event.name === "Modules"){
       modules = modules.filter( modules => (
-        modules.modId != event.removedValue.id && this.doublonsRessources(modules.ressId) 
-        //&& ressources.filter
+        modules.modId != event.removedValue.id && this.doublonsRessources(modules.ressId)
       ))
       this.setState({ressourcesModules : modules})
     }
@@ -100,7 +110,11 @@ class Ressources extends Component{
       this.setState({ressourcesModules : modules})
     }
 
-
+    for(let i = 0; i < promoId.length; i++){
+      modules = modules.filter( mod => promoId[i] === mod.promoId)
+    }
+    console.log(modules)
+    this.setState({ressourcesModules : modules})
     filtered = [...promotions, ...modules]
     this.setState({ressourcesFiltered: filtered})
   }
