@@ -1,7 +1,7 @@
 import React from 'react'
 import Page from '../../../layouts/classic'
 import dynamic from 'next/dynamic'
-const CalendrierReact = dynamic(() => import('../../../components/Calendrier/CalendrierReact'), { ssr: false })
+const CalendrierReact = dynamic(() => import ('../../../components/Calendrier/CalendrierReact'), { ssr: false })
 import '../../../styles/sass/styles.scss'
 
 const Agenda = () => {
