@@ -90,7 +90,8 @@ class Ressources extends Component{
     }
     else if(event.action === "remove-value" && event.name === "Modules"){
       modules = modules.filter( modules => (
-        modules.modId != event.removedValue.id
+        modules.modId != event.removedValue.id && this.doublonsRessources(modules.ressId) 
+        //&& ressources.filter
       ))
       this.setState({ressourcesModules : modules})
     }
