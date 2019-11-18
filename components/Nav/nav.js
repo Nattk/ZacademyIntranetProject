@@ -38,7 +38,7 @@ const Nav = (props) => (
         </a>
 
         <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a href="https://app.slack.com/client/TDKLZEH1B/CNCQ57W04" role="button" alt="Lien vers slack academy">Slack academy</a><br></br>
+          <a href="https://app.slack.com/client/TDKLZEH1B/CNCQ57W04" target="_blank" role="button" alt="Lien vers slack academy">Slack academy</a><br></br>
           <Link href="/communaute/Rss/rss"><a role="button" alt="Lien vers flux rss">RSS</a></Link><br></br>
           <Link href="/communaute/who-to-follow/who-to-follow"><a role="button" alt="Lien vers who to follow">Who to follow</a></Link><br></br>
         </div>
