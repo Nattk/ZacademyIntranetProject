@@ -2,9 +2,9 @@ import React from 'react'
 import Modal from 'react-responsive-modal'
 import Button from '../Boutons/Boutons'
 
-const ModalAddFollow = (props) => {
+const Modals = (props) => {
   return (
-    <Modal open={props.show} >
+    <Modal open={props.show}>
 
       <header className="header-modal-add">
         <section>
@@ -142,4 +142,4 @@ const ModalAddFollow = (props) => {
     </Modal>
   )
 }
-export default ModalAddFollow
+export default Modals

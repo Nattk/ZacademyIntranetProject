@@ -136,7 +136,9 @@ class Follow extends Component {
         handleChangeMail={(e) => this.setState({ mail: e.target.value })}
         handleChangeFonction={(e) => this.setState({ fonction: e.target.value })}
         handleChangeDescription={(e) => this.setState({ description: e.target.value })}
-        // handleChangeLink={(e) => this.setState({ link: e.target.value })}
+        handleChangeLinkGithub={(e) => this.setState({ linkGithub: e.target.value })}
+        handleChangeLinkLinkedin={(e) => this.setState({ linkLinkedin: e.target.value })}
+        handleChangeLinkTwitter={(e) => this.setState({ linkTwitter: e.target.value })}
         handleClose={this.handleClose}
         handleSubmit={this.handleConfirm}
         onSubmit
@@ -171,7 +173,8 @@ class Follow extends Component {
         handleChangeDescription={(e) => this.setState({ description: e.target.value })}
         handleSocialInput={() => this.setState({ handleSocialInput: true })}
         handleChangeLinkGithub={(e) => this.setState({ linkGithub: e.target.value })}
-        // handleChangeLink={(e) => this.setState({ link: e.target.value })}
+        handleChangeLinkLinkedin={(e) => this.setState({ linkLinkedin: e.target.value })}
+        handleChangeLinkTwitter={(e) => this.setState({ linkTwitter: e.target.value })}
         handleClose={this.handleClose}
         onUpdate
         handleUpdate={() => this.handleUpdate(this.state.id)}
