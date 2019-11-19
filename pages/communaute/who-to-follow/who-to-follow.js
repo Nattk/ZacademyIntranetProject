@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
 import Modal from '../../../components/Modal/modal'
-import FollowCard from '../../../components/whoToFollow/followCard'
-
+import FollowCard from '../../../components/whoToFollow/who-to-follow-card'
 import '../../../styles/sass/styles.scss'
 
 class Follow extends Component {
@@ -204,7 +203,7 @@ class Follow extends Component {
     return (
       <Page title=" Influenceurs " contextePage=" Influenceurs " >
 
-        <article id="who2follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
+        <article id="who-to-follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
           <header className="col-md-12 col-sm-12 col-xs-12 header-article-rss" >
 
             {this.state.showAlertSuccess ? (notificationSuccess) : null}

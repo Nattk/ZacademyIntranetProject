@@ -1,0 +1,80 @@
+// Add user2follow Modal
+
+.custom-title-H1 {
+  float: left;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 3.25rem;
+  letter-spacing: .0156rem;
+}
+
+.header-modal-add {
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.form-group-who-to-follow {
+  margin-top: 1rem;
+}
+
+.footer-style {
+  margin-top: 1rem;
+  float: right;
+}
+
+.who-to-follow-input {
+  margin-bottom: 1rem;
+}
+// 
+.section-card-user {
+  margin: 1rem auto;
+}
+
+.button-follow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.img-social-media {
+  height: 15vh;
+
+}
+
+.card-button-twitter {
+  color: #00acee;
+  cursor: pointer;
+  margin: .3rem .3rem 0;
+}
+
+.card-button-github {
+  color: #000000;
+  cursor: pointer;
+  margin: .3rem .3rem 0;
+}
+
+.card-button-reddit {
+  color: #FF4301;
+  cursor: pointer;
+  margin: .3rem .3rem 0;
+}
+
+.card-button-linkedin {
+  color: #2867B2;
+  cursor: pointer;
+  margin: .3rem .3rem 0;
+}
+
+.social-icon-card {
+  color: #fff;
+}
+@media only screen and(max-width: 1025px) {
+  .img-follow {
+    height: 12vh;
+    border-radius: 50%;
+  }
+
+  .card-follow-description {
+    margin: 4rem;
+  }
+}

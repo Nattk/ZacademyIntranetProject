@@ -6,11 +6,11 @@ const ModalAddFollow = (props) => {
   return (
     <Modal open={props.show} >
 
-      <header className="header-modal-add-who2follow">
+      <header className="header-modal-add">
         <section>
-          <h1 className="customTitle-H1" >{props.titleModal} </h1>
+          <h1 className="custom-title-H1" >{props.titleModal} </h1>
         </section>
-        <section className="containerModalHeaderRight" >
+        <section className="container-modal-header-right" >
           <Button clicked={props.handleClose} btnType="close-button-icon" >
             <span aria-hidden="true">&times;</span>
           </Button>
@@ -21,15 +21,15 @@ const ModalAddFollow = (props) => {
       <main>
         <section>
           {props.formulaire ? (
-            <form className="form-group-who2follow" >
+            <form className="form-group-who-to-follow" >
 
-              <label htmlFor="firstName">Prenom</label>
+              <label htmlFor="firstName" >Prenom</label>
               <input
                 type="text"
                 name="firstName"
                 required
                 placeholder={props.firstName ? props.firstName : 'Inserer un prénom'}
-                className="form-control who2follow-input"
+                className="form-control who-to-follow-input"
                 value={props.firstName}
                 onChange={props.handleChangeFirstName}
               />
@@ -39,31 +39,10 @@ const ModalAddFollow = (props) => {
                 name="lastName"
                 required
                 placeholder="Inserer un nom de famille"
-                className="form-control who2follow-input"
+                className="form-control who-to-follow-input"
                 value={props.lastName}
                 onChange={props.handleChangeLastName}
               />
-
-              {/* <label htmlFor="phone">Telephone</label>
-              <input
-                type="number"
-                name="phone"
-                required
-                placeholder="Inserer un numero de téléphone"
-                className="form-control who2follow-input"
-                value={props.phone}
-                onChange={props.handleChangePhone}
-              />
-              <label htmlFor="mail">Email</label>
-              <input
-                type="text"
-                name="mail"
-                required
-                placeholder="Inserer un email"
-                className="form-control who2follow-input"
-                value={props.mail}
-                onChange={props.handleChangeMail}
-              /> */}
 
               <label htmlFor="fonction">Fonction</label>
               <input
@@ -71,7 +50,7 @@ const ModalAddFollow = (props) => {
                 name="fonction"
                 required
                 placeholder="Poste ou fonction de l'utilisateur"
-                className="form-control who2follow-input"
+                className="form-control who-to-follow-input"
                 value={props.fonction}
                 onChange={props.handleChangeFonction}
               />
@@ -82,7 +61,7 @@ const ModalAddFollow = (props) => {
                 required
                 cols="40" rows="2"
                 placeholder="description de l'utilisateur, (limiter à 8O caractères)"
-                className="form-control who2follow-input"
+                className="form-control who-to-follow-input"
                 value={props.description}
                 onChange={props.handleChangeDescription}
               />
@@ -93,7 +72,7 @@ const ModalAddFollow = (props) => {
                 name="linkGithub"
 
                 placeholder="Inserer l'adresse github"
-                className="form-control who2follow-input"
+                className="form-control who-to-follow-input"
                 value={props.linkGithub}
                 onChange={props.handleChangeLinkGithub}
               />
@@ -104,7 +83,7 @@ const ModalAddFollow = (props) => {
                 name="linkTwitter"
 
                 placeholder="Inserer l'adresse twitter"
-                className="form-control who2follow-input"
+                className="form-control who-to-follow-input"
                 value={props.linkTwitter}
                 onChange={props.handleChangeLinkTwitter}
               />
@@ -115,7 +94,7 @@ const ModalAddFollow = (props) => {
                 name="linkLinkedin"
 
                 placeholder="Inserer l'adresse linkedin"
-                className="form-control who2follow-input"
+                className="form-control who-to-follow-input"
                 value={props.linkLinkedin}
                 onChange={props.handleChangeLinkLinkedin}
               />
@@ -123,7 +102,7 @@ const ModalAddFollow = (props) => {
             </form>) : null}
 
           {props.deleteDescription ? (
-            <p className="description-modal-delete-who2follow">
+            <p className="description-modal-delete-who-to-follow">
               Êtes-vous sûr de vouloir supprimer ce profil  ?
             </p>) : null}
         </section>

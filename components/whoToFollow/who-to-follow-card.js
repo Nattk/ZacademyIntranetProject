@@ -2,37 +2,34 @@ import React from 'react'
 
 const FollowCard = (props) => (
 
-  <article className="col-md-3 col-sm-12 col-xs-12 article-card-who2follow" >
-    <header className="headerUser-card-who2follow" >
+  <article className="col-md-3 col-sm-12 col-xs-12 article-card-who-to-follow" >
+    <header className="header-user-card-who-to-follow" >
 
       <img
         src="/firmin.jpg"
         alt=""
-        className="imgUser-card-who2follow"
-
+        className="img-user-card-who-to-follow"
       />
-      <section className="section-HeaderUser-card-who2follow" >
+      <section className="section-header-user-card-who-to-follow" >
         <i className="fa fa-remove remove-icon " title="supprimer ce profil " onClick={props.remove} />
         &nbsp;
         <i className="fa fa-pen update-icon " title="mettre à jour ce profil " onClick={props.update} />
       </section>
     </header>
 
-    <section className="sectionUser-card-who2follow" style={{ borderTop: 'none' }}>
+    <section className="section-user-card-who-to-follow" style={{ borderTop: 'none' }}>
 
       <header >
 
-        <h1 className="nameUser-card-who2follow">{props.firstName} {props.lastName} </h1>
+        <h1 className="name-user-card-who-to-follow">{props.firstName} {props.lastName} </h1>
 
       </header>
       <section>
-        <p className="fonctionUser-card-who2follow">{props.fonction} </p>
-        {/* <p><span><i class="fas fa-phone-square-alt"></i></span> &nbsp; {props.phone} </p>
-        <p><span><i className="far fa-envelope"></i></span>&nbsp; {props.mail} </p> */}
-        <p className="descriptionUser-card-who2follow" >{props.description}</p>
+        <p className="fonction-user-card-who-to-follow">{props.fonction} </p>
+        <p className="description-user-card-who-to-follow" >{props.description}</p>
       </section>
-      <footer className="footer-card-who2follow button-follow" >
-        <section className="sectionFooter-card-who2follow">
+      <footer className="footer-card-who-to-follow button-follow" >
+        <section className="section-footer-card-who-to-follow">
           {props.linkTwitter ? (
 
             <a href={props.linkTwitter} title="Aller sur son twitter" target="_blank">
