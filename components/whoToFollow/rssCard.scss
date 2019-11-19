@@ -1,68 +1,88 @@
 .article-card-who2follow {
   margin: 1rem;
+
 }
 
 .card-who2follow {
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  // border: 1px solid rgba(0, .0156rem, 0, 0.125);
   margin: .1rem .1rem 2rem;
   text-align: left;
 
 }
 
+.headerUser-card-who2follow {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-bottom: none;
+  display: flex;
+  justify-content: center;
+}
+
 .imgUser-card-who2follow {
-  height: 17vh;
-  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  margin-top: .6rem;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
 
 }
 
 .header-card-who2follow {
   height: 7vh;
   margin-bottom: .5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  margin-right: auto;
+  margin-left: auto;
+  // border-bottom: 1px soid rgba(0, 0, 0, 0.125);
+}
+
+.section-HeaderUser-card-who2follow {
+
+  display: flex;
+  flex-direction: flex;
+  position: absolute;
+  right: 0;
+  margin: .4rem;
 }
 
 .title-card-who2follow {
   color: #000;
   margin-top: .8rem;
   font-size: 1.2rem;
-  text-align: left;
+
 }
 
 .sectionUser-card-who2follow {
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-bottom: 1px solid white;
+  padding: 1rem;
 }
 
 .nameUser-card-who2follow {
   margin-top: .5rem;
-  font-size: 1.3rem;
-  color: #000;
+  font-size: 1.4rem;
+  text-align: center;
+  color: rgba(0,0,0,.9);
+  font-weight: 600;
+  line-height: 1.5;
 }
 
-.functionUser-card-who2follow {
-  font-size: 1rem;
-  color: rgba(11, 11, 29, 0.678);
-  text-align: left;
+.fonctionUser-card-who2follow {
+  font-size: 1.1rem;
+  line-height: 1.42857;
+  font-weight: 400;
+  color: rgba(0,0,0,.6);
+  text-align: center;
 }
 
 .descriptionUser-card-who2follow {
-  height: 8vh;
-}
 
-.footer-card-who2follow {
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-top: none;
+  font-size: 1.1rem;
+  line-height: 1.42857;
+  font-weight: 400;
+  margin-left: 1.2rem;
+  text-align: left;
 }
 
 .sectionFooter-card-who2follow {
-  // margin-left: auto;
-}
-
-.deleteUserIcon-card-who2follow {
-  float: right;
-  margin-right: 1rem;
-  color: #cc4949;
-  cursor: pointer;
+  margin-left: auto;
 }
 
 // delete user2follow Modal

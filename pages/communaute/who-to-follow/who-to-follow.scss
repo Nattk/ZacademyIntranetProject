@@ -16,6 +16,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    border: 1px solid green;
   }
 
   .header-article-rss {
@@ -26,6 +27,7 @@
     display: flex;
     flex-wrap: wrap;
     height: max-content;
+    justify-content: center;
   }
 
   .card-rss .edit {
@@ -44,8 +46,16 @@
 
   .remove-icon {
     color: #cc4949;
+    display: column;
+    font-size: 1.3rem;
+    margin: 0 .5rem .5rem;
+    cursor: pointer;
+  }
 
-    font-size: 1.5rem;
+  .update-icon {
+    margin: 0 1rem .5rem;
+    display: column;
+    cursor: pointer;
   }
 
   .button-position {
