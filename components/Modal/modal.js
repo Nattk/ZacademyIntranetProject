@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Modal from 'react-responsive-modal'
 import Button from '../Boutons/Boutons'
 
@@ -112,30 +112,29 @@ const ModalAddFollow = (props) => {
 
         <section>
 
-          <Fragment>
-            <Button clicked={props.handleClose} btnType="annuler">
-              Annuler
+          <Button clicked={props.handleClose} btnType="annuler">
+            Annuler
+          </Button>
+          {props.onSubmit ? (
+            <Button clicked={props.handleSubmit} btnType="valider">
+              Ajouter
             </Button>
-            {props.onSubmit ? (
-              <Button clicked={props.handleSubmit} btnType="valider">
-                Ajouter
-              </Button>
-            ) : null}
-            {props.onDelete ? (
+          ) : null}
+          {props.onDelete ? (
 
-              <Button clicked={props.handleDelete} btnType="valider">
-                Supprimer
-              </Button>
+            <Button clicked={props.handleDelete} btnType="valider">
+              Supprimer
+            </Button>
 
-            ) : null}
-            {props.onUpdate ? (
+          ) : null}
+          {props.onUpdate ? (
 
-              <Button clicked={props.handleUpdate} btnType="valider">
-                Modifier
-              </Button>
+            <Button clicked={props.handleUpdate} btnType="valider">
+              Modifier
+            </Button>
 
-            ) : null}
-          </Fragment>
+          ) : null}
+
         </section>
 
       </footer>
