@@ -9,10 +9,8 @@ const Footer = () => (
     <article className="col-md-4 col-sm-6 col-xs-12  row1-position">
       <p>
         <span>Contact</span>:&nbsp;
-        <a title="Envoyer un mail" href=" mailto:info@zenika.com" className="footer-link-customization">
-					info@zenika.com
-        </a>
-				&nbsp; +33(0)1 45 26 19 15
+        <a title="Envoyer un mail" href=" mailto:info@zenika.com" className="footer-link-customization"> info@zenika.com
+        </a> &nbsp; +33(0)1 45 26 19 15
       </p>
     </article>
     {/* ROW 2 */}
@@ -28,11 +26,9 @@ const Footer = () => (
     </article>
     {/* ROW 3 */}
     <article className="col-md-4 col-sm-6 col-xs-12 row3-position">
-      <small>
-				&copy; Copyright 2006-2019 Zenika. &shy;Tous droits réservés.
+      <small> &copy; Copyright 2006-2019 Zenika. &shy;Tous droits réservés.
         <section>
-          <a title="Consulter les mentions légales" href="/legal" className="footer-link-customization">
-						Mentions légales
+          <a title="Consulter les mentions légales" href="/legal" className="footer-link-customization">Mentions légales
           </a>
         </section>
       </small>
