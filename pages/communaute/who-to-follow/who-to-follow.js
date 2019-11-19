@@ -1,19 +1,13 @@
-<<<<<<< HEAD
 import React, { Component } from 'react'
-=======
-
-import React from 'react'
->>>>>>> dcd36355a455d0c7b1e567beba32dd9b393205ac
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
 import Modal from '../../../components/Modal/modal'
 import FollowCard from '../../../components/whoToFollow/followCard'
 
 import '../../../styles/sass/styles.scss'
-import { element } from 'prop-types'
 
 class Follow extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
 
@@ -49,11 +43,11 @@ class Follow extends Component {
     this.handleUpdate = this.handleUpdate.bind(this)
   }
 
-  handleModalAdd() {
+  handleModalAdd () {
     this.setState({ showModal: true })
   }
 
-  handleDelete(id) {
+  handleDelete (id) {
     const users = this.state.users2follow.filter((user) => user.id !== id)
     this.setState({ users2follow: users, showModalDelete: false, id: '', showAlertDelete: true })
     setTimeout(() => {
@@ -61,11 +55,11 @@ class Follow extends Component {
     }, 5000)
   }
 
-  handleClose() {
+  handleClose () {
     this.setState({ showModal: false, showModalDelete: false, showModalUpdate: false })
   }
 
-  handleConfirm() {
+  handleConfirm () {
     const elements = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -91,7 +85,7 @@ class Follow extends Component {
     console.log(this.state.users2follow)
   }
 
-  handleUpdate(id) {
+  handleUpdate (id) {
     const elements = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -131,7 +125,7 @@ class Follow extends Component {
     console.log(this.state.users2follow)
   }
 
-  render() {
+  render () {
     const modalAddRss = (
       <Modal
         show={this.state.showModal}
