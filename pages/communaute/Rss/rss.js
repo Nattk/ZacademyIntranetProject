@@ -1,111 +1,65 @@
-
-import React, { Component } from 'react'
+import React from 'react'
 import Page from '../../../layouts/classic'
 import Card from '../../../components/Card/card'
-import Button from '../../../components/Boutons/Boutons'
-import Alert from '../../../components/Modal/alert'
 import '../../../styles/sass/styles.scss'
 
-class Rss extends Component {
-  state = {
-    fluxs: [
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://fr.khanacademy.org/computing/computer-programming", fluxId: 1 },
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://facebook.github.io/react-native/", fluxId: 2 },
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://medium.com/", fluxId: 3 },
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://fr.khanacademy.org/computing/computer-programming", fluxId: 4 },
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://facebook.github.io/react-native/", fluxId: 5 },
-      { descriptionFlux: ' Apprenez en plus sur Javascript !', linkFlux: "https://medium.com/", fluxId: 6 }
-    ],
-    showAdd: false,
-    show: false
-  }
+const followCard = (
+  <article className="card-article col-md-12 col-sm-12 col-xs-12">
+    <section className="align-self-center col-md-2  col-xs-12">
+      <img
+        src="https://ca.slack-edge.com/TDKLZEH1B-UN6RVVAP3-g00f562b54f1-72"
+        alt="profile-user"
+        className="img-socialMedia"
+        aria-describedby="p1"
+      />
+    </section>
+    <section className="col-md-9  col-xs-12 section-card-user">
+      <h1 className="card-title" id="p1">
+        Jeremie Patonnier
+      </h1>
+      <p className="card-description">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit voluptatem ullam sint vitae eligendi
+				illum asperiores quis, quam temporibus perspiciatis repellendus voluptate? Nihil numquam, doloribus
+				reprehenderit voluptatibus cum perspiciatis tempore!
+      </p>
+      <section className="button-follow">
+        <a href="https://twitter.com/jeremiepat?lang=fr" title="Aller sur son twitter" target="_blank">
+          <button className="card-button-twitter">
+            <i className="fa fa-twitter social-icon-card"> </i> &nbsp;
+          </button>
+        </a>
 
-  handleModal = () => {
-    this.setState({ show: true })
-  }
-
-  handleModalAddFlux = () => {
-    this.setState({ showAdd: true })
-  }
-  addRss = (event) => {
-    this.state.fluxs.push({ descriptionFlux: ' Apprenez en plus React et node !', linkFlux: "https://fr.khanacademy.org/computing/computer-programming", fluxId: 7 })
-    this.setState({ showAdd: false })
-    event.preventDefault()
-  }
-
-  handleDelete = (fluxId) => {
-    const flus = this.state.fluxs.filter((item) => item.fluxId !== fluxId)
-    this.setState({ fluxs: flus, show: false })
-    event.preventDefault()
-  }
-
-  handleClose = () => {
-    this.setState({ show: false, showAdd: false })
-  }
-
-
-
-  render() {
-
-    return (
-      <Page title="Flux RSS" contextePage="Flux RSS">
-
-        <article className="container-article">
-          <Button btnType="annuler" clicked={this.handleModalAddFlux} title="ajout-flux" className="link-button-creation" style={{ margin: '2rem' }} >
-            Ajouter un flux
-							</Button>
-          {this.state.showAdd ? (
-            <Alert
-              show={this.state.showAdd}
-              handleClose={this.handleClose}
-              handleConfirmForm={this.addRss}
-              headerTitle="Ajout flux"
-              input
-              modalHeader={true}
-              modalBody={true}
-              modalFooterRedirection={true}
-            />
-          ) : null}
-          <section className=" col-md-10 col-sm-12 col-xs-12 text-center container-card">
-
-            {this.state.fluxs.map((flux, index) => (
-              <Card styleName="card-rss col-md-5 col-sm-12 col-xs-12 " >
-
-                <div className="edit" onClick={this.handleModal}><i className="fa fa-close edit" title="supprimer ce flux"></i>
-                </div>
-                <article key={index} className="card-article">
-                  <a
-                    title="lien vers le flux"
-                    href={`${flux.linkFlux}`}
-                    target="_blank"
-                    style={{ color: '#fff' }}
-                  >
-                    <p title="lien vers le flux" className="card-rss-title">
-                      <i className="fas fa-rss card-rss-button" />    {flux.descriptionFlux}
-                    </p>
-                  </a>
-                  <aside>
-                    <span aria-hidden="true" onClick={this.handleModal} className="deleteRssButton" title="supprimer">&times;</span>
-                    {this.state.show ? (
-                      <Alert
-                        show={this.state.show}
-                        handleClose={this.handleClose}
-                        handleDelete={() => this.handleDelete(flux.fluxId)}
-                        headerTitle="Suppression flux"
-                        modalDescription="Etes vous sûr de vouloir supprimer ce flux ?"
-                        modalHeader={true}
-                        modalBody={true}
-                        modalFooter={true}
-                      />
-                    ) : null}
-                  </aside>
-                </article>
-              </Card>
-            ))}
-          </section>
-        </article>
-      </Page>
-    )
-  }
-}
+        <a
+          href="https://fr.khanacademy.org/computing/computer-programming"
+          title="Aller sur son linkedin"
+          target="_blank"
+        >
+          <button className="card-button-linkedin">
+            <i className="fa fa-linkedin" />&nbsp;
+          </button>
+        </a>
+        <a
+          href="https://fr.khanacademy.org/computing/computer-programming"
+          title="Aller sur son github"
+          target="_blank"
+        >
+          <button className="card-button-github">
+            <i className="fa fa-github" />&nbsp;
+          </button>
+        </a>
+      </section>
+    </section>
+  </article>
+)
+const Rss = () => (
+  <Page title="Influenceurs" contextePage="Influenceurs">
+    <article className="container-article">
+      <div className="text-center col-md-10 col-sm-12 col-xs-12 container-card ">
+        <Card styleName="card">{followCard}</Card>
+        <Card styleName="card">{followCard}</Card>
+        <Card styleName="card">{followCard}</Card>
+      </div>
+    </article>
+  </Page>
+)
 export default Rss
