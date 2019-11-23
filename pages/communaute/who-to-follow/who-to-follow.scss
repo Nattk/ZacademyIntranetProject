@@ -3,7 +3,7 @@
     display: flex;
   }
 
-  .card-rss-button {
+  .card-button {
     background-color: #f26522;
     color: #fff;
     border: #f26522;
@@ -19,18 +19,18 @@
     border: 1px solid green;
   }
 
-  .header-article-rss {
+  .header-article {
     height: max-content;
   }
 
-  .section-article-rss {
+  .section-article {
     display: flex;
     flex-wrap: wrap;
     height: max-content;
     justify-content: center;
   }
 
-  .card-rss .edit {
+  .card .edit {
     display: block;
   }
 
@@ -61,5 +61,9 @@
   .button-position {
     margin-left: 2rem;
     margin-bottom: 2rem;
+  }
+
+  .toto {
+    width: 50rem;
   }
 }

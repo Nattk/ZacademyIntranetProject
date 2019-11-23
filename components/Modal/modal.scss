@@ -1,20 +1,32 @@
 // Add user2follow Modal
 
+// .form-control {
+//   :placeholder-shown
+//   }
+
+.styles_modal__gNwvD {
+  width: 45rem;
+}
+
 .custom-title-H1 {
+
   float: left;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 3.25rem;
+  margin-left: auto;
   letter-spacing: .0156rem;
 }
 
 .header-modal-add {
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  margin-left: auto;
+  text-align: right;
 }
 
 .form-group-who-to-follow {
-  margin-top: 1rem;
+  margin-top: .3rem;
 }
 
 .footer-style {
@@ -23,9 +35,13 @@
 }
 
 .who-to-follow-input {
-  margin-bottom: 1rem;
+  border: 1px solid #cc4949;
 }
-// 
+
+.who-to-follow-input-fonction {
+  border: 1px solid #cc4949;
+}
+
 .section-card-user {
   margin: 1rem auto;
 }
@@ -38,7 +54,6 @@
 
 .img-social-media {
   height: 15vh;
-
 }
 
 .card-button-twitter {
