@@ -8,11 +8,11 @@
     }
 }
 
-.ressourceCarte {
+.ressource-carte {
     height: 10rem;
 }
 
-.ressourceCarte,
+.ressource-carte,
 .ressourceContent {
     padding: 1rem;
     min-width: 40rem;
@@ -26,7 +26,7 @@
         margin-left: 0.5rem;
     }
 
-    .ressourceDetails {
+    .ressource-details {
         margin: 0 1rem 0 1rem;
 
         h2 {
@@ -48,7 +48,7 @@
     }
 }
 
-.ressourceIndividuelle{
+.ressource-individuelle{
     flex-grow : 1;
 }
 

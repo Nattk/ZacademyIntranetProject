@@ -3,49 +3,38 @@ import Page from '../../layouts/classic'
 import Card from '../../components/Card/card'
 import Button from '../../components/Boutons/Boutons'
 import Link from 'next/link'
-import Select from 'react-select';
+import Select from 'react-select'
+import axios from 'axios'
+import { getAllRessources, getAllModules, getAllSequences, getAllPromotions } from '../../services/ressources'
 
 class Ressources extends Component{
 
   state = {
-    ressources: [
-      {titre:"Apprendre le JAVA", lien:"ressource-individuelle" ,promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:3 , contributeur:1, ressId:1, modId:0},
-      {titre:"Les algorithmes JAVA", lien:"ressource-individuelle" ,promotion:"Promo Rennes 2", auteur:"Nattan Kifoyi", promoId:3 , contributeur:1, ressId:2, modId:0},
-      {titre:"Revue de code en JAVA", lien:"ressource-individuelle", promotion:"Promo Paris 2", auteur:"Nattan Kifoyi", promoId:1, contributeur:2, ressId:3, modId:3},
-      {titre:"TDD", lien:"ressource-individuelle",promotion:"Promo Casablanca 1", auteur:"Nattan Kifoyi", promoId:2, contributeur:2, ressId:4, modId:3},
-      {titre:"Les collections", lien:"ressource-individuelle",promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", promoId:4, contributeur:2, ressId:5, modId:1},
-      {titre:"Les dates", lien:"ressource-individuelle",promotion:"Promo Rio 1", auteur:"Nattan Kifoyi", promoId:4, contributeur:2, ressId:6, modId:1}
-    ],
-    Promotions: [
-      {ville:"Paris", id:1, promotion:"Paris 01", programme:'Consultant Javascript', date:'12/12/19'},
-      {ville:"Casablanca", id:2, promotion:"Casablanca 01", programme:'Consultant Java', date:'12/12/19'},
-      {ville:"Rennes", id:3, promotion:"Rennes 02", programme:'Consultant Java', date:'12/12/19'},
-      {ville:"Rio", id:4, promotion:"Rio 01", programme:'Consultant Java', date:'12/12/19'}
-    ],
-
-    Modules: [
-      {id:0, name:'Algorithme java'},
-      {id:1, name:'Librairies JDK'},
-      {id:3, name:'Craftmanship'}
-    ],
-
-    Sequences: [
-      {id:1, idModules:1, name:'dates'},
-      {id:2, idModules:1, name:'collections'},
-      {id:3, idModules:3, name:'Pair Programming'},
-      {id:4, idModules:3, name:'Revue de code'},
-      {id:5, idModules:3, name:'TDD'},
-      {id:6, idModules:3, name:'TDD'}
-    ],
+    ressources: [],
+    Promotions: [],
+    Modules: [],
+    Sequences: [],
     ressourcesFiltered:[],
     ressourcesModules: [],
     ressourcesPromotions:[],
+    ressourcesSequences: [],
     promoId:[],
-    sequencesDispo: [],
+    moduleId:[],
+    sequenceId:[],
     ressourcesDispo:0,
     formateurs: false
     }
 
+
+  componentDidMount(){
+    axios.all([getAllRessources(), getAllModules(), getAllSequences(), getAllPromotions()])
+    .then(axios.spread( (ressources, modules, sequences, promotions)=>{
+      this.setState({Modules: modules.data})
+      this.setState({Sequences: sequences.data})
+      this.setState({Promotions: promotions.data})
+      this.setState({ressources: ressources.data})
+    }))
+  }
   doublonsRessources(ressId){
     const doublon = this.state.ressourcesFiltered.filter( ressfilter => ressfilter.ressId === ressId)
     if(doublon.length){
@@ -56,18 +45,27 @@ class Ressources extends Component{
     } 
   }
 
+  checkTables(idTable,ressTable,key){
+    for(let i = 0; i < idTable.length; i++){
+      ressTable = ressTable.filter( ress => idTable[i] === ress[key])
+    }
+    return ressTable
+  }
+
 
   filtre = (selecteur, event) => {
     let filtered = [...this.state.ressourcesFiltered]
     let modules = [...this.state.ressourcesModules]
     let promotions = [...this.state.ressourcesPromotions]
+    let sequences = [...this.state.ressourcesSequences]
     let promoId = [...this.state.promoId]
-    let moduleId = []
+    let moduleId = [...this.state.moduleId]
+    let sequenceId = [...this.state.sequenceId]
 
+//promo filtre
     if(event.action === "select-option" && event.name === "Promotions" && selecteur){
       for(let i = 0, length = selecteur.length; i<length; i++){
         promoId.push(selecteur[i].id)
-
         promotions.push(...this.state.ressources.filter( ress => (
            ress.promoId === selecteur[i].id && this.doublonsRessources(ress.ressId)
         )).filter( ress => ress.promoId ))
@@ -89,7 +87,7 @@ class Ressources extends Component{
       this.setState({ressourcesPromotions : promotions})
       this.setState({promoId: promoId})
     }
-
+//module filtre
     if(event.action === "select-option" && event.name === "Modules" && selecteur){
       for(let i = 0, length = selecteur.length; i<length; i++){
         moduleId.push(selecteur[i].id)
@@ -109,13 +107,46 @@ class Ressources extends Component{
       modules = []
       this.setState({ressourcesModules : modules})
     }
+//sequences filtre
+    if(event.action === "select-option" && event.name === "Sequences" && selecteur){
+      console.log('sequences')
+      for(let i = 0, length = selecteur.length; i<length; i++){
+        sequenceId.push(selecteur[i].id)
+        sequences.push(...this.state.ressources.filter( ress => {
+          return ress.seqId === selecteur[i].id && this.doublonsRessources(ress.ressId)
+      }))
+      }
+      this.setState({ressourcesSequences : sequences})
+    }
+    else if(event.action === "remove-value" && event.name === "Sequences"){
+      sequences = sequences.filter( sequences => (
+        sequences.seqId != event.removedValue.id && this.doublonsRessources(modules.ressId)
+      ))
+      this.setState({ressourcesSequences : sequences})
+    }
+    else if(event.action === "clear" && event.name === "Sequences"){
+      sequences = []
+      this.setState({ressourcesSequences : sequences})
+    }
+    // this.checkTables(moduleId, promotions,'modId')
+    // this.checkTables(sequenceId, promotions,'seqId')
+    // this.checkTables(promotionId, modules,'promoId')
+    // this.checkTables(sequenceId, modules,'seqId')
+    sequences = this.checkTables(promoId, sequences,'promoId')
+    sequences = this.checkTables(moduleId, sequences,'modId')
+
+    for(let i = 0; i < moduleId.length; i++){
+      promotions = promotions.filter( promo => moduleId[i] === promo.modId)
+    }
+    console.log('check', promotions)
 
     for(let i = 0; i < promoId.length; i++){
       modules = modules.filter( mod => promoId[i] === mod.promoId)
     }
-    console.log(modules)
+    this.setState({ressourcesSequences : sequences})
+    this.setState({ressourcesPromotions : promotions})
     this.setState({ressourcesModules : modules})
-    filtered = [...promotions, ...modules]
+    filtered = [...promotions, ...modules,...sequences]
     this.setState({ressourcesFiltered: filtered})
   }
 
@@ -126,31 +157,41 @@ class Ressources extends Component{
   }
 
   render(){
-    const ressourcesCartes = this.state.ressourcesFiltered.map( (ressource, index) => (
-      <Card styleName="ressourceCarte d-flex flex-column" key={index}>
-        <div className="d-flex flex-row">
-          <div>
-              <img
-                src="https://ca.slack-edge.com/TDKLZEH1B-UN6RVVAP3-g00f562b54f1-72"
-                alt="profile-user"
-                className="img-socialMedia"
-                aria-describedby="p1"
-              />
+    const ressources = this.state.ressourcesFiltered.length ? this.state.ressourcesFiltered : this.state.ressources
+    let ressourcesCartes = null
+    if(ressources.length){
+      console.log(ressources)
+      ressourcesCartes = (
+        ressources.map( (ressource, index) => (
+        <Card styleName="ressource-carte d-flex flex-column" key={index}>
+          <div className="d-flex flex-row">
+            <div>
+                <img
+                  src="https://ca.slack-edge.com/TDKLZEH1B-UN6RVVAP3-g00f562b54f1-72"
+                  alt="profile-user"
+                  className="img-socialMedia"
+                  aria-describedby="p1"
+                />
+              </div>
+              <section className="d-flex flex-column ressource-details">
+                <Link href={ressource.lien}>
+                  <h2><a>{ressource.titre}</a></h2>
+                </Link>
+                <i>{ressource.auteur} . 12/12/2019 . {ressource.promotion}</i>
+                <i>#{this.state.Modules[ressource.modId].name}</i>
+              </section>
             </div>
-            <section className="d-flex flex-column ressourceDetails">
-              <Link href={ressource.lien}>
-                <h2><a>{ressource.titre}</a></h2>
-              </Link>
-              <i>{ressource.auteur} . 12/12/2019 . {ressource.promotion}</i>
-              <i>#HTML #CSS</i>
-            </section>
-          </div>
-          <aside className="d-flex flex-row justify-content-end"> 
-            <Button btnType="modifier" title="Modifier"> <Link href="./modifier-ressource"><a>Modifier</a></Link></Button>
-            <Button btnType="annuler" title="Supprimer" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
-          </aside>
-      </Card>
-    ))
+            <aside className="d-flex flex-row justify-content-end"> 
+              <Button btnType="modifier" title="Modifier"> <Link href="./modifier-ressource"><a>Modifier</a></Link></Button>
+              <Button btnType="annuler" title="Supprimer" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
+            </aside>
+        </Card>)))
+    }
+    else{
+      ressourcesCartes = <div>...Loading</div>
+
+    }
+
     
     return(
     <Page title="Ressources" contextePage="Ressources">
@@ -158,12 +199,12 @@ class Ressources extends Component{
         <header className="d-flex flex-row justify-content-between align-items-center">
           <Select className="select-component" options={this.state.Promotions} isMulti={true}
             formatCreateLabel={(inputValue) => `Promotion`}
-            noOptionsMessage={(inputValues) => `${inputValues.inputValue} cette optio...`}
+            noOptionsMessage={(inputValues) => `${inputValues.inputValue} n'est pas disponible`}
             defaultValue="Promotion"
             placeholder="Promotions"
             getOptionLabel={(option) => option.promotion}
             getOptionValue={(option) => option.id}
-            onChange={(selecteur, event) => this.filtre(selecteur, event)}
+            onChange={(selecteur, event) => {this.filtre(selecteur, event)}}
             name='Promotions'
           ></Select>
           <Select className="select-component" options={this.state.Modules} isMulti={true}
@@ -176,13 +217,14 @@ class Ressources extends Component{
           onChange={(selecteur, event) => this.filtre(selecteur, event)}
           name='Modules'
           ></Select>
-          <Select className="select-component" options={this.state.sequencesDispo} isMulti={true}
+          <Select className="select-component" options={this.state.Sequences} isMulti={true}
           formatCreateLabel={(inputValue) => `Sequences`}
           noOptionsMessage={(inputValues) => `${inputValues.inputValue} cette optio...`}
-          defaultValue="Promotion"
+          defaultValue="Sequences"
           placeholder="Séquences"
           getOptionLabel={(option) => option.name}
           getOptionValue={(option) => option.id}
+          onChange={(selecteur, event) => this.filtre(selecteur, event)}
           name='Sequences'
           ></Select>
           <Button btnType="valider">
@@ -194,9 +236,9 @@ class Ressources extends Component{
           </Button>
         </header>
         <aside className="align-self-stretch">
-            <i>{this.state.ressourcesFiltered.length} ressources trouvées</i>
+            <i>{ressources.length} ressources trouvées</i>
         </aside>
-        <section className="ressourcesList"> 
+        <section className="ressources-list"> 
             {ressourcesCartes}
         </section>
           <footer className="d-flex align-items-end">
