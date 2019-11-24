@@ -11,7 +11,7 @@ const Header = (props) => (
     {props.showAlertUpdate ? <NotificationUpdate title={`${props.firstName} ${props.lastName} a été mis à jour!`} /> : null}
 
     <Button btnType="annuler button-position" clicked={props.clicked} title="ajout-flux" >
-      Ajouter un flux
+      {props.title}
     </Button>
   </header>
 )

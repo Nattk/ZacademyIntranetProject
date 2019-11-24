@@ -6,7 +6,7 @@ const Input = (props) => {
     <Fragment>
       <label htmlFor="firstName" className="label-style">{input.label}</label>
       <input
-        type="text"
+        type={props.type}
         name={input.name}
         required
         placeholder={input.placeholder}

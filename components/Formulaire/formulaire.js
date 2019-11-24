@@ -11,6 +11,11 @@ class Formulaire extends Component {
           lastName={this.props.lastName}
           fonction={this.props.fonction}
           description={this.props.description}
+          phone={this.props.phone}
+          mail={this.props.mail}
+          contact={this.props.contact}
+          influenceur={this.props.influenceur}
+          picture={this.props.picture}
           linkGithub={this.props.linkGithub}
           linkTwitter={this.props.linkTwitter}
           linkLinkedin={this.props.linkLinkedin}
@@ -20,6 +25,8 @@ class Formulaire extends Component {
           lastNameValidation={this.props.lastNameValidation}
           fonctionValidation={this.props.fonctionValidation}
           descriptionValidation={this.props.descriptionValidation}
+          mailValidation={this.props.mailValidation}
+          phoneValidation={this.props.phoneValidation}
         />
         <section className="text-right" >
           <Button clicked={this.props.handleClose} btnType="annuler">

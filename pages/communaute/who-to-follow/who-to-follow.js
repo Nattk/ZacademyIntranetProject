@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
-import Header from '../../../components/whoToFollow/header-who-to-follow'
+import Header from '../../../components/Header/header-button-add'
 import Modal from '../../../components/Modal/modal'
 import DeleteCard from '../../../components/Modal/sectionDeleteModal'
-import FollowCard from '../../../components/whoToFollow/card/who-to-follow-card'
+import Card from '../../../components/Card/card'
 import Formulaire from '../../../components/Formulaire/formulaire'
 import Data from '../../../components/whoToFollow/data.json'
 
@@ -177,10 +177,10 @@ class Follow extends Component {
     return (
       <Page title=" Influenceurs" contextePage="Influenceurs" >
         <article id="who-to-follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
-          <Header clicked={this.handleModalAdd} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} firstName={this.state.firstName} lastName={this.state.lastName} />
+          <Header clicked={this.handleModalAdd} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} firstName={this.state.firstName} lastName={this.state.lastName} title="Ajouter un influenceur" />
           <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
             {this.state.fakeData.map((user, id) => (
-              <FollowCard
+              <Card
                 key={id}
                 firstName={user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1).toLowerCase()}
                 lastName={user.lastName.toUpperCase()}
