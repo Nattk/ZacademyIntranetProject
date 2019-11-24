@@ -7,6 +7,7 @@ import '../../styles/sass/styles.scss'
 export const ShowCard = (props) => (
   <Card
     key={props.key}
+    picture={props.picture}
     firstName={props.firstName.charAt(0).toUpperCase() + props.firstName.slice(1).toLowerCase()}
     lastName={props.lastName.toUpperCase()}
     fonction={props.fonction.length > 80 ? props.fonction.charAt(0).toUpperCase() + props.fonction.slice(2).toLowerCase().substring(0, 80) + '...' : props.fonction.charAt(0).toUpperCase() + props.fonction.slice(1).toLowerCase()}
@@ -15,6 +16,10 @@ export const ShowCard = (props) => (
     phone={props.phone}
     remove={props.remove}
     update={props.update}
+    linkTwitter={props.linkTwitter}
+    linkLinkedin={props.linkLinkedin}
+    linkGithub={props.linkGithub}
+    linkFluxRss={props.linkFluxRss}
   />
 )
 

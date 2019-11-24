@@ -53,6 +53,7 @@ class ContactsUtiles extends ValidationMethod {
             {this.state.fakeData.map((user, id) => (
               <ShowCard
                 key={id}
+                picture
                 firstName={user.firstName}
                 lastName={user.lastName}
                 fonction={user.fonction}

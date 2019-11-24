@@ -4,7 +4,9 @@ const Card = (props) => (
 
   <article className="col-md-3 col-sm-12 col-xs-12 article-card" >
     <header className="header-user-card" >
-      <img src="/firmin.jpg" alt="" className="img-user-card" />
+      {props.picture ? (
+        <img src="/firmin.jpg" alt="" className="img-user-card" />
+      ) : null}
       <section className="section-header-user-card" >
         <i className="fa fa-remove remove-icon " title="supprimer ce profil " onClick={props.remove} />
         &nbsp;
@@ -34,6 +36,10 @@ const Card = (props) => (
             </a>) : null}
           {props.linkGithub ? (
             <a href={props.linkGithub} title="Aller sur son github" target="_blank">
+              <i className="fa fa-github card-button-github" title="Aller sur son github" />
+            </a>) : null}
+          {props.linkFluxRss ? (
+            <a href={props.linkFluxRss} title="Aller sur son github" target="_blank">
               <i className="fa fa-github card-button-github" title="Aller sur son github" />
             </a>) : null}
         </section>
