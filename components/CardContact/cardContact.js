@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = (props) => (
+const CardContact = (props) => (
 
   <article className="col-md-3 col-sm-12 col-xs-12 article-card" >
     <header className="header-user-card" >
@@ -49,4 +49,4 @@ const Card = (props) => (
   </article>
 )
 
-export default Card
+export default CardContact

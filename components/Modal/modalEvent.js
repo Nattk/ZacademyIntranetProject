@@ -63,7 +63,7 @@ const ModalEvent = (props) => {
             ) : null}
             {props.manageEvents ? (
 
-              <Button clicked={props.handleManageEvent} btnType="url_evenement">
+              <Button clicked={props.handleManageEvent} btnType="url-evenement">
                 Gérer l'évènement
               </Button>
             ) : null}
@@ -77,7 +77,7 @@ const ModalEvent = (props) => {
         ) : null
       }
 
-    </Modal >
+    </Modal>
   )
 }
 export default ModalEvent

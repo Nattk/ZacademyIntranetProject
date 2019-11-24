@@ -15,9 +15,9 @@ const Modals = (props) => {
           <section>
             {props.formulaire ? (
               props.formulaire) : null}
-
             {props.deleteDescription ? (
               props.deleteDescription) : null}
+            {props.calendar ? (props.calendar) : null}
           </section>
         </main>
       </article>

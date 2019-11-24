@@ -126,7 +126,7 @@ class Follow extends ValidationMethod {
               titleModal={this.state.formulaireTitleAdd ? "Ajout d'un flux rss" : '' || this.state.formulaireUpdate ? 'Modification du fluxt' : ''}
               formulaire={this.state.formulaire
                 ? Formul : false}
-              deleteDescription={this.state.descriptionDelete ? <DeleteDescription handleDelete={() => this.handleDelete(this.state.id)} handleClose={this.handleClose} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false} />
+              deleteDescription={this.state.descriptionDelete ? <DeleteDescription handleDelete={() => this.handleDelete(this.state.id)} handleClose={this.handleClose} title="Êtes-vous sûr de vouloir supprimer ce flux rss" /> : false} />
           </section>
         </article>
       </Page>
