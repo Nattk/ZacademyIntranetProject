@@ -1,11 +1,11 @@
-import Card from '../Card/card'
+import CardContact from '../CardContact/cardContact'
 import DeleteCard from './sectionDeleteModal'
 import Formulaire from '../Formulaire/formulaire'
 import { state } from '../Methods/state'
 import '../../styles/sass/styles.scss'
 
 export const ShowCard = (props) => (
-  <Card
+  <CardContact
     key={props.key ? props.key : ''}
     picture={props.picture ? props.picture : ''}
     titleRss={props.titleRss ? props.titleRss.charAt(0).toUpperCase() + props.titleRss.slice(1).toLowerCase() : ''}
