@@ -181,15 +181,15 @@ class Ressources extends Component{
               </div>
               <section className="d-flex flex-column ressource-details">
                 <Link href={ressource.lien}>
-                  <h2><a>{ressource.titre}</a></h2>
+                  <h2><a tabindex="0" title="Accéder à la ressource">{ressource.titre}</a></h2>
                 </Link>
-                <i>{ressource.auteur} . 12/12/2019 . {ressource.promotion}</i>
+                <i>{ressource.auteur} . 12 Nov 2019 . {ressource.promotion}</i>
                 <i>#{this.state.Modules[ressource.modId].name}</i>
               </section>
             </div>
             <aside className="d-flex flex-row justify-content-end"> 
-              <Link href="./modifier-ressource"><a className="btn btn-warning">Modifier</a></Link>
-              <Button btnType="annuler" title="Supprimer" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
+              <Link href="./modifier-ressource"><a title="Modifier la ressource" className="btn btn-warning">Modifier</a></Link>
+              <Button btnType="annuler" title="Supprimer la ressource" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
             </aside>
         </Card>)))
     }
@@ -201,6 +201,7 @@ class Ressources extends Component{
     <Page title="Ressources" contextePage="Ressources">
       <article className="ressources d-flex flex-column">
         <header className="d-flex flex-row justify-content-between align-items-center">
+          {/* select filtre */}
           <Select className="select-component" options={this.state.Promotions} isMulti={true}
             formatCreateLabel={(inputValue) => `Promotion`}
             noOptionsMessage={(inputValues) => `${inputValues.inputValue} n'est pas disponible`}
@@ -232,7 +233,7 @@ class Ressources extends Component{
           name='Sequences'
           ></Select>
             <Link href="./ajouter-ressource">
-              <a className="btn btn-success">
+              <a title="Ajouter une ressource" className="btn btn-success">
                 Ajouter une ressource
               </a>
             </Link>
@@ -245,7 +246,7 @@ class Ressources extends Component{
         </section>
           <footer className="d-flex align-items-end">
               <Link href="./ajouter-ressource">
-                <a className="btn btn-success">
+                <a title="Ajouter une ressource" className="btn btn-success">
                   Ajouter une ressource
                 </a>
               </Link>

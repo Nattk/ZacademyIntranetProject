@@ -33,17 +33,31 @@
             margin: 0;
             text-transform: initial;
             text-align: initial;
+            
+            :focus{
+                outline: rgb(44, 18, 18);
+                
+            }
         }
 
         h2 a {
             font-size: 1.5rem;
             color: black;
             cursor: pointer;
+            outline: rgb(44, 18, 18);
+        }
+
+        
+        h2 a:visited{
+            font-size: 1.5rem;
+            color: rgb(44, 18, 18);
+            cursor: pointer;
         }
 
         i {
+            font-style: normal;
             font-weight: bold;
-            color: gray;
+            color: rgb(59, 59, 59);
         }
     }
 }
