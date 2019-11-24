@@ -1,15 +1,44 @@
+
 import React from 'react'
 
 const ContactCard = (props) => (
-  <section class="card" >
-    <img src="/firmin.jpg" class="card-img-top" alt="image profil contact utile" />
-    <div class="card-body">
-      <h1 class="card-title">{props.name}</h1>
 
-      <p class="card-text"><span>Fonction :</span> <br />{props.fonction}</p>
-      <p class="card-text"><span>Tel :</span> <br />{props.telephone}</p>
-      <p class="card-text"><span>Email :</span> <br />{props.email}</p>
-    </div>
-  </section>)
+  <article className="col-md-3 col-sm-12 col-xs-12 article-card-who-to-follow" >
+    <header className="header-user-card-who-to-follow" >
+      <img src="/firmin.jpg" alt="" className="img-user-card-who-to-follow" />
+      <section className="section-header-user-card-who-to-follow" >
+        <i className="fa fa-remove remove-icon " title="supprimer ce profil " onClick={props.remove} />
+        &nbsp;
+        <i className="fa fa-pen update-icon " title="mettre à jour ce profil " onClick={props.update} />
+      </section>
+    </header>
+    <section className="section-user-card-who-to-follow" style={{ borderTop: 'none' }}>
+      <header>
+        <h1 className="name-user-card-who-to-follow">{props.firstName} {props.lastName}</h1>
+      </header>
+      <section>
+        <p className="fonction-user-card-who-to-follow">{props.fonction} </p>
+        <p className="description-user-card-who-to-follow" >{props.description}</p>
+      </section>
+      <footer className="footer-card-who-to-follow button-follow" >
+        <section className="section-footer-card-who-to-follow">
+          {props.linkTwitter ? (
+            <a href={props.linkTwitter} title="Aller sur son twitter" target="_blank">
+              <i className="fa fa-twitter card-button-twitter" title="lAller sur son twitter"> </i>
+            </a>
+          ) : null}
+          {props.linkLinkedin ? (
+            <a href={props.linkLinkedin} title="Aller sur son linkedin" target="_blank" >
+              <i className="fa fa-linkedin card-button-linkedin" title="Aller sur son linkedin" />
+            </a>) : null}
+          {props.linkGithub ? (
+            <a href={props.linkGithub} title="Aller sur son github" target="_blank">
+              <i className="fa fa-github card-button-github" title="Aller sur son github" />
+            </a>) : null}
+        </section>
+      </footer>
+    </section>
+  </article>
+)
 
 export default ContactCard

@@ -56,21 +56,22 @@ class UtilisateursGestion extends Component {
 											modalFooter={true}
 										/>
 									) : null}
-									<Link href="./modification-utilisateur">
-										<a>
-											<Button btnType="valider">Modifier</Button>
-										</a>
-									</Link>
+
+									<a href="/admin/gestion-utilisateur/modification-utilisateur" title="modification-utlisateur" className="link-button-valider"  >
+										Modifier
+									</a>
+
 								</li>
 							))}
 						</ul>
 					</section>
 					<footer className="d-flex flex-row align-items-end justify-content-center">
-						<Link href="/admin/CreationUtilisateur/creation_utilisateur">
-							<button type="button" className="btn btn-primary">
-								Ajouter un utilisateur
-							</button>
-						</Link>
+
+
+						<a href="/admin/creation-utilisateur/creation-utilisateur" title="modification-utlisateur" className="link-button-creation"  >
+							Ajouter un utilisateur
+							</a>
+
 					</footer>
 				</article>
 			</Page>

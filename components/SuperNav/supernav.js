@@ -1,80 +1,91 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Nav from '../Nav/nav'
 import AdminNav from '../AdminNav/adminNav'
-import Login from '../../components/Login/login'
+import usersService from '../../services/users'
 
-const SuperNav = () => {
-  const [isAdmin, SetAdmin] = useLocalStorage('isAdmin', false)
-  const [isConnected, SetConnected] = useLocalStorage('isConnected', false)
-
-  const handleAdminON = () => {
-    SetAdmin(true)
-  }
-
-  const handleAdminOFF = () => {
-    SetAdmin(false)
-  }
-
-  const handleOffline = () => {
-    SetConnected(false)
-    SetAdmin(false)
-  }
-
-  const handleOnline = () => {
-    SetConnected(true)
-    SetAdmin(false)
-  }
-
-  const handleboth = () => {
-    SetConnected(true)
-    SetAdmin(true)
-  }
-  
-  if (!isConnected) {
-    return <Login online={handleOnline} both={handleboth}/>
-  }
-  if (isAdmin) {
-    return <AdminNav adminClick={handleAdminOFF} offline={handleOffline} />
-  }else {
-    return <Nav adminClick={handleAdminON} offline={handleOffline}/>
-  }
-
-}
-
-function useLocalStorage (key, initialValue) {
-  // State to store our value
-  // Pass initial state function to useState so logic is only executed once
+const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {
-      // Get from local storage by key
       const item = window.localStorage.getItem(key)
-      // Parse stored json or if none return initialValue
       return item ? JSON.parse(item) : initialValue
     } catch (error) {
-      // If error also return initialValue
       console.log(error)
       return initialValue
     }
   })
-
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
   const setValue = value => {
     try {
-      // Allow value to be a function so we have same API as useState
       const valueToStore =
-          value instanceof Function ? value(storedValue) : value
-      // Save state
+        value instanceof Function ? value(storedValue) : value
       setStoredValue(valueToStore)
-      // Save to local storage
       window.localStorage.setItem(key, JSON.stringify(valueToStore))
     } catch (error) {
-      // A more advanced implementation would handle the error case
       console.log(error)
     }
   }
-
   return [storedValue, setValue]
+}
+
+const Notification = ({ message }) => {
+  if (message === null) {
+    return null
+  }
+
+  return (
+    <div className="error">
+      {message}
+    </div>
+  )
+}
+
+const SuperNav = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [role, setRole] = useLocalStorage('role', '')
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    const users = await usersService.getAll()
+    const user = users.find(n => n.mail === email && n.password === password)
+    try {
+      setRole(user.role)
+      setEmail('')
+      setPassword('')
+    } catch (e) {
+      setErrorMessage('MAUVAIS LOGIN HAHAHAHAHA')
+    }
+  }
+
+  const offlineClick = () => {
+    setRole('')
+  }
+
+  if (!role) {
+    return (
+
+      <form className="wrapper" onSubmit={handleLogin}>
+        <Notification message={errorMessage} />
+        <section id="form-content">
+          <div className="first">
+            <img src="/zenika_icon.png" id="icon" alt="User Icon" />
+          </div>
+          <div>
+            <label for="login">Email</label><br></br>
+            <input type="email" id="login" className="login-form" name="usename" placeholder="email" value={email} onChange={({ target }) => setEmail(target.value)} required />
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" className="login-form" name="login" placeholder="mot de passe" value={password} onChange={({ target }) => setPassword(target.value)} required />
+            <input type="submit" id="submit-login" className="login-form" value="Log In" />
+          </div>
+
+        </section>
+      </form>
+    )
+  } else if (role === 'eleve') {
+    return <Nav offline={offlineClick} />
+  } else {
+    return <AdminNav offline={offlineClick} />
+  }
 }
 
 export default SuperNav

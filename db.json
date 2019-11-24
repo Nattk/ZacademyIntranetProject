@@ -1,0 +1,75 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstname": "Norbert",
+      "name": "Nadir",
+      "mail" : "norbert@zenika.com",
+      "password": "Norbert",
+      "role": "superadmin"
+    },
+    {
+      "id": 2,
+      "firstname": "Admin",
+      "name": "Admin",
+      "mail" : "admin@zenika.com",
+      "password": "Admin",
+      "role": "admin"
+    },
+    {
+      "id": 3,
+      "firstname": "Jérémie",
+      "name": "Patonnier",
+      "mail" : "jérémie@zenika.com",
+      "password": "Jérémie",
+      "role": "formateur"
+    },
+    {
+      "id": 4,
+      "firstname": "Firmin",
+      "name": "Giret",
+      "mail" : "firmin@zenika.com",
+      "password": "Firmin",
+      "role": "eleve"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "ressources": [
+    {"titre":"Apprendre le JAVA", "lien":"ressource-individuelle" ,"promotion":"Promo Rennes 2", "auteur":"Nattan Kifoyi", "promoId":3 , "contributeur":1, "ressId":1, "modId":0, "seqId":null},
+    {"titre":"Les algorithmes JAVA", "lien":"ressource-individuelle" ,"promotion":"Promo Rennes 2", "auteur":"Nattan Kifoyi", "promoId":3 , "contributeur":1, "ressId":2, "modId":0, "seqId":null},
+    {"titre":"Revue de code en JAVA", "lien":"ressource-individuelle", "promotion":"Promo Paris 1", "auteur":"Nattan Kifoyi", "promoId":1, "contributeur":2, "ressId":3, "modId":2, "seqId":4},
+    {"titre":"TDD", "lien":"ressource-individuelle","promotion":"Promo Casablanca 1", "auteur":"Nattan Kifoyi", "promoId":2, "contributeur":2, "ressId":4, "modId":2, "seqId":5},
+    {"titre":"Les collections", "lien":"ressource-individuelle","promotion":"Promo Rio 1", "auteur":"Nattan Kifoyi", "promoId":4, "contributeur":2, "ressId":5, "modId":1, "seqId":2 },
+    {"titre":"Les dates", "lien":"ressource-individuelle","promotion":"Promo Rio 1", "auteur":"Nattan Kifoyi", "promoId":4, "contributeur":2, "ressId":6, "modId":1, "seqId":1 }
+  ],
+
+  "promotions": [
+    {"ville":"Paris", "id":1, "promotion":"Paris 01", "programme":"Consultant Javascript", "date":"12/12/19"},
+    {"ville":"Casablanca", "id":2, "promotion":"Casablanca 01", "programme":"Consultant Java", "date":"12/12/19"},
+    {"ville":"Rennes", "id":3, "promotion":"Rennes 02", "programme":"Consultant Java", "date":"12/12/19"},
+    {"ville":"Rio", "id":4, "promotion":"Rio 01", "programme":"Consultant Java", "date":"12/12/19"}
+  ],
+
+  "modules": [
+    {"id":0, "name":"Algorithme java", "sequences":[]},
+    {"id":1, "name":"Librairies JDK", "sequences":[1,2]},
+    {"id":2, "name":"Craftmanship", "sequences":[3,4,5]}
+  ],
+
+  "sequences": [
+    {"id":1, "idModule":1, "name":"Dates"},
+    {"id":2, "idModule":1, "name":"Collections"},
+    {"id":3, "idModule":2, "name":"Pair Programming"},
+    {"id":4, "idModule":2, "name":"Revue de code"},
+    {"id":5, "idModule":2, "name":"TDD"}
+  ]
+}

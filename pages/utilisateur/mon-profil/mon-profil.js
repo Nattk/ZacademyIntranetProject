@@ -2,7 +2,7 @@ import React from 'react'
 import Page from '../../../layouts/classic'
 
 const MonProfil = () => (
-  <Page title="Profil">
+  <Page title="Profil" contextePage="Mon Profil">
     <article className="card" id="monprofil" alt="informations mon profil">
       <div className="card-body">
         <h1 className="card-title">Mon profil</h1>

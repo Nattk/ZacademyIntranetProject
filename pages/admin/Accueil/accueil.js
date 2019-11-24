@@ -5,44 +5,39 @@ import Button from '../../../components/Boutons/Boutons'
 
 class Admin extends Component {
   state = {
-    Eleves:[
-      {nom:"Kifoyi",prenom:"nattan", promoId:1, promotion:"Paris 01"},
-      {nom:"Kifoyi",prenom:"nattan", promoId:6, promotion:"Rennes 01"},
-      {nom:"Kifoyi",prenom:"nattan", promoId:3, promotion:"Casablanca 02"},
-      {nom:"Kifoyi",prenom:"nattan", promoId:2, promotion:"Paris 02"},
-      {nom:"Kifoyi",prenom:"nattan", promoId:5, promotion:"Rennes 02"},
-      {nom:"Kifoyi",prenom:"nattan", promoId:4, promotion:"Casablanca 01"},
-    ],
-    Formateurs:[
-      {nom:"jeanDeParis", prenom:"robert", promoId:1, promotion:"Paris 01"},
-      {nom:"jeanDeParis", prenom:"robert", promoId:2, promotion:"Paris 02"},
-      {nom:"jeanDeParis", prenom:"robert", promoId:2, promotion:"Paris 02"},
-      {nom:"jeanDeRennes", prenom:"robert", promoId:6, promotion:"Rennes 01"},
-      {nom:"jeanDeRennes", prenom:"robert", promoId:5, promotion:"Rennes 02"},
-      {nom:"jeanDeRennes", prenom:"robert", promoId:5, promotion:"Rennes 02"},
-      {nom:"jeanDeCasablanca", prenom:"robert", promoId:3, promotion:"Casablanca 02"},
-      {nom:"jeanDeCasablanca", prenom:"robert", promoId:4, promotion:"Casablanca 01"}
+    // Eleves:[
+    //   {nom:"Kifoyi",prenom:"nattan", promoId:1, promotion:"Paris 01"},
+    //   {nom:"Kifoyi",prenom:"nattan", promoId:6, promotion:"Rennes 01"},
+    //   {nom:"Kifoyi",prenom:"nattan", promoId:3, promotion:"Casablanca 02"},
+    //   {nom:"Kifoyi",prenom:"nattan", promoId:2, promotion:"Paris 02"},
+    //   {nom:"Kifoyi",prenom:"nattan", promoId:5, promotion:"Rennes 02"},
+    //   {nom:"Kifoyi",prenom:"nattan", promoId:4, promotion:"Casablanca 01"},
+    // ],
+    // Formateurs:[
+    //   {nom:"jeanDeParis", prenom:"robert", promoId:1, promotion:"Paris 01"},
+    //   {nom:"jeanDeParis", prenom:"robert", promoId:2, promotion:"Paris 02"},
+    //   {nom:"jeanDeParis", prenom:"robert", promoId:2, promotion:"Paris 02"},
+    //   {nom:"jeanDeRennes", prenom:"robert", promoId:6, promotion:"Rennes 01"},
+    //   {nom:"jeanDeRennes", prenom:"robert", promoId:5, promotion:"Rennes 02"},
+    //   {nom:"jeanDeRennes", prenom:"robert", promoId:5, promotion:"Rennes 02"},
+    //   {nom:"jeanDeCasablanca", prenom:"robert", promoId:3, promotion:"Casablanca 02"},
+    //   {nom:"jeanDeCasablanca", prenom:"robert", promoId:4, promotion:"Casablanca 01"}
 
-    ],
+    // ],
     Promotions: [
-      {ville:"Paris", promoId:1, promotion:"Paris 01"},
-      {ville:"Paris", promoId:2, promotion:"Paris 02"},
-      {ville:"Casablanca", promoId:3, promotion:"Casablanca 02"},
-      {ville:"Casablanca", promoId:4, promotion:"Casablanca 01"},
-      {ville:"Rennes", promoId:5, promotion:"Rennes 02"},
-      {ville:"Rennes", promoId:6, promotion:"Rennes 01"},
-    ],
-    filtreVille:'0',
-    filtrePromo:0
+      {ville:"Paris", id:1, promotion:"Paris 01", programme:'Consultant Javascript', date:'12/12/19'},
+      {ville:"Paris", id:2, promotion:"Paris 02", programme:'Consultant Java', date:'12/12/19'},
+      {ville:"Casablanca", id:3, promotion:"Casablanca 01", programme:'Consultant Java', date:'12/12/19'},
+      {ville:"Casablanca", id:4, promotion:"Casablanca 02", programme:'Consultant Java', date:'12/12/19'},
+      {ville:"Rennes", id:5, promotion:"Rennes 02", programme:'Consultant Java', date:'12/12/19'},
+      {ville:"Rennes", id:6, promotion:"Rennes 01", programme:'Consultant Java', date:'12/12/19'}
+    ]
   }
 
-  filtre = (event) => {
-    if(event.target.id === "selectVille"){
-      this.setState({filtreVille: event.target.value})
-    }
-    else{
-      this.setState({filtrePromo: event.target.value})
-    }
+  filtre = (type) => {
+    const arrayFiltered = [...this.state.Promotions]
+    arrayFiltered.sort( (a, b) => a[type] > b[type] ? 1 : -1)
+    this.setState({Promotions : arrayFiltered})
   }
 
   handleDelete = () =>{
@@ -51,9 +46,40 @@ class Admin extends Component {
 
   render () {
     return (
-      <Page title="Admin Accueil">
-        <article className="admin_page">
-            <select defaultValue="0" className="custom-select" id="selectVille" onChange={this.filtre}>
+      <Page title="Admin Accueil" contextePage="Promotions en cours">
+        <article id="admin-page">
+          {/* //<button>Ajouter une promotion</button> */}
+          <section className="search-bar-promo d-flex flex-row">
+          <input className="form-control" type="text" placeholder="Rechercher"/>
+          </section>
+          <section>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th onClick={(type)=>this.filtre("nom")}><div className="d-flex flex-row justify-content-between align-items-baseline">Nom <i class="fas fa-sort"></i></div></th>
+                <th onClick={(type)=>this.filtre("ville")}><div className="d-flex flex-row justify-content-between align-items-baseline">Ville <i class="fas fa-sort"></i></div></th>
+                <th onClick={(type)=>this.filtre("programme")}><div className="d-flex flex-row justify-content-between align-items-baseline">Programme <i class="fas fa-sort"></i></div></th>
+                <th onClick={(type)=>this.filtre("date")}><div className="d-flex flex-row justify-content-between align-items-baseline">Date <i class="fas fa-sort"></i></div></th>
+                <th onClick={(type)=>this.filtre("actions")}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+            {this.state.Promotions.map( (promo =>(
+                <tr className="promotion-row" key={promo.id}> 
+                  <td>{promo.promotion}</td>
+                  <td>{promo.ville}</td>
+                  <td>{promo.programme}</td>
+                  <td>{promo.date}</td>
+                  <td>
+                    <button><i className="fas fa-eye" title="Voir détails"></i></button>
+                    <button>Ghost</button>
+                  </td>
+                </tr>
+              )))}
+            </tbody>
+          </table>
+          </section>
+            {/* <select defaultValue="0" className="custom-select" id="selectVille" onChange={this.filtre}>
               <option value="0">Ville</option>
               <option value="Paris">Paris</option>
               <option value="Rennes">Rennes</option>
@@ -108,7 +134,7 @@ class Admin extends Component {
                 </article>
               ))}
             </div>
-          </div>
+          </div> */}
         </article>
       </Page>
     )

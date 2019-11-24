@@ -1,6 +1,5 @@
-article.container-article{
+.card-article {
   display: flex;
-  flex-flow: column wrap;
 }
 
 .card-rss-title {
@@ -28,5 +27,32 @@ article.container-article{
   background-color: #f26522;
   color: #fff;
   border: #f26522;
+  margin: 1rem;
+  padding: .2rem;
   border-radius: 15%;
+}
+
+.cardStyle:hover {
+  text-decoration: underline;
+
+}
+
+.card-rss {
+  position: relative;
+  display: inline-block;
+}
+
+.card-rss:hover .edit {
+  display: block;
+}
+
+.edit {
+  padding-top: 7px;
+  padding-right: 7px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+  color: #cc4949;
+  cursor: pointer;
 }

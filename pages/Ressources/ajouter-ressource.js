@@ -15,31 +15,30 @@ class AjouterRessources extends Component {
 
   render () {
     return (
-      <Page title="Ajouter Ressources">
-        <article className="ajouterRessource">
-          <h1>Ajouter une ressource</h1>
+      <Page title="Ajouter Ressources" contextePage="Ajouter une ressource">
+        <article id="ajouter-ressource">
           <section>
             <form className="form-group d-flex flex-column">
-              <label for="titre">Titre</label>
+              <label htmlFor="titre">Titre</label>
               <div className="d-flex flex-row">
                 <input id="titre" className="form-control" type="text" required/>
                 <span>&nbsp;*</span>
               </div>
-              <label for="ressource">Ressource</label>
+              <label htmlFor="ressource">Ressource</label>
               <div className="d-flex flex-row">
                 <textarea for="ressource" className="form-control" required>
                 </textarea>
                 <span>&nbsp;*</span>
               </div>
-              <label for="modules" >Modules associés</label>
+              <label htmlFor="modules">Modules associés</label>
               <select id="modules" className="form-control" type="text" required>
                 <option value="HTML">HTML</option>
                 <option value="CSS">Css</option>
                 <option value="Javascript">Javascript</option>
               </select>
               <div class="d-flex flex-row justify-content-end">
-                <Button btnType="valider" title="ajouter une ressource" submit={true} clicked={this.handleValidation}>Ajouter</Button>
-                <Button btnType="annuler" title="annuler"> <Link href="./ressources"><a>Annuler</a></Link></Button>
+                 <Button btnType="valider" title="Ajouter une ressource" submit={true} clicked={this.handleValidation}>Ajouter</Button>
+                 <Link href="./ressources"><a title="Annuler la modification" className="btn btn-danger">Annuler</a></Link>
               </div>
             </form>
           </section>

@@ -5,7 +5,13 @@
 @import '../../components/Carousel/carousel.scss';
 @import '../../components/Calendrier/calendrier.scss';
 @import '../../components/Boutons/Boutons.scss';
+@import '../../components/Modal/modal.scss';
 @import '../../components/Modal/modalEvent.scss';
+@import '../../components/SuperNav/supernav.scss';
+@import '../../components/Formulaire/formulaire.scss';
+@import '../../components/Contacts/contactCard.scss';
+@import '../../components/CardContact/cardContact.scss';
+@import '../../components/Spinner/spinner.scss';
 
 // Dossier Pages
 @import '../../pages/index-connecte.scss';
@@ -23,8 +29,6 @@
 @import '../../pages/ma-formation/Livret-Accueil/livret-accueil.scss';
 @import '../../pages/ma-formation/Agenda/agenda.scss';
 
-
-
 // Calendar
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
@@ -39,9 +43,15 @@ html {
   background-color: #fff;
 }
 
+h1#context-page {
+  margin-top: 6rem;
+  text-align: center;
+}
+
 .main {
   display: flex;
   flex: 1;
+  position: sticky;
 }
 
 .mainTitle {

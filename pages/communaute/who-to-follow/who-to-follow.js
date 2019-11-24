@@ -1,66 +1,123 @@
 import React from 'react'
-import Page from '../../../layouts/global'
-import Card from '../../../components/Card/card'
+import Page from '../../../layouts/classic'
+import Header from '../../../components/Header/header-button-add'
+import Modal from '../../../components/Modal/modal'
+import { state } from './state'
+import ValidationMethod from '../../../components/Methods/ValidationMethod'
+import { Form, ShowCard, DeleteDescription } from '../../../components/Modal/SectionModal'
 import '../../../styles/sass/styles.scss'
+class Follow extends ValidationMethod {
+  constructor (props) {
+    super(props)
+    this.state = { ...state }
+    this.handleModalAdd = this.handleModalAdd.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+  }
 
-const followCard = (
-	<article className="card-article col-md-12 col-sm-12 col-xs-12">
-		<section className="align-self-center col-md-2  col-xs-12">
-			<img
-				src="https://ca.slack-edge.com/TDKLZEH1B-UN6RVVAP3-g00f562b54f1-72"
-				alt="profile-user"
-				className="img-socialMedia"
-				aria-describedby="p1"
-			/>
-		</section>
-		<section className="col-md-9  col-xs-12 section-card-user">
-			<h1 className="card-title" id="p1">
-				Jeremie Patonnier
-			</h1>
-			<p className="card-description">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit voluptatem ullam sint vitae eligendi
-				illum asperiores quis, quam temporibus perspiciatis repellendus voluptate? Nihil numquam, doloribus
-				reprehenderit voluptatibus cum perspiciatis tempore!
-			</p>
-			<section className="button-follow">
-				<a href="https://twitter.com/jeremiepat?lang=fr" title="Aller sur son twitter" target="_blank">
-					<button className="card-button-twitter">
-						<i className="fa fa-twitter social-icon-card"> </i> &nbsp;
-					</button>
-				</a>
+  handleModalAdd () {
+    this.setState({
+      showModal: true, formulaire: true, formulaireTitleAdd: true, formulaireUpdate: false, descriptionDelete: false, firstName: '', lastName: '', fonction: '', description: '', linkLinkedin: '', linkGithub: '', linkTwitter: ''
+    })
+  }
 
-				<a
-					href="https://fr.khanacademy.org/computing/computer-programming"
-					title="Aller sur son linkedin"
-					target="_blank"
-				>
-					<button className="card-button-linkedin">
-						<i className="fa fa-linkedin" />&nbsp;
-					</button>
-				</a>
-				<a
-					href="https://fr.khanacademy.org/computing/computer-programming"
-					title="Aller sur son github"
-					target="_blank"
-				>
-					<button className="card-button-github">
-						<i className="fa fa-github" />&nbsp;
-					</button>
-				</a>
-			</section>
-		</section>
-	</article>
-)
-const Follow = () => (
-	<Page title="Follow">
-		<article className="container-article">
-			<h1 className="mainTitle">Who to Follow!</h1>
-			<div className="text-center col-md-10 col-sm-12 col-xs-12 container-card ">
-				<Card styleName="card">{followCard}</Card>
-				<Card styleName="card">{followCard}</Card>
-				<Card styleName="card">{followCard}</Card>
-			</div>
-		</article>
-	</Page>
-)
+  handleClose () {
+    this.setState({
+      showModal: false, firstNameValidation: '', lastNameValidation: '', fonctionValidation: '', descriptionValidation: ''
+    })
+  }
+
+  handleSubmit () {
+    const elements = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      fonction: this.state.fonction,
+      mail: this.state.mail,
+      phone: this.state.phone,
+      img: this.state.img,
+      description: this.state.description.length > 70 ? this.state.description.substring(0, 70) + '...' : this.state.description,
+      linkGithub: this.state.linkGithub,
+      linkReddit: this.state.linkReddit,
+      linkLinkedin: this.state.linkLinkedin,
+      linkTwitter: this.state.linkTwitter,
+      id: Math.random().toString(36).substr(2, 9)
+    }
+    const data = this.state.fakeData
+    const newdata = [...data, elements]
+
+    if (this.state.firstName && this.state.lastName && this.state.fonction && this.state.description !== '') {
+      this.setState({ fakeData: newdata, showAlertSuccess: true, showModal: false, firstNameValidaion: '', lastNameValidation: '', fonctionValidation: '', descriptionValidation: '' })
+      setTimeout(() => {
+        this.setState({
+          showAlertSuccess: false
+        })
+      }, 5000)
+    } else {
+      this.handleValidation()
+    }
+    console.log(this.state.contact)
+  }
+
+  render () {
+    const Formul = (
+      <Form handleClose={this.handleClose}
+        buttonName={this.state.formulaireUpdate ? 'Mettre à jour' : 'Ajouter'}
+        clicked={this.state.formulaireUpdate ? () => this.handleUpdate(this.state.id) : this.handleSubmit}
+        onChange={this.onChange} lastName={this.state.lastName}
+        influenceur
+        contact
+        identity
+        firstName={this.state.firstName}
+        lastName={this.state.lastName}
+        fonction={this.state.fonction}
+        description={this.state.description}
+        mail={this.state.mail}
+        phone={this.state.phone}
+        linkGithub={this.state.linkGithub}
+        linkLinkedin={this.state.linkLinkedin}
+        linkTwitter={this.state.linkTwitter}
+        firstNameValidation={this.state.firstNameValidation}
+        lastNameValidation={this.state.lastNameValidation}
+        fonctionValidation={this.state.fonctionValidation}
+        descriptionValidation={this.state.descriptionValidation}
+        phoneValidation={this.state.phoneValidation}
+        mailValidation={this.state.mailValidation}
+      />
+    )
+    return (
+      <Page title=" Influenceurs" contextePage="Influenceurs" >
+        <article id="who-to-follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
+          <Header clicked={this.handleModalAdd} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} firstName={this.state.firstName} lastName={this.state.lastName} title="Ajouter un influenceur" />
+          <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
+            {this.state.fakeData.map((user, id) => (
+              <ShowCard
+                key={id}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                fonction={user.fonction}
+                description={user.description}
+                linkLinkedin={user.linkLinkedin}
+                linkGithub={user.linkGithub}
+                linkTwitter={user.linkTwitter}
+                picture
+                mail={user.mail}
+                phone={user.phone}
+                remove={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, id: user.id })}
+                update={() => this.setState({
+                  showModal: true, formulaire: true, formulaireUpdate: true, descriptionDelete: false, formulaireTitleAdd: false, id: user.id, firstName: user.firstName, lastName: user.lastName, fonction: user.fonction, description: user.description, linkLinkedin: user.linkLinkedin, linkGithub: user.linkGithub, linkTwitter: user.linkTwitter
+                })}
+              />
+            ))}
+            <Modal
+              show={this.state.showModal}
+              onClose={this.handleClose}
+              titleModal={this.state.formulaireTitleAdd ? "Ajout d'un contact" : '' || this.state.formulaireUpdate ? 'Modification du contact' : ''}
+              formulaire={this.state.formulaire
+                ? Formul : false}
+              deleteDescription={this.state.descriptionDelete ? <DeleteDescription handleDelete={() => this.handleDelete(this.state.id)} handleClose={this.handleClose} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false} />
+          </section>
+        </article>
+      </Page>
+    )
+  }
+}
 export default Follow

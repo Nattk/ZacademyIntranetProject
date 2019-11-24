@@ -1,7 +1,7 @@
-import React, { Component } from './node_modules/react'
+import React, { Component } from 'react'
 import Page from '../../layouts/classic'
 import Button from '../../components/Boutons/Boutons'
-import Link from './node_modules/next/link'
+import Link from 'next/link'
 import Modal from '../../components/Modal/alert'
 
 class AjouterRessources extends Component {
@@ -17,16 +17,15 @@ class AjouterRessources extends Component {
       this.setState({modalShow: true})
       setTimeout(() => {
         this.setState({ modalShow: false })
-        window.location.assign('/communaute/Ressources/ressources')
+        window.location.assign('/Ressources/ressources')
       }, 5000)
     }
   }
 
   render () {
     return (
-      <Page title="Modifier Ressources">
-        <article className="ajouterRessource">
-          <h1>Modifier une ressource</h1>
+      <Page title="Modifier Ressources" contextePage="Modifier une ressource">
+        <article id="ajouter-ressource">
           <section>
             <form className="form-group d-flex flex-column" novalidate>
               <label for="titre">Titre de la ressource</label>
