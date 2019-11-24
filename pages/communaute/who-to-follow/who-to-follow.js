@@ -64,7 +64,8 @@ class Follow extends ValidationMethod {
         clicked={this.state.formulaireUpdate ? () => this.handleUpdate(this.state.id) : this.handleSubmit}
         onChange={this.onChange} lastName={this.state.lastName}
         influenceur
-        picture
+        contact
+        identity
         firstName={this.state.firstName}
         lastName={this.state.lastName}
         fonction={this.state.fonction}
@@ -85,7 +86,7 @@ class Follow extends ValidationMethod {
     return (
       <Page title=" Influenceurs" contextePage="Influenceurs" >
         <article id="who-to-follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
-          <Header clicked={this.handleModalAdd} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} firstName={this.state.firstName} lastName={this.state.lastName} title="Ajouter un contact" />
+          <Header clicked={this.handleModalAdd} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} firstName={this.state.firstName} lastName={this.state.lastName} title="Ajouter un influenceur" />
           <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
             {this.state.fakeData.map((user, id) => (
               <ShowCard

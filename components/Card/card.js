@@ -16,6 +16,7 @@ const Card = (props) => (
     <section className="section-user-card" style={{ borderTop: 'none' }}>
       <header>
         <h1 className="name-user-card">{props.firstName} {props.lastName}</h1>
+        {props.titleRss ? (<h1 className="name-user-card">{props.titleRss}</h1>) : null}
       </header>
       <section>
         <p className="fonction-user-card">{props.fonction} </p>
@@ -39,8 +40,8 @@ const Card = (props) => (
               <i className="fa fa-github card-button-github" title="Aller sur son github" />
             </a>) : null}
           {props.linkFluxRss ? (
-            <a href={props.linkFluxRss} title="Aller sur son github" target="_blank">
-              <i className="fa fa-github card-button-github" title="Aller sur son github" />
+            <a href={props.linkFluxRss} className="card-button-rss" title="Aller sur le lien flux rss" target="_blank">
+              Lien flux rss &nbsp; <i class="fas fa-rss card-button-rss"></i>
             </a>) : null}
         </section>
       </footer>

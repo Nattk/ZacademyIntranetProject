@@ -14,17 +14,23 @@ class Formulaire extends Component {
           phone={this.props.phone}
           mail={this.props.mail}
           contact={this.props.contact}
+          contactDetail={this.props.contactDetail}
           influenceur={this.props.influenceur}
+          rss={this.props.rss}
           picture={this.props.picture}
+          titleRss={this.props.titleRss}
           linkGithub={this.props.linkGithub}
           linkTwitter={this.props.linkTwitter}
           linkLinkedin={this.props.linkLinkedin}
+          linkFluxRss={this.props.linkFluxRss}
           uploadPicture={this.props.uploadPicture}
           onChange={this.props.onChange}
+          titleValidation={this.props.titleValidation}
           firstNameValidation={this.props.firstNameValidation}
           lastNameValidation={this.props.lastNameValidation}
           fonctionValidation={this.props.fonctionValidation}
           descriptionValidation={this.props.descriptionValidation}
+          linkFluxRssValidation={this.props.linkFluxRssValidation}
           mailValidation={this.props.mailValidation}
           phoneValidation={this.props.phoneValidation}
         />

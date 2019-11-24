@@ -6,20 +6,23 @@ import '../../styles/sass/styles.scss'
 
 export const ShowCard = (props) => (
   <Card
-    key={props.key}
-    picture={props.picture}
-    firstName={props.firstName.charAt(0).toUpperCase() + props.firstName.slice(1).toLowerCase()}
-    lastName={props.lastName.toUpperCase()}
-    fonction={props.fonction.length > 80 ? props.fonction.charAt(0).toUpperCase() + props.fonction.slice(2).toLowerCase().substring(0, 80) + '...' : props.fonction.charAt(0).toUpperCase() + props.fonction.slice(1).toLowerCase()}
-    description={props.description.length > 80 ? props.description.charAt(1).toUpperCase() + props.description.slice(2).toLowerCase().substring(0, 80) + '...' : props.description.charAt(0).toUpperCase() + props.description.slice(1).toLowerCase()}
-    mail={props.mail}
-    phone={props.phone}
+    key={props.key ? props.key : ''}
+    picture={props.picture ? props.picture : ''}
+    titleRss={props.titleRss ? props.titleRss.charAt(0).toUpperCase() + props.titleRss.slice(1).toLowerCase() : ''}
+    firstName={props.firstName ? props.firstName.charAt(0).toUpperCase() + props.firstName.slice(1).toLowerCase() : ''}
+    lastName={props.lastName ? props.lastName.toUpperCase() : ''}
+    fonction={props.fonction ? props.fonction.length > 80 ? props.fonction.charAt(0).toUpperCase() + props.fonction.slice(2).toLowerCase().substring(0, 80) + '...' : props.fonction.charAt(0).toUpperCase() + props.fonction.slice(1).toLowerCase() : ''}
+    description={props.description ? props.description.length > 80 ? props.description.charAt(1).toUpperCase() + props.description.slice(2).toLowerCase().substring(0, 80) + '...' : props.description.charAt(0).toUpperCase() + props.description.slice(1).toLowerCase() : ''}
+    mail={props.mail ? props.mail : ''}
+    phone={props.phone ? props.phone : ''}
     remove={props.remove}
     update={props.update}
-    linkTwitter={props.linkTwitter}
-    linkLinkedin={props.linkLinkedin}
-    linkGithub={props.linkGithub}
-    linkFluxRss={props.linkFluxRss}
+    linkTwitter={props.linkTwitter ? props.linkTwitter : ''}
+    linkLinkedin={props.linkLinkedin ? props.linkLinkedin : ''}
+    linkGithub={props.linkGithub ? props.linkGithub : ''}
+    linkFluxRss={props.linkFluxRss ? props.linkFluxRss : ''}
+    rss={props.rss}
+
   />
 )
 
@@ -35,19 +38,25 @@ export const Form = (props) => (
     fonction={props.fonction}
     phone={props.phone}
     mail={props.mail}
+    rss={props.rss}
     description={props.description}
     linkGithub={props.linkGithub}
     linkTwitter={props.linkTwitter}
     linkLinkedin={props.linkLinkedin}
+    titleRss={props.titleRss}
+    linkFluxRss={props.linkFluxRss}
     firstNameValidation={props.firstNameValidation}
     lastNameValidation={props.lastNameValidation}
     fonctionValidation={props.fonctionValidation}
+    titleValidation={props.titleValidation}
     descriptionValidation={props.descriptionValidation}
+    linkFluxRssValidation={props.linkFluxRssValidation}
     phoneValidation={props.phoneValidation}
     mailValidation={props.mailValidation}
     contact={props.contact}
     picture={props.picture}
     influenceur={props.influenceur}
+    contactDetail={props.contactDetail}
   />
 
 )

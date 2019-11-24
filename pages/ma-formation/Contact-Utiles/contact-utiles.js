@@ -15,7 +15,7 @@ class ContactsUtiles extends ValidationMethod {
 
   handleModalAdd () {
     this.setState({
-      showModal: true, formulaire: true, contact: true, formulaireTitleAdd: true, formulaireUpdate: false, descriptionDelete: false, firstName: '', lastName: '', fonction: '', description: '', phone: '', mail: ''
+      showModal: true, formulaire: true, contactDetail: true, formulaireTitleAdd: true, formulaireUpdate: false, descriptionDelete: false, firstName: '', lastName: '', fonction: '', description: '', phone: '', mail: ''
     })
   }
 
@@ -30,6 +30,7 @@ class ContactsUtiles extends ValidationMethod {
         clicked={this.state.formulaireUpdate ? () => this.handleUpdate(this.state.id) : this.handleSubmit}
         onChange={this.onChange} lastName={this.state.lastName}
         contact
+        contactDetail
         picture
         firstName={this.state.firstName}
         lastName={this.state.lastName}
