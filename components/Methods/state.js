@@ -13,10 +13,12 @@ export const state = {
   img: '',
   phone: '',
   mail: '',
+
   firstNameValidation: '',
   lastNameValidation: '',
   fonctionValidation: '',
   descriptionValidation: '',
+  contactDetail: false,
   contact: false,
   mailValidation: '',
   phoneValidation: '',
