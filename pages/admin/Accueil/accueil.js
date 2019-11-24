@@ -49,8 +49,8 @@ class Admin extends Component {
       <Page title="Admin Accueil" contextePage="Promotions en cours">
         <article id="admin-page">
           {/* //<button>Ajouter une promotion</button> */}
-          <section>
-            <input type="text" placeholder="Rechercher"/>
+          <section className="search-bar-promo d-flex flex-row">
+          <input className="form-control" type="text" placeholder="Rechercher"/>
           </section>
           <section>
           <table className="table table-hover">
