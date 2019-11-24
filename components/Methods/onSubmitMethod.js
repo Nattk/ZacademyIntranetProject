@@ -26,7 +26,7 @@ export default class OnSubmitMethod extends Component {
     const data = this.state.fakeData
     const newdata = [...data, elements]
 
-    if (this.state.firstName && this.state.lastName && this.state.fonction && this.state.description !== '' && this.state.contact ? this.state.mail && this.state.contact !== '' : null) {
+    if (this.state.firstName && this.state.lastName && this.state.fonction && this.state.description !== '' && this.state.contact ? this.state.mail && this.state.phone !== '' : null) {
       this.setState({ fakeData: newdata, showAlertSuccess: true, showModal: false, firstNameValidation: '', lastNameValidation: '', fonctionValidation: '', descriptionValidation: '', phoneValidation: '', mailValidation: '' })
       setTimeout(() => {
         this.setState({

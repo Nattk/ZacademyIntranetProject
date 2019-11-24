@@ -4,7 +4,9 @@ const Card = (props) => (
 
   <article className="col-md-3 col-sm-12 col-xs-12 article-card-who-to-follow" >
     <header className="header-user-card-who-to-follow" >
-      <img src="/firmin.jpg" alt="" className="img-user-card-who-to-follow" />
+      {props.picture ? (
+        <img src="/firmin.jpg" alt="" className="img-user-card-who-to-follow" />
+      ) : null}
       <section className="section-header-user-card-who-to-follow" >
         <i className="fa fa-remove remove-icon " title="supprimer ce profil " onClick={props.remove} />
         &nbsp;
