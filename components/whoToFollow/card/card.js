@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FollowCard = (props) => (
+const Card = (props) => (
 
   <article className="col-md-3 col-sm-12 col-xs-12 article-card-who-to-follow" >
     <header className="header-user-card-who-to-follow" >
@@ -18,6 +18,8 @@ const FollowCard = (props) => (
       <section>
         <p className="fonction-user-card-who-to-follow">{props.fonction} </p>
         <p className="description-user-card-who-to-follow" >{props.description}</p>
+        {props.email ? (<p className="description-user-card-who-to-follow" ><i class="far fa-envelope"></i>&nbsp; &nbsp;{props.email}</p>) : null}
+        {props.telephone ? (<p className="description-user-card-who-to-follow" ><i class="fas fa-phone-alt"></i>&nbsp; &nbsp;{props.telephone}</p>) : null}
       </section>
       <footer className="footer-card-who-to-follow button-follow" >
         <section className="section-footer-card-who-to-follow">
@@ -40,4 +42,4 @@ const FollowCard = (props) => (
   </article>
 )
 
-export default FollowCard
+export default Card

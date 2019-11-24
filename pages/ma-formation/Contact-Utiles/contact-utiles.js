@@ -1,53 +1,82 @@
-import ContactCard from '../../../components/Contacts/contactCard'
+
 import Page from '../../../layouts/classic'
+import React from 'react'
+import Header from '../../../components/Header/header-button-add'
+import Modal from '../../../components/Modal/modal'
+import ValidationMethod from '../../../components/Methods/ValidationMethod'
+import { Form, ShowCard, DeleteDescription } from '../../../components/Modal/SectionModal'
+import '../../../styles/sass/styles.scss'
+class ContactsUtiles extends ValidationMethod {
+  constructor (props) {
+    super(props)
+    this.handleModalAdd = this.handleModalAdd.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+  }
 
-const ContactsUtiles = (props) => {
-  const contacts =
-    [
-      {
-        name: "J'ai rémi Pas Tonier",
-        fonction: 'Formateur principal',
-        telephone: '0606060606',
-        email: 'pastonier@gmail.com'
-      },
-      {
-        name: 'Joe Nathan',
-        fonction: 'React Overlord',
-        telephone: '0707070707',
-        email: 'jonathan@gmail.com'
-      },
-      {
-        name: 'Nattan Drake',
-        fonction: "Sauveur de l'humanité",
-        telephone: '090909090909',
-        email: 'pasdinspi@gmail.com'
-      },
-      {
-        name: 'Nord Bher',
-        fonction: 'Directeur ZA-KA',
-        telephone: '01010101010101',
-        email: 'troplong@gmail.com'
-      }
-    ]
-  const Rows = () => contacts.map(x =>
-    <ContactCard
-      key={x.name}
-      name={x.name}
-      email={x.email}
-      fonction={x.fonction}
-      telephone={x.telephone}
-    />
-  )
+  handleModalAdd () {
+    this.setState({
+      showModal: true, formulaire: true, contact: true, formulaireTitleAdd: true, formulaireUpdate: false, descriptionDelete: false, firstName: '', lastName: '', fonction: '', description: '', phone: '', mail: ''
+    })
+  }
 
-  return (
-    <Page title="Contact Utiles" contextePage="Contact Utiles">
-      <article className="profiles flex-column" role="liste des profiles" alt="profil contact utile" id="article_contact_utiles" >
-        <div id="div_contact_utiles">
-          {Rows()}
-        </div>
-      </article>
-    </Page>
-  )
+  handleClose () {
+    this.setState({ showModal: false, firstNameValidation: '', lastNameValidation: '', fonctionValidation: '', descriptionValidation: '', mailValidation: '', phoneValidation: '' })
+  }
+
+  render () {
+    const Formul = (
+      <Form handleClose={this.handleClose}
+        buttonName={this.state.formulaireUpdate ? 'Mettre à jour' : 'Ajouter'}
+        clicked={this.state.formulaireUpdate ? () => this.handleUpdate(this.state.id) : this.handleSubmit}
+        onChange={this.onChange} lastName={this.state.lastName}
+        contact
+        picture
+        firstName={this.state.firstName}
+        lastName={this.state.lastName}
+        fonction={this.state.fonction}
+        description={this.state.description}
+        mail={this.state.mail}
+        phone={this.state.phone}
+        firstNameValidation={this.state.firstNameValidation}
+        lastNameValidation={this.state.lastNameValidation}
+        fonctionValidation={this.state.fonctionValidation}
+        descriptionValidation={this.state.descriptionValidation}
+        phoneValidation={this.state.phoneValidation}
+        mailValidation={this.state.mailValidation}
+      />
+    )
+    return (
+      <Page title="Contact Utiles" contextePage="Contact Utiles">
+        <article id="contact-utiles" className="col-md-12 col-sm-12 col-xs-12 section-card" >
+          <Header clicked={this.handleModalAdd} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} firstName={this.state.firstName} lastName={this.state.lastName} title="Ajouter un contact" />
+          <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
+            {this.state.fakeData.map((user, id) => (
+              <ShowCard
+                key={id}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                fonction={user.fonction}
+                description={user.description}
+                mail={user.mail}
+                phone={user.phone}
+                remove={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, id: user.id })}
+                update={() => this.setState({
+                  showModal: true, formulaire: true, formulaireUpdate: true, descriptionDelete: false, formulaireTitleAdd: false, id: user.id, firstName: user.firstName, lastName: user.lastName, fonction: user.fonction, description: user.description, mail: user.mail, phone: user.phone
+                })}
+              />
+            ))}
+            <Modal
+              show={this.state.showModal}
+              onClose={this.handleClose}
+              titleModal={this.state.formulaireTitleAdd ? "Ajout d'un contact" : '' || this.state.formulaireUpdate ? 'Modification du contact' : ''}
+              formulaire={this.state.formulaire
+                ? Formul : false}
+              deleteDescription={this.state.descriptionDelete ? <DeleteDescription handleDelete={() => this.handleDelete(this.state.id)} handleClose={this.handleClose} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false} />
+          </section>
+        </article>
+      </Page>
+    )
+  }
 }
 
 export default ContactsUtiles
