@@ -5,6 +5,7 @@ import Button from '../../components/Boutons/Boutons'
 import Link from 'next/link'
 import Select from 'react-select'
 import axios from 'axios'
+import Spinner from '../../components/Spinner/spinner'
 import { getAllRessources, getAllModules, getAllSequences, getAllPromotions } from '../../services/ressources'
 
 class Ressources extends Component{
@@ -26,6 +27,7 @@ class Ressources extends Component{
     }
 
 
+//Get des ressources, modules et séquences dans la base de donnée    
   componentDidMount(){
     axios.all([getAllRessources(), getAllModules(), getAllSequences(), getAllPromotions()])
     .then(axios.spread( (ressources, modules, sequences, promotions)=>{
@@ -35,6 +37,8 @@ class Ressources extends Component{
       this.setState({ressources: ressources.data})
     }))
   }
+
+  //Renvoi false si il y'a un doublon entre la ressource selectionné et les ressources déjà sélectionné et filtrés
   doublonsRessources(ressId){
     const doublon = this.state.ressourcesFiltered.filter( ressfilter => ressfilter.ressId === ressId)
     if(doublon.length){
@@ -52,24 +56,27 @@ class Ressources extends Component{
     return ressTable
   }
 
-
   filtre = (selecteur, event) => {
+//Ces listes sont liés a la state pour qu'elles persistent à chaque appel de fonction
+//Liste des ressources selectionnés et filtrés   
     let filtered = [...this.state.ressourcesFiltered]
+//Liste des ressources selectionné en fonction du filtre (promotions, modules ou sequences) 
     let modules = [...this.state.ressourcesModules]
     let promotions = [...this.state.ressourcesPromotions]
     let sequences = [...this.state.ressourcesSequences]
+//id des resssources selectonné en fonction du filtre(promotions, modules ou sequences)
     let promoId = [...this.state.promoId]
     let moduleId = [...this.state.moduleId]
     let sequenceId = [...this.state.sequenceId]
 
-//promo filtre
+//promo filtrage en fonction de l'évenement
     if(event.action === "select-option" && event.name === "Promotions" && selecteur){
       for(let i = 0, length = selecteur.length; i<length; i++){
         promoId.push(selecteur[i].id)
         promotions.push(...this.state.ressources.filter( ress => (
            ress.promoId === selecteur[i].id && this.doublonsRessources(ress.ressId)
         )).filter( ress => ress.promoId ))
-      }
+      }  
       this.setState({ressourcesPromotions : promotions})
       this.setState({promoId: promoId})
     }
@@ -96,20 +103,25 @@ class Ressources extends Component{
       }))
       }
       this.setState({ressourcesModules : modules})
+      this.setState({moduleId: moduleId})
     }
     else if(event.action === "remove-value" && event.name === "Modules"){
+      moduleId = moduleId.filter( id => id !== event.removedValue.id )
       modules = modules.filter( modules => (
         modules.modId != event.removedValue.id && this.doublonsRessources(modules.ressId)
       ))
       this.setState({ressourcesModules : modules})
+      this.setState({moduleId: moduleId})
+
     }
     else if(event.action === "clear" && event.name === "Modules"){
       modules = []
       this.setState({ressourcesModules : modules})
+      this.setState({moduleId: moduleId})
+
     }
 //sequences filtre
     if(event.action === "select-option" && event.name === "Sequences" && selecteur){
-      console.log('sequences')
       for(let i = 0, length = selecteur.length; i<length; i++){
         sequenceId.push(selecteur[i].id)
         sequences.push(...this.state.ressources.filter( ress => {
@@ -128,24 +140,19 @@ class Ressources extends Component{
       sequences = []
       this.setState({ressourcesSequences : sequences})
     }
-    // this.checkTables(moduleId, promotions,'modId')
-    // this.checkTables(sequenceId, promotions,'seqId')
-    // this.checkTables(promotionId, modules,'promoId')
-    // this.checkTables(sequenceId, modules,'seqId')
+
+//Filtrer les tableaux de ressources par rapport aux ID des filtres potentiellement déjà selctionnés
+    promotions = this.checkTables(moduleId, promotions,'modId')
+    promotions = this.checkTables(sequenceId, promotions,'seqId')
+    modules = this.checkTables(promoId, modules,'promoId')
+    modules = this.checkTables(sequenceId, modules,'seqId')
     sequences = this.checkTables(promoId, sequences,'promoId')
     sequences = this.checkTables(moduleId, sequences,'modId')
 
-    for(let i = 0; i < moduleId.length; i++){
-      promotions = promotions.filter( promo => moduleId[i] === promo.modId)
-    }
-    console.log('check', promotions)
-
-    for(let i = 0; i < promoId.length; i++){
-      modules = modules.filter( mod => promoId[i] === mod.promoId)
-    }
     this.setState({ressourcesSequences : sequences})
     this.setState({ressourcesPromotions : promotions})
     this.setState({ressourcesModules : modules})
+
     filtered = [...promotions, ...modules,...sequences]
     this.setState({ressourcesFiltered: filtered})
   }
@@ -160,7 +167,6 @@ class Ressources extends Component{
     const ressources = this.state.ressourcesFiltered.length ? this.state.ressourcesFiltered : this.state.ressources
     let ressourcesCartes = null
     if(ressources.length){
-      console.log(ressources)
       ressourcesCartes = (
         ressources.map( (ressource, index) => (
         <Card styleName="ressource-carte d-flex flex-column" key={index}>
@@ -182,17 +188,15 @@ class Ressources extends Component{
               </section>
             </div>
             <aside className="d-flex flex-row justify-content-end"> 
-              <Button btnType="modifier" title="Modifier"> <Link href="./modifier-ressource"><a>Modifier</a></Link></Button>
+              <Link href="./modifier-ressource"><a className="btn btn-warning">Modifier</a></Link>
               <Button btnType="annuler" title="Supprimer" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
             </aside>
         </Card>)))
     }
     else{
-      ressourcesCartes = <div>...Loading</div>
-
+      ressourcesCartes = <Spinner/>
     }
 
-    
     return(
     <Page title="Ressources" contextePage="Ressources">
       <article className="ressources d-flex flex-column">
@@ -227,13 +231,11 @@ class Ressources extends Component{
           onChange={(selecteur, event) => this.filtre(selecteur, event)}
           name='Sequences'
           ></Select>
-          <Button btnType="valider">
             <Link href="./ajouter-ressource">
-              <a>
+              <a className="btn btn-success">
                 Ajouter une ressource
               </a>
             </Link>
-          </Button>
         </header>
         <aside className="align-self-stretch">
             <i>{ressources.length} ressources trouvées</i>
@@ -242,13 +244,11 @@ class Ressources extends Component{
             {ressourcesCartes}
         </section>
           <footer className="d-flex align-items-end">
-            <Button btnType="valider">
               <Link href="./ajouter-ressource">
-                <a>
+                <a className="btn btn-success">
                   Ajouter une ressource
                 </a>
               </Link>
-            </Button>
           </footer>
       </article>
       </Page>

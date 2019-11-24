@@ -25,7 +25,7 @@ class AjouterRessources extends Component {
   render () {
     return (
       <Page title="Modifier Ressources" contextePage="Modifier une ressource">
-        <article className="ajouterRessource">
+        <article id="ajouter-ressource">
           <section>
             <form className="form-group d-flex flex-column" novalidate>
               <label for="titre">Titre de la ressource</label>

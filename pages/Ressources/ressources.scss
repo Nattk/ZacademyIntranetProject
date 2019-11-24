@@ -13,7 +13,7 @@
 }
 
 .ressource-carte,
-.ressourceContent {
+.ressource-content {
     padding: 1rem;
     min-width: 40rem;
 
@@ -56,7 +56,7 @@
     width: 10rem;
 }
 
-.ressourceContent {
+.ressource-content {
     padding: 2rem;
 }
 
@@ -71,11 +71,4 @@ article.gestionProgramme.card .card-body li {
 article.gestionProgramme.card footer {
     padding: 1rem;
 
-}
-
-.ajouterRessource input[type=text] {
-    background-color: unset;
-    color: black;
-    text-align: left;
-    padding: 0.5rem;
 }
