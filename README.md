@@ -9,4 +9,4 @@ Designed with nextJS, you can find the pages in ./pages. They are composed of :
 
 ## STYLING
 Each component is with its own sass stylesheet.
-Naming components is based on BEM best practices to follow bootstrap classes configuration
+Component names are kebab-cased to follow bootstrap's classes configuration
