@@ -20,8 +20,8 @@ class RessourceIndividuelle extends Component {
   render () {
     return (
       <Page title={this.state.ressource.titre}>
-        <article className="ressourceIndividuelle">
-          <Card styleName="ressourceContent">
+        <article className="ressource-individuelle d-flex flex-column">
+          <Card styleName="ressource-content">
             <h1>{this.state.ressource.titre}</h1>
             <div className="d-flex flex-row">
               <img
@@ -29,7 +29,7 @@ class RessourceIndividuelle extends Component {
                 alt="profile-user"
                 className="img-socialMedia"
               />
-            <section className="d-flex flex-column ressourceDetails">
+            <section className="d-flex flex-column ressource-details">
               <i>{this.state.ressource.auteur} . 12/12/2019 . {this.state.ressource.promotion}</i>
               <i>#HTML #CSS</i>
             </section>
@@ -58,7 +58,7 @@ class RessourceIndividuelle extends Component {
             Incididunt sit ut consectetur adipisicing culpa laborum Lorem nostrud pariatur laborum elit commodo commodo ex.<br/> 
             Culpa amet deserunt exercitation cupidatat exercitation Lorem.</p>
         </Card>
-        <Button btnType="annuler" title="Retour à la liste des ressources"><Link href="./ressources"><a>Retour à la liste des ressources</a></Link></Button>
+        <Link href="./ressources"><a title="Retour à la liste des ressources">Retour à la liste des ressources</a></Link>
         </article>
       </Page>
     )
