@@ -1,10 +1,42 @@
 
 import { Component } from 'react'
-import { state } from './state'
+import Data from '../Contacts/data.json'
 export default class OnSubmitMethod extends Component {
   constructor (props) {
     super(props)
-    this.state = { ...state }
+    this.state = {
+      fakeData: Data,
+      id: '',
+      firstName: '',
+      lastName: '',
+      fonction: '',
+      description: '',
+      linkGithub: '',
+      linkLinkedin: '',
+      linkTwitter: '',
+      img: '',
+      phone: '',
+      mail: '',
+      firstNameValidation: '',
+      lastNameValidation: '',
+      fonctionValidation: '',
+      descriptionValidation: '',
+      contactDetail: false,
+      contact: false,
+      mailValidation: '',
+      phoneValidation: '',
+      imgValidation: '',
+      descriptionDelete: false,
+      formulaire: false,
+      showModal: false,
+      showModalDelete: false,
+      showModalUpdate: false,
+      showAlertSuccess: false,
+      showAlertUpdate: false,
+      formulaireUpdate: false,
+      showAlertDelete: false,
+      formulaireTitleAdd: false
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
