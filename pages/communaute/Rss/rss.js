@@ -2,14 +2,35 @@ import React from 'react'
 import Page from '../../../layouts/classic'
 import Header from '../../../components/Header/header-button-add'
 import Modal from '../../../components/Modal/modal'
-import { state } from './state'
+import Data from './data.json'
 import ValidationMethod from '../../../components/Methods/ValidationMethod'
 import { Form, ShowCard, DeleteDescription } from '../../../components/Modal/SectionModal'
 import '../../../styles/sass/styles.scss'
 class Follow extends ValidationMethod {
   constructor (props) {
     super(props)
-    this.state = { ...state }
+    this.state = {
+      fakeData: Data,
+      id: '',
+      titleRss: '',
+      description: '',
+      linkFluxRss: '',
+      titleValidation: '',
+      descriptionValidation: '',
+      linkFluxRssValidation: '',
+      descriptionDelete: false,
+      formulaire: false,
+      showModal: false,
+      showModalDelete: false,
+      showModalUpdate: false,
+      showAlertSuccess: false,
+      showAlertUpdate: false,
+      formulaireUpdate: false,
+      showAlertDelete: false,
+      formulaireTitleAdd: false
+
+    }
+
     this.handleModalAdd = this.handleModalAdd.bind(this)
     this.handleClose = this.handleClose.bind(this)
   }

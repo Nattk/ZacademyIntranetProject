@@ -1,7 +1,6 @@
 import CardContact from '../CardContact/cardContact'
 import DeleteCard from './sectionDeleteModal'
 import Formulaire from '../Formulaire/formulaire'
-import { state } from '../Methods/state'
 import '../../styles/sass/styles.scss'
 
 export const ShowCard = (props) => (
@@ -32,7 +31,7 @@ export const Form = (props) => (
     clicked={props.clicked}
     buttonName={props.buttonName}
     onChange={props.onChange}
-    uploadPicture={state.img}
+    uploadPicture={props.img}
     firstName={props.firstName}
     lastName={props.lastName}
     fonction={props.fonction}

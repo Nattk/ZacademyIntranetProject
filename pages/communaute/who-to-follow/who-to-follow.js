@@ -2,14 +2,42 @@ import React from 'react'
 import Page from '../../../layouts/classic'
 import Header from '../../../components/Header/header-button-add'
 import Modal from '../../../components/Modal/modal'
-import { state } from './state'
+
 import ValidationMethod from '../../../components/Methods/ValidationMethod'
 import { Form, ShowCard, DeleteDescription } from '../../../components/Modal/SectionModal'
+import Data from '../../../components/whoToFollow/data.json'
 import '../../../styles/sass/styles.scss'
 class Follow extends ValidationMethod {
   constructor (props) {
     super(props)
-    this.state = { ...state }
+    this.state = {
+      fakeData: Data,
+      id: '',
+      firstName: '',
+      lastName: '',
+      fonction: '',
+      description: '',
+      linkGithub: '',
+      linkLinkedin: '',
+      linkTwitter: '',
+      img: '',
+      firstNameValidation: '',
+      lastNameValidation: '',
+      fonctionValidation: '',
+      descriptionValidation: '',
+      imgValidation: '',
+      descriptionDelete: false,
+      formulaire: false,
+      showModal: false,
+      showModalDelete: false,
+      showModalUpdate: false,
+      showAlertSuccess: false,
+      showAlertUpdate: false,
+      formulaireUpdate: false,
+      showAlertDelete: false,
+      formulaireTitleAdd: false
+
+    }
     this.handleModalAdd = this.handleModalAdd.bind(this)
     this.handleClose = this.handleClose.bind(this)
   }
@@ -31,8 +59,6 @@ class Follow extends ValidationMethod {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       fonction: this.state.fonction,
-      mail: this.state.mail,
-      phone: this.state.phone,
       img: this.state.img,
       description: this.state.description.length > 70 ? this.state.description.substring(0, 70) + '...' : this.state.description,
       linkGithub: this.state.linkGithub,
@@ -70,8 +96,6 @@ class Follow extends ValidationMethod {
         lastName={this.state.lastName}
         fonction={this.state.fonction}
         description={this.state.description}
-        mail={this.state.mail}
-        phone={this.state.phone}
         linkGithub={this.state.linkGithub}
         linkLinkedin={this.state.linkLinkedin}
         linkTwitter={this.state.linkTwitter}
@@ -79,8 +103,7 @@ class Follow extends ValidationMethod {
         lastNameValidation={this.state.lastNameValidation}
         fonctionValidation={this.state.fonctionValidation}
         descriptionValidation={this.state.descriptionValidation}
-        phoneValidation={this.state.phoneValidation}
-        mailValidation={this.state.mailValidation}
+
       />
     )
     return (
@@ -99,8 +122,6 @@ class Follow extends ValidationMethod {
                 linkGithub={user.linkGithub}
                 linkTwitter={user.linkTwitter}
                 picture
-                mail={user.mail}
-                phone={user.phone}
                 remove={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, id: user.id })}
                 update={() => this.setState({
                   showModal: true, formulaire: true, formulaireUpdate: true, descriptionDelete: false, formulaireTitleAdd: false, id: user.id, firstName: user.firstName, lastName: user.lastName, fonction: user.fonction, description: user.description, linkLinkedin: user.linkLinkedin, linkGithub: user.linkGithub, linkTwitter: user.linkTwitter
