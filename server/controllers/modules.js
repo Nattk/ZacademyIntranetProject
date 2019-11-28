@@ -47,10 +47,15 @@ modulesRouter.delete('/:id', async (request, response, next) => {
 })
 
 modulesRouter.put('/:id', async (request, response, next) => {
+  const programme = await Programme.findById(request.body.programmeId)
   const body = request.body
 
   try {
     const moduleToUpdate = await Module.findByIdAndUpdate(request.params.id, body, { new: true })
+    if (programme && programme.modules.filter(x => x.toString() === moduleToUpdate.id).length === 0) {
+      programme.modules = programme.modules.concat(moduleToUpdate._id)
+      await programme.save()
+    }
     response.json(moduleToUpdate.toJSON())
   } catch (error) {
     next(error)
