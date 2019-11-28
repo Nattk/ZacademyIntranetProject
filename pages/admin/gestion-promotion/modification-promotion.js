@@ -1,11 +1,11 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
 import Alert from '../../../components/Modal/alert'
 class ModificationPromotion extends Component {
   state = {
     promotions: [
-      { ville: "Rio de Janeiro", name: "Promo Rio 1", dateDebut: "10/10/2019", dateFin: "10/01/2019", promoId: 1 }
+      { ville: 'Rio de Janeiro', name: 'Promo Rio 1', dateDebut: '10/10/2019', dateFin: '10/01/2019', promoId: 1 }
     ],
     show: false
   }
@@ -21,16 +21,18 @@ class ModificationPromotion extends Component {
   handleClose = () => {
     this.setState({ show: false })
   }
+
   previousPage = () => {
     window.location.assign('/admin/gestion-promotion/gestion-promotion')
   }
-  render() {
+
+  render () {
     return (
       <Page title="Modification Promotion">
         <article class="gestionProgramme card" id="form_creation_promotion">
           <header class="card-header text-center">
             Modifier une promotion
-            </header>
+          </header>
           <form class="container" >
             <section class="section">
 
@@ -106,8 +108,7 @@ class ModificationPromotion extends Component {
                 className="btn btn-primary text-center button-cancel-programme"
               >
                 Annuler
-							</Button>
-
+              </Button>
 
               <Button
                 btnType="valider"
@@ -115,7 +116,7 @@ class ModificationPromotion extends Component {
 
               >
                 Modifier
-								</Button>
+              </Button>
               {this.state.show ? (
                 <Alert
                   show={this.state.show}

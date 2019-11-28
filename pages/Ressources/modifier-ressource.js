@@ -5,16 +5,14 @@ import Link from 'next/link'
 import Modal from '../../components/Modal/alert'
 
 class AjouterRessources extends Component {
-
   state = {
     modalShow: false
   }
 
   handleValidation = () => {
-
-    if(document.getElementById('titre').value != '' && document.getElementById('ressource').value !=""){
-      event.preventDefault();
-      this.setState({modalShow: true})
+    if (document.getElementById('titre').value !== '' && document.getElementById('ressource').value !== '') {
+      event.preventDefault()
+      this.setState({ modalShow: true })
       setTimeout(() => {
         this.setState({ modalShow: false })
         window.location.assign('/Ressources/ressources')
@@ -47,15 +45,15 @@ class AjouterRessources extends Component {
                 <option value="Javascript">Javascript</option>
               </select>
               <div className="d-flex flex-row justify-content-end">
-              <Button btnType="annuler" title="annuler"><Link href="./ressources"> Annuler</Link></Button>
-              <Button btnType="valider" title="valider" submit={true} clicked={this.handleValidation}>Valider</Button>
-            </div>
+                <Button btnType="annuler" title="annuler"><Link href="./ressources"> Annuler</Link></Button>
+                <Button btnType="valider" title="valider" submit={true} clicked={this.handleValidation}>Valider</Button>
+              </div>
             </form>
           </section>
         </article>
         {this.state.modalShow ? (
-									<Modal show={this.state.modalShow} modalTitle="Ressource Modifié avec succés" />
-								) : null}      
+          <Modal show={this.state.modalShow} modalTitle="Ressource Modifié avec succés" />
+        ) : null}
       </Page>
     )
   }

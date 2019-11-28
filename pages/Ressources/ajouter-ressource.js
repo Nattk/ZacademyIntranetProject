@@ -9,45 +9,45 @@ class AjouterRessources extends Component {
       modalShow: false
     }
 
-  handleValidation () {
+    handleValidation () {
 
-  }
+    }
 
-  render () {
-    return (
-      <Page title="Ajouter Ressources" contextePage="Ajouter une ressource">
-        <article id="ajouter-ressource">
-          <section>
-            <form className="form-group d-flex flex-column">
-              <label htmlFor="titre">Titre</label>
-              <div className="d-flex flex-row">
-                <input id="titre" className="form-control" type="text" required/>
-                <span>&nbsp;*</span>
-              </div>
-              <label htmlFor="ressource">Ressource</label>
-              <div className="d-flex flex-row">
-                <textarea for="ressource" className="form-control" required>
-                </textarea>
-                <span>&nbsp;*</span>
-              </div>
-              <label htmlFor="modules">Modules associés</label>
-              <select id="modules" className="form-control" type="text" required>
-                <option value="HTML">HTML</option>
-                <option value="CSS">Css</option>
-                <option value="Javascript">Javascript</option>
-              </select>
-              <div class="d-flex flex-row justify-content-end">
-                 <Button btnType="valider" title="Ajouter une ressource" submit={true} clicked={this.handleValidation}>Ajouter</Button>
-                 <Link href="./ressources"><a title="Annuler la modification" className="btn btn-danger">Annuler</a></Link>
-              </div>
-            </form>
-          </section>
-        </article>
-        {this.state.modalShow ? (
-          <Modal show={this.state.modalShow} modalTitle="La ressource a été ajouté avec succés" />
-        ) : null}
-      </Page>
-    )
-  }
+    render () {
+      return (
+        <Page title="Ajouter Ressources" contextePage="Ajouter une ressource">
+          <article id="ajouter-ressource">
+            <section>
+              <form className="form-group d-flex flex-column">
+                <label htmlFor="titre">Titre</label>
+                <div className="d-flex flex-row">
+                  <input id="titre" className="form-control" type="text" required/>
+                  <span>&nbsp;*</span>
+                </div>
+                <label htmlFor="ressource">Ressource</label>
+                <div className="d-flex flex-row">
+                  <textarea for="ressource" className="form-control" required>
+                  </textarea>
+                  <span>&nbsp;*</span>
+                </div>
+                <label htmlFor="modules">Modules associés</label>
+                <select id="modules" className="form-control" type="text" required>
+                  <option value="HTML">HTML</option>
+                  <option value="CSS">Css</option>
+                  <option value="Javascript">Javascript</option>
+                </select>
+                <div class="d-flex flex-row justify-content-end">
+                  <Button btnType="valider" title="Ajouter une ressource" submit={true} clicked={this.handleValidation}>Ajouter</Button>
+                  <Link href="./ressources"><a title="Annuler la modification" className="btn btn-danger">Annuler</a></Link>
+                </div>
+              </form>
+            </section>
+          </article>
+          {this.state.modalShow ? (
+            <Modal show={this.state.modalShow} modalTitle="La ressource a été ajouté avec succés" />
+          ) : null}
+        </Page>
+      )
+    }
 }
 export default AjouterRessources

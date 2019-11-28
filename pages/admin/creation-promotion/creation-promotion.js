@@ -19,19 +19,19 @@ class CreaPromotion extends Component {
   handleClose = () => {
     this.setState({ show: false })
   }
+
   previousPage = () => {
     window.location.assign('/admin/gestion-promotion/gestion-promotion')
   }
 
-
-  render() {
+  render () {
     return (
 
       <Page title="Création promotion">
         <article className="gestionProgramme card" id="form_creation_promotion">
           <header className="card-header text-center">
             Creation une promotion
-      </header>
+          </header>
           <form className="container" >
             <section className="section">
 
@@ -106,14 +106,14 @@ class CreaPromotion extends Component {
                 className="btn btn-primary text-center button-cancel-programme"
               >
                 Annuler
-							</Button>
+              </Button>
               <Button
                 btnType="valider"
                 clicked={this.handleUpdate}
 
               >
                 Créer promotion
-								</Button>
+              </Button>
               {this.state.show ? (
                 <Alert
                   show={this.state.show}
