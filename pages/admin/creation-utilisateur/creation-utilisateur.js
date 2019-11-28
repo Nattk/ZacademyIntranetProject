@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
-import Link from 'next/link'
 import Button from '../../../components/Boutons/Boutons'
 import Alert from '../../../components/Modal/alert'
 class CreaUtilisateur extends Component {
@@ -20,18 +19,18 @@ class CreaUtilisateur extends Component {
   handleClose = () => {
     this.setState({ show: false })
   }
+
   previousPage = () => {
     window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
   }
 
-
-  render() {
+  render () {
     return (
       <Page title="Création Utilisateur">
         <article className="gestionProgramme card" id="form_creation_utilisateur">
           <header className="card-header text-center">
             Creation un utilisateur
-      </header>
+          </header>
           <form className="container" >
             <section className="section">
               <div className="form-group">
@@ -92,14 +91,14 @@ class CreaUtilisateur extends Component {
                 className="btn btn-primary text-center button-cancel-programme"
               >
                 Annuler
-							</Button>
+              </Button>
               <Button
                 btnType="valider"
                 clicked={this.handleUpdate}
 
               >
                 Ajout utilisateur
-								</Button>
+              </Button>
               {this.state.show ? (
                 <Alert
                   show={this.state.show}

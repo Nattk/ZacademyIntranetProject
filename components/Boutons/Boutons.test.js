@@ -6,5 +6,6 @@ import Button from './Boutons'
 describe('Creation Programme', () => {
   test('renders content', () => {
     const component = render(<Button />)
+    console.log(component)
   })
 })

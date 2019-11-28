@@ -8,33 +8,35 @@ class CreaProgramme extends Component {
     show: false
   }
 
-  handleUpdate = () => {
-    // if (name === '' || undefined) {
-    //   this.setState({ show: false })
-    // } else {
-    return this.setState({ show: true })
-    // }
-  }
+   handleUpdate = () => {
+     // if (name === '' || undefined) {
+     //   this.setState({ show: false })
+     // } else {
+     return this.setState({ show: true })
+     // }
+   }
 
   handleConfirmForm = () => {
     window.location.assign('/admin/gestion-programme/gestion-programme')
   }
+
   handleClose = () => {
     this.setState({ show: false })
   }
+
   previousPage = () => {
     window.location.assign('/admin/gestion-programme/gestion-programme')
   }
 
-  render() {
+  render () {
     return (
 
       <Page title="Création programme">
         <article className="gestionProgramme card" id="form_creation_programme">
           <header className="card-header text-center">
             Creation programme
-      </header>
-          <form className="container"  >
+          </header>
+          <form className="container" >
             <section className="section">
               <div className="form-group">
                 <label htmlFor="programtitle">Titre</label><br></br>
@@ -81,7 +83,7 @@ class CreaProgramme extends Component {
                 className="btn btn-primary text-center button-cancel-programme"
               >
                 Annuler
-							</Button>
+              </Button>
               <Button
                 btnType="valider"
                 // type="submit"
@@ -89,7 +91,7 @@ class CreaProgramme extends Component {
 
               >
                 Créer programme
-								</Button>
+              </Button>
               {this.state.show ? (
                 <Alert
                   show={this.state.show}

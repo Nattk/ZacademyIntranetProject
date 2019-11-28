@@ -6,5 +6,6 @@ import CreaProgramme from './creation-programme'
 describe('Creation Programme', () => {
   test('renders content', () => {
     const component = render(<CreaProgramme/>)
+    console.log(component)
   })
 })

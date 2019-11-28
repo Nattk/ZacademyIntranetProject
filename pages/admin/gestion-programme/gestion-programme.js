@@ -1,52 +1,52 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
 import Alert from '../../../components/Modal/alert'
-import Link from 'next/link'
 
 class ProgrammeGestion extends Component {
   state = {
     programmes: [
-      { name: "Développeur Javascript", progId: 1 },
-      { name: "Développeur Java", progId: 2 },
-      { name: "Chef de Projet web", progId: 3 }
+      { name: 'Développeur Javascript', progId: 1 },
+      { name: 'Développeur Java', progId: 2 },
+      { name: 'Chef de Projet web', progId: 3 }
     ],
     show: false
   }
+
   handleModal = (event) => {
     this.setState({ show: true })
     event.preventDefault()
   }
+
   handleDelete = (progId) => {
-    const prog = this.state.programmes.filter(item => item.progId !== progId);
-    this.setState({ programmes: prog });
+    const prog = this.state.programmes.filter(item => item.progId !== progId)
+    this.setState({ programmes: prog })
     this.setState({ show: false })
 
     event.preventDefault()
   }
+
   handleClose = (event) => {
     this.setState({ show: false })
 
     event.preventDefault()
   }
 
-
-
   handleDuplication = (progId) => {
-    alert('Programme  duppliqué !');
-    const programmes = this.state.programmes;
-    const prog = this.state.programmes.filter(item => item.progId === progId);
-    programmes.push(prog[0]);
-    this.setState({ programmes: programmes });
+    alert('Programme  duppliqué !')
+    const programmes = this.state.programmes
+    const prog = this.state.programmes.filter(item => item.progId === progId)
+    programmes.push(prog[0])
+    this.setState({ programmes: programmes })
   }
 
-  render() {
+  render () {
     return (
       <Page title="Gestion des programmes">
         <article className="gestionProgramme card">
           <header className="card-header">
             Liste des programmes
-        </header>
+          </header>
           <section className="card-body">
             <ul>
               {this.state.programmes.map((programme, index) => (
@@ -54,9 +54,9 @@ class ProgrammeGestion extends Component {
                   <a href="#">{programme.name}</a>
                   <Button btnType="dupliquer" clicked={(progId) => this.handleDuplication(programme.progId)}><a>Dupliquer</a></Button>
                   <Button btnType="annuler" clicked={this.handleModal}>Supprimer</Button>
-                  <a href="/admin/gestion-programme/modification-programme" title="modification-programme" className="link-button-valider"  >
+                  <a href="/admin/gestion-programme/modification-programme" title="modification-programme" className="link-button-valider" >
                     Modifier
-									</a>
+                  </a>
                   {this.state.show ? (
                     <Alert
                       show={this.state.show}
@@ -76,10 +76,9 @@ class ProgrammeGestion extends Component {
           </section>
           <footer className="d-flex flex-row align-items-end justify-content-center">
 
-
-            <a href="/admin/creation-programme/creation-programme" title="creation-programme" className="link-button-creation"  >
+            <a href="/admin/creation-programme/creation-programme" title="creation-programme" className="link-button-creation" >
               Ajouter un programme
-									</a>
+            </a>
           </footer>
         </article>
       </Page>

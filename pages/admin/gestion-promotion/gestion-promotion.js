@@ -1,28 +1,30 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
-import Link from 'next/link'
 import Alert from '../../../components/Modal/alert'
 class PromotionGestion extends Component {
   state = {
     promotions: [
-      { ville: "Rio de Janeiro", promotion: "Promo Rio 1", promoId: 1 },
-      { ville: "Rennes", promotion: "Promo Rennes 2", promId: 2 },
-      { ville: "Paris", promotion: "Promo Paris 2", promoId: 3 }
+      { ville: 'Rio de Janeiro', promotion: 'Promo Rio 1', promoId: 1 },
+      { ville: 'Rennes', promotion: 'Promo Rennes 2', promId: 2 },
+      { ville: 'Paris', promotion: 'Promo Paris 2', promoId: 3 }
     ],
     show: false
   }
+
   handleModal = (event) => {
     this.setState({ show: true })
     event.preventDefault()
   }
+
   handleDelete = (promoId) => {
-    const promos = this.state.promotions.filter(item => item.promoId !== promoId);
-    this.setState({ promotions: promos });
+    const promos = this.state.promotions.filter(item => item.promoId !== promoId)
+    this.setState({ promotions: promos })
     this.setState({ show: false })
 
     event.preventDefault()
   }
+
   handleClose = (event) => {
     this.setState({ show: false })
 
@@ -35,13 +37,13 @@ class PromotionGestion extends Component {
   //   this.setState({ promotions: promos });
   // }
 
-  render() {
+  render () {
     return (
       <Page title="Gestion des promotions">
         <article className="gestionProgramme card">
           <header className="card-header">
             Liste des Promotions
-        </header>
+          </header>
           <section className="card-body">
             <ul>
               {this.state.promotions.map((promotion, index) => (
@@ -49,9 +51,9 @@ class PromotionGestion extends Component {
                   <p>{promotion.name}</p>
                   <p>Ville : {promotion.ville}</p>
                   <Button btnType="annuler" clicked={this.handleModal}>Supprimer</Button>
-                  <a href="/admin/gestion-promotion/modification-promotion" title="modification-promotion" className="link-button-valider"  >
+                  <a href="/admin/gestion-promotion/modification-promotion" title="modification-promotion" className="link-button-valider" >
                     Modifier
-									</a>
+                  </a>
 
                   {this.state.show ? (
                     <Alert
@@ -74,9 +76,9 @@ class PromotionGestion extends Component {
           </section>
           <footer className="d-flex flex-row align-items-end justify-content-center">
 
-            <a href="/admin/creation-promotion/creation-promotion" title="creation-programme" className="link-button-creation"  >
+            <a href="/admin/creation-promotion/creation-promotion" title="creation-programme" className="link-button-creation" >
               Ajouter une promotion
-									</a>
+            </a>
           </footer>
         </article>
       </Page>

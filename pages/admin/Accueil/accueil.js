@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
-import Link from 'next/link'
-import Button from '../../../components/Boutons/Boutons'
 
 class Admin extends Component {
   state = {
@@ -25,24 +23,24 @@ class Admin extends Component {
 
     // ],
     Promotions: [
-      {ville:"Paris", id:1, promotion:"Paris 01", programme:'Consultant Javascript', date:'12/12/19'},
-      {ville:"Paris", id:2, promotion:"Paris 02", programme:'Consultant Java', date:'12/12/19'},
-      {ville:"Casablanca", id:3, promotion:"Casablanca 01", programme:'Consultant Java', date:'12/12/19'},
-      {ville:"Casablanca", id:4, promotion:"Casablanca 02", programme:'Consultant Java', date:'12/12/19'},
-      {ville:"Rennes", id:5, promotion:"Rennes 02", programme:'Consultant Java', date:'12/12/19'},
-      {ville:"Rennes", id:6, promotion:"Rennes 01", programme:'Consultant Java', date:'12/12/19'}
+      { ville: 'Paris', id: 1, promotion: 'Paris 01', programme: 'Consultant Javascript', date: '12/12/19' },
+      { ville: 'Paris', id: 2, promotion: 'Paris 02', programme: 'Consultant Java', date: '12/12/19' },
+      { ville: 'Casablanca', id: 3, promotion: 'Casablanca 01', programme: 'Consultant Java', date: '12/12/19' },
+      { ville: 'Casablanca', id: 4, promotion: 'Casablanca 02', programme: 'Consultant Java', date: '12/12/19' },
+      { ville: 'Rennes', id: 5, promotion: 'Rennes 02', programme: 'Consultant Java', date: '12/12/19' },
+      { ville: 'Rennes', id: 6, promotion: 'Rennes 01', programme: 'Consultant Java', date: '12/12/19' }
     ]
   }
 
   filtre = (type) => {
     const arrayFiltered = [...this.state.Promotions]
-    arrayFiltered.sort( (a, b) => a[type] > b[type] ? 1 : -1)
-    this.setState({Promotions : arrayFiltered})
+    arrayFiltered.sort((a, b) => a[type] > b[type] ? 1 : -1)
+    this.setState({ Promotions: arrayFiltered })
   }
 
-  handleDelete = () =>{
-    alert('profil supprimé');
-  }  
+  handleDelete = () => {
+    alert('profil supprimé')
+  }
 
   render () {
     return (
@@ -50,36 +48,36 @@ class Admin extends Component {
         <article id="admin-page">
           {/* //<button>Ajouter une promotion</button> */}
           <section className="search-bar-promo d-flex flex-row">
-          <input className="form-control" type="text" placeholder="Rechercher"/>
+            <input className="form-control" type="text" placeholder="Rechercher"/>
           </section>
           <section>
-          <table className="table table-hover">
-            <thead>
-              <tr>
-                <th onClick={(type)=>this.filtre("nom")}><div className="d-flex flex-row justify-content-between align-items-baseline">Nom <i class="fas fa-sort"></i></div></th>
-                <th onClick={(type)=>this.filtre("ville")}><div className="d-flex flex-row justify-content-between align-items-baseline">Ville <i class="fas fa-sort"></i></div></th>
-                <th onClick={(type)=>this.filtre("programme")}><div className="d-flex flex-row justify-content-between align-items-baseline">Programme <i class="fas fa-sort"></i></div></th>
-                <th onClick={(type)=>this.filtre("date")}><div className="d-flex flex-row justify-content-between align-items-baseline">Date <i class="fas fa-sort"></i></div></th>
-                <th onClick={(type)=>this.filtre("actions")}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.state.Promotions.map( (promo =>(
-                <tr className="promotion-row" key={promo.id}> 
-                  <td>{promo.promotion}</td>
-                  <td>{promo.ville}</td>
-                  <td>{promo.programme}</td>
-                  <td>{promo.date}</td>
-                  <td>
-                    <button><i className="fas fa-eye" title="Voir détails"></i></button>
-                    <button>Ghost</button>
-                  </td>
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th onClick={(type) => this.filtre('nom')}><div className="d-flex flex-row justify-content-between align-items-baseline">Nom <i class="fas fa-sort"></i></div></th>
+                  <th onClick={(type) => this.filtre('ville')}><div className="d-flex flex-row justify-content-between align-items-baseline">Ville <i class="fas fa-sort"></i></div></th>
+                  <th onClick={(type) => this.filtre('programme')}><div className="d-flex flex-row justify-content-between align-items-baseline">Programme <i class="fas fa-sort"></i></div></th>
+                  <th onClick={(type) => this.filtre('date')}><div className="d-flex flex-row justify-content-between align-items-baseline">Date <i class="fas fa-sort"></i></div></th>
+                  <th onClick={(type) => this.filtre('actions')}>Actions</th>
                 </tr>
-              )))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {this.state.Promotions.map(promo => (
+                  <tr className="promotion-row" key={promo.id}>
+                    <td>{promo.promotion}</td>
+                    <td>{promo.ville}</td>
+                    <td>{promo.programme}</td>
+                    <td>{promo.date}</td>
+                    <td>
+                      <button><i className="fas fa-eye" title="Voir détails"></i></button>
+                      <button>Ghost</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </section>
-            {/* <select defaultValue="0" className="custom-select" id="selectVille" onChange={this.filtre}>
+          {/* <select defaultValue="0" className="custom-select" id="selectVille" onChange={this.filtre}>
               <option value="0">Ville</option>
               <option value="Paris">Paris</option>
               <option value="Rennes">Rennes</option>
@@ -91,7 +89,7 @@ class Admin extends Component {
                 return promo.ville === this.state.filtreVille;
               }).map(promo => (
                 <option key={promo.promoId} value={promo.promoId}>{promo.promotion}</option>
-              ))} 
+              ))}
             </select>
           <div className="admin_listing">
             <div className="listing_eleves">
