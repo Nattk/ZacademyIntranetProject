@@ -1,0 +1,98 @@
+// Dossier FontAwesomes
+@import '../../components/FontAwesomeIcon/fontawesome.scss';
+// Dossier Components
+@import '../../components/Footer/footer.scss';
+@import '../../components/Carousel/carousel.scss';
+@import '../../components/Calendrier/calendrier.scss';
+@import '../../components/Boutons/Boutons.scss';
+@import '../../components/Modal/modal.scss';
+@import '../../components/Modal/modalEvent.scss';
+@import '../../components/SuperNav/supernav.scss';
+@import '../../components/Formulaire/formulaire.scss';
+@import '../../components/Contacts/contactCard.scss';
+@import '../../components/CardContact/cardContact.scss';
+@import '../../components/Spinner/spinner.scss';
+
+// Dossier Pages
+@import '../../pages/index-connecte.scss';
+@import '../../pages/index.scss';
+@import '../../pages/admin/Accueil/accueil-admin.scss';
+@import '../../pages/admin/creation-utilisateur/creation-utilisateur.scss';
+@import '../../pages/admin/creation-promotion/creation-promotion.scss';
+@import '../../pages/admin/creation-programme/creation-programme.scss';
+@import '../../pages/ma-formation/Contact-Utiles/contacts-utiles.scss';
+@import '../../pages/utilisateur/mon-profil/mon-profil.scss';
+@import '../../pages/communaute/Rss/rss.scss';
+@import '../../pages/communaute/who-to-follow/who-to-follow.scss';
+@import '../../pages/ressources/ressources.scss';
+@import '../../pages/ressources/ajouter-ressource.scss';
+@import '../../pages/ma-formation/Livret-Accueil/livret-accueil.scss';
+@import '../../pages/ma-formation/Agenda/agenda.scss';
+
+// Calendar
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+
+#__next,
+body,
+html {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #fff;
+}
+
+h1#context-page {
+  margin-top: 6rem;
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  position: sticky;
+}
+
+.mainTitle {
+  margin: 2.3rem;
+
+}
+
+.card {
+  margin: 1rem;
+}
+
+.container-card {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.card-article {
+  margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-title {
+  color: #000000;
+  text-decoration-color: #000000;
+  font-size: 1.5rem;
+
+}
+
+.card-description {
+  text-align: left;
+}
+
+article.container-article {
+  width: 100%;
+  align-self: unset;
+  margin: 0;
+  max-width: unset;
+
+}

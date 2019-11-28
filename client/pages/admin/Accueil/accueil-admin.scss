@@ -1,0 +1,36 @@
+#admin-page{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    flex-grow: 1;
+
+    table{
+        th{
+            cursor:pointer;
+            i{
+                font-size: 0.9rem;
+                line-height: unset;
+            }
+        }
+
+    }
+
+    p{
+        max-width: 5rem;
+    }
+
+    .promotion-row{
+        padding: 1rem;
+    }
+
+    h1{
+        font-size: 1.5rem;
+    }
+
+    .search-bar-promo{
+       width: 10rem;
+       margin-bottom: 1rem; 
+    }
+    
+}
+

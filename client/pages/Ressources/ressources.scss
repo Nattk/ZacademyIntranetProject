@@ -1,0 +1,88 @@
+.ressources {
+    padding: 1rem;
+    flex-grow: 1;
+    height: 100%;
+
+    .select-component{
+        width: 14rem;
+    }
+}
+
+.ressource-carte {
+    height: 10rem;
+}
+
+.ressource-carte,
+.ressource-content {
+    padding: 1rem;
+    min-width: 40rem;
+
+    img {
+        height: 4rem;
+    }
+
+    .btn {
+        font-weight: bold;
+        margin-left: 0.5rem;
+    }
+
+    .ressource-details {
+        margin: 0 1rem 0 1rem;
+
+        h2 {
+            margin: 0;
+            text-transform: initial;
+            text-align: initial;
+            
+            :focus{
+                outline: rgb(44, 18, 18);
+                
+            }
+        }
+
+        h2 a {
+            font-size: 1.5rem;
+            color: black;
+            cursor: pointer;
+            outline: rgb(44, 18, 18);
+        }
+
+        
+        h2 a:visited{
+            font-size: 1.5rem;
+            color: rgb(44, 18, 18);
+            cursor: pointer;
+        }
+
+        i {
+            font-style: normal;
+            font-weight: bold;
+            color: rgb(59, 59, 59);
+        }
+    }
+}
+
+.ressource-individuelle{
+    flex-grow : 1;
+}
+
+.ressources select {
+    width: 10rem;
+}
+
+.ressource-content {
+    padding: 2rem;
+}
+
+article.gestionProgramme.card {
+    width: 70rem;
+}
+
+article.gestionProgramme.card .card-body li {
+    height: 5rem;
+}
+
+article.gestionProgramme.card footer {
+    padding: 1rem;
+
+}

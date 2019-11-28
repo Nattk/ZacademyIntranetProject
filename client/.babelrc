@@ -1,0 +1,17 @@
+{
+  "presets": [
+    "next/babel"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-do-expressions"
+  ],
+  
+  "env":{
+    "test": {
+      "plugins": [
+        ["transform-es2015-modules-commonjs"]
+      ],
+      "presets": [["next/babel", { "preset-env": { "modules": "commonjs" } }]]
+    }
+  }
+}
