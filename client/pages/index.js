@@ -1,8 +1,9 @@
-import React from 'react'
-import Page from '../layouts/classic'
+import Page from '../layouts/accueil'
+import { LoginForm } from '../components/Login/LoginForm'
 
 const Home = () => (
   <Page title="Accueil">
+    <LoginForm />
   </Page>
 )
 

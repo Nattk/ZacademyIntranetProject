@@ -1,9 +1,8 @@
-import { useState } from 'react'
-import Nav from '../Nav/nav'
-import AdminNav from '../AdminNav/adminNav'
-import usersService from '../../services/users'
+import React, { useState, Fragment } from 'react'
+import loginService from '../../services/login'
+import Router from 'next/router'
 
-const useLocalStorage = (key, initialValue) => {
+export const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key)
@@ -38,54 +37,47 @@ const Notification = ({ message }) => {
   )
 }
 
-const SuperNav = () => {
+export const LoginForm = () => {
+  const [, setUser] = useLocalStorage('user', '')
+  const [errorMessage, setErrorMessage] = useState(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useLocalStorage('role', '')
-  const [errorMessage, setErrorMessage] = useState(null)
-
   const handleLogin = async (event) => {
     event.preventDefault()
-    const users = await usersService.getAll()
-    const user = users.find(n => n.mail === email && n.password === password)
     try {
-      setRole(user.role)
+      const user = await loginService.login({ email, password })
+      setUser(user)
       setEmail('')
       setPassword('')
-    } catch (e) {
-      setErrorMessage('MAUVAIS LOGIN HAHAHAHAHA')
+      if (user.role === 'superadmin' || user.role === 'admin') {
+        Router.push('/admin/Accueil/accueil')
+      } else {
+        Router.push('/index_connecte')
+      }
+    } catch (exception) {
+      setErrorMessage('Les identifiants ne sont pas corrects.')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     }
   }
-
-  const offlineClick = () => {
-    setRole('')
-  }
-
-  if (!role) {
-    return (
-
+  return (
+    <Fragment>
+      <Notification message={errorMessage} />
       <form className="wrapper" onSubmit={handleLogin}>
-        <Notification message={errorMessage} />
         <section id="form-content">
           <div className="first">
             <img src="/zenika_icon.png" id="icon" alt="User Icon" />
           </div>
           <div>
-            <label for="login">Email</label><br></br>
+            <label htmlFor="login">Email</label><br></br>
             <input type="email" id="login" className="login-form" name="usename" placeholder="email" value={email} onChange={({ target }) => setEmail(target.value)} required />
-            <label for="password">Mot de passe</label>
+            <label htmlFor="password">Mot de passe</label>
             <input type="password" id="password" className="login-form" name="login" placeholder="mot de passe" value={password} onChange={({ target }) => setPassword(target.value)} required />
             <input type="submit" id="submit-login" className="login-form" value="Log In" />
           </div>
-
         </section>
       </form>
-    )
-  } else if (role === 'eleve') {
-    return <Nav offline={offlineClick} />
-  } else {
-    return <AdminNav offline={offlineClick} />
-  }
+    </Fragment>
+  )
 }
-
-export default SuperNav

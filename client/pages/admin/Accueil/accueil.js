@@ -1,27 +1,8 @@
 import React, { Component } from 'react'
-import Page from '../../../layouts/classic'
+import Page from '../../../layouts/admin'
 
 class Admin extends Component {
   state = {
-    // Eleves:[
-    //   {nom:"Kifoyi",prenom:"nattan", promoId:1, promotion:"Paris 01"},
-    //   {nom:"Kifoyi",prenom:"nattan", promoId:6, promotion:"Rennes 01"},
-    //   {nom:"Kifoyi",prenom:"nattan", promoId:3, promotion:"Casablanca 02"},
-    //   {nom:"Kifoyi",prenom:"nattan", promoId:2, promotion:"Paris 02"},
-    //   {nom:"Kifoyi",prenom:"nattan", promoId:5, promotion:"Rennes 02"},
-    //   {nom:"Kifoyi",prenom:"nattan", promoId:4, promotion:"Casablanca 01"},
-    // ],
-    // Formateurs:[
-    //   {nom:"jeanDeParis", prenom:"robert", promoId:1, promotion:"Paris 01"},
-    //   {nom:"jeanDeParis", prenom:"robert", promoId:2, promotion:"Paris 02"},
-    //   {nom:"jeanDeParis", prenom:"robert", promoId:2, promotion:"Paris 02"},
-    //   {nom:"jeanDeRennes", prenom:"robert", promoId:6, promotion:"Rennes 01"},
-    //   {nom:"jeanDeRennes", prenom:"robert", promoId:5, promotion:"Rennes 02"},
-    //   {nom:"jeanDeRennes", prenom:"robert", promoId:5, promotion:"Rennes 02"},
-    //   {nom:"jeanDeCasablanca", prenom:"robert", promoId:3, promotion:"Casablanca 02"},
-    //   {nom:"jeanDeCasablanca", prenom:"robert", promoId:4, promotion:"Casablanca 01"}
-
-    // ],
     Promotions: [
       { ville: 'Paris', id: 1, promotion: 'Paris 01', programme: 'Consultant Javascript', date: '12/12/19' },
       { ville: 'Paris', id: 2, promotion: 'Paris 02', programme: 'Consultant Java', date: '12/12/19' },
