@@ -4,7 +4,7 @@ import Nav from '../Nav/nav'
 import AdminNav from '../AdminNav/adminNav'
 import loginService from '../../services/login'
 
-const useLocalStorage = (key, initialValue) => {
+export const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key)
@@ -48,7 +48,6 @@ const SuperNav = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({ email, password })
-      console.log('user', user)
       setUser(user)
       setEmail('')
       setPassword('')

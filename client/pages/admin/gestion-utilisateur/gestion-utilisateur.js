@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Page from '../../../layouts/classic'
+import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
 import Alert from '../../../components/Modal/alert'
 class UtilisateursGestion extends Component {

@@ -22,9 +22,13 @@ nav#navbar{
     button.navbar-toggler{
         background: rgb(178, 30, 62);
     }
-    div{
+    div{ 
+        padding: 0.1rem;
         div#end-of-navbar{
         margin-left: auto;
+        a{
+            margin: 0.1rem;
+        }
     }
 }
 } 
