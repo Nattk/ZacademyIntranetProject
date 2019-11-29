@@ -1,11 +1,29 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
-import Alert from '../../../components/Modal/alert'
+import Select from 'react-select/'
+import axios from 'axios'
+
 class CreaProgramme extends Component {
   state = {
-    name: '',
-    show: false
+    programmeId: '',
+    title: '',
+    moduleTitle: '',
+    modules: '',
+    modSelected: null,
+    sequences: '',
+    etapes: 1
+  }
+
+  componentDidMount () {
+    axios.get('http://localhost:3333/api/modules')
+      .then(modules => {
+        this.setState({ modules: modules.data })
+        console.log(modules.data)
+      })
+      .catch(err => {
+        alert(err)
+      })
   }
 
    handleUpdate = () => {
@@ -17,11 +35,70 @@ class CreaProgramme extends Component {
    }
 
   handleConfirmForm = () => {
+    event.preventDefault()
     window.location.assign('/admin/gestion-programme/gestion-programme')
   }
 
-  handleClose = () => {
-    this.setState({ show: false })
+  handleStep = () => {
+    event.preventDefault()
+    if (this.state.etapes === 1) {
+      this.handleProgram()
+      this.setState({ etapes: this.state.etapes + 1 })
+    } else if (this.state.etapes === 2) {
+      const modules = [...this.state.modSelected]
+      axios.put('http://localhost:3333/api/programmes', { modules: modules }).then(response => {
+        console.log(response)
+      })
+    }
+  }
+
+  handleModule = () => {
+    event.preventDefault()
+    axios.post('http://localhost:3333/api/modules', { title: this.state.moduleTitle })
+      .then(response => {
+        return axios.get('http://localhost:3333/api/modules')
+      })
+      .then(modules => {
+        this.setState({ modules: modules.data })
+      })
+      .catch(err => {
+        console.log(err, 'err')
+      })
+  }
+
+  handleChange = (event) => {
+    if (event.name === 'programmeTitle') {
+      this.setState({ title: event.value })
+    } else {
+      this.setState({ moduleTitle: event.value })
+    }
+  }
+
+  handleSelect = (newValue, action) => {
+    console.log(action)
+    switch (action) {
+      case 'select-option':
+        this.setState({ modSelected: newValue })
+        break
+      case 'remove-value':
+        this.setState({ modSelected: newValue })
+        break
+      case 'clear':
+        this.setState({ modSelected: '' })
+        break
+      default:
+        break
+    }
+  }
+
+  handleProgram = () => {
+    axios.post('http://localhost:3333/api/programmes', { title: this.state.title })
+      .then(response => {
+        console.log('program added')
+      })
+      .catch(err => {
+        console.log('err', err)
+      })
   }
 
   previousPage = () => {
@@ -29,83 +106,83 @@ class CreaProgramme extends Component {
   }
 
   render () {
-    return (
+    let creationProgramme = null
 
-      <Page title="Création programme">
-        <article className="gestionProgramme card" id="form_creation_programme">
-          <header className="card-header text-center">
-            Creation programme
-          </header>
+    if (this.state.etapes === 1) {
+      creationProgramme = (
+        <div>
           <form className="container" >
             <section className="section">
               <div className="form-group">
                 <label htmlFor="programtitle">Titre</label><br></br>
-                <input type="text" name="programtitle" required className="form-control" id="exampleFormControlInput1" value={this.state.name} onChange={e => this.onTodoChange(e.target.value)}
+                <input type="text" name="programmeTitle" required className="form-control" id="exampleFormControlInput1" onChange={e => this.handleChange(e.target)}
                   placeholder="Intitulé du programme" />
               </div>
-              <div data-test-hook="groups">
-                <label htmlFor="modules">Choisir module(s)</label>
-                <select className="form-control" name="modules" id="choices-groups" multiple required >
-                  <optgroup label="DEVOPS">
-                    <option value="Paris">Linux</option>
-                    <option value="Lyon">Mac</option>
-                  </optgroup>
-                  <optgroup label="JavaScript">
-                    <option value="JavaScript">JavaScript</option>
-                    <option value="React">React</option>
-                    <option value="Node">Node</option>
-                  </optgroup>
-                  <optgroup label="Basic">
-                    <option value="HTML">HTML</option>
-                    <option value="CSS">CSS</option>
-                    <option value="TypeScript">TypeScript</option>
-                  </optgroup>
-                  <optgroup label="Autres">
-                    <option value="Java">Java</option>
-                    <option value="Python">Pyhton</option>
-                    <option value="PHP">PHP</option>
-                  </optgroup>
-                </select>
-              </div>
-              <br></br>
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <span className="input-group-text description-programme-span">Description</span>
-                </div>
-                <textarea className="form-control" name="description" aria-label="With textarea" required ></textarea>
-              </div>
-            </section>
-            <section className="d-flex flex-row footer-programme-formulaire">
-              <Button
-                btnType="annuler"
-                type="button"
-                clicked={this.previousPage}
-                className="btn btn-primary text-center button-cancel-programme"
-              >
-                Annuler
-              </Button>
-              <Button
-                btnType="valider"
-                // type="submit"
-                clicked={this.handleUpdate}
-
-              >
-                Créer programme
-              </Button>
-              {this.state.show ? (
-                <Alert
-                  show={this.state.show}
-                  handleClose={this.handleClose}
-                  headerTitle="Création programme"
-                  modalDescription="Confirmer la création de ce programme"
-                  modalHeader={true}
-                  modalBody={true}
-                  modalFooterRedirection
-                  handleConfirmForm={this.handleConfirmForm}
-                />
-              ) : null}
             </section>
           </form>
+          <section className="d-flex flex-row footer-programme-formulaire">
+            <Button
+              btnType="annuler"
+              type="button"
+              clicked={this.previousPage}
+              className="btn btn-primary text-center button-cancel-programme"
+            >
+            Annuler
+            </Button>
+            <Button
+              btnType="valider"
+              clicked={this.handleStep}
+            >
+            Etape suivante
+            </Button>
+          </section>
+        </div>
+      )
+    } else if (this.state.etapes === 2) {
+      creationProgramme = (
+        <form className="container" >
+          <h2>Ajouter des modules</h2>
+          <section className="d-flex flex-row">
+            <input type="text" placeholder="modules" onChange={e => this.handleChange(e.target)}/>
+            <button onClick={this.handleModule} className="btn btn-primary text-center"
+            >Créer vos modules
+            </button>
+          </section>
+          <h2>Selectionner votre module</h2>
+          <Select className="select-component" options={this.state.modules} isMulti={true}
+            formatCreateLabel={(inputValue) => inputValue}
+            getOptionLabel={(option) => option.title}
+            getOptionValue={(option) => option.title}
+            onChange={(newValue, actionMeta) => this.handleSelect(newValue, actionMeta.action)}
+          />
+
+          <section className="d-flex flex-row footer-programme-formulaire">
+            <Button
+              btnType="annuler"
+              type="button"
+              className="btn btn-primary text-center button-cancel-programme"
+            >
+            Annuler
+            </Button>
+            <Button
+              btnType="valider"
+              // type="submit"
+              clicked={this.handleStep}
+            >
+            Etape suivante
+            </Button>
+          </section>
+        </form>
+      )
+    }
+
+    return (
+      <Page title="Création programme">
+        <article className="card" id="creation-programme">
+          <header className="card-header text-center">
+            Etape {this.state.etapes}
+          </header>
+          {creationProgramme}
         </article>
       </Page>
     )
