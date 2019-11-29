@@ -1,8 +1,9 @@
 import Meta from '../components/Meta/meta'
-import SuperNav, { useLocalStorage } from '../components/SuperNav/supernav'
 import Footer from '../components/Footer/footer'
-import '../styles/sass/styles.scss'
+import { useLocalStorage } from '../components/Login/LoginForm'
 import { Wrongpath } from '../components/Admin/Wrongpath'
+import AdminNav from '../components/Nav/adminNav'
+import '../styles/sass/styles.scss'
 
 export default ({ children, title, contextePage }) => {
   const [user] = useLocalStorage('user', '')
@@ -10,7 +11,7 @@ export default ({ children, title, contextePage }) => {
     return (
       <React.Fragment>
         <Meta title={title} />
-        <SuperNav />
+        <AdminNav />
         <h1 id="context-page">{contextePage}</h1>
         <main className="main">{children}</main>
         <Footer />

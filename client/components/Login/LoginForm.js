@@ -1,8 +1,6 @@
-import { useState } from 'react'
-import Router from 'next/router'
-import Nav from '../Nav/nav'
-import AdminNav from '../AdminNav/adminNav'
+import React, { useState, Fragment } from 'react'
 import loginService from '../../services/login'
+import Router from 'next/router'
 
 export const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
@@ -39,7 +37,7 @@ const Notification = ({ message }) => {
   )
 }
 
-const SuperNav = () => {
+export const LoginForm = () => {
   const [user, setUser] = useLocalStorage('user', '')
   const [errorMessage, setErrorMessage] = useState(null)
   const [email, setEmail] = useState('')
@@ -53,6 +51,8 @@ const SuperNav = () => {
       setPassword('')
       if (user.role === 'superadmin' || user.role === 'admin') {
         Router.push('/admin/Accueil/accueil')
+      } else {
+        Router.push('/index_connecte')
       }
     } catch (exception) {
       setErrorMessage('Les identifiants ne sont pas corrects.')
@@ -61,16 +61,10 @@ const SuperNav = () => {
       }, 5000)
     }
   }
-
-  const offlineClick = () => {
-    setUser('')
-  }
-
-  if (!user.role) {
-    return (
+  return (
+    <div>      <Notification message={errorMessage} />
 
       <form className="wrapper" onSubmit={handleLogin}>
-        <Notification message={errorMessage} />
         <section id="form-content">
           <div className="first">
             <img src="/zenika_icon.png" id="icon" alt="User Icon" />
@@ -85,12 +79,6 @@ const SuperNav = () => {
 
         </section>
       </form>
-    )
-  } else if (user.role === 'eleve') {
-    return <Nav offline={offlineClick} />
-  } else {
-    return <AdminNav offline={offlineClick} />
-  }
+    </div>
+  )
 }
-
-export default SuperNav
