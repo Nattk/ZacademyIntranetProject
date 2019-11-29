@@ -38,7 +38,7 @@ const Notification = ({ message }) => {
 }
 
 export const LoginForm = () => {
-  const [user, setUser] = useLocalStorage('user', '')
+  const [, setUser] = useLocalStorage('user', '')
   const [errorMessage, setErrorMessage] = useState(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -62,8 +62,8 @@ export const LoginForm = () => {
     }
   }
   return (
-    <div>      <Notification message={errorMessage} />
-
+    <Fragment>
+      <Notification message={errorMessage} />
       <form className="wrapper" onSubmit={handleLogin}>
         <section id="form-content">
           <div className="first">
@@ -76,9 +76,8 @@ export const LoginForm = () => {
             <input type="password" id="password" className="login-form" name="login" placeholder="mot de passe" value={password} onChange={({ target }) => setPassword(target.value)} required />
             <input type="submit" id="submit-login" className="login-form" value="Log In" />
           </div>
-
         </section>
       </form>
-    </div>
+    </Fragment>
   )
 }

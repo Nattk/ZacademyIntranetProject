@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useLocalStorage } from '../Login/LoginForm'
 
-const Nav = (props) => {
+const Nav = () => {
   const [user, setUser] = useLocalStorage('user', '')
   const offlineClick = () => {
     setUser('')

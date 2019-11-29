@@ -8,6 +8,12 @@ const promotionSchema = mongoose.Schema({
   city: {
     type: String
   },
+  start: {
+    type:  Date
+  },
+  end: {
+    type : Date
+  },
   programmes: [
     {
       type: mongoose.Schema.Types.ObjectId,

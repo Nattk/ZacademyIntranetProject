@@ -2,8 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import { useLocalStorage } from '../Login/LoginForm'
 
-const AdminNav = (props) => {
-  const [user, setUser] = useLocalStorage('user', '')
+const AdminNav = () => {
+  const [, setUser] = useLocalStorage('user', '')
   const offlineClick = () => {
     setUser('')
   }
