@@ -59,12 +59,12 @@ usersRouter.put('/', async (request, response, next) => {
     }
 
     const userToUpdate = await User.findByIdAndUpdate(request.params.id, user, { new: true })
-    if (promotion) {
+    if (promotion 
+      && (promotion.eleves.filter(x => x.toString() === userToUpdate.id).length === 0
+      || promotion.formateurs.filter(x => x.toString() === userToUpdate.id).length === 0)) {
       userToUpdate.role === 'eleve' 
         ? promotion.eleves = promotion.eleves.concat(userToUpdate._id) 
         : promotion.formateurs = promotion.formateurs.concat(userToUpdate._id)
-      promotion.eleves = [...new Set(promotion.eleves)]
-      promotion.formateurs = [...new Set(promotion.formateurs)]
       await promotion.save()
     }
     response.json(userToUpdate)
