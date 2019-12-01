@@ -46,8 +46,12 @@ class CreaProgramme extends Component {
       this.setState({ etapes: this.state.etapes + 1 })
     } else if (this.state.etapes === 2) {
       const modules = [...this.state.modSelected]
-      axios.put('http://localhost:3333/api/programmes', { modules: modules }).then(response => {
-        console.log(response)
+      const programmeId = this.state.programmeId
+      console.log(modules)
+      axios.put(`http://localhost:3333/api/programmes/${programmeId}`, { modules: modules }).then(response => {
+        console.table(response.data)
+      }).catch(err => {
+        console.log(err)
       })
     }
   }
@@ -94,6 +98,8 @@ class CreaProgramme extends Component {
   handleProgram = () => {
     axios.post('http://localhost:3333/api/programmes', { title: this.state.title })
       .then(response => {
+        console.log(response.data.id)
+        this.setState({ programmeId: response.data.id })
         console.log('program added')
       })
       .catch(err => {
