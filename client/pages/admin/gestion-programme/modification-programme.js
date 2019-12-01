@@ -27,24 +27,24 @@ class ModificationProgramme extends Component {
 	render () {
 	  return (
 	    <Page title="Modification programme">
-	      <article class="gestionProgramme card" id="form_creation_programme">
-	        <header class="card-header text-center">Modification programme</header>
-	        <form class="container">
-	          <section class="section">
-	            <div class="form-group">
-	              <label for="programtitle">Titre</label>
+	      <article className="gestionProgramme card" id="form_creation_programme">
+	        <header className="card-header text-center">Modification programme</header>
+	        <form className="container">
+	          <section className="section">
+	            <div className="form-group">
+	              <label htmlFor="programtitle">Titre</label>
 	              <br />
 	              <input
 	                type="text"
 	                name="programtitle"
-	                class="form-control"
+	                className="form-control"
 	                id="exampleFormControlInput1"
 	                value={this.state.programme[0].name}
 	              />
 	            </div>
 	            <div data-test-hook="groups">
-	              <label for="modules">Choisir module(s)</label>
-	              <select class="form-control" name="modules" id="choices-groups" multiple>
+	              <label htmlFor="modules">Choisir module(s)</label>
+	              <select className="form-control" name="modules" id="choices-groups" multiple>
 	                <optgroup label="DEVOPS">
 	                  <option value="Paris">Linux</option>
 	                  <option value="Lyon">Mac</option>
@@ -67,14 +67,14 @@ class ModificationProgramme extends Component {
 	              </select>
 	            </div>
 	            <br />
-	            <div class="input-group">
-	              <div class="input-group-prepend">
-	                <span class="input-group-text description-programme-span">Description</span>
+	            <div className="input-group">
+	              <div className="input-group-prepend">
+	                <span className="input-group-text description-programme-span">Description</span>
 	              </div>
-	              <textarea class="form-control" name="description" aria-label="With textarea" />
+	              <textarea className="form-control" name="description" aria-label="With textarea" />
 	            </div>
 	          </section>
-	          <section class="d-flex flex-row footer-programme-formulaire">
+	          <section className="d-flex flex-row footer-programme-formulaire">
 
 	            <Button
 	              btnType="annuler"

@@ -10,18 +10,18 @@ class CalendarSectionCard extends Component {
         <section className="section-style-calendar-modal">
           {this.props.headerTitle ? (
             <p className="h2-title-modal" >
-              <i class="far fa-clock" />
+              <i className="far fa-clock" />
               &nbsp; {this.props.headerTitle}
             </p>) : null}
           {this.props.modalLocation ? (
             <p>
-              <i class="fas fa-map-marker-alt" />
+              <i className="fas fa-map-marker-alt" />
               &nbsp; {this.props.modalLocation}{' '}
             </p>
           ) : null}
           {this.props.modalDescription ? (
             <p>
-              <i class="fas fa-bars" />
+              <i className="fas fa-bars" />
               &nbsp; {this.props.modalDescription}
             </p>
           ) : null}

@@ -26,7 +26,7 @@ class AjouterRessources extends Component {
                 </div>
                 <label htmlFor="ressource">Ressource</label>
                 <div className="d-flex flex-row">
-                  <textarea for="ressource" className="form-control" required>
+                  <textarea htmlFor="ressource" className="form-control" required>
                   </textarea>
                   <span>&nbsp;*</span>
                 </div>
@@ -36,7 +36,7 @@ class AjouterRessources extends Component {
                   <option value="CSS">Css</option>
                   <option value="Javascript">Javascript</option>
                 </select>
-                <div class="d-flex flex-row justify-content-end">
+                <div className="d-flex flex-row justify-content-end">
                   <Button btnType="valider" title="Ajouter une ressource" submit={true} clicked={this.handleValidation}>Ajouter</Button>
                   <Link href="./ressources"><a title="Annuler la modification" className="btn btn-danger">Annuler</a></Link>
                 </div>

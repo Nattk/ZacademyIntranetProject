@@ -34,24 +34,24 @@ class CreaUtilisateur extends Component {
           <form className="container" >
             <section className="section">
               <div className="form-group">
-                <label for="username">Nom</label>
+                <label htmlFor="username">Nom</label>
                 <input type="text" name="username" className="form-control" id="exampleFormControlInput1" placeholder="Nom"></input>
               </div>
               <div className="form-group">
-                <label for="userfirstname">Prenom</label>
+                <label htmlFor="userfirstname">Prenom</label>
                 <input type="text" name="userfirstname" className="form-control" id="exampleFormControlInput1" placeholder="Prénom"></input>
               </div>
               <div className="form-group">
-                <label for="useremail">Email</label>
+                <label htmlFor="useremail">Email</label>
                 <input type="email" name="useremail" className="form-control" id="exampleFormControlInput1" placeholder="Email"></input>
               </div>
               <div className="form-group">
-                <label for="userphone">Téléphone</label>
+                <label htmlFor="userphone">Téléphone</label>
                 <input type="Telephone" name="userphone" className="form-control" id="exampleFormControlInput1"
                   placeholder="Telephone"></input>
               </div>
               <div className="form-group">
-                <label for="choices-groups">Selectionner une promotion</label>
+                <label htmlFor="choices-groups">Selectionner une promotion</label>
                 <select className="form-control" name="choices-groups" id="choices-groups">
                   <optgroup label="Casablanca">
                     <option value="Casablanca">Casablanca_01</option>
@@ -75,7 +75,7 @@ class CreaUtilisateur extends Component {
                 </select>
               </div>
               <div classNameName="form-group">
-                <label for="roles">Selectionner un rôle</label>
+                <label htmlFor="roles">Selectionner un rôle</label>
                 <select classNameName="form-control" id="role">
                   <option value="Eleve">Eleve</option>
                   <option value="Formateur">Formateur</option>

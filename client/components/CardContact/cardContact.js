@@ -21,8 +21,8 @@ const CardContact = (props) => (
       <section>
         <p className="fonction-user-card">{props.fonction} </p>
         <p className="description-user-card" >{props.description}</p>
-        {props.mail ? (<p className="description-user-card" ><i class="far fa-envelope"></i>&nbsp; &nbsp;{props.mail}</p>) : null}
-        {props.phone ? (<p className="description-user-card" ><i class="fas fa-phone-alt"></i>&nbsp; &nbsp;{props.phone}</p>) : null}
+        {props.mail ? (<p className="description-user-card" ><i className="far fa-envelope"></i>&nbsp; &nbsp;{props.mail}</p>) : null}
+        {props.phone ? (<p className="description-user-card" ><i className="fas fa-phone-alt"></i>&nbsp; &nbsp;{props.phone}</p>) : null}
       </section>
       <footer className="footer-card button-follow" >
         <section className="section-footer-card">
@@ -41,7 +41,7 @@ const CardContact = (props) => (
             </a>) : null}
           {props.linkFluxRss ? (
             <a href={props.linkFluxRss} className="card-button-rss" title="Aller sur le lien flux rss" target="_blank">
-              Lien flux rss &nbsp; <i class="fas fa-rss card-button-rss"></i>
+              Lien flux rss &nbsp; <i className="fas fa-rss card-button-rss"></i>
             </a>) : null}
         </section>
       </footer>

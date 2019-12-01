@@ -36,12 +36,12 @@ class CreaPromotion extends Component {
             <section className="section">
 
               <div className="form-group">
-                <label for="titre_promotion">Titre</label>
+                <label htmlFor="titre_promotion">Titre</label>
                 <input type="text" name="titre_promotion" className="form-control" id="exampleFormControlInput1"
                   placeholder="Intitulé de la promotion"></input>
               </div>
               <div className="form-group">
-                <label for="ville">Selectionner Ville</label>
+                <label htmlFor="ville">Selectionner Ville</label>
                 <select className="form-control" name="ville" id="exampleFormControlSelect1">
                   <optgroup label=" France">
                     <option value="Paris">Paris</option>
@@ -64,7 +64,7 @@ class CreaPromotion extends Component {
                 </select>
               </div>
               <div data-test-hook="groups">
-                <label for="programme">Choisir Programme</label>
+                <label htmlFor="programme">Choisir Programme</label>
                 <select className="form-control" name="programme" id="programme" multiple>
                   <optgroup label="Front-End">
                     <option value="JavaScript">JavaScript</option>

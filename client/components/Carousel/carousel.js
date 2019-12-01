@@ -1,8 +1,8 @@
 import React from 'react'
 
 const Carousel = () => (
-  <article className="container fluid carouselPromo" data-pause="hover">
-    <section id="carouselExampleCaptions" className="carousel slide" data-ride="carousel" alt="carousel formation">
+  <article className="container fluid carousel-promo">
+    <section id="carouselExampleCaptions" className="carousel slide" data-interval="false" alt="carousel formation">
       <ol className="carousel-indicators">
         <li data-target="#carouselExampleCaptions" data-slide-to="0" className="active"></li>
         <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -21,7 +21,7 @@ const Carousel = () => (
           <img src="/slide_2.png"
             className="d-block w-100 carousel-connected " alt="carousel slide 2" />
           <div className="carousel-caption d-none d-md-block">
-            <h2>Third slide label</h2>
+            <h2>Second slide label</h2>
             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
           </div>
         </div>
