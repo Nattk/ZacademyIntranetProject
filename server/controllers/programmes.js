@@ -40,10 +40,15 @@ programmesRouter.post('/', async (request, response, next) => {
 })
 
 programmesRouter.put('/:id', async (request, response, next) => {
+  const promotion = await Promotion.findById(request.body.promotionId)
   const body = request.body
 
   try {
     const programmeToUpdate = await Programme.findByIdAndUpdate(request.params.id, body, { new: true })
+    if (promotion && promotion.programmes.filter(x => x.toString() === programmeToUpdate.id).length === 0) {
+      promotion.programmes = promotion.programmes.concat(programmeToUpdate._id)
+      await promotion.save()
+    }
     response.json(programmeToUpdate.toJSON())
   } catch (error) {
     next(error)
