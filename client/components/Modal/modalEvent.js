@@ -19,21 +19,21 @@ const ModalEvent = (props) => {
           {props.headerTitle ? (
             <section>
               <h2 className="customModalTitle-H2">
-                <i class="far fa-clock" />
+                <i className="far fa-clock" />
                 &nbsp; {props.headerTitle}
               </h2>
             </section>) : null}
           {props.modalLocation ? (
             <section>
               <p>
-                <i class="fas fa-map-marker-alt" />
+                <i className="fas fa-map-marker-alt" />
                 &nbsp; {props.modalLocation}{' '}
               </p>
             </section>) : null}
           {props.modalDescription ? (
             <section >
               <p>
-                <i class="fas fa-bars" />
+                <i className="fas fa-bars" />
                 &nbsp; {props.modalDescription}
               </p>
             </section>

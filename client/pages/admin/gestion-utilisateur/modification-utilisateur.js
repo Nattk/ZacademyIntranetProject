@@ -43,7 +43,7 @@ class ModificationUtilisateur extends Component {
 	        <form className="container">
 	          <section className="section">
 	            <div className="form-group">
-	              <label for="username">Nom</label>
+	              <label htmlFor="username">Nom</label>
 	              <input
 	                type="text"
 	                name="username"
@@ -53,7 +53,7 @@ class ModificationUtilisateur extends Component {
 	              />
 	            </div>
 	            <div className="form-group">
-	              <label for="userfirstname">Prenom</label>
+	              <label htmlFor="userfirstname">Prenom</label>
 	              <input
 	                type="text"
 	                name="userfirstname"
@@ -63,7 +63,7 @@ class ModificationUtilisateur extends Component {
 	              />
 	            </div>
 	            <div className="form-group">
-	              <label for="useremail">Email</label>
+	              <label htmlFor="useremail">Email</label>
 	              <input
 	                type="email"
 	                name="useremail"
@@ -73,7 +73,7 @@ class ModificationUtilisateur extends Component {
 	              />
 	            </div>
 	            <div className="form-group">
-	              <label for="userphone">Téléphone</label>
+	              <label htmlFor="userphone">Téléphone</label>
 	              <input
 	                type="Telephone"
 	                name="userphone"
@@ -83,7 +83,7 @@ class ModificationUtilisateur extends Component {
 	              />
 	            </div>
 	            <div className="form-group">
-	              <label for="choices-groups">Selectionner une promotion</label>
+	              <label htmlFor="choices-groups">Selectionner une promotion</label>
 	              <select
 	                defaultValue="Paris_02"
 	                className="form-control"
@@ -112,7 +112,7 @@ class ModificationUtilisateur extends Component {
 	              </select>
 	            </div>
 	            <div className="form-group">
-	              <label for="roles">Selectionner un rôle</label>
+	              <label htmlFor="roles">Selectionner un rôle</label>
 	              <select className="form-control" id="role">
 	                <option value="Eleve">Eleve</option>
 	                <option value="Formateur">Formateur</option>

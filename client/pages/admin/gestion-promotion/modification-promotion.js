@@ -29,21 +29,21 @@ class ModificationPromotion extends Component {
   render () {
     return (
       <Page title="Modification Promotion">
-        <article class="gestionProgramme card" id="form_creation_promotion">
-          <header class="card-header text-center">
+        <article className="gestionProgramme card" id="form_creation_promotion">
+          <header className="card-header text-center">
             Modifier une promotion
           </header>
-          <form class="container" >
-            <section class="section">
+          <form className="container" >
+            <section className="section">
 
-              <div class="form-group">
-                <label for="titre_promotion">Titre</label>
-                <input type="text" name="titre_promotion" class="form-control" id="exampleFormControlInput1"
+              <div className="form-group">
+                <label htmlFor="titre_promotion">Titre</label>
+                <input type="text" name="titre_promotion" className="form-control" id="exampleFormControlInput1"
                   value={this.state.promotions.name}></input>
               </div>
-              <div class="form-group">
-                <label for="ville">Selectionner Ville</label>
-                <select class="form-control" name="ville" id="exampleFormControlSelect1">
+              <div className="form-group">
+                <label htmlFor="ville">Selectionner Ville</label>
+                <select className="form-control" name="ville" id="exampleFormControlSelect1">
                   <optgroup label=" France">
                     <option value="Paris">Paris</option>
                     <option value="Lyon">Lyon</option>
@@ -65,8 +65,8 @@ class ModificationPromotion extends Component {
                 </select>
               </div>
               <div data-test-hook="groups">
-                <label for="programme">Choisir Programme</label>
-                <select class="form-control" name="programme" id="programme" multiple>
+                <label htmlFor="programme">Choisir Programme</label>
+                <select className="form-control" name="programme" id="programme" multiple>
                   <optgroup label="Front-End">
                     <option value="JavaScript">JavaScript</option>
                     <option value="CSS Overlord">CSS Overlord</option>
@@ -84,22 +84,22 @@ class ModificationPromotion extends Component {
                   </optgroup>
                 </select>
               </div><br></br>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text description-programme-span">Description</span>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text description-programme-span">Description</span>
                 </div>
-                <textarea class="form-control" aria-label="With textarea"></textarea>
+                <textarea className="form-control" aria-label="With textarea"></textarea>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label>Debut formation</label>
-                <input type="date" name="bday" value="2019-10-10" max="3000-12-31" min="1000-01-01" class="form-control"></input>
+                <input type="date" name="bday" value="2019-10-10" max="3000-12-31" min="1000-01-01" className="form-control"></input>
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label>Fin formation</label>
-                <input type="date" name="bday" value="2019-01-10" min="1000-01-01" max="3000-12-31" class="form-control"></input>
+                <input type="date" name="bday" value="2019-01-10" min="1000-01-01" max="3000-12-31" className="form-control"></input>
               </div>
             </section>
-            <section class="d-flex flex-row footer-programme-formulaire">
+            <section className="d-flex flex-row footer-programme-formulaire">
 
               <Button
                 btnType="annuler"

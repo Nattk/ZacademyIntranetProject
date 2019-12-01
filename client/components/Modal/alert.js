@@ -39,7 +39,7 @@ const Alert = (props) => {
             </section>) : null}
           {props.input ? (
             <div className="form-group">
-              <label for="username">Flux RSS</label>
+              <label htmlFor="username">Flux RSS</label>
               <input
                 type="text"
                 name="rss"

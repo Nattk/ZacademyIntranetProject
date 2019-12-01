@@ -20,8 +20,8 @@ const Card = (props) => (
       <section>
         <p className="fonction-user-card-who-to-follow">{props.fonction} </p>
         <p className="description-user-card-who-to-follow" >{props.description}</p>
-        {props.email ? (<p className="description-user-card-who-to-follow" ><i class="far fa-envelope"></i>&nbsp; &nbsp;{props.email}</p>) : null}
-        {props.telephone ? (<p className="description-user-card-who-to-follow" ><i class="fas fa-phone-alt"></i>&nbsp; &nbsp;{props.telephone}</p>) : null}
+        {props.email ? (<p className="description-user-card-who-to-follow" ><i className="far fa-envelope"></i>&nbsp; &nbsp;{props.email}</p>) : null}
+        {props.telephone ? (<p className="description-user-card-who-to-follow" ><i className="fas fa-phone-alt"></i>&nbsp; &nbsp;{props.telephone}</p>) : null}
       </section>
       <footer className="footer-card-who-to-follow button-follow" >
         <section className="section-footer-card-who-to-follow">
