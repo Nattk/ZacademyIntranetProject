@@ -44,10 +44,20 @@ sequencesRouter.post('/', async (request, response, next) => {
 })
 
 sequencesRouter.put('/:id', async (request, response, next) => {
+  const module = await Module.findById(request.body.moduleId)
+  const sousmodule = await Sousmodule.findById(request.body.sousmoduleId)
   const body = request.body
 
   try {
-    const sequenceToUpdate = await Sequence.findByIdAndUpdate(request.params.id, body, { new: true })
+    const sequenceToUpdate = await Sousmodule.findByIdAndUpdate(request.params.id, body, { new: true })
+    if (sousmodule && sousmodule.sequences.filter(x => x.toString() === sequenceToUpdate.id).length === 0) {
+      sousmodule.sequences = sousmodule.sequences.concat(sequenceToUpdate._id)
+      await sousmodule.save()
+    }
+    if (module && module.sequences.filter(x => x.toString() === sequenceToUpdate.id).length === 0) {
+      module.sequences = module.sequences.concat(sequenceToUpdate._id)
+      await module.save()
+    }
     response.json(sequenceToUpdate.toJSON())
   } catch (error) {
     next(error)

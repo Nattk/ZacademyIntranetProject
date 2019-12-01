@@ -48,11 +48,16 @@ sousmodulesRouter.delete('/:id', async (request, response, next) => {
 })
 
 sousmodulesRouter.put('/:id', async (request, response, next) => {
+  const module = await Module.findById(request.body.moduleId)
   const body = request.body
 
   try {
-    const moduleToUpdate = await Sousmodule.findByIdAndUpdate(request.params.id, body, { new: true })
-    response.json(moduleToUpdate.toJSON())
+    const sousmoduleToUpdate = await Sousmodule.findByIdAndUpdate(request.params.id, body, { new: true })
+    if (module && module.sousmodules.filter(x => x.toString() === sousmoduleToUpdate.id).length === 0) {
+      module.sousmodules = module.sousmodules.concat(sousmoduleToUpdate._id)
+      await module.save()
+    }
+    response.json(sousmoduleToUpdate.toJSON())
   } catch (error) {
     next(error)
   }
