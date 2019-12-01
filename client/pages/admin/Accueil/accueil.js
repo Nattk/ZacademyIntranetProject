@@ -59,9 +59,8 @@ class Admin extends Component {
                       <td>{promo.title}</td>
                       <td>{promo.city}</td>
                       <td>{promo.programmes.map(el => el.title)}</td>
-                      <td>{promo.start}
-
-                        {promo.end}</td>
+                      <td className="date-style"><span className="date-style">Début: {promo.start ? promo.start.slice(0, 10) : promo.start}</span>
+                        <span className="date-style">  Fin: {promo.end ? promo.end.slice(0, 10) : promo.end} </span>  </td>
                       <td>
                         <button><i className="fas fa-eye" title="Voir détails"></i></button>
                         <button>Ghost</button>

@@ -79,7 +79,7 @@ class CreaPromotion extends Component {
     axios.post('http://localhost:3333/api/promotions', elements)
       .then((data) => { this.setState({ showModal: false, promotions: data }) })
       .catch(error => { console.log(error.response) })
-    // window.location.assign('/admin/Accueil/accueil'),
+    window.location.assign('/admin/Accueil/accueil')
   }
 
   onShowRecapForm () {
@@ -118,19 +118,18 @@ class CreaPromotion extends Component {
     const { selectedCity, selectedProgramme, formateursOption, studentsOption } = this.state
     const start = this.state.startDate ? JSON.stringify(this.state.startDate._d) : null
     const end = this.state.endDate ? JSON.stringify(this.state.endDate._d) : null
-    const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => <div className="d-flex">{el.firstName}{el.lastName}</div>) : this.state.formateursOption
-    const students = this.state.studentsOption ? this.state.studentsOption.map(el => <div className="d-flex">{el.firstName}{el.lastName}</div>) : this.state.studentsOption
     const dayStart = start ? start.toString().slice(9, 11) : start
     const monthStart = start ? start.toString().slice(6, 8) : start
     const yearStart = start ? start.toString().slice(1, 5) : start
-
     const dayEnd = end ? end.toString().slice(9, 11) : end
     const monthEnd = end ? end.toString().slice(6, 8) : end
     const yearEnd = end ? end.toString().slice(1, 5) : end
     const dateStart = `${dayStart}-${monthStart}-${yearStart}`
     const dateEnd = `${dayEnd}-${monthEnd}-${yearEnd}`
+    const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => <div className="d-flex">{el.firstName}&nbsp;{el.lastName}</div>) : this.state.formateursOption
+    const students = this.state.studentsOption ? this.state.studentsOption.map(el => <div className="d-flex">{el.firstName}&nbsp; {el.lastName}</div>) : this.state.studentsOption
 
-    const des = <div style={{ marginTop: '1.5rem' }}>
+    const recapPromotion = <div style={{ marginTop: '1.5rem' }}>
       <section>
         <p>Nom de promotion: {this.state.title}</p>
         <p>Ville: {this.state.selectedCity.value}</p>
@@ -272,7 +271,7 @@ class CreaPromotion extends Component {
             </Button>
           </section>
           <section className="col-md-12 col-sm-12 col-xs-12 text-right" >
-            <Modal titleModal={`Recapitulatif promotion ${this.state.title}`} show={this.state.showModal} onClose={this.handleClose} recapitulation={des} />
+            <Modal titleModal={`Recapitulatif promotion ${this.state.title}`} show={this.state.showModal} onClose={this.handleClose} recapitulation={recapPromotion} />
           </section>
 
         </article>
