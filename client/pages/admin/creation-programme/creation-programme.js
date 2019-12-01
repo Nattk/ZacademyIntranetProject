@@ -3,6 +3,7 @@ import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
 import Select from 'react-select/'
 import axios from 'axios'
+import { addModuleToProgram } from '../../../services/creation-programme'
 
 class CreaProgramme extends Component {
   state = {
@@ -47,12 +48,17 @@ class CreaProgramme extends Component {
     } else if (this.state.etapes === 2) {
       const modules = [...this.state.modSelected]
       const programmeId = this.state.programmeId
-      console.log(modules)
-      axios.put(`http://localhost:3333/api/programmes/${programmeId}`, { modules: modules }).then(response => {
-        console.table(response.data)
-      }).catch(err => {
-        console.log(err)
+      const promisesArray = modules.map(mod => {
+        return addModuleToProgram(mod.id, programmeId)
       })
+
+      axios.all(promisesArray)
+        .then(results => {
+          results.map(res => console.table(res.data))
+        })
+        .catch(err => {
+          alert(err)
+        })
     }
   }
 
@@ -179,6 +185,73 @@ class CreaProgramme extends Component {
             </Button>
           </section>
         </form>
+      )
+    } else if (this.state.etapes === 3) {
+      creationProgramme = (
+        <div>
+          <form className="container" >
+            <section className="section">
+              <div className="form-group">
+                <label htmlFor="programtitle">Titre</label><br></br>
+                <input type="text" name="programmeTitle" required className="form-control" id="exampleFormControlInput1" onChange={e => this.handleChange(e.target)}
+                  placeholder="Intitulé du programme" />
+              </div>
+            </section>
+          </form>
+          <section className="d-flex flex-row footer-programme-formulaire">
+            <Button
+              btnType="annuler"
+              type="button"
+              clicked={this.previousPage}
+              className="btn btn-primary text-center button-cancel-programme"
+            >
+            Annuler
+            </Button>
+            <Button
+              btnType="valider"
+              clicked={this.handleStep}
+            >
+            Etape suivante
+            </Button>
+          </section>
+        </div>
+      )
+    } else if (this.state.etapes === 2) {
+      creationProgramme = (
+        <form className="container" >
+          <h2>Ajouter des Sous Modules</h2>
+          <section className="d-flex flex-row">
+            <input type="text" placeholder="modules" onChange={e => this.handleChange(e.target)}/>
+            <button onClick={this.handleModule} className="btn btn-primary text-center"
+            >Créer vos Sous Modules
+            </button>
+          </section>
+          <h2>Selectionner votre module</h2>
+          <Select className="select-component" options={this.state.modules} isMulti={true}
+            formatCreateLabel={(inputValue) => inputValue}
+            getOptionLabel={(option) => option.title}
+            getOptionValue={(option) => option.title}
+            onChange={(newValue, actionMeta) => this.handleSelect(newValue, actionMeta.action)}
+          />
+
+          <section className="d-flex flex-row footer-programme-formulaire">
+            <Button
+              btnType="annuler"
+              type="button"
+              className="btn btn-primary text-center button-cancel-programme"
+            >
+            Annuler
+            </Button>
+            <Button
+              btnType="valider"
+              // type="submit"
+              clicked={this.handleStep}
+            >
+            Etape suivante
+            </Button>
+          </section>
+        </form>
+
       )
     }
 
