@@ -9,10 +9,10 @@ const promotionSchema = mongoose.Schema({
     type: String
   },
   start: {
-    type:  Date
+    type: Date
   },
   end: {
-    type : Date
+    type: Date
   },
   programmes: [
     {

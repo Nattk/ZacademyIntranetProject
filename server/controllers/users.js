@@ -42,7 +42,7 @@ usersRouter.put('/', async (request, response, next) => {
   const promotion = await Promotion.findById(request.body.promotionId)
 
   try {
-    const user = request.body
+    let user = request.body
 
     if (request.body.password) {
       const saltRounds = 10
@@ -59,11 +59,11 @@ usersRouter.put('/', async (request, response, next) => {
     }
 
     const userToUpdate = await User.findByIdAndUpdate(request.params.id, user, { new: true })
-    if (promotion 
-      && (promotion.eleves.filter(x => x.toString() === userToUpdate.id).length === 0
-      || promotion.formateurs.filter(x => x.toString() === userToUpdate.id).length === 0)) {
-      userToUpdate.role === 'eleve' 
-        ? promotion.eleves = promotion.eleves.concat(userToUpdate._id) 
+    if (promotion &&
+      (promotion.eleves.filter(x => x.toString() === userToUpdate.id).length === 0 ||
+      promotion.formateurs.filter(x => x.toString() === userToUpdate.id).length === 0)) {
+      userToUpdate.role === 'eleve'
+        ? promotion.eleves = promotion.eleves.concat(userToUpdate._id)
         : promotion.formateurs = promotion.formateurs.concat(userToUpdate._id)
       await promotion.save()
     }
