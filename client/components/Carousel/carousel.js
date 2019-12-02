@@ -13,24 +13,21 @@ const Carousel = () => (
           <img src="/slide_1.png"
             className="d-block w-100 carousel-connected " alt="carousel slide 1" />
           <div className="carousel-caption d-none d-md-block">
-            <h2>First slide label</h2>
-            <p>Nulla vitae elit laibero, a pharetra augue mollis interdum.</p>
+            <p>Description de l'image 1</p>
           </div>
         </div>
         <div className="carousel-item ">
           <img src="/slide_2.png"
             className="d-block w-100 carousel-connected " alt="carousel slide 2" />
           <div className="carousel-caption d-none d-md-block">
-            <h2>Second slide label</h2>
-            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            <p>Description de l'image 2</p>
           </div>
         </div>
         <div className="carousel-item ">
           <img src="/slide_3.png"
             className="d-block w-100 carousel-connected " alt="carousel slide 3" />
           <div className="carousel-caption d-none d-md-block">
-            <h2>Third slide label</h2>
-            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            <p>Description de l'image 3</p>
           </div>
         </div>
       </div>
