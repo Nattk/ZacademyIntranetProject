@@ -38,7 +38,7 @@ usersRouter.post('/', async (request, response, next) => {
   }
 })
 
-usersRouter.put('/', async (request, response, next) => {
+usersRouter.put('/:id', async (request, response, next) => {
   const promotion = await Promotion.findById(request.body.promotionId)
 
   try {
