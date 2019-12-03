@@ -3,16 +3,20 @@ import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
 import axios from 'axios'
 import CreationProgramme from '../../../components/Creation-programme/creation-programme'
+import Modal from '../../../components/Modal/modal'
 
 class CreaProgramme extends Component {
   state = {
     programmeId: '',
+    programme: '',
     title: '',
-    moduleTitle: '',
+    moduleId: '',
+    smouleId: '',
     modules: '',
-    modSelected: null,
+    sousmodules: '',
     sequences: '',
-    etapes: 1
+    etapes: 1,
+    modalShow: false
   }
 
   componentDidMount () {
@@ -26,14 +30,6 @@ class CreaProgramme extends Component {
       })
   }
 
-   handleUpdate = () => {
-     // if (name === '' || undefined) {
-     //   this.setState({ show: false })
-     // } else {
-     return this.setState({ show: true })
-     // }
-   }
-
   handleConfirmForm = () => {
     event.preventDefault()
     window.location.assign('/admin/gestion-programme/gestion-programme')
@@ -43,6 +39,8 @@ class CreaProgramme extends Component {
     event.preventDefault()
     if (this.state.etapes === 1) {
       this.handleProgram()
+      this.setState({ etapes: this.state.etapes + 1 })
+    } else {
       this.setState({ etapes: this.state.etapes + 1 })
     }
   }
@@ -64,29 +62,64 @@ class CreaProgramme extends Component {
   handleChange = (event) => {
     if (event.name === 'programmeTitle') {
       this.setState({ title: event.value })
-    } else {
-      this.setState({ moduleTitle: event.value })
     }
   }
 
   handleProgram = () => {
     axios.post('http://localhost:3333/api/programmes', { title: this.state.title })
       .then(response => {
-        console.log(response.data.id)
         this.setState({ programmeId: response.data.id })
-        console.log('program added')
       })
       .catch(err => {
         console.log('err', err)
       })
   }
 
-  previousPage = () => {
-    window.location.assign('/admin/gestion-programme/gestion-programme')
+  endProgram = () => {
+    event.preventDefault()
+    axios.get(`http://localhost:3333/api/programmes/${this.state.programmeId}`)
+      .then(programme => {
+        this.setState({ programme: programme.data })
+        this.setState({ modalShow: !this.state.modalShow })
+      })
+      .catch(err => {
+        console.log(err, 'err')
+      })
+  }
+
+  handleClose = () => {
+	  this.setState({ modalShow: false })
   }
 
   render () {
     let creationProgramme = null
+    let modalConfirm = null
+    if (this.state.programme !== '') {
+      modalConfirm = (
+        <React.Fragment>
+          <h2>{this.state.programme.title}</h2>
+          <ul>
+            {
+              this.state.programme.modules.map(mod => (
+                <li key={mod.id}>{mod.title}
+                  <ul>
+                    {mod.sousmodules.map(sousMod => (
+                      <li key={sousMod.id}>{sousMod.title}
+                        <ul>
+                          {sousMod.sequences.map(seq => (
+                            <li key={seq.id}>{seq.title}</li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))
+            }
+          </ul>
+        </React.Fragment>
+      )
+    }
 
     if (this.state.etapes === 1) {
       creationProgramme = (
@@ -104,15 +137,15 @@ class CreaProgramme extends Component {
       )
     } else if (this.state.etapes === 2) {
       creationProgramme = (
-        <CreationProgramme name="modules" step={this.state.etapes} programme={this.state.programmeId}/>
+        <CreationProgramme name="modules" step={this.state.etapes} parentId={this.state.programmeId}/>
       )
     } else if (this.state.etapes === 3) {
       creationProgramme = (
-        <CreationProgramme name="sousmodules" step={this.state.etapes} programme={this.state.programmeId}/>
+        <CreationProgramme name="sousmodules" step={this.state.etapes} parentId={this.state.moduleId}/>
       )
     } else if (this.state.etapes === 4) {
       creationProgramme = (
-        <CreationProgramme name="sequences" step={this.state.etapes} programme={this.state.programmeId}/>
+        <CreationProgramme name="sequences" step={this.state.etapes} parentId={this.state.smoduleId}/>
       )
     }
 
@@ -124,22 +157,32 @@ class CreaProgramme extends Component {
           </header>
           {creationProgramme}
           <section className="d-flex flex-row footer-programme-formulaire">
-            <Button
+            {/* <Button
               btnType="annuler"
               type="button"
               clicked={this.previousPage}
               className="btn btn-primary text-center button-cancel-programme"
             >
             Annuler
-            </Button>
+            </Button> */}
             <Button
               btnType="valider"
               clicked={this.handleStep}
             >
             Etape suivante
             </Button>
+            <Button
+              btnType="valider"
+              clicked={this.endProgram}
+            >
+            Terminer programme
+            </Button>
           </section>
 
+          <Modal
+            show={this.state.modalShow}
+	        onClose={this.handleClose}
+	        titleModal="Confirmation">{modalConfirm}</Modal>
         </article>
       </Page>
     )
