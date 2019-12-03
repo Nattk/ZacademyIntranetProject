@@ -23,6 +23,18 @@ promotionsRouter.get('/', async (req, res) => {
 promotionsRouter.get('/:id', async (req, res, next) => {
   try {
     const foundpromotion = await Promotion.findById(req.params.id)
+      .populate({
+        path: 'programmes',
+        populate: {
+          path: 'modules',
+          populate: {
+            path: 'sousmodules',
+            populate: {
+              path: 'sequences'
+            }
+          }
+        }
+      })
     if (foundpromotion) {
       res.json(foundpromotion.toJSON())
     } else {

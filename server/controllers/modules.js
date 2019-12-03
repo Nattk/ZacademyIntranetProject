@@ -4,14 +4,26 @@ const Programme = require('../models/programme')
 
 modulesRouter.get('/', async (req, res) => {
   const allModules = await Module.find({})
-    .populate('sousmodules', { title: 1 })
     .populate('sequences', { title: 1 })
+    .populate({
+      path: 'sousmodules',
+      populate: {
+        path: 'sequences'
+      }
+    })
   res.json(allModules.map(module => module.toJSON()))
 })
 
 modulesRouter.get('/:id', async (req, res, next) => {
   try {
     const foundmodule = await Module.findById(req.params.id)
+      .populate('sequences', { title: 1 })
+      .populate({
+        path: 'sousmodules',
+        populate: {
+          path: 'sequences'
+        }
+      })
     if (foundmodule) {
       res.json(foundmodule.toJSON())
     } else {

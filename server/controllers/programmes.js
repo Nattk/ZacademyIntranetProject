@@ -4,13 +4,30 @@ const Promotion = require('../models/promotion')
 
 programmesRouter.get('/', async (req, res) => {
   const allProgrammes = await Programme.find({})
-    .populate('modules')
+    .populate({
+      path: 'modules',
+      populate: {
+        path: 'sousmodules',
+        populate: {
+          path: 'sequences'
+        }
+      }
+    })
   res.json(allProgrammes.map(programme => programme.toJSON()))
 })
 
 programmesRouter.get('/:id', async (req, res, next) => {
   try {
     const foundprogramme = await Programme.findById(req.params.id)
+      .populate({
+        path: 'modules',
+        populate: {
+          path: 'sousmodules',
+          populate: {
+            path: 'sequences'
+          }
+        }
+      })
     if (foundprogramme) {
       res.json(foundprogramme.toJSON())
     } else {
