@@ -19,11 +19,11 @@ const Modals = (props) => {
               props.deleteDescription) : null}
             {props.calendar ? (props.calendar) : null}
             {props.recapitulation ? (props.recapitulation) : null}
+            {props.children}
           </section>
         </main>
       </article>
     </Modal>
   )
 }
-
 export default Modals

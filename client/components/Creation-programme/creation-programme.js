@@ -12,7 +12,6 @@ class CreationProgramme extends Component {
 
     componentDidMount () {
       getModules(this.props.name).then(reponse => {
-        console.table(reponse.data)
         this.setState({ items: reponse.data })
       }).catch(err => {
         alert(err, 'getModules')
@@ -57,7 +56,7 @@ class CreationProgramme extends Component {
     handleAdd = () => {
       event.preventDefault()
       console.table(this.state.selected)
-      addToProgram(this.state.selected.id, this.props.name, this.props.programmeId).then(response => {
+      addToProgram(this.state.selected.id, this.props.name, this.props.parentId).then(response => {
         console.table(response.data)
       }).catch(err => {
         alert(err, 'handleAdd')
