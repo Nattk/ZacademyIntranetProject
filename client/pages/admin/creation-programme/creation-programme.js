@@ -11,10 +11,11 @@ class CreaProgramme extends Component {
     programme: '',
     title: '',
     moduleId: '',
-    smouleId: '',
+    smoduleId: '',
     modules: '',
     sousmodules: '',
     sequences: '',
+    selected: '',
     etapes: 1,
     modalShow: false
   }
@@ -28,6 +29,33 @@ class CreaProgramme extends Component {
       .catch(err => {
         alert(err)
       })
+  }
+
+  handleSelect = (newValue, action) => {
+    console.log('selected', newValue.id)
+    switch (action.action) {
+      case 'select-option':
+        if (action.name === 'modules') {
+          this.setState({ moduleId: newValue.id })
+        } else if (action.name === 'sousmodules') {
+          this.setState({ smoduleId: newValue.id })
+        }
+        this.setState({ selected: newValue })
+        break
+      case 'remove-value':
+        if (action.name === 'modules') {
+          this.setState({ moduleId: newValue.id })
+        } else if (action.name === 'sousmodules') {
+          this.setState({ smoduleId: newValue.id })
+        }
+        this.setState({ selected: newValue })
+        break
+      case 'clear':
+        this.setState({ selected: '' })
+        break
+      default:
+        break
+    }
   }
 
   handleConfirmForm = () => {
@@ -137,15 +165,15 @@ class CreaProgramme extends Component {
       )
     } else if (this.state.etapes === 2) {
       creationProgramme = (
-        <CreationProgramme name="modules" step={this.state.etapes} parentId={this.state.programmeId}/>
+        <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="modules" step={this.state.etapes} parentId={this.state.programmeId}/>
       )
     } else if (this.state.etapes === 3) {
       creationProgramme = (
-        <CreationProgramme name="sousmodules" step={this.state.etapes} parentId={this.state.moduleId}/>
+        <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="sousmodules" step={this.state.etapes} parentId={this.state.moduleId}/>
       )
     } else if (this.state.etapes === 4) {
       creationProgramme = (
-        <CreationProgramme name="sequences" step={this.state.etapes} parentId={this.state.smoduleId}/>
+        <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="sequences" step={this.state.etapes} parentId={this.state.smoduleId}/>
       )
     }
 
