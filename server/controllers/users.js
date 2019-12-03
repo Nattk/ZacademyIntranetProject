@@ -8,7 +8,6 @@ usersRouter.get('/', async (request, response) => {
   response.json(users.map(u => u.toJSON()))
 })
 
-
 usersRouter.post('/', async (request, response, next) => {
   console.log('request.body', request.body)
   const promotion = await Promotion.findById(request.body.promotionId)

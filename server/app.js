@@ -31,7 +31,6 @@ app.use(helmet())
 app.use(helmet.hidePoweredBy({ setTo: 'PHP 7.4.0' }))
 app.use(express.static('static'))
 app.use(bodyParser.json())
-app.use(express.urlencoded())
 app.use(middleware.requestLogger)
 
 app.use('/api/ressources', ressourcesRouter)
