@@ -11,9 +11,16 @@ nav#navbar{
       background: rgb(178, 30, 62);
       border: rgb(178, 30, 62);
   }
+  button.bouton-navbar {
+    background: rgb(178, 30, 62);
+    border: rgb(178, 30, 62);
+  }
   a.bouton-navbar:hover{
       background: rgb(178, 30, 62);
       border: rgb(178, 30, 62);
+  }
+  .dropdown-menu{
+    color: #343a40
   }
   #dropdownMenuLink{
       background: rgb(178, 30, 62);
@@ -29,11 +36,17 @@ nav#navbar{
   div{
       div#end-of-navbar{
       margin-left: auto;
+    }
   }
-}
 } 
 
-
+.dropdown-menu{
+  a{
+    color: white;
+  }
+  background-color: rgb(178, 30, 62)
+  
+}
 
 .error {
 color: red;

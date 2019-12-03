@@ -19,6 +19,7 @@ const MonProfil = () => (
       </div>
       <img className="card-img-top" src="/avatar.jpg" alt="avatar mon profil" />
     </article>
+    <p>Pour modification ou suppression de vos données personnelles, merci de contacter l'administration cf mentions légales.</p>
   </Page>
 )
 

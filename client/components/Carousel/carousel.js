@@ -4,9 +4,6 @@ const Carousel = () => (
   <article className="container fluid carousel-promo">
     <section id="carouselExampleCaptions" className="carousel slide" data-interval="false" alt="carousel formation">
       <ol className="carousel-indicators">
-        <li data-target="#carouselExampleCaptions" data-slide-to="0" className="active"></li>
-        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
       </ol>
       <div className="carousel-inner">
         <div className="carousel-item active">
@@ -31,11 +28,11 @@ const Carousel = () => (
           </div>
         </div>
       </div>
-      <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <a className="carousel-control-prev" title="photo précédente" href="#carouselExampleCaptions" role="button" data-slide="prev">
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
         <span className="sr-only">Previous</span>
       </a>
-      <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <a className="carousel-control-next" title="photo suivante" href="#carouselExampleCaptions" role="button" data-slide="next">
         <span className="carousel-control-next-icon" aria-hidden="true"></span>
         <span className="sr-only">Next</span>
       </a>
