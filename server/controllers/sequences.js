@@ -49,7 +49,7 @@ sequencesRouter.put('/:id', async (request, response, next) => {
   const body = request.body
 
   try {
-    const sequenceToUpdate = await Sousmodule.findByIdAndUpdate(request.params.id, body, { new: true })
+    const sequenceToUpdate = await Sequence.findByIdAndUpdate(request.params.id, body, { new: true })
     if (sousmodule && sousmodule.sequences.filter(x => x.toString() === sequenceToUpdate.id).length === 0) {
       sousmodule.sequences = sousmodule.sequences.concat(sequenceToUpdate._id)
       await sousmodule.save()
