@@ -4,13 +4,14 @@ const Sousmodule = require('../models/sousmodule')
 
 sousmodulesRouter.get('/', async (req, res) => {
   const allSousmodules = await Sousmodule.find({})
-    .populate('sequences', { title: 1 })
+    .populate('sequences')
   res.json(allSousmodules.map(module => module.toJSON()))
 })
 
 sousmodulesRouter.get('/:id', async (req, res, next) => {
   try {
     const foundmodule = await Sousmodule.findById(req.params.id)
+      .populate('sequences')
     if (foundmodule) {
       res.json(foundmodule.toJSON())
     } else {

@@ -13,6 +13,7 @@ const sousmodulesRouter = require('./controllers/sousmodules')
 const sequencesRouter = require('./controllers/sequences')
 const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
+const helmet = require('helmet')
 const logger = require('./utils/logger')
 
 logger.info('connecting to', config.MONGODB_URI)
@@ -26,6 +27,8 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
   })
 
 app.use(cors())
+app.use(helmet())
+app.use(helmet.hidePoweredBy({ setTo: 'PHP 7.4.0' }))
 app.use(express.static('static'))
 app.use(bodyParser.json())
 app.use(middleware.requestLogger)
