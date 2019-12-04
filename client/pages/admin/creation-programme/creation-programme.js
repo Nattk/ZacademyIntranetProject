@@ -73,6 +73,10 @@ class CreaProgramme extends Component {
     }
   }
 
+  handleRedirection = () => {
+    window.location.assign('/admin/gestion-programme/gestion-programme')
+  }
+
   handleModule = () => {
     event.preventDefault()
     axios.post('http://localhost:3333/api/modules', { title: this.state.moduleTitle })
@@ -145,6 +149,7 @@ class CreaProgramme extends Component {
               ))
             }
           </ul>
+          <Button clicked={this.handleRedirection} btnType="valider">Valider</Button>
         </React.Fragment>
       )
     }

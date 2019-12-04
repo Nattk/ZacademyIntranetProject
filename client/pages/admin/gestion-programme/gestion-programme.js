@@ -2,15 +2,21 @@ import React, { Component } from 'react'
 import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
 import Alert from '../../../components/Modal/alert'
+import { getModules } from '../../../services/creation-programme'
 
 class ProgrammeGestion extends Component {
   state = {
-    programmes: [
-      { name: 'Développeur Javascript', progId: 1 },
-      { name: 'Développeur Java', progId: 2 },
-      { name: 'Chef de Projet web', progId: 3 }
-    ],
+    programmes: [],
     show: false
+  }
+
+  componentDidMount () {
+    getModules('programmes').then(programmes => {
+      console.log(programmes.data)
+      this.setState({ programmes: programmes.data })
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   handleModal = (event) => {
@@ -49,9 +55,9 @@ class ProgrammeGestion extends Component {
           </header>
           <section className="card-body">
             <ul>
-              {this.state.programmes.map((programme, index) => (
-                <li key={index} className="d-flex flex- justify-content-around align-items-baseline">
-                  <a href="#">{programme.name}</a>
+              {this.state.programmes.map(programme => (
+                <li key={programme.id} className="d-flex flex- justify-content-around align-items-baseline">
+                  <a href="#">{programme.title}</a>
                   <Button btnType="dupliquer" clicked={(progId) => this.handleDuplication(programme.progId)}><a>Dupliquer</a></Button>
                   <Button btnType="annuler" clicked={this.handleModal}>Supprimer</Button>
                   <a href="/admin/gestion-programme/modification-programme" title="modification-programme" className="link-button-valider" >
