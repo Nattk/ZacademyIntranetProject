@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import userService from '../../../services/users'
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
@@ -20,12 +20,9 @@ class CreaPromotion extends Component {
     this.state = {
       promotions: [],
       promotion: '',
-      focusedInput: '',
       show: false,
       showModal: false,
       title: '',
-      startDate: '',
-      endDate: '',
       startdateValidation: '',
       enddateValidation: '',
       titreValidation: '',
@@ -89,7 +86,7 @@ class CreaPromotion extends Component {
   }
 
 
-  componentWillUpdate(id) {
+  componentWillUpdate() {
     const eleveSelected = { eleveId: this.state.studentsOption ? this.state.studentsOption.map(el => el.id) : null }
     const formateurSelected = { formateurId: this.state.formateursOption ? this.state.formateursOption.map(el => el.id) : null }
 
@@ -114,9 +111,9 @@ class CreaPromotion extends Component {
     this.state.formateursOption === '' ? this.setState({ formateursValidation: 'Veuillez selectionné un ou plusieurs formateurs ' }) : this.setState({ formateursValidation: '' })
     this.state.studentsOption === '' ? this.setState({ studentsValidation: 'Veuillez selectionné des futurs consultants ' }) : this.setState({ studentsValidation: '' })
     this.state.selectedCity === '' ? this.setState({ cityValidation: 'Veuillez selectionné une ville ' }) : this.setState({ cityValidation: '' })
-    this.state.startDate === '' ? this.setState({ startdateValidation: 'Veuillez selectionné une date de début de formation ' }) : this.setState({ startdateValidation: '' })
-    this.state.endDate === '' ? this.setState({ enddateValidation: 'Veuillez selectionné une date  de fin de formation ' }) : this.setState({ enddateValidation: '' })
-    this.state.startDate === '' && this.state.endDate === '' ? this.setState({ dateValidation: 'Veuillez selectionné une période de formation ' }) : this.setState({ dateValidation: '' })
+    this.state.startDate === undefined || this.state.startDate === null ? this.setState({ startdateValidation: 'Veuillez selectionné une date de début de formation ' }) : this.setState({ startdateValidation: '' })
+    this.state.endDate === undefined || this.state.endDate === null ? this.setState({ enddateValidation: 'Veuillez selectionné une date  de fin de formation ' }) : this.setState({ enddateValidation: '' })
+    this.state.startDate === undefined && this.state.endDate === undefined ? this.setState({ dateValidation: 'Veuillez selectionné une période de formation ' }) : this.setState({ dateValidation: '' })
   }
 
   componentDidMount() {
@@ -146,12 +143,12 @@ class CreaPromotion extends Component {
     const yearEnd = end ? end.toString().slice(1, 5) : end
     const dateStart = `${dayStart}-${monthStart}-${yearStart}`
     const dateEnd = `${dayEnd}-${monthEnd}-${yearEnd}`
-    const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => <div className="d-flex">{el.firstName}&nbsp;{el.lastName}</div>) : this.state.formateursOption
-    const students = this.state.studentsOption ? this.state.studentsOption.map(el => <div className="d-flex">{el.firstName}&nbsp; {el.lastName}</div>) : this.state.studentsOption
+    const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => el.firstName.concat(' ', el.lastName, ' ')) : this.state.formateursOption
+    const students = this.state.studentsOption ? this.state.studentsOption.map(el => el.firstName.concat(' ', el.lastName, ' \n ')) : this.state.studentsOption
 
-    const recapPromotion = <div style={{ marginTop: '1.5rem' }}>
+    const recapPromotion = <div className="recapitulation-promotion-style">
       <section>
-        <p>Nom de promotion: {this.state.title}</p>
+        <p className="title-style-modal">Nom de promotion: {this.state.title}</p>
         <p>Ville: {this.state.selectedCity.value}</p>
         <p>Début formation: {dateStart}</p>
         <p>Fin formation: {dateEnd}</p>
@@ -166,7 +163,7 @@ class CreaPromotion extends Component {
       </footer>
     </div>
 
-    moment.locale('fr', frLocale)
+    moment.updateLocale('fr', frLocale)
     const optionsEleve = this.state.eleves ? this.state.eleves.filter(el => el.role === 'eleve') : this.state.eleves
     const optionsFormateurs = this.state.formateurs ? this.state.formateurs.filter(el => el.role === 'formateur') : this.state.formateurs
     const optionProgramme = this.state.programmes ? this.state.programmes.filter(el => el.title) : this.state.programmes
@@ -182,8 +179,8 @@ class CreaPromotion extends Component {
             <section className="col-md-12 col-sm-12 col-xs-12  d-flex section-style justify-content-center" >
 
               <div className="col-md-4 col-sm-12 col-xs-12 section-style ">
-                <label for="date_formation" className="label-style">Période de formation </label>
-                <div>
+                <label htmlFor="date_formation" className="label-style"> Période de formation *  </label>
+                <div className={this.state.dateValidation ? 'error-input' : ''}>
                   <DateRangePicker
                     startDateId="startDate"
                     endDateId="endDate"
@@ -192,9 +189,7 @@ class CreaPromotion extends Component {
                     startDate={this.state.startDate}
                     endDate={this.state.endDate}
                     onDatesChange={({ startDate, endDate }) => { this.setState({ startDate, endDate }) }}
-                    onChange={() => this.onChange}
                     focusedInput={this.state.focusedInput}
-                    className={this.state.dateValidation ? 'error-input' : ''}
                     onFocusChange={(focusedInput) => { this.setState({ focusedInput }) }}
                   />
                 </div>
@@ -203,16 +198,18 @@ class CreaPromotion extends Component {
                 {this.state.enddateValidation && !this.state.startdateValidation ? <p className="validation-style"> <small>{this.state.enddateValidation}</small></p> : null}
               </div>
               <div className="col-md-4 col-sm-12 col-xs-12 custom-file section-style upload-style ">
-                <label for="ville" className="label-style">Ville </label>
+                <label htmlFor="ville" className="label-style">Ville * </label>
                 <Select
                   value={selectedCity}
                   onChange={this.handleChange}
+                  name="city"
+                  id="cityInput"
                   options={optionsCity}
                   className={this.state.cityValidation ? ' error-input' : ' '}
                   placeholder="Selectionner une ville"
 
                 />
-                <p className="validation-style"> <small>{this.state.cityValidation}</small></p>
+                <p className="validation-style" id="cityValidation"> <small>{this.state.cityValidation}</small></p>
               </div>
 
             </section>
@@ -220,9 +217,10 @@ class CreaPromotion extends Component {
 
               <div className="col-md-4 col-sm-12 col-xs-12">
                 <Input
-                  label="Titre"
+                  label="Titre *"
                   type="text"
                   name="title"
+                  id="titleInput"
                   placeholder='Intitulé de la promotion'
                   validation={this.state.titreValidation}
                   value={this.state.title}
@@ -231,7 +229,7 @@ class CreaPromotion extends Component {
               </div>
               <div className="col-md-4 col-sm-12 col-xs-12">
 
-                <label for="programme" className="label-style">Programme </label>
+                <label htmlFor="programme" className="label-style">Programme * </label>
                 <Select
                   value={selectedProgramme}
                   onChange={this.onChangeProgramme}
@@ -247,7 +245,7 @@ class CreaPromotion extends Component {
             <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style justify-content-center " >
 
               <div className="col-md-4 col-sm-12 col-xs-12">
-                <label for="programme" className="label-style">Choix formateur(s) </label>
+                <label htmlFor="programme" className="label-style">Choix formateur(s) * </label>
                 <Select
                   placeholder="Formateur(s)"
                   isMulti={true}
@@ -265,7 +263,7 @@ class CreaPromotion extends Component {
 
               </div>
               <div className="col-md-4 col-sm-12 col-xs-12 ">
-                <label for="programme" className="label-style">Élèves </label>
+                <label htmlFor="programme" className="label-style">Élèves * </label>
                 <Select
                   placeholder="Élèves(s)"
                   isMulti={true}
@@ -282,11 +280,16 @@ class CreaPromotion extends Component {
                 <p className="validation-style"> <small>{this.state.studentsValidation}</small></p>
 
               </div>
-            </section>
 
+
+            </section>
+            <section className="col-md-6 col-sm-12 col-xs-12 d-flex obligatoire-style justify-content-center  " >
+
+              <small>*  Champs obligatoires</small>
+            </section>
           </form>
           <section className=" col-md-10 col-sm-12 col-xs-12  d-flex mt-5 justify-content-end">
-            <Button clicked={this.onShowRecapForm} btnType="valider" >
+            <Button clicked={this.onShowRecapForm} id="recap-button" btnType="valider" >
               Créer promotion
             </Button>
           </section>
