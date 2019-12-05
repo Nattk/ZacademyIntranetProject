@@ -14,7 +14,7 @@ import { DateRangePicker } from 'react-dates'
 import 'react-dates/initialize'
 
 class CreaPromotion extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -36,7 +36,7 @@ class CreaPromotion extends Component {
       formateursOption: '',
       studentsOption: '',
       selectedProgramme: '',
-      formateursSelected: '',
+      formateursSelected: ''
     }
 
     this.handleClose = this.handleClose.bind(this)
@@ -49,19 +49,19 @@ class CreaPromotion extends Component {
     this.handleValidation = this.handleValidation.bind(this)
   }
 
-  handleStudents(studentsOption) {
+  handleStudents (studentsOption) {
     this.setState({ studentsOption })
   }
 
-  handleClose() {
+  handleClose () {
     this.setState({ showModal: false })
   }
 
-  handleFormateurs(formateursOption) {
+  handleFormateurs (formateursOption) {
     this.setState({ formateursOption })
   }
 
-  onCreatePromotion() {
+  onCreatePromotion () {
     const eleveSelected = { eleveId: this.state.studentsOption.map(el => el.id) }
     const formateurSelected = { formateurId: this.state.formateursOption.map(el => el.id) }
 
@@ -72,9 +72,8 @@ class CreaPromotion extends Component {
       start: this.state.startDate._d,
       end: this.state.endDate._d,
       formateurs: formateurSelected.formateurId,
-      eleves: eleveSelected.eleveId,
+      eleves: eleveSelected.eleveId
     }
-
 
     axios.post('http://localhost:3333/api/promotions', elements)
       .then((data) => {
@@ -88,27 +87,23 @@ class CreaPromotion extends Component {
     }, 1000)
   }
 
-
-  componentWillUpdate() {
+  componentWillUpdate () {
     const eleveSelected = { eleveId: this.state.studentsOption ? this.state.studentsOption.map(el => el.id) : null }
     const formateurSelected = { formateurId: this.state.formateursOption ? this.state.formateursOption.map(el => el.id) : null }
-
 
     if (this.state.promotion) {
       eleveSelected.eleveId.map(eleveID => userService.update(eleveID, { promotion: this.state.promotion }))
       formateurSelected.formateurId.map(formateurID => userService.update(formateurID, { promotion: this.state.promotion }))
-
     }
   }
 
-  onShowRecapForm() {
-
+  onShowRecapForm () {
     if (this.state.title && this.state.selectedProgramme && this.state.selectedCity && this.state.formateursOption && this.state.studentsOption && this.state.endDate && this.state.startDate !== '') {
       this.setState({ showModal: true })
     } this.handleValidation()
   }
 
-  handleValidation() {
+  handleValidation () {
     this.state.title === '' ? this.setState({ titreValidation: 'Un titre est réquis' }) : this.setState({ titreValidation: '' })
     this.state.selectedProgramme === '' ? this.setState({ programmeValidation: 'Un programme est réquis' }) : this.setState({ programmeValidation: '' })
     this.state.formateursOption === '' ? this.setState({ formateursValidation: 'Veuillez selectionné un ou plusieurs formateurs ' }) : this.setState({ formateursValidation: '' })
@@ -119,22 +114,22 @@ class CreaPromotion extends Component {
     this.state.startDate === undefined && this.state.endDate === undefined ? this.setState({ dateValidation: 'Veuillez selectionné une période de formation ' }) : this.setState({ dateValidation: '' })
   }
 
-  componentDidMount() {
+  componentDidMount () {
     axios.all([getAllFormateurs(), getAllStudents(), getAllProgrammes()])
-      .then(axios.spread((formateurs, students, programmes, ) => {
-        this.setState({ formateurs: formateurs.data, eleves: students.data, programmes: programmes.data, })
+      .then(axios.spread((formateurs, students, programmes) => {
+        this.setState({ formateurs: formateurs.data, eleves: students.data, programmes: programmes.data })
       }))
   }
 
-  handleChange(selectedCity) {
+  handleChange (selectedCity) {
     this.setState({ selectedCity })
   }
 
-  onChangeProgramme(selectedProgramme) {
+  onChangeProgramme (selectedProgramme) {
     this.setState({ selectedProgramme })
   }
 
-  render() {
+  render () {
     const { selectedCity, selectedProgramme, formateursOption, studentsOption } = this.state
     const start = this.state.startDate ? JSON.stringify(this.state.startDate._d) : null
     const end = this.state.endDate ? JSON.stringify(this.state.endDate._d) : null
@@ -284,13 +279,11 @@ class CreaPromotion extends Component {
 
               </div>
 
-
             </section>
             <section className="col-md-6 col-sm-12 col-xs-12 d-flex obligatoire-style justify-content-center  " >
 
               <small>*  Champs obligatoires</small>
             </section>
-
 
           </form>
           <section className=" col-md-10 col-sm-12 col-xs-12  d-flex mt-5 justify-content-end">
