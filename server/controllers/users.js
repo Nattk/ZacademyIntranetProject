@@ -8,6 +8,19 @@ usersRouter.get('/', async (request, response) => {
   response.json(users.map(u => u.toJSON()))
 })
 
+usersRouter.get('/:id', async (req, res, next) => {
+  try {
+    const foundUser = await User.findById(req.params.id)
+    if (foundUser) {
+      res.json(foundUser.toJSON())
+    } else {
+      res.status(404).end()
+    }
+  } catch (e) {
+    next(e)
+  }
+})
+
 usersRouter.post('/', async (request, response, next) => {
   console.log('request.body', request.body)
   const promotion = await Promotion.findById(request.body.promotionId)
