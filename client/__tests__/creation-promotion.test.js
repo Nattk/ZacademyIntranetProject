@@ -15,7 +15,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import CreaPromotion from '../creation-promotion'
+import CreaPromotion from '../pages/admin/creation-promotion/creation-promotion'
 
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -42,7 +42,7 @@ describe('Creation Promotion Form tests', () => {
     expect(container).toHaveLength(1);
   });
 
-  it('Should have a recap button', () => {
+  it('Should have a recap button ', () => {
     const container = wrapper.find('#recap-button');
     expect(container).toHaveLength(1);
   });
@@ -70,30 +70,7 @@ describe('Creation Promotion Form tests', () => {
     input.simulate('change', mockEvent);
     expect(wrapper.state().selectedCity.target.value).toEqual('Marseille');
   });
-  // it('Should show  need city if state  === " " on click button with onShowRecapForm', () => {
-  //   const p = wrapper.find('#cityValidation');
-  //   const input = wrapper.find('#cityInput');
-  //   // const mockEvent = {
-  //     // target: {
-
-  //     //   value: '',
-  //     // },
-  //   // };
 
 
-  //   input.simulate('change', mockEvent);
-  //   expect(p.cityValidation).toEqual('Veuillez selectionné une ville');
-  // });
 
-  // it('Should have cancel button', () => {
-  //   const container = wrapper.find('#cancelButton');
-  //   expect(container).toHaveLength(1);
-  // });
-
-  it('Should call toggleModal() props on cancel button click', () => {
-    const button = wrapper.find('#cancelButton');
-    const toggle = wrapper.instance().props.toggleModal;
-    button.simulate('click');
-    expect(toggle).toHaveBeenCalled();
-  });
 });
