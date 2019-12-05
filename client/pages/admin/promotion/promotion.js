@@ -1,21 +1,22 @@
-import React, { Component, } from 'react'
+import React, { Component } from 'react'
 import Page from '../../../layouts/classic'
-import { getPromotionByID, } from '../../../services/creation-promotion'
+import { getPromotionByID } from '../../../services/creation-promotion'
 
 class GetPromotionByID extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
       promotion: [],
-      programmes: '',
+      programmes: ''
     }
   }
-  static getInitialProps({ query }) {
+
+  static getInitialProps ({ query }) {
     return { query }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     getPromotionByID(this.props.query.promotions)
       .then(promotion => {
         this.setState({ promotion: promotion.data, programmes: promotion.data.programmes[0].title })
@@ -24,7 +25,8 @@ class GetPromotionByID extends Component {
         console.log(err)
       })
   }
-  render() {
+
+  render () {
     const start = this.state.promotion.start ? JSON.stringify(this.state.promotion.start) : null
     const end = this.state.promotion.end ? JSON.stringify(this.state.promotion.end) : null
     const dayStart = start ? start.toString().slice(9, 11) : start

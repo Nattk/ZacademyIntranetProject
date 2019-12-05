@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import Page from '../../../layouts/admin'
 import axios from 'axios'
 import Link from 'next/link'
 class Admin extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -22,7 +22,7 @@ class Admin extends Component {
     alert('profil supprimé')
   }
 
-  componentDidMount() {
+  componentDidMount () {
     axios.get('http://localhost:3333/api/promotions')
       .then((promotions) => {
         this.setState({ promotions: promotions.data })
@@ -30,7 +30,7 @@ class Admin extends Component {
       })
   }
 
-  render() {
+  render () {
     return (
       <Page title="Admin Accueil" contextePage="Promotions en cours">
         <article id="admin-page">
@@ -64,7 +64,6 @@ class Admin extends Component {
                       <td>
 
                         <Link href={{ pathname: '../promotion/promotion', query: { promotions: promo.id } }}>details    </Link>
-
 
                       </td>
                     </tr>

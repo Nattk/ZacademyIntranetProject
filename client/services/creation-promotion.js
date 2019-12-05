@@ -17,7 +17,6 @@ export const getPromotionByID = (id) => {
   return axios.get(`http://localhost:3333/api/promotions/${id}`)
 }
 
-
 export const optionsCity =
   [
 
