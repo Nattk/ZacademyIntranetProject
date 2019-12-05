@@ -3,28 +3,150 @@ import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
 import Alert from '../../../components/Modal/alert'
 class CreaPromotion extends Component {
-  state = {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      promotions: [],
+      promotion: '',
+      focusedInput: '',
+      show: false,
+      showModal: false,
+      title: '',
+      startdateValidation: '',
+      enddateValidation: '',
+      titreValidation: '',
+      programmeValidation: '',
+      cityValidation: '',
+      dateValidation: '',
+      studentsValidation: '',
+      formateursValidation: '',
+      selectedCity: '',
+      formateursOption: '',
+      studentsOption: '',
+      selectedProgramme: '',
+      formateursSelected: ''
+    }
 
     show: false
   }
 
-  handleUpdate = () => {
-    this.setState({ show: true })
+  handleStudents (studentsOption) {
+    this.setState({ studentsOption })
   }
 
-  handleConfirmForm = () => {
-    window.location.assign('/admin/gestion-promotion/gestion-promotion')
+  handleClose () {
+    this.setState({ showModal: false })
   }
 
-  handleClose = () => {
-    this.setState({ show: false })
+  handleFormateurs (formateursOption) {
+    this.setState({ formateursOption })
   }
 
-  previousPage = () => {
-    window.location.assign('/admin/gestion-promotion/gestion-promotion')
+  onCreatePromotion () {
+    const eleveSelected = { eleveId: this.state.studentsOption.map(el => el.id) }
+    const formateurSelected = { formateurId: this.state.formateursOption.map(el => el.id) }
+
+    const elements = {
+      title: this.state.title,
+      city: this.state.selectedCity.value,
+      programmes: this.state.selectedProgramme.id,
+      start: this.state.startDate._d,
+      end: this.state.endDate._d,
+      formateurs: formateurSelected.formateurId,
+      eleves: eleveSelected.eleveId
+    }
+
+    axios.post('http://localhost:3333/api/promotions', elements)
+      .then((data) => {
+        this.setState({ showModal: false, promotions: data, promotion: data.data.id })
+        const IdPromotion = data.data.id
+        return this.setState({ promotion: IdPromotion })
+      })
+      .catch(error => { console.log(error.response) })
+    setTimeout(() => {
+      window.location.assign('/admin/Accueil/accueil')
+    }, 1000)
+  }
+
+  componentWillUpdate () {
+    const eleveSelected = { eleveId: this.state.studentsOption ? this.state.studentsOption.map(el => el.id) : null }
+    const formateurSelected = { formateurId: this.state.formateursOption ? this.state.formateursOption.map(el => el.id) : null }
+
+    if (this.state.promotion) {
+      eleveSelected.eleveId.map(eleveID => userService.update(eleveID, { promotion: this.state.promotion }))
+      formateurSelected.formateurId.map(formateurID => userService.update(formateurID, { promotion: this.state.promotion }))
+    }
+  }
+
+  onShowRecapForm () {
+    if (this.state.title && this.state.selectedProgramme && this.state.selectedCity && this.state.formateursOption && this.state.studentsOption && this.state.endDate && this.state.startDate !== '') {
+      this.setState({ showModal: true })
+    } this.handleValidation()
+  }
+
+  handleValidation () {
+    this.state.title === '' ? this.setState({ titreValidation: 'Un titre est réquis' }) : this.setState({ titreValidation: '' })
+    this.state.selectedProgramme === '' ? this.setState({ programmeValidation: 'Un programme est réquis' }) : this.setState({ programmeValidation: '' })
+    this.state.formateursOption === '' ? this.setState({ formateursValidation: 'Veuillez selectionné un ou plusieurs formateurs ' }) : this.setState({ formateursValidation: '' })
+    this.state.studentsOption === '' ? this.setState({ studentsValidation: 'Veuillez selectionné des futurs consultants ' }) : this.setState({ studentsValidation: '' })
+    this.state.selectedCity === '' ? this.setState({ cityValidation: 'Veuillez selectionné une ville ' }) : this.setState({ cityValidation: '' })
+    this.state.startDate === undefined || this.state.startDate === null ? this.setState({ startdateValidation: 'Veuillez selectionné une date de début de formation ' }) : this.setState({ startdateValidation: '' })
+    this.state.endDate === undefined || this.state.endDate === null ? this.setState({ enddateValidation: 'Veuillez selectionné une date  de fin de formation ' }) : this.setState({ enddateValidation: '' })
+    this.state.startDate === undefined && this.state.endDate === undefined ? this.setState({ dateValidation: 'Veuillez selectionné une période de formation ' }) : this.setState({ dateValidation: '' })
+  }
+
+  componentDidMount () {
+    axios.all([getAllFormateurs(), getAllStudents(), getAllProgrammes()])
+      .then(axios.spread((formateurs, students, programmes) => {
+        this.setState({ formateurs: formateurs.data, eleves: students.data, programmes: programmes.data })
+      }))
+  }
+
+  handleChange (selectedCity) {
+    this.setState({ selectedCity })
+  }
+
+  onChangeProgramme (selectedProgramme) {
+    this.setState({ selectedProgramme })
   }
 
   render () {
+    const { selectedCity, selectedProgramme, formateursOption, studentsOption } = this.state
+    const start = this.state.startDate ? JSON.stringify(this.state.startDate._d) : null
+    const end = this.state.endDate ? JSON.stringify(this.state.endDate._d) : null
+    const dayStart = start ? start.toString().slice(9, 11) : start
+    const monthStart = start ? start.toString().slice(6, 8) : start
+    const yearStart = start ? start.toString().slice(1, 5) : start
+    const dayEnd = end ? end.toString().slice(9, 11) : end
+    const monthEnd = end ? end.toString().slice(6, 8) : end
+    const yearEnd = end ? end.toString().slice(1, 5) : end
+    const dateStart = `${dayStart}-${monthStart}-${yearStart}`
+    const dateEnd = `${dayEnd}-${monthEnd}-${yearEnd}`
+    const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => el.firstName.concat(' ', el.lastName, ' ')) : this.state.formateursOption
+    const students = this.state.studentsOption ? this.state.studentsOption.map(el => el.firstName.concat(' ', el.lastName, ' \n ')) : this.state.studentsOption
+
+    const recapPromotion = <div className="recapitulation-promotion-style">
+      <section>
+        <p className="title-style-modal">Nom de promotion: {this.state.title}</p>
+        <p>Ville: {this.state.selectedCity.value}</p>
+        <p>Début formation: {dateStart}</p>
+        <p>Fin formation: {dateEnd}</p>
+        <p>Formateurs: {formateurs}</p>
+        <p>Programme :       {this.state.selectedProgramme.title} </p>
+        <p>Futur consultants: {students} </p>
+      </section>
+      <footer className="text-right">
+        <Button clicked={this.onCreatePromotion} btnType="valider">
+          Confirmer la Création de cette promotion
+        </Button>
+      </footer>
+    </div>
+
+    moment.updateLocale('fr', frLocale)
+    const optionsEleve = this.state.eleves ? this.state.eleves.filter(el => el.role === 'eleve') : this.state.eleves
+    const optionsFormateurs = this.state.formateurs ? this.state.formateurs.filter(el => el.role === 'formateur') : this.state.formateurs
+    const optionProgramme = this.state.programmes ? this.state.programmes.filter(el => el.title) : this.state.programmes
     return (
 
       <Page title="Création promotion">
