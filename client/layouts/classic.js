@@ -10,7 +10,7 @@ export default ({ children, title, contextePage }) => {
   if (user.role) {
     return (
       <React.Fragment>
-        <Meta title={title} />
+        <Meta title={`${title} Zenika Academy`} />
         <Nav />
         <h1 id="context-page">{contextePage}</h1>
         <main className="main">{children}</main>

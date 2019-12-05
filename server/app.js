@@ -43,6 +43,7 @@ app.use('/api/sousmodules', sousmodulesRouter)
 app.use('/api/sequences', sequencesRouter)
 
 app.use(middleware.unknownEndpoint)
+app.use(middleware.forbidden)
 app.use(middleware.errorHandler)
 
 module.exports = app

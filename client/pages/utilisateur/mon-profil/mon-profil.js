@@ -15,10 +15,11 @@ const MonProfil = () => (
         <li className="list-group-item"><strong> Promotion : </strong>Paris_02</li>
       </ul>
       <div className="card-body">
-        <p className="card-text"><strong>Tel : </strong>06 26 28 05 29</p>
+        <p className="card-text"><strong>Telephone : </strong>06 26 28 05 29</p>
       </div>
       <img className="card-img-top" src="/avatar.jpg" alt="avatar mon profil" />
     </article>
+    <p>Pour modification ou suppression de vos données personnelles, merci de contacter l'administration cf mentions légales.</p>
   </Page>
 )
 

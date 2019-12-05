@@ -10,7 +10,7 @@ export default ({ children, title, contextePage }) => {
   if (user.role === 'admin' || user.role === 'superadmin') {
     return (
       <React.Fragment>
-        <Meta title={title} />
+        <Meta title={`${title} Zenika Academy`} />
         <AdminNav />
         <h1 id="context-page">{contextePage}</h1>
         <main className="main">{children}</main>

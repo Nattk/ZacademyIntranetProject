@@ -12,6 +12,10 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send('404 Page inconnue')
 }
 
+const forbidden = (request, response) => {
+  response.status(403).send('403 Accès interdit')
+}
+
 const errorHandler = (error, request, response, next) => {
   if (error.name === 'CastError' && error.kind === 'ObjectId') {
     return response.status(400).send({
@@ -35,5 +39,6 @@ const errorHandler = (error, request, response, next) => {
 module.exports = {
   requestLogger,
   unknownEndpoint,
-  errorHandler
+  errorHandler,
+  forbidden
 }

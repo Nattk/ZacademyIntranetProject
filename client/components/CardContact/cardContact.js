@@ -5,7 +5,7 @@ const CardContact = (props) => (
   <article className="col-md-3 col-sm-12 col-xs-12 article-card" >
     <header className="header-user-card" >
       {props.picture ? (
-        <img src="/firmin.jpg" alt="" className="img-user-card" />
+        <img src="/firmin.jpg" alt="" className="img-user-card" alt="image de contact"/>
       ) : null}
       <section className="section-header-user-card" >
         <i className="fa fa-remove remove-icon " title="supprimer ce profil " onClick={props.remove} />

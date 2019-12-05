@@ -69,10 +69,11 @@ const LoginForm = () => {
         <div className="first">
           <img src="/zenika_icon.png" className="icon" alt="User Icon" />
           <div></div>
-          <label htmlFor="login">Adresse e-mail </label>
+          <label htmlFor="login">Adresse e-mail * </label>
           <input type="email" id="login" className="login-form" name="usename" placeholder="Veuillez entrer votre email" value={email} onChange={({ target }) => setEmail(target.value)} required />
-          <label htmlFor="password">Mot de passe </label>
+          <label htmlFor="password">Mot de passe * </label>
           <input type="password" id="password" className="login-form" name="login" placeholder="Veuillez entrer votre mdp" value={password} onChange={({ target }) => setPassword(target.value)} required />
+          *Champs obligatoires
           <input type="submit" id="submit-login" className="login-form" value="Log In" />
         </div>
       </form>

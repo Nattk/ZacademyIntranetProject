@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 // SocialMedia Icon
 import * as SocialMedia from '../FontAwesomeIcon/FontAwesomeIcon'
 import '../../styles/sass/styles.scss'
@@ -28,8 +29,8 @@ const Footer = () => (
     <article className="col-md-4 col-sm-6 col-xs-12 row3-position">
       <small> &copy; Copyright 2006-2019 Zenika. &shy;Tous droits réservés.
         <section>
-          <a title="Consulter les mentions légales" href="/legal" className="footer-link-customization">Mentions légales
-          </a>
+          <Link href="/mentions-legales"><a title="Consulter les mentions légales" className="footer-link-customization">Mentions légales
+          </a></Link>
         </section>
       </small>
     </article>
