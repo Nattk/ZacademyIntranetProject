@@ -25,3 +25,7 @@ export const NotificationUpdate = (props) => {
     </section>
   )
 }
+
+const AllNotification = (props) => <div class={`alert alert-${props.alertType}`} role="alert">{props.notifMessage}</div>
+
+export default AllNotification

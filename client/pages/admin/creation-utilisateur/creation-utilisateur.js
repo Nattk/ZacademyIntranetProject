@@ -1,23 +1,98 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
-import Alert from '../../../components/Modal/alert'
+import userService from '../../../services/users'
+import UserModal from '../../../components/Modal/UserModal'
+
 class CreaUtilisateur extends Component {
   state = {
-
-    show: false
+    promotions: [],
+    firstName: '',
+    lastName: '',
+    password: '',
+    email: '',
+    role: 'eleve',
+    phone: '',
+    help: '',
+    promotion: '',
+    promotionName: '',
+    modalShow: false,
+    notifShow: false
   }
 
-  handleUpdate = () => {
-    this.setState({ show: true })
+  handlefirstnameChange = (event) => {
+    this.setState({ firstName: event.value })
   }
 
-  handleConfirmForm = () => {
-    window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
+  handlelastnameChange = (event) => {
+    this.setState({ lastName: event.value })
+  }
+
+  handleemailChange = (event) => {
+    this.setState({ email: event.value })
+  }
+
+  handlepasswordChange = (event) => {
+    this.setState({ password: event.value })
+  }
+
+  handlephoneChange = (event) => {
+    this.setState({ phone: event.value })
+  }
+
+  handleroleChange (event) {
+    this.setState({ role: event.target.value })
+  }
+
+  handlehelpChange = (event) => {
+    this.setState({ help: event.value })
+  }
+
+  handlepromotionChange (event) {
+    fetch(`http://localhost:3333/api/promotions/${event.target.value}`)
+      .then(response => response.json())
+      .then(data => this.setState({ promotionName: data.title }))
+
+    this.setState({ promotion: event.target.value })
+  }
+
+  componentDidMount () {
+    fetch('http://localhost:3333/api/promotions')
+      .then(response => response.json())
+      .then(data => this.setState({ promotions: data }))
+  }
+
+  handleOpenModal = () => {
+	  this.setState({ modalShow: true })
+  }
+
+  handleNotif = () => {
+	  this.setState({ notifShow: true })
+    setTimeout(() => this.setState({ notifShow: false }), 5000)
+  }
+
+  handleConfirmForm = async (e) => {
+    e.preventDefault()
+    try {
+      await userService.create({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password,
+        role: this.state.role,
+        phone: this.state.phone,
+        help: this.state.help,
+        promotionId: this.state.promotion
+      })
+      window.alert(`L'utilisateur ${this.state.firstName} a bien été créé`)
+      this.handleClose()
+    } catch (error) {
+      window.alert(`${error.response.data.error}`)
+    }
   }
 
   handleClose = () => {
-    this.setState({ show: false })
+	  this.setState({ modalShow: false })
   }
 
   previousPage = () => {
@@ -25,63 +100,63 @@ class CreaUtilisateur extends Component {
   }
 
   render () {
+    const villes = [...new Set(this.state.promotions.map(promo => promo.city))]
     return (
       <Page title="Création Utilisateur">
         <article className="gestionProgramme card" id="form_creation_utilisateur">
           <header className="card-header text-center">
-            Creation un utilisateur
+            Creation d'un utilisateur
           </header>
           <form className="container" >
             <section className="section">
               <div className="form-group">
-                <label htmlFor="username">Nom</label>
-                <input type="text" name="username" className="form-control" id="exampleFormControlInput1" placeholder="Nom"></input>
+                <label htmlFor="userfirstname">Prénom*</label>
+                <input type="text" name="userfirstname" className="form-control" id="exampleFormControlInput1" placeholder="Prénom" onChange={e => this.handlefirstnameChange(e.target)} required></input>
               </div>
               <div className="form-group">
-                <label htmlFor="userfirstname">Prenom</label>
-                <input type="text" name="userfirstname" className="form-control" id="exampleFormControlInput1" placeholder="Prénom"></input>
+                <label htmlFor="username">Nom*</label>
+                <input type="text" name="username" className="form-control" id="exampleFormControlInput1" placeholder="Nom" onChange={e => this.handlelastnameChange(e.target)} required></input>
               </div>
               <div className="form-group">
-                <label htmlFor="useremail">Email</label>
-                <input type="email" name="useremail" className="form-control" id="exampleFormControlInput1" placeholder="Email"></input>
+                <label htmlFor="useremail">Email*</label>
+                <input type="email" name="useremail" className="form-control" id="exampleFormControlInput1" placeholder="Email" onChange={e => this.handleemailChange(e.target)} required></input>
               </div>
+              <div className="form-group">
+                <label htmlFor="userpwd">Mot de Passe*</label>
+                <input type="password" name="userpwd" className="form-control" id="exampleFormControlInput1" placeholder="Mot de Passe" onChange={e => this.handlepasswordChange(e.target)} required></input>
+              </div>
+              <label htmlFor="role">Role*</label>
+              <select class="custom-select" multiple value={this.props.role} onChange={e => this.handleroleChange(e)} required>
+                <option selected value="">Selectionner un rôle</option>
+                <option value="eleve">Eleve</option>
+                <option value="formateur">Formateur</option>
+                <option value="admin">Admin</option>
+                <option value="superadmin">Super Admin</option>
+              </select>
               <div className="form-group">
                 <label htmlFor="userphone">Téléphone</label>
-                <input type="Telephone" name="userphone" className="form-control" id="exampleFormControlInput1"
-                  placeholder="Telephone"></input>
+                <input type="Telephone" name="userphone" className="form-control" id="exampleFormControlInput1" placeholder="Telephone" onChange={e => this.handlephoneChange(e.target)}></input>
+              </div>
+              <div className="form-group">
+                <label htmlFor="userdescription">Description</label>
+                <textarea className="form-control" name="userdescription" onChange={e => this.handlehelpChange(e.target)} ></textarea>
               </div>
               <div className="form-group">
                 <label htmlFor="choices-groups">Selectionner une promotion</label>
-                <select className="form-control" name="choices-groups" id="choices-groups">
-                  <optgroup label="Casablanca">
-                    <option value="Casablanca">Casablanca_01</option>
-                  </optgroup>
-                  <optgroup label="Montreal">
-                    <option value="Montreal">Montreal_01</option>
-                  </optgroup>
-                  <optgroup label="Paris">
-                    <option value="Paris">Paris_01</option>
-                    <option value="Paris">Paris_02</option>
-                    <option value="Paris">Paris_03</option>
-                  </optgroup>
-                  <optgroup label="Rennes">
-                    <option value="Paris">Rennes_01</option>
-                    <option value="Paris">Rennes_02</option>
-                    <option value="Paris">Rennes_03</option>
-                  </optgroup>
-                  <optgroup label="Singapor">
-                    <option value="Singapor">Singapor_01</option>
-                  </optgroup>
-                </select>
-              </div>
-              <div classNameName="form-group">
-                <label htmlFor="roles">Selectionner un rôle</label>
-                <select classNameName="form-control" id="role">
-                  <option value="Eleve">Eleve</option>
-                  <option value="Formateur">Formateur</option>
+                <select className="form-control" name="choices-groups" id="choices-groups" multiple value={this.props.promotion} onChange={e => this.handlepromotionChange(e)} required>
+                  {villes.map(ville => {
+                    const promoOfVille = this.state.promotions.filter(promo => promo.city === ville)
+                    return (<optgroup label={ville} key={ville}>{promoOfVille.map(promo => {
+                      return (
+                        <option key={promo.id} value={promo.id}>{promo.title}</option>
+                      )
+                    })}</optgroup>)
+                  }
+                  )}
                 </select>
               </div>
             </section>
+            * Champs obligatoires
             <section className="d-flex flex-row footer-programme-formulaire">
 
               <Button
@@ -94,23 +169,15 @@ class CreaUtilisateur extends Component {
               </Button>
               <Button
                 btnType="valider"
-                clicked={this.handleUpdate}
+                clicked={this.handleOpenModal}
 
               >
                 Ajout utilisateur
               </Button>
-              {this.state.show ? (
-                <Alert
-                  show={this.state.show}
-                  handleClose={this.handleClose}
-                  headerTitle="Création utilisateur"
-                  modalDescription="Confirmer la création de l' utilisateur"
-                  modalHeader={true}
-                  modalBody={true}
-                  modalFooterRedirection
-                  handleConfirmForm={this.handleConfirmForm}
-                />
-              ) : null}
+              <UserModal
+	        onClose={this.handleClose}
+                onSubmit={e => this.handleConfirmForm(e)} {...this.state}
+	        titleModal="Confirmation"></UserModal>
             </section>
           </form>
         </article>
