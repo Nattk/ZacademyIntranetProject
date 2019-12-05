@@ -35,6 +35,8 @@ promotionsRouter.get('/:id', async (req, res, next) => {
           }
         }
       })
+      .populate('formateurs', { firstName: 1, lastName: 1 })
+      .populate('eleves', { firstName: 1, lastName: 1 })
     if (foundpromotion) {
       res.json(foundpromotion.toJSON())
     } else {
