@@ -7,8 +7,7 @@ class Admin extends Component {
     super(props)
 
     this.state = {
-      promotions: '',
-      id: ''
+      promotions: ''
 
     }
   }
@@ -75,7 +74,7 @@ class Admin extends Component {
           </section>
 
         </article>
-      </Page >
+      </Page>
     )
   }
 }

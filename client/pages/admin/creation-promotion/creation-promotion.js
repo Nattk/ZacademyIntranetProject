@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import userService from '../../../services/users'
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
@@ -20,6 +20,7 @@ class CreaPromotion extends Component {
     this.state = {
       promotions: [],
       promotion: '',
+      focusedInput: '',
       show: false,
       showModal: false,
       title: '',
@@ -61,7 +62,7 @@ class CreaPromotion extends Component {
   }
 
   onCreatePromotion() {
-    const eleveSelected = { eleveId: this.state.studentsOption.map(el => el.id), lastName: this.state.studentsOption.map(el => el.lastName), firstName: this.state.studentsOption.map(el => el.firstName), }
+    const eleveSelected = { eleveId: this.state.studentsOption.map(el => el.id) }
     const formateurSelected = { formateurId: this.state.formateursOption.map(el => el.id) }
 
     const elements = {
@@ -72,8 +73,6 @@ class CreaPromotion extends Component {
       end: this.state.endDate._d,
       formateurs: formateurSelected.formateurId,
       eleves: eleveSelected.eleveId,
-      lastName: eleveSelected.lastName,
-      firstName: eleveSelected.firstName
     }
 
 
@@ -107,8 +106,6 @@ class CreaPromotion extends Component {
     if (this.state.title && this.state.selectedProgramme && this.state.selectedCity && this.state.formateursOption && this.state.studentsOption && this.state.endDate && this.state.startDate !== '') {
       this.setState({ showModal: true })
     } this.handleValidation()
-
-
   }
 
   handleValidation() {
@@ -262,7 +259,7 @@ class CreaPromotion extends Component {
                   getOptionLabel={(option) => option.firstName.concat(' ', option.lastName)}
                   getOptionValue={(option) => option.id}
                   onChange={this.handleFormateurs}
-                  className={this.state.formateursValidation ? ' error-input' : 'basic-multi-select'}
+                  className={this.state.formateursValidation ? 'error-input' : 'basic-multi-select'}
                   classNamePrefix="select"
                 />
                 <p className="validation-style"> <small>{this.state.formateursValidation}</small></p>
@@ -293,6 +290,7 @@ class CreaPromotion extends Component {
 
               <small>*  Champs obligatoires</small>
             </section>
+
           </form>
           <section className=" col-md-10 col-sm-12 col-xs-12  d-flex mt-5 justify-content-end">
             <Button clicked={this.onShowRecapForm} id="recap-button" btnType="valider" >
