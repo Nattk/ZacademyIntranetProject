@@ -24,14 +24,14 @@ Clever Cloud SAS<br/>
 44000 Nantes<br/>
 France<br/>
 
-<p>L’utilisateur est informé que ses données personnelles reccueillies sur le site zenika.com font l’objet d’un traitement automatisé par Zenika. Le droit d’accès et de rectification portant sur les données le concernant peut être exercé par courrier à l’adresse suivante :</p>
+          <p>L’utilisateur est informé que ses données personnelles reccueillies sur le site zenika.com font l’objet d’un traitement automatisé par Zenika. Le droit d’accès et de rectification portant sur les données le concernant peut être exercé par courrier à l’adresse suivante :</p>
 
 Zenika<br/>
 Service Marketing<br/>
 10 rue de Milan<br/>
 75009 Paris<br/>
 
-<p>Zenika pourra transmettre vos données personnelles si vous l’avez expressément accepté auprès de ses partenaires. Vous pourrez également exercer vos droits d’accès et de rectification en adressant un courrier à Zenika à l’adresse mentionnée ci-dessus.</p>
+          <p>Zenika pourra transmettre vos données personnelles si vous l’avez expressément accepté auprès de ses partenaires. Vous pourrez également exercer vos droits d’accès et de rectification en adressant un courrier à Zenika à l’adresse mentionnée ci-dessus.</p>
         </section>
 
         <section><h2>Propriété Intellectuelle

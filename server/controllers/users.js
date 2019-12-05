@@ -9,6 +9,7 @@ usersRouter.get('/', async (request, response) => {
 })
 
 usersRouter.post('/', async (request, response, next) => {
+  console.log('request.body', request.body)
   const promotion = await Promotion.findById(request.body.promotionId)
 
   try {
@@ -40,6 +41,7 @@ usersRouter.post('/', async (request, response, next) => {
 
 usersRouter.put('/:id', async (request, response, next) => {
   const promotion = await Promotion.findById(request.body.promotionId)
+  console.log('request.body', request.body)
 
   try {
     let user = request.body
@@ -54,6 +56,7 @@ usersRouter.put('/:id', async (request, response, next) => {
         phone: request.body.phone,
         email: request.body.email,
         role: request.body.role,
+        help: request.body.help,
         promotion: promotion ? promotion._id : null
       })
     }
