@@ -20,7 +20,6 @@
 @import '../../pages/admin/creation-utilisateur/creation-utilisateur.scss';
 @import '../../pages/admin/creation-promotion/creation-promotion.scss';
 @import '../../pages/admin/creation-programme/creation-programme.scss';
-@import '../../pages/admin/promotion/promotion';
 @import '../../pages/ma-formation/Contact-Utiles/contacts-utiles.scss';
 @import '../../pages/utilisateur/mon-profil/mon-profil.scss';
 @import '../../pages/communaute/Rss/rss.scss';
@@ -61,7 +60,7 @@ h1#context-page {
 
 }
 
-h1.wrong-path {
+h1.wrong-path{
   margin: auto;
   font-size: 3rem;
 }
