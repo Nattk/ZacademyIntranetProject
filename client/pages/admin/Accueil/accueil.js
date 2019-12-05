@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Page from '../../../layouts/admin'
 import axios from 'axios'
+import Link from 'next/link'
 class Admin extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      promotions: ''
+      promotions: '',
+      id: ''
 
     }
   }
@@ -61,8 +63,10 @@ class Admin extends Component {
                       <td className="date-style"><span className="date-style">Début: {promo.start ? promo.start.slice(0, 10) : promo.start}</span>
                         <span className="date-style">  Fin: {promo.end ? promo.end.slice(0, 10) : promo.end} </span>  </td>
                       <td>
-                        <button><i className="fas fa-eye" title="Voir détails"></i></button>
-                        <button>Ghost</button>
+
+                        <Link href={{ pathname: '../promotion/promotion', query: { promotions: promo.id } }}>details    </Link>
+
+
                       </td>
                     </tr>
                   )) : null}
@@ -71,7 +75,7 @@ class Admin extends Component {
           </section>
 
         </article>
-      </Page>
+      </Page >
     )
   }
 }
