@@ -1,17 +1,4 @@
-// import React from 'react'
-// import '@testing-library/jest-dom/extend-expect'
-// import ShallowRenderer from 'react-test-renderer/shallow'
-// import CreaPromotion from '../creation-promotion'
-// describe('Creation Promotion', () => {
 
-//   it('it should render content', () => {
-//     const renderer = new ShallowRenderer()
-//     renderer.render(<CreaPromotion />)
-//     const result = renderer.getRenderOutput()
-//     expect(result.props.children.type).toBe('article')
-//   })
-
-// })
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';

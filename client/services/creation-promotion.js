@@ -13,6 +13,16 @@ export const getAllProgrammes = () => {
 export const getAllPromotions = () => {
   return axios.get('http://localhost:3333/api/promotions')
 }
+export const getPromotionByID = (id) => {
+  return axios.get(`http://localhost:3333/api/promotions/${id}`)
+}
+export const getUserByID = (id) => {
+  return axios.get(`http://localhost:3333/api/users/${id}`)
+}
+export const getByID = (id) => {
+  return axios.get(`http://localhost:3333/api/users/${id}`)
+
+}
 export const optionsCity =
   [
 

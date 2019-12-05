@@ -61,7 +61,7 @@ class CreaPromotion extends Component {
   }
 
   onCreatePromotion() {
-    const eleveSelected = { eleveId: this.state.studentsOption.map(el => el.id) }
+    const eleveSelected = { eleveId: this.state.studentsOption.map(el => el.id), lastName: this.state.studentsOption.map(el => el.lastName), firstName: this.state.studentsOption.map(el => el.firstName), }
     const formateurSelected = { formateurId: this.state.formateursOption.map(el => el.id) }
 
     const elements = {
@@ -72,6 +72,8 @@ class CreaPromotion extends Component {
       end: this.state.endDate._d,
       formateurs: formateurSelected.formateurId,
       eleves: eleveSelected.eleveId,
+      lastName: eleveSelected.lastName,
+      firstName: eleveSelected.firstName
     }
 
 
@@ -82,7 +84,9 @@ class CreaPromotion extends Component {
         return this.setState({ promotion: IdPromotion })
       })
       .catch(error => { console.log(error.response) })
-
+    setTimeout(() => {
+      window.location.assign('/admin/Accueil/accueil')
+    }, 1000)
   }
 
 
@@ -103,6 +107,8 @@ class CreaPromotion extends Component {
     if (this.state.title && this.state.selectedProgramme && this.state.selectedCity && this.state.formateursOption && this.state.studentsOption && this.state.endDate && this.state.startDate !== '') {
       this.setState({ showModal: true })
     } this.handleValidation()
+
+
   }
 
   handleValidation() {
@@ -294,7 +300,7 @@ class CreaPromotion extends Component {
             </Button>
           </section>
           <section className="col-md-12 col-sm-12 col-xs-12 text-right" >
-            <Modal titleModal={`Recapitulatif promotion ${this.state.title}`} show={this.state.showModal} onClose={this.handleClose} recapitulation={recapPromotion} />
+            <Modal titleModal="Demande de confirmation" show={this.state.showModal} onClose={this.handleClose} recapitulation={recapPromotion} />
           </section>
         </article>
       </Page>
