@@ -9,7 +9,6 @@ const Input = (props) => {
         type={props.type}
         name={input.name}
         required
-        id={input.id}
         placeholder={input.placeholder}
         className={input.validation ? 'form-control who-to-follow-input' : 'form-control '}
         value={input.value}
