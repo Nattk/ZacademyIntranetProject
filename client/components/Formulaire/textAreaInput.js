@@ -10,6 +10,7 @@ const TextArea = (props) => {
         name="description"
         required
         cols="40"
+        id={props.id}
         rows={props.rows}
         placeholder={props.placeholder}
         className={props.validation ? 'form-control who-to-follow-input' : 'form-control'}

@@ -5,7 +5,9 @@ import CreaProgramme from '../pages/admin/creation-programme/creation-programme'
 
 describe('Creation Programme', () => {
   test('renders content', () => {
-    const component = render(<CreaProgramme/>)
+    const component = render(<CreaProgramme />)
     expect(component).toBeTruthy()
+    const component = render(<CreaProgramme />)
+    console.log(component)
   })
 })
