@@ -38,6 +38,7 @@ usersRouter.post('/', async (request, response, next) => {
       phone: body.phone,
       email: body.email,
       role: body.role,
+      help: body.help,
       promotion: promotion ? promotion._id : null
     })
 
