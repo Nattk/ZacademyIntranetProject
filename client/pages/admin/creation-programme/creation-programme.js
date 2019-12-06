@@ -63,7 +63,7 @@ class CreaProgramme extends Component {
     window.location.assign('/admin/gestion-programme/gestion-programme')
   }
 
-  handleStep = () => {
+  handleStep = (event) => {
     event.preventDefault()
     if (this.state.etapes === 1) {
       this.handleProgram()
@@ -156,7 +156,7 @@ class CreaProgramme extends Component {
 
     if (this.state.etapes === 1) {
       creationProgramme = (
-        <div>
+        <React.Fragment>
           <form className="container" >
             <section className="section">
               <div className="form-group">
@@ -166,7 +166,7 @@ class CreaProgramme extends Component {
               </div>
             </section>
           </form>
-        </div>
+        </React.Fragment>
       )
     } else if (this.state.etapes === 2) {
       creationProgramme = (
@@ -200,16 +200,21 @@ class CreaProgramme extends Component {
             </Button> */}
             <Button
               btnType="valider"
-              clicked={this.handleStep}
+              clicked={(event) => this.handleStep(event)}
+              className="step-button"
             >
             Etape suivante
             </Button>
-            <Button
-              btnType="valider"
-              clicked={this.endProgram}
-            >
-            Terminer programme
-            </Button>
+            {
+              this.state.etapes > 1 &&
+              <Button
+                btnType="valider"
+                clicked={this.endProgram}
+              >
+                Terminer programme
+              </Button>
+            }
+
           </section>
 
           <Modal
