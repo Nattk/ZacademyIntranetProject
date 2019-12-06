@@ -3,6 +3,7 @@ import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
 import userService from '../../../services/users'
 import UserModal from '../../../components/Modal/UserModal'
+import Router from 'next/router'
 
 class CreaUtilisateur extends Component {
   state = {
@@ -84,8 +85,9 @@ class CreaUtilisateur extends Component {
         help: this.state.help,
         promotionId: this.state.promotion
       })
-      window.alert(`L'utilisateur ${this.state.firstName} a bien été créé`)
-      this.handleClose()
+      // window.alert(`L'utilisateur ${this.state.firstName} a bien été créé`)
+      // this.handleClose()
+      Router.push(`/admin/promotion/promotion?promotions=${this.state.promotion}`)
     } catch (error) {
       window.alert(`${error.response.data.error}`)
     }
