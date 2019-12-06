@@ -5,6 +5,7 @@ import userService from '../../../services/users'
 import UserModal from '../../../components/Modal/UserModal'
 import Router from 'next/router'
 import CSVReader from 'react-csv-reader'
+import AllNotification from '../../../components/Notifications/notifications'
 
 class CreaUtilisateur extends Component {
   state = {
@@ -19,7 +20,9 @@ class CreaUtilisateur extends Component {
     promotion: '',
     promotionName: '',
     modalShow: false,
-    notifShow: false
+    notifShow: false,
+    errorStyle: false,
+    notifMessage: ''
   }
 
   handlefirstnameChange = (event) => {
@@ -42,7 +45,7 @@ class CreaUtilisateur extends Component {
     this.setState({ phone: event.value })
   }
 
-  handleroleChange (event) {
+  handleroleChange(event) {
     this.setState({ role: event.target.value })
   }
 
@@ -50,7 +53,7 @@ class CreaUtilisateur extends Component {
     this.setState({ help: event.value })
   }
 
-  handlepromotionChange (event) {
+  handlepromotionChange(event) {
     fetch(`http://localhost:3333/api/promotions/${event.target.value}`)
       .then(response => response.json())
       .then(data => this.setState({ promotionName: data.title }))
@@ -58,19 +61,22 @@ class CreaUtilisateur extends Component {
     this.setState({ promotion: event.target.value })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     fetch('http://localhost:3333/api/promotions')
       .then(response => response.json())
       .then(data => this.setState({ promotions: data }))
   }
 
   handleOpenModal = () => {
-	  this.setState({ modalShow: true })
+    this.setState({ modalShow: true })
   }
 
-  handleNotif = () => {
-	  this.setState({ notifShow: true })
-    setTimeout(() => this.setState({ notifShow: false }), 5000)
+  handleNotif = (error, message) => {
+    error
+      ? this.setState({ errorStyle: true, notifMessage: `${error.response.data.error}` })
+      : this.setState({ errorStyle: false, notifMessage: `${message}` })
+    this.setState({ notifShow: true })
+    setTimeout(() => this.setState({ notifShow: false }), 10000)
   }
 
   handleConfirmForm = async (e) => {
@@ -90,19 +96,20 @@ class CreaUtilisateur extends Component {
       // this.handleClose()
       Router.push(`/admin/promotion/promotion?promotions=${this.state.promotion}`)
     } catch (error) {
-      window.alert(`${error.response.data.error}`)
+      this.handleClose()
+      this.handleNotif(error)
     }
   }
 
   handleClose = () => {
-	  this.setState({ modalShow: false })
+    this.setState({ modalShow: false })
   }
 
   previousPage = () => {
     window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
   }
 
-  render () {
+  render() {
     const villes = [...new Set(this.state.promotions.map(promo => promo.city))]
     const papaparseOptions = {
       header: true,
@@ -187,9 +194,9 @@ class CreaUtilisateur extends Component {
                 Ajout utilisateur
               </Button>
               <UserModal
-	        onClose={this.handleClose}
+                onClose={this.handleClose}
                 onSubmit={e => this.handleConfirmForm(e)} {...this.state}
-	        titleModal="Confirmation"></UserModal><br></br>
+                titleModal="Confirmation"></UserModal><br></br>
 
             </section>
             <CSVReader label="Ajouter plusieurs utilisateurs par CSV" parserOptions={papaparseOptions} cssClass="csv-reader-input" onFileLoaded={usersCSV => {
@@ -205,16 +212,17 @@ class CreaUtilisateur extends Component {
                     help: userCSV.description,
                     promotionId: '5de8caf7246bfc3574c0b334'
                   })
-                  console.log('userCSV was added to the DB')
                   // window.alert(`L'utilisateur ${this.state.firstName} a bien été créé`)
                   // this.handleClose()
                 })
-                window.alert('Tous les utilisateurs ont bien été créés')
+                this.handleNotif(null, 'Les utilisateurs ont bién été ajoutés.')
               } catch (error) {
-                window.alert(`${error.response.data.error}`)
+                this.handleNotif(error)
               }
             }} > </CSVReader>
-
+            {this.state.notifShow
+              ? <AllNotification alertType={this.state.errorStyle ? 'danger' : 'success'} notifMessage={this.state.notifMessage} />
+              : null}
           </form>
         </article>
       </Page>

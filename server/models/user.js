@@ -34,8 +34,7 @@ const userSchema = mongoose.Schema({
     required: true
   },
   help: {
-    type: String,
-    minlength: 3
+    type: String
   },
   promotion: {
     type: mongoose.Schema.Types.ObjectId,

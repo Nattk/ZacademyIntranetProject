@@ -16,7 +16,7 @@ const AdminNav = () => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent15">
         <Link href="/index_connecte"><a className="btn btn-danger bouton-navbar" role="button" >ACCUEIL</a></Link>
         <div className="dropdown show">
-          <a className="btn btn-danger dropdown-toggle bouton-navbar" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
           Créer
           </a>
@@ -28,7 +28,7 @@ const AdminNav = () => {
           </div>
         </div>
         <div className="dropdown show">
-          <a className="btn btn-danger dropdown-toggle bouton-navbar" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
           Modifier
           </a>
