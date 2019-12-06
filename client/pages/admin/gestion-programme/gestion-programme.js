@@ -2,15 +2,22 @@ import React, { Component } from 'react'
 import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
 import Alert from '../../../components/Modal/alert'
+import { getModules } from '../../../services/creation-programme'
+import Link from 'next/link'
 
 class ProgrammeGestion extends Component {
   state = {
-    programmes: [
-      { name: 'Développeur Javascript', progId: 1 },
-      { name: 'Développeur Java', progId: 2 },
-      { name: 'Chef de Projet web', progId: 3 }
-    ],
+    programmes: [],
     show: false
+  }
+
+  componentDidMount () {
+    getModules('programmes').then(programmes => {
+      console.log(programmes.data)
+      this.setState({ programmes: programmes.data })
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   handleModal = (event) => {
@@ -43,16 +50,19 @@ class ProgrammeGestion extends Component {
   render () {
     return (
       <Page title="Gestion des programmes">
-        <article className="gestionProgramme card">
-          <header className="card-header">
+        <article id="liste-programme" className="d-flex flex-column align-items-center">
+          <div className="card">
+            <header className="card-header">
             Liste des programmes
-          </header>
-          <section className="card-body">
-            <ul>
-              {this.state.programmes.map((programme, index) => (
-                <li key={index} className="d-flex flex- justify-content-around align-items-baseline">
-                  <a href="#">{programme.name}</a>
-                  <Button btnType="dupliquer" clicked={(progId) => this.handleDuplication(programme.progId)}><a>Dupliquer</a></Button>
+            </header>
+            <section className="card-body">
+              <ul>
+                {this.state.programmes.map(programme => (
+                  <li key={programme.id} className="d-flex flex- justify-content-around align-items-baseline">
+                    <Link as={`/admin/gestion-programme/programme/${programme.title}`} href={{ pathname: './programme', query: { id: programme.id } }}>
+                      <a title={`Voir les détails de ${programme.title}`}>{programme.title}</a>
+                    </Link>
+                    {/* <Button btnType="dupliquer" clicked={(progId) => this.handleDuplication(programme.progId)}><a>Dupliquer</a></Button>
                   <Button btnType="annuler" clicked={this.handleModal}>Supprimer</Button>
                   <a href="/admin/gestion-programme/modification-programme" title="modification-programme" className="link-button-valider" >
                     Modifier
@@ -69,17 +79,18 @@ class ProgrammeGestion extends Component {
                       modalFooter={true}
                     />
                   ) : null
-                  }
-                </li>
-              ))}
-            </ul>
-          </section>
-          <footer className="d-flex flex-row align-items-end justify-content-center">
+                  } */}
+                  </li>
+                ))}
+              </ul>
+            </section>
+            <footer className="d-flex flex-row align-items-end justify-content-center">
 
-            <a href="/admin/creation-programme/creation-programme" title="creation-programme" className="link-button-creation" >
+              <a href="/admin/creation-programme/creation-programme" title="creation-programme" className="link-button-creation" >
               Ajouter un programme
-            </a>
-          </footer>
+              </a>
+            </footer>
+          </div>
         </article>
       </Page>
     )
