@@ -141,37 +141,34 @@ class CreaPromotion extends Component {
     const yearEnd = end ? end.toString().slice(1, 5) : end
     const dateStart = `${dayStart}-${monthStart}-${yearStart}`
     const dateEnd = `${dayEnd}-${monthEnd}-${yearEnd}`
-    const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => el.firstName.concat(' ', el.lastName, ' ')) : this.state.formateursOption
+    const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => <p>{el.firstName.concat(' ', el.lastName, ' ')}</p>) : this.state.formateursOption
     const students = this.state.studentsOption ? this.state.studentsOption.map(el => el.firstName.concat(' ', el.lastName, ' \n ')) : this.state.studentsOption
 
-    const recapPromotion = <div className="recapitulation-promotion-style">
-      <section>
-        <p className="title-style-modal">Nom de promotion: {this.state.title}</p>
-        <p>Ville: {this.state.selectedCity.value}</p>
-        <p>Début formation: {dateStart}</p>
-        <p>Fin formation: {dateEnd}</p>
-        <p>Formateurs: {formateurs}</p>
-        <p>Programme :       {this.state.selectedProgramme.title} </p>
-        <p>Futur consultants: {students} </p>
-      </section>
-      <footer className="text-right">
-        <Button clicked={this.onCreatePromotion} btnType="valider">
-          Confirmer la Création de cette promotion
-        </Button>
-      </footer>
-    </div>
+    const recapPromotion =
+      <article>
+        <section className="title-style-modal">
+          <p><span className="promotion-p-style">Nom de promotion:</span> {this.state.title}</p>
+          <p><span className="promotion-p-style">Ville:</span>&nbsp; {this.state.selectedCity.value}</p>
+          <p><span className="promotion-p-style">Début formation:</span>&nbsp; {dateStart}</p>
+          <p><span className="promotion-p-style">Fin formation:</span>&nbsp; {dateEnd}</p>
+          <p><span className="promotion-p-style">Formateurs:</span>&nbsp; {formateurs}</p>
+          <p><span className="promotion-p-style">Programme :</span>&nbsp;       {this.state.selectedProgramme.title} </p>
+          <p><span className="promotion-p-style">Futur consultants:</span>&nbsp; {students} </p>
+        </section>
+        <footer className="text-right">
+          <Button clicked={this.onCreatePromotion} btnType="valider">
+            Confirmer la Création de cette promotion
+          </Button>
+        </footer>
+      </article>
 
     moment.updateLocale('fr', frLocale)
     const optionsEleve = this.state.eleves ? this.state.eleves.filter(el => el.role === 'eleve') : this.state.eleves
     const optionsFormateurs = this.state.formateurs ? this.state.formateurs.filter(el => el.role === 'formateur') : this.state.formateurs
     const optionProgramme = this.state.programmes ? this.state.programmes.filter(el => el.title) : this.state.programmes
     return (
-      <Page title="Création promotion" >
+      <Page title="Création promotion" contextePage="Création promotion" >
         <article className="col-md-12 col-sm-12 col-xs-12 " id="form_creation_promotion">
-          <header className="card-header  text-center">
-            Créer une promotion
-          </header>
-
           <form className="form-group-who-to-follow " role="form" data-toggle="validator" >
 
             <section className="col-md-12 col-sm-12 col-xs-12  d-flex section-style justify-content-center" >
@@ -288,7 +285,7 @@ class CreaPromotion extends Component {
           </form>
           <section className=" col-md-10 col-sm-12 col-xs-12  d-flex mt-5 justify-content-end">
             <Button clicked={this.onShowRecapForm} id="recap-button" btnType="valider" >
-              Créer promotion
+              Valider le formulaire
             </Button>
           </section>
           <section className="col-md-12 col-sm-12 col-xs-12 text-right" >

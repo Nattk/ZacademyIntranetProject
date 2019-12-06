@@ -41,23 +41,19 @@ class GetPromotionByID extends Component {
     const eleves = this.state.promotion.eleves ? this.state.promotion.eleves.map(el => <p> {el.lastName.concat(' ', el.firstName)}</p>) : null
     return (
       <Page title={this.state.promotion.title} contextePage={this.state.promotion.title}>
-        <article className="col-md-12 col-sm-12 col-xs-12  " id="promotionByID">
+        <article className="col-md-10 col-sm-12 col-xs-12  ml-auto mr-auto  " id="promotionByID">
           <div className="col-md-12 col-sm-12 col-xs-12 d-flex section-style-promotion">
             <section>
-              <p> Début formation: {dateStart}</p>
-              <p> Fin formation: {dateEnd}</p>
+              <p> <span className="promotion-p-style"> Début formation:</span> &nbsp;{dateStart}</p>
+              <p> <span className="promotion-p-style"> Fin formation:</span> &nbsp;{dateEnd}</p>
+              <p ><span className="promotion-p-style">Ville:</span> &nbsp;{this.state.promotion.city}</p>
+              <p> <span className="promotion-p-style">Programme:</span>&nbsp;{this.state.programmes}</p>
+              <p> <span className="promotion-p-style">Formateurs:</span> &nbsp;{formateurs}</p>
             </section>
-            <section> <p className="promotion-p-style">Ville: </p>{this.state.promotion.city}</section>
-            <section> <p className="promotion-p-style">Formateurs: </p> {formateurs} </section>
-            <section>
-              <p className="promotion-p-style">Programme :      </p>
-              {this.state.programmes}
+            <section className="ml-auto mr-auto">
+              <p > <span className="promotion-p-style">Futur consultants:</span> &nbsp;   </p> {eleves}
             </section>
           </div>
-          <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-eleve-style" >
-            <p className="promotion-p-style">Futur consultants:  </p>
-            {eleves}
-          </section>
         </article>
       </Page>
     )
