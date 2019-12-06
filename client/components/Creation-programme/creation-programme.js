@@ -33,23 +33,6 @@ class CreationProgramme extends Component {
       this.setState({ title: event.value })
     }
 
-    // handleSelect = (newValue, action) => {
-    //   console.log(action)
-    //   switch (action) {
-    //     case 'select-option':
-    //       this.setState({ selected: newValue })
-    //       break
-    //     case 'remove-value':
-    //       this.setState({ selected: newValue })
-    //       break
-    //     case 'clear':
-    //       this.setState({ selected: '' })
-    //       break
-    //     default:
-    //       break
-    //   }
-    // }
-
     handleCreate = () => {
       event.preventDefault()
       create(this.props.name, this.state.title).then(response => {

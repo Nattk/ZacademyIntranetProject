@@ -19,7 +19,7 @@ class Programme extends Component {
 	      this.setState({ programme: prog })
 	    })
 	    .catch(err => {
-	      console.log(err)
+	      alert('une erreur est survenue', err)
 	    })
 	}
 
@@ -27,7 +27,7 @@ class Programme extends Component {
 	  let programme = null
 	  if (this.state.programme.length > 0) {
 	    programme = (
-	      <div class="card">
+	      <div className="card">
 	       <header className="card-header text-center">{this.state.programme[0].title}</header>
 	        {this.state.programme[0].modules.map(mod => (
 	          <li key={mod.id}>{mod.title}

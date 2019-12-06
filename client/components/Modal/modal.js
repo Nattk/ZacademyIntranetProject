@@ -20,6 +20,7 @@ const Modals = (props) => {
             {props.calendar ? (props.calendar) : null}
             {props.recapitulation ? (props.recapitulation) : null}
             {props.children}
+            {props.recapitulation ? (props.recapitulation) : null}
           </section>
         </main>
       </article>
