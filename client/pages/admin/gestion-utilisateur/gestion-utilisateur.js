@@ -7,6 +7,7 @@ class UtilisateursGestion extends Component {
 	state = {
 	  utilisateurs: [],
 	  modalShow: false,
+	  userToDelete: '',
 	  show: false
 	}
 
@@ -14,13 +15,17 @@ class UtilisateursGestion extends Component {
 	  userService.getAll().then(data => this.setState({ utilisateurs: data }))
 	  }
 
-	handleModal = (event) => {
+	handleModal = (id) => {
+	  console.log('id', id)
+	  this.setState({ userToDelete: id })
 	  this.setState({ modalShow: true })
 	  event.preventDefault()
 	}
 
-	handleDelete = (id) => {
-	  userService.remove(id)
+	handleDelete = (e, id) => {
+	  e.preventDefault()
+	  console.log('id', id)
+	  userService.remove(this.state.userToDelete)
 	  userService.getAll().then(data => this.setState({ utilisateurs: data }))
 	  this.setState({ modalShow: false })
 
@@ -40,19 +45,21 @@ class UtilisateursGestion extends Component {
 	        <header className="card-header">Liste des Utilisateurs</header>
 	        <section className="card-body">
 	          <ul>
-	            {this.state.utilisateurs.map((utilisateur, index) =>
+	            {this.state.utilisateurs.map((utilisateur, index) => {
+	              console.log('utilisateur.id', utilisateur.id)
+	              return (
 	              <li key={index} className="d-flex flex- justify-content-around align-items-baseline">
 	                <a href="#">
 	                  {utilisateur.firstName} {utilisateur.lastName}
 	                </a>
-	                <Button btnType="annuler" clicked={this.handleModal}>
+	                <Button btnType="annuler" clicked={() => this.handleModal(utilisateur.id)}>
 										Supprimer
 	                </Button>
 	                {this.state.modalShow ? (
 	                  <Alert
 	                    show={this.state.modalShow}
 	                    handleClose={this.handleClose}
-	                    handleDelete={() => this.handleDelete(utilisateur.id)}
+	                    handleDelete={e => this.handleDelete(e, utilisateur.id)}
 	                    headerTitle="Suppression utilisateur"
 	                    modalDescription="Etes vous sûr de vouloir supprimer cet utilisateur ?"
 	                    modalHeader={true}
@@ -66,7 +73,8 @@ class UtilisateursGestion extends Component {
 	                </a>
 
 	              </li>
-	            )}
+	            )
+	            })}
 	          </ul>
 	        </section>
 	        <footer className="d-flex flex-row align-items-end justify-content-center">
