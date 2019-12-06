@@ -1,10 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 import { useLocalStorage } from '../Login/LoginForm'
+import Router from 'next/router'
 
 const Nav = () => {
   const [user, setUser] = useLocalStorage('user', '')
   const offlineClick = () => {
+    Router.push('/')
     setUser('')
   }
   return (
@@ -54,7 +56,7 @@ const Nav = () => {
             ? <Link href="/admin/Accueil/accueil"><a className="btn btn-danger bouton-navbar" role="button" >ADMINISTRATION</a></Link>
             : null }
           <Link href="/utilisateur/mon-profil/mon-profil"><a className="btn btn-danger bouton-navbar" role="button" alt="Lien vers mon profil">PROFIL</a></Link>
-          <Link href="/"><a className="btn btn-danger bouton-navbar" role="button" alt="Lien déconnexion" onClick={offlineClick}>LOGOUT</a></Link>
+          <a className="btn btn-danger bouton-navbar" role="button" alt="Lien déconnexion" onClick={offlineClick}>LOGOUT</a>
         </div>
       </div>
     </nav>
