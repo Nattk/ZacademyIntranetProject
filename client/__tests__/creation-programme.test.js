@@ -29,6 +29,7 @@ describe('Creation Programme', () => {
     wrapper.find('.step-button').props().clicked()
     expect(mockedHandleStep).toHaveBeenCalledTimes(1)
   })
+
   it('should increment state Etapes when called', () => {
     const preventDefault = jest.fn()
     wrapper.find('.step-button').props().clicked({ preventDefault })

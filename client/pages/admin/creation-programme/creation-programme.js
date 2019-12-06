@@ -24,7 +24,6 @@ class CreaProgramme extends Component {
     axios.get('http://localhost:3333/api/modules')
       .then(modules => {
         this.setState({ modules: modules.data })
-        console.log(modules.data)
       })
       .catch(err => {
         alert(err)
@@ -87,7 +86,7 @@ class CreaProgramme extends Component {
         this.setState({ modules: modules.data })
       })
       .catch(err => {
-        console.log(err, 'err')
+        alert(err, 'Une erreur est survenue')
       })
   }
 
@@ -103,7 +102,7 @@ class CreaProgramme extends Component {
         this.setState({ programmeId: response.data.id })
       })
       .catch(err => {
-        console.log('err', err)
+        alert('Une erreur est survenue', err)
       })
   }
 
@@ -115,7 +114,7 @@ class CreaProgramme extends Component {
         this.setState({ modalShow: !this.state.modalShow })
       })
       .catch(err => {
-        console.log(err, 'err')
+        alert(err, 'Une erreur est survenue')
       })
   }
 
