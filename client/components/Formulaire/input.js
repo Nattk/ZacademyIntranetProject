@@ -12,6 +12,8 @@ const Input = (props) => {
         placeholder={input.placeholder}
         className={input.validation ? 'form-control who-to-follow-input' : 'form-control '}
         value={input.value}
+        min={props.min}
+        max={props.max}
         onChange={input.onChange}
       />
       <p className="validation-style"> <small>&nbsp;{input.validation}</small></p>

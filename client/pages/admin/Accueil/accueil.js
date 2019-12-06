@@ -54,6 +54,7 @@ class Admin extends Component {
                 {this.state.promotions
 
                   ? this.state.promotions.map(promo => (
+
                     <tr className="promotion-row" key={promo.id}>
                       <td>{promo.title}</td>
                       <td>{promo.city}</td>

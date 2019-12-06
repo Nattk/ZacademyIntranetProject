@@ -7,20 +7,16 @@ import axios from 'axios'
 import { getAllFormateurs, getAllStudents, getAllProgrammes, optionsCity } from '../../../services/creation-promotion'
 import Input from '../../../components/Formulaire/input'
 import Select from 'react-select'
-import 'react-dates/lib/css/_datepicker.css'
-import frLocale from 'moment/locale/fr'
-import moment from 'moment'
-import { DateRangePicker } from 'react-dates'
-import 'react-dates/initialize'
+
+
 
 class CreaPromotion extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
       promotions: [],
       promotion: '',
-      focusedInput: '',
       show: false,
       showModal: false,
       title: '',
@@ -47,21 +43,22 @@ class CreaPromotion extends Component {
     this.handleFormateurs = this.handleFormateurs.bind(this)
     this.handleStudents = this.handleStudents.bind(this)
     this.handleValidation = this.handleValidation.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
-  handleStudents (studentsOption) {
+  handleStudents(studentsOption) {
     this.setState({ studentsOption })
   }
 
-  handleClose () {
+  handleClose() {
     this.setState({ showModal: false })
   }
 
-  handleFormateurs (formateursOption) {
+  handleFormateurs(formateursOption) {
     this.setState({ formateursOption })
   }
 
-  onCreatePromotion () {
+  onCreatePromotion() {
     const eleveSelected = { eleveId: this.state.studentsOption.map(el => el.id) }
     const formateurSelected = { formateurId: this.state.formateursOption.map(el => el.id) }
 
@@ -69,8 +66,8 @@ class CreaPromotion extends Component {
       title: this.state.title,
       city: this.state.selectedCity.value,
       programmes: this.state.selectedProgramme.id,
-      start: this.state.startDate._d,
-      end: this.state.endDate._d,
+      start: this.state.startDate,
+      end: this.state.endDate,
       formateurs: formateurSelected.formateurId,
       eleves: eleveSelected.eleveId
     }
@@ -87,7 +84,7 @@ class CreaPromotion extends Component {
     }, 1000)
   }
 
-  componentWillUpdate () {
+  componentWillUpdate() {
     const eleveSelected = { eleveId: this.state.studentsOption ? this.state.studentsOption.map(el => el.id) : null }
     const formateurSelected = { formateurId: this.state.formateursOption ? this.state.formateursOption.map(el => el.id) : null }
 
@@ -97,13 +94,13 @@ class CreaPromotion extends Component {
     }
   }
 
-  onShowRecapForm () {
+  onShowRecapForm() {
     if (this.state.title && this.state.selectedProgramme && this.state.selectedCity && this.state.formateursOption && this.state.studentsOption && this.state.endDate && this.state.startDate !== '') {
       this.setState({ showModal: true })
     } this.handleValidation()
   }
 
-  handleValidation () {
+  handleValidation() {
     this.state.title === '' ? this.setState({ titreValidation: 'Un titre est réquis' }) : this.setState({ titreValidation: '' })
     this.state.selectedProgramme === '' ? this.setState({ programmeValidation: 'Un programme est réquis' }) : this.setState({ programmeValidation: '' })
     this.state.formateursOption === '' ? this.setState({ formateursValidation: 'Veuillez selectionné un ou plusieurs formateurs ' }) : this.setState({ formateursValidation: '' })
@@ -114,25 +111,28 @@ class CreaPromotion extends Component {
     this.state.startDate === undefined && this.state.endDate === undefined ? this.setState({ dateValidation: 'Veuillez selectionné une période de formation ' }) : this.setState({ dateValidation: '' })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     axios.all([getAllFormateurs(), getAllStudents(), getAllProgrammes()])
       .then(axios.spread((formateurs, students, programmes) => {
         this.setState({ formateurs: formateurs.data, eleves: students.data, programmes: programmes.data })
       }))
   }
 
-  handleChange (selectedCity) {
+  handleChange(selectedCity) {
     this.setState({ selectedCity })
   }
 
-  onChangeProgramme (selectedProgramme) {
+  onChangeProgramme(selectedProgramme) {
     this.setState({ selectedProgramme })
   }
-
-  render () {
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+  render() {
+    console.log(this.state)
     const { selectedCity, selectedProgramme, formateursOption, studentsOption } = this.state
-    const start = this.state.startDate ? JSON.stringify(this.state.startDate._d) : null
-    const end = this.state.endDate ? JSON.stringify(this.state.endDate._d) : null
+    const start = this.state.startDate ? JSON.stringify(this.state.startDate) : null
+    const end = this.state.endDate ? JSON.stringify(this.state.endDate) : null
     const dayStart = start ? start.toString().slice(9, 11) : start
     const monthStart = start ? start.toString().slice(6, 8) : start
     const yearStart = start ? start.toString().slice(1, 5) : start
@@ -162,7 +162,6 @@ class CreaPromotion extends Component {
         </footer>
       </article>
 
-    moment.updateLocale('fr', frLocale)
     const optionsEleve = this.state.eleves ? this.state.eleves.filter(el => el.role === 'eleve') : this.state.eleves
     const optionsFormateurs = this.state.formateurs ? this.state.formateurs.filter(el => el.role === 'formateur') : this.state.formateurs
     const optionProgramme = this.state.programmes ? this.state.programmes.filter(el => el.title) : this.state.programmes
@@ -173,25 +172,38 @@ class CreaPromotion extends Component {
 
             <section className="col-md-12 col-sm-12 col-xs-12  d-flex section-style justify-content-center" >
 
-              <div className="col-md-4 col-sm-12 col-xs-12 section-style ">
-                <label htmlFor="date_formation" className="label-style"> Période de formation *  </label>
-                <div className={this.state.dateValidation ? 'error-input' : ''}>
-                  <DateRangePicker
-                    startDateId="startDate"
-                    endDateId="endDate"
-                    startDatePlaceholderText="Début"
-                    endDatePlaceholderText="Fin formation"
-                    startDate={this.state.startDate}
-                    endDate={this.state.endDate}
-                    onDatesChange={({ startDate, endDate }) => { this.setState({ startDate, endDate }) }}
-                    focusedInput={this.state.focusedInput}
-                    onFocusChange={(focusedInput) => { this.setState({ focusedInput }) }}
-                  />
-                </div>
-                {this.state.startdateValidation && this.state.enddateValidation ? <p className="validation-style"> <small>{this.state.dateValidation}</small></p> : null}
+              <div className={this.state.dateValidation ? 'col-md-2 col-sm-12 col-xs-12' : "col-md-2 col-sm-12 col-xs-12 section-style  "} >
+
+                <Input
+                  label="Début de formation *"
+                  type="date"
+                  name="date-start"
+                  max={this.state.endDate}
+                  id="date-start"
+                  validation={this.state.startdateValidation}
+                  value={this.state.startDate}
+                  onChange={(e) => this.setState({ startDate: e.target.value })}
+                />
+
                 {this.state.startdateValidation && !this.state.enddateValidation ? <p className="validation-style"> <small>{this.state.startdateValidation}</small></p> : null}
+
+              </div>
+              <div className={this.state.dateValidation ? 'col-md-2 col-sm-12 col-xs-12' : "col-md-2 col-sm-12 col-xs-12 custom-file section-style upload-style "}>
+                <Input
+                  label="Fin de formation *"
+                  type="date"
+                  name="date-end"
+                  min={this.state.startDate}
+                  id="date-end"
+                  validation={this.state.enddateValidation}
+                  value={this.state.endDate}
+                  onChange={(e) => this.setState({ endDate: e.target.value })}
+                />
+
                 {this.state.enddateValidation && !this.state.startdateValidation ? <p className="validation-style"> <small>{this.state.enddateValidation}</small></p> : null}
               </div>
+
+
               <div className="col-md-4 col-sm-12 col-xs-12 custom-file section-style upload-style ">
                 <label htmlFor="ville" className="label-style">Ville * </label>
                 <Select
