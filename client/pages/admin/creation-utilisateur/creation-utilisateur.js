@@ -4,6 +4,7 @@ import Button from '../../../components/Boutons/Boutons'
 import userService from '../../../services/users'
 import UserModal from '../../../components/Modal/UserModal'
 import Router from 'next/router'
+import CSVReader from 'react-csv-reader'
 
 class CreaUtilisateur extends Component {
   state = {
@@ -103,6 +104,15 @@ class CreaUtilisateur extends Component {
 
   render () {
     const villes = [...new Set(this.state.promotions.map(promo => promo.city))]
+    const papaparseOptions = {
+      header: true,
+      dynamicTyping: true,
+      skipEmptyLines: true,
+      transformHeader: header =>
+        header
+          .toLowerCase()
+          .replace(/\W/g, '_')
+    }
     return (
       <Page title="Création Utilisateur">
         <article className="gestionProgramme card" id="form_creation_utilisateur">
@@ -179,8 +189,32 @@ class CreaUtilisateur extends Component {
               <UserModal
 	        onClose={this.handleClose}
                 onSubmit={e => this.handleConfirmForm(e)} {...this.state}
-	        titleModal="Confirmation"></UserModal>
+	        titleModal="Confirmation"></UserModal><br></br>
+
             </section>
+            <CSVReader label="Ajouter plusieurs utilisateurs par CSV" parserOptions={papaparseOptions} cssClass="csv-reader-input" onFileLoaded={usersCSV => {
+              try {
+                usersCSV.map(async userCSV => {
+                  await userService.create({
+                    firstName: userCSV.pr_nom,
+                    lastName: userCSV.nom,
+                    email: userCSV.mail,
+                    password: userCSV.mdp_academy,
+                    role: 'eleve',
+                    phone: `0${userCSV.tel}`,
+                    help: userCSV.description,
+                    promotionId: '5de8caf7246bfc3574c0b334'
+                  })
+                  console.log('userCSV was added to the DB')
+                  // window.alert(`L'utilisateur ${this.state.firstName} a bien été créé`)
+                  // this.handleClose()
+                })
+                window.alert('Tous les utilisateurs ont bien été créés')
+              } catch (error) {
+                window.alert(`${error.response.data.error}`)
+              }
+            }} > </CSVReader>
+
           </form>
         </article>
       </Page>
