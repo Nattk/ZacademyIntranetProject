@@ -17,7 +17,7 @@ const Nav = () => {
         <Link href="/index_connecte"><a className="btn btn-danger bouton-navbar" role="button">ACCUEIL</a></Link>
 
         <div className="dropdown show">
-          <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          <a className="btn btn-danger dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false" alt="groupe de liens ma formation">
           Ma Formation
           </a>
@@ -29,7 +29,7 @@ const Nav = () => {
           </div>
         </div>
         <div className="dropdown show">
-          <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          <a className="btn btn-danger dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
           Ressources
           </a>
