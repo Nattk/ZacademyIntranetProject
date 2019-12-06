@@ -162,7 +162,6 @@ class CreaPromotion extends Component {
         </footer>
       </article>
 
-    moment.updateLocale('fr', frLocale)
     const optionsEleve = this.state.eleves ? this.state.eleves.filter(el => el.role === 'eleve') : this.state.eleves
     const optionsFormateurs = this.state.formateurs ? this.state.formateurs.filter(el => el.role === 'formateur') : this.state.formateurs
     const optionProgramme = this.state.programmes ? this.state.programmes.filter(el => el.title) : this.state.programmes
@@ -179,6 +178,7 @@ class CreaPromotion extends Component {
                   label="Début de formation *"
                   type="date"
                   name="date-start"
+                  max={this.state.endDate}
                   id="date-start"
                   validation={this.state.startdateValidation}
                   value={this.state.startDate}
@@ -193,6 +193,7 @@ class CreaPromotion extends Component {
                   label="Fin de formation *"
                   type="date"
                   name="date-end"
+                  min={this.state.startDate}
                   id="date-end"
                   validation={this.state.enddateValidation}
                   value={this.state.endDate}
