@@ -10,7 +10,7 @@ import Select from 'react-select'
 import { capitalize } from '../../index_connecte'
 import moment from 'moment'
 class CreaPromotion extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -45,19 +45,19 @@ class CreaPromotion extends Component {
     this.onChange = this.onChange.bind(this)
   }
 
-  handleStudents(studentsOption) {
+  handleStudents (studentsOption) {
     this.setState({ studentsOption })
   }
 
-  handleClose() {
+  handleClose () {
     this.setState({ showModal: false })
   }
 
-  handleFormateurs(formateursOption) {
+  handleFormateurs (formateursOption) {
     this.setState({ formateursOption })
   }
 
-  onCreatePromotion() {
+  onCreatePromotion () {
     const eleveSelected = { eleveId: this.state.studentsOption.map(el => el.id) }
     const formateurSelected = { formateurId: this.state.formateursOption.map(el => el.id) }
 
@@ -83,7 +83,7 @@ class CreaPromotion extends Component {
     }, 1000)
   }
 
-  componentWillUpdate() {
+  componentWillUpdate () {
     const eleveSelected = { eleveId: this.state.studentsOption ? this.state.studentsOption.map(el => el.id) : null }
     const formateurSelected = { formateurId: this.state.formateursOption ? this.state.formateursOption.map(el => el.id) : null }
 
@@ -93,13 +93,13 @@ class CreaPromotion extends Component {
     }
   }
 
-  onShowRecapForm() {
+  onShowRecapForm () {
     if (this.state.title && this.state.selectedProgramme && this.state.selectedCity && this.state.formateursOption && this.state.studentsOption && this.state.endDate && this.state.startDate !== '') {
       this.setState({ showModal: true })
     } this.handleValidation()
   }
 
-  handleValidation() {
+  handleValidation () {
     this.state.title === '' ? this.setState({ titreValidation: 'Un titre est réquis' }) : this.setState({ titreValidation: '' })
     this.state.selectedProgramme === '' ? this.setState({ programmeValidation: 'Un programme est réquis' }) : this.setState({ programmeValidation: '' })
     this.state.formateursOption === '' ? this.setState({ formateursValidation: 'Veuillez selectionné un ou plusieurs formateurs ' }) : this.setState({ formateursValidation: '' })
@@ -110,26 +110,26 @@ class CreaPromotion extends Component {
     this.state.startDate === undefined && this.state.endDate === undefined ? this.setState({ dateValidation: 'Veuillez selectionné une période de formation ' }) : this.setState({ dateValidation: '' })
   }
 
-  componentDidMount() {
+  componentDidMount () {
     axios.all([getAllFormateurs(), getAllStudents(), getAllProgrammes()])
       .then(axios.spread((formateurs, students, programmes) => {
         this.setState({ formateurs: formateurs.data, eleves: students.data, programmes: programmes.data })
       }))
   }
 
-  handleChange(selectedCity) {
+  handleChange (selectedCity) {
     this.setState({ selectedCity })
   }
 
-  onChangeProgramme(selectedProgramme) {
+  onChangeProgramme (selectedProgramme) {
     this.setState({ selectedProgramme })
   }
 
-  onChange(e) {
+  onChange (e) {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  render() {
+  render () {
     moment.locale('fr')
     const { selectedCity, selectedProgramme, formateursOption, studentsOption } = this.state
     const start = this.state.startDate ? capitalize(moment(this.state.startDate).format('DD MMMM YYYY')) : null
@@ -149,7 +149,7 @@ class CreaPromotion extends Component {
           <p><span className="promotion-p-style">Futur consultants:</span>&nbsp; {students} </p>
         </section>
         <footer className="text-right">
-          <Button clicked={this.onCreatePromotion} btnType="valider">
+          <Button clicked={this.onCreatePromotion} id="confirm-creation-promotion" btnType="valider">
             Confirmer la Création de cette promotion
           </Button>
         </footer>
