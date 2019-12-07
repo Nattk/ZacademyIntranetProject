@@ -9,5 +9,20 @@
     margin-top: 2rem;
     align-items: none;
   }
+  @media only screen and(max-width: 768px) {
+    .section-eleve-style {
+      display: none;
 
+    }
+
+    .show-eleve-style {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  @media only screen and(min-width: 768px) {
+    .show-eleve-style {
+      display: none;
+    }
+  }
 }

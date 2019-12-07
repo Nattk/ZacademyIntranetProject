@@ -56,4 +56,22 @@ describe('Creation Promotion Form tests', () => {
     input.simulate('change', mockEvent)
     expect(wrapper.state().selectedCity.target.value).toEqual('Marseille')
   })
+  it('should show modal  recap informations when called', () => {
+    const handleChange = wrapper.setState({ showModal: true })
+    wrapper.find('#recap-button').props().clicked({ handleChange })
+    expect(wrapper.state('showModal')).toBe(true)
+  })
+  it('should show modal récapitulation  informations promotion when called', () => {
+    const handleChange = wrapper.setState({ showModal: true })
+    wrapper.find('#recap-button').props().clicked({ handleChange })
+    expect(wrapper.state('showModal')).toBe(true)
+  })
+  it('should have a confirm creation promotion button in modal récapitulation ', () => {
+    const container = wrapper.find('#confirm-creation-promotion')
+    const onCreatePromotion = wrapper.setState({ showModal: true })
+    expect(container).toHaveLength(0)
+    wrapper.find('#recap-button').props().clicked({ onCreatePromotion })
+    expect(wrapper.state('showModal')).toBe(true)
+    if (expect(wrapper.state('showModal')).toBe(true)) expect(container).toHaveLength(1)
+  })
 })
