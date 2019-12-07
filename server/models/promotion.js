@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const promotionSchema = mongoose.Schema({
   title: {
     type: String,
-    required: true
+    required: true,
+    unique: [true, 'promotion déjà existante']
   },
   city: {
     type: String
@@ -36,6 +38,9 @@ const promotionSchema = mongoose.Schema({
     }
   ]
 })
+
+promotionSchema.plugin(uniqueValidator)
+
 
 promotionSchema.set('toJSON', {
   transform: (document, returnedObject) => {
