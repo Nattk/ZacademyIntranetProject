@@ -4,6 +4,7 @@ import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
 import Modal from '../../../components/Modal/modal'
 import axios from 'axios'
+import Router from 'next/router'
 import { getAllFormateurs, getAllStudents, getAllProgrammes, optionsCity } from '../../../services/creation-promotion'
 import Input from '../../../components/Formulaire/input'
 import Select from 'react-select'
@@ -78,7 +79,7 @@ class CreaPromotion extends Component {
         return this.setState({ promotion: IdPromotion })
       })
     setTimeout(() => {
-      window.location.assign('/admin/Accueil/accueil')
+      Router.push('/admin/Accueil/accueil')
     }, 1000)
   }
 
@@ -158,8 +159,9 @@ class CreaPromotion extends Component {
     const optionsFormateurs = this.state.formateurs ? this.state.formateurs.filter(el => el.role === 'formateur') : this.state.formateurs
     const optionProgramme = this.state.programmes ? this.state.programmes.filter(el => el.title) : this.state.programmes
     return (
-      <Page title="Création promotion" contextePage="Création promotion" >
+      <Page title="Création promotion" >
         <article className="col-md-12 col-sm-12 col-xs-12 " id="form_creation_promotion">
+          <h1 className="h1-promotion-style" >Création Promotions </h1>
           <form className="form-group-who-to-follow " role="form" data-toggle="validator" >
 
             <section className="col-md-12 col-sm-12 col-xs-12  d-flex section-style justify-content-center" >
