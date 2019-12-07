@@ -3,7 +3,7 @@ import Page from '../layouts/classic'
 const Legal = () => {
   return (
     <Page title="Mentions Légales" contextePage="Mentions Légales">
-      <article class="container">
+      <article className="container">
         <section>
           <p>Zenika SARL de conseil en systèmes et logiciels informatiques.</p>
 

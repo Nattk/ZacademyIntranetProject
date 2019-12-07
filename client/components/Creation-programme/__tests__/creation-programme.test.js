@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import CreationProgramme from '../creation-programme';
+import CreationProgramme from '../creation-programme'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -29,9 +30,8 @@ describe('Creation Programme', () => {
   })
 
   test('Should render select with the items of the state', () => {
-    const items = [{sousmodules: Array(3), sequences: Array(0), title: "jesuismodule", id: "5de0e0c1a6ba2205308cdb36"}, {sousmodules: Array(3), sequences: Array(0), title: "jesuismodule", id: "5de0e0c1a6ba2205308cdb36"}, {sousmodules: Array(3), sequences: Array(0), title: "jesuismodule", id: "5de0e0c1a6ba2205308cdb36"}]
-    wrapper.setState({ items: items });
+    const items = [{ sousmodules: Array(3), sequences: Array(0), title: 'jesuismodule', id: '5de0e0c1a6ba2205308cdb36' }, { sousmodules: Array(3), sequences: Array(0), title: 'jesuismodule', id: '5de0e0c1a6ba2205308cdb36' }, { sousmodules: Array(3), sequences: Array(0), title: 'jesuismodule', id: '5de0e0c1a6ba2205308cdb36' }]
+    wrapper.setState({ items: items })
     expect(wrapper.find('.select-component').props().options).toEqual(items)
   })
-  
 })

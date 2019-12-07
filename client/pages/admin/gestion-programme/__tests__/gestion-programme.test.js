@@ -1,9 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import GestionProgramme from '../gestion-programme';
-import Spinner from '../../../../components/Spinner/spinner';
-
+import GestionProgramme from '../gestion-programme'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -26,10 +25,9 @@ describe('Liste programme', () => {
   })
 
   test('Should render list of programmes', () => {
-    const items = [{title:"prog",id:"5de66d42796c9c3db85c683c"},{title:"prog",id:"5de7855d4e9428493c825423"},{title:"prog",id:"5de0e0e0a6ba2205308cdb37"}]
+    const items = [{ title: 'prog', id: '5de66d42796c9c3db85c683c' }, { title: 'prog', id: '5de7855d4e9428493c825423' }, { title: 'prog', id: '5de0e0e0a6ba2205308cdb37' }]
     wrapper.setState({ programmes: items })
     expect(wrapper.find('.spinner').exists()).toBe(false)
     expect(wrapper.find('.liste-programme').exists()).toBe(true)
   })
-  
 })

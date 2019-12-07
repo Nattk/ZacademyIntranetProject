@@ -13,7 +13,6 @@ class ProgrammeGestion extends Component {
   componentDidMount () {
     getModules('programmes').then(programmes => {
       this.setState({ programmes: programmes.data })
-    }).catch(err => {
     })
   }
 
@@ -45,16 +44,16 @@ class ProgrammeGestion extends Component {
 
   render () {
     let listeProgramme = null
-    if(this.state.programmes.length !== 0 ){
+    if (this.state.programmes.length !== 0) {
       listeProgramme = (
         <section className="card-body liste-programme">
-        <ul>
-          {this.state.programmes.map(programme => (
-            <li key={programme.id} className="d-flex flex- justify-content-around align-items-baseline">
-              <Link as={`/admin/gestion-programme/programme/${programme.title}`} href={{ pathname: './programme', query: { id: programme.id } }}>
-                <a title={`Voir les détails de ${programme.title}`}>{programme.title}</a>
-              </Link>
-              {/* <Button btnType="dupliquer" clicked={(progId) => this.handleDuplication(programme.progId)}><a>Dupliquer</a></Button>
+          <ul>
+            {this.state.programmes.map(programme => (
+              <li key={programme.id} className="d-flex flex- justify-content-around align-items-baseline">
+                <Link as={`/admin/gestion-programme/programme/${programme.title}`} href={{ pathname: './programme', query: { id: programme.id } }}>
+                  <a title={`Voir les détails de ${programme.title}`}>{programme.title}</a>
+                </Link>
+                {/* <Button btnType="dupliquer" clicked={(progId) => this.handleDuplication(programme.progId)}><a>Dupliquer</a></Button>
             <Button btnType="annuler" clicked={this.handleModal}>Supprimer</Button>
             <a href="/admin/gestion-programme/modification-programme" title="modification-programme" className="link-button-valider" >
               Modifier
@@ -72,14 +71,12 @@ class ProgrammeGestion extends Component {
               />
             ) : null
             } */}
-            </li>
-          ))}
-        </ul>
-      </section>
+              </li>
+            ))}
+          </ul>
+        </section>
       )
-    }
-
-    else {
+    } else {
       listeProgramme = <Spinner className="spinner"/>
     }
     return (

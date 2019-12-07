@@ -62,18 +62,18 @@ class CreationProgramme extends Component {
             </button>
           </section>
           <section>
-          <h2>Selectionner votre {this.props.name}</h2>
-          <div className="d-flex flex-row"> 
-          <Select className="select-component" options={this.state.items}
-            formatCreateLabel={(inputValue) => this.props.name}
-            placeholder={this.props.name}
-            getOptionLabel={(option) => option.title}
-            getOptionValue={(option) => option.title}
-            onChange={this.props.select}
-            name={this.props.name}
-          />
-          <Button  btnType="valider" className="add-item" clicked={this.handleAdd}>Ajouter au {this.props.parent}</Button>
-          </div>
+            <h2>Selectionner votre {this.props.name}</h2>
+            <div className="d-flex flex-row">
+              <Select className="select-component" options={this.state.items}
+                formatCreateLabel={(inputValue) => this.props.name}
+                placeholder={this.props.name}
+                getOptionLabel={(option) => option.title}
+                getOptionValue={(option) => option.title}
+                onChange={this.props.select}
+                name={this.props.name}
+              />
+              <Button btnType="valider" className="add-item" clicked={this.handleAdd}>Ajouter au {this.props.parent}</Button>
+            </div>
           </section>
         </form>
 

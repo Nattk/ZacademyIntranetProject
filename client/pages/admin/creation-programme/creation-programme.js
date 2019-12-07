@@ -152,7 +152,7 @@ class CreaProgramme extends Component {
         </div>
       )
     }
-    
+
     if (this.state.etapes === 1) {
       creationProgramme = (
         <React.Fragment>

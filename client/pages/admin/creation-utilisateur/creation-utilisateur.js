@@ -145,7 +145,7 @@ class CreaUtilisateur extends Component {
                 <input type="password" name="userpwd" className="form-control" id="exampleFormControlInput1" placeholder="Mot de Passe" onChange={e => this.handlepasswordChange(e.target)} required></input>
               </div>
               <label htmlFor="role">Role*</label>
-              <select class="custom-select" multiple value={this.props.role} onChange={e => this.handleroleChange(e)} required>
+              <select className="custom-select" multiple value={this.props.role} onChange={e => this.handleroleChange(e)} required>
                 <option selected value="">Selectionner un rôle</option>
                 <option value="eleve">Eleve</option>
                 <option value="formateur">Formateur</option>

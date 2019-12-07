@@ -28,8 +28,8 @@ class Programme extends Component {
 	  let programme = null
 	  if (this.state.programme.length > 0) {
 	    programme = (
-		<Page title="Modification programme" contextePage={this.state.programme[0].title}>
-		<article id="Programme" className="d-flex flex-column align-items-center">
+	      <Page title="Modification programme" contextePage={this.state.programme[0].title}>
+	        <article id="Programme" className="d-flex flex-column align-items-center">
 	      <div className="card">
 	       <header className="card-header text-center">Détails</header>
 	        {this.state.programme[0].modules.map(mod => (
@@ -51,14 +51,13 @@ class Programme extends Component {
 	      </article>
 	    </Page>
 	    )
-	  }
-	  else {
+	  } else {
 		  programme = <Spinner className="spinner"/>
 	  }
 	  return (
-		<React.Fragment>
-			{programme}
-		</React.Fragment>
+	    <React.Fragment>
+	      {programme}
+	    </React.Fragment>
 	  )
 	}
 }
