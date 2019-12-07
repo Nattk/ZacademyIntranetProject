@@ -91,7 +91,7 @@ class CreaProgramme extends Component {
   }
 
   handleChange = (event) => {
-    if (event.name === 'programmeTitle') {
+    if (event.name === 'titre') {
       this.setState({ title: event.value })
     }
   }
@@ -127,8 +127,8 @@ class CreaProgramme extends Component {
     let modalConfirm = null
     if (this.state.programme !== '') {
       modalConfirm = (
-        <React.Fragment>
-          <h2>{this.state.programme.title}</h2>
+        <div className="modal-contenu d-flex flex-column">
+          <h2>Création du programme : {this.state.programme.title}</h2>
           <ul>
             {
               this.state.programme.modules.map(mod => (
@@ -149,7 +149,7 @@ class CreaProgramme extends Component {
             }
           </ul>
           <Button clicked={this.handleRedirection} btnType="valider">Valider</Button>
-        </React.Fragment>
+        </div>
       )
     }
     
@@ -159,18 +159,11 @@ class CreaProgramme extends Component {
           <form className="container" >
             <section className="section">
               <div className="form-group">
-                <label htmlFor="programtitle">Titre</label><br></br>
-                <input type="text" name="programmeTitle" required className="form-control" id="exampleFormControlInput1" onChange={e => this.handleChange(e.target)}
+                <label htmlFor="titre">Titre</label><br></br>
+                <input type="text" name="titre" required className="form-control" id="exampleFormControlInput1" onChange={e => this.handleChange(e.target)}
                   placeholder="Intitulé du programme" />
               </div>
             </section>
-            <Button
-              btnType="valider"
-              clicked={(event) => this.handleStep(event)}
-              className="step-button"
-            >
-            Etape suivante
-            </Button>
           </form>
         </React.Fragment>
       )
@@ -189,7 +182,7 @@ class CreaProgramme extends Component {
     }
 
     return (
-      <Page title="Création programme" context="Création de programme">
+      <Page title="Création programme" contextePage="Création programme">
         <article className="card" id="creation-programme">
           <header className="card-header text-center">
             Etape {this.state.etapes}
@@ -204,6 +197,13 @@ class CreaProgramme extends Component {
             >
             Annuler
             </Button> */}
+            <Button
+              btnType="valider"
+              clicked={(event) => this.handleStep(event)}
+              className="step-button"
+            >
+            Etape suivante
+            </Button>
             {
               this.state.etapes > 1 &&
               <Button
@@ -219,7 +219,7 @@ class CreaProgramme extends Component {
           <Modal
             show={this.state.modalShow}
 	        onClose={this.handleClose}
-	        titleModal="Confirmation">{modalConfirm}</Modal>
+	        titleModal="Demande de confirmation">{modalConfirm}</Modal>
         </article>
       </Page>
     )
