@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Page from '../layouts/classic'
 import { useLocalStorage } from '../components/Login/LoginForm'
-import Carousel from '../components/Carousel/carousel'
+// import Carousel from '../components/Carousel/carousel'
+import moment from 'moment'
 
 // export default function IndexConnected () {
 //   return (
@@ -28,24 +29,55 @@ import Carousel from '../components/Carousel/carousel'
 //   )
 // }
 
+export const capitalize = (s) => {
+  if (typeof s !== 'string') return ''
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
 
-export default function IndexConnected() {
+export default function IndexConnected () {
   const [promotion, Setpromotion] = useState()
   const [user] = useLocalStorage('user')
   useEffect(() => {
-    fetch(`http://localhost:3333/api/promotions/${user.promotion}`)
-      .then(response => response.json())
-      .then(data => Setpromotion(data))
+    if (user.promotion) {
+      fetch(`http://localhost:3333/api/promotions/${user.promotion}`)
+        .then(response => response.json())
+        .then(data => Setpromotion(data))
+    }
   }, [])
 
+  const promo = user.promotion
+
+  moment.locale('fr')
+
   console.log('promotion', promotion)
+  if (!promo) {
+    return (
+      <Page title="Accueil" contextePage="Accueil">
+        <article className="col-md-10 col-sm-12 col-xs-12  ml-auto mr-auto  " id="promotionByID">
+          <div className="col-md-12 col-sm-12 col-xs-12 d-flex section-style-promotion">
+            <section>
+              <p> <span className="promotion-p-style">Début formation:</span> &nbsp;{promotion ? capitalize(moment(promotion.start).format('MMMM YYYY')) : null}</p>
+              <p> <span className="promotion-p-style">Fin formation:</span> &nbsp;{promotion ? capitalize(moment(promotion.end).format('MMMM YYYY')) : null}</p>
+              <p ><span className="promotion-p-style">Ville:</span> &nbsp;{promotion ? promotion.city : null}</p>
+              <p> <span className="promotion-p-style">Programme:</span>&nbsp;{promotion ? promotion.programmes.map(x => x.title) : null}</p>
+              <p> <span className="promotion-p-style">Formateurs:</span> &nbsp;{promotion ? promotion.formateurs.map(x => `${x.firstName} ${x.lastName}`) : null}</p>
+            </section>
+            <section className="ml-auto mr-auto">
+              <p > <span className="promotion-p-style">Futur consultants:</span> &nbsp; {promotion ? promotion.eleves.map(x => <div>{`${x.firstName} ${x.lastName}`}</div>) : null}</p>
+            </section>
+          </div>
+        </article>
+      </Page>
+    )
+  }
+
   return (
     <Page title="Accueil" contextePage="Accueil">
       <article className="col-md-10 col-sm-12 col-xs-12  ml-auto mr-auto  " id="promotionByID">
         <div className="col-md-12 col-sm-12 col-xs-12 d-flex section-style-promotion">
           <section>
-            <p> <span className="promotion-p-style">Début formation:</span> &nbsp;{promotion ? promotion.start : null}</p>
-            <p> <span className="promotion-p-style">Fin formation:</span> &nbsp;{promotion ? promotion.end : null}</p>
+            <p> <span className="promotion-p-style">Début formation:</span> &nbsp;{promotion ? capitalize(moment(promotion.start).format('MMMM YYYY')) : null}</p>
+            <p> <span className="promotion-p-style">Fin formation:</span> &nbsp;{promotion ? capitalize(moment(promotion.end).format('MMMM YYYY')) : null}</p>
             <p ><span className="promotion-p-style">Ville:</span> &nbsp;{promotion ? promotion.city : null}</p>
             <p> <span className="promotion-p-style">Programme:</span>&nbsp;{promotion ? promotion.programmes.map(x => x.title) : null}</p>
             <p> <span className="promotion-p-style">Formateurs:</span> &nbsp;{promotion ? promotion.formateurs.map(x => `${x.firstName} ${x.lastName}`) : null}</p>

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 before(function () {
   cy.request('POST', 'http://localhost:3333/api/testing/reset')
   const admin = {
@@ -22,22 +23,18 @@ before(function () {
 
 describe('Loging in', function () {
   it('front page can be opened', function () {
-
     cy.visit('http://localhost:3000')
     cy.contains('CONNEXION')
   })
 
   it('can show login form', function () {
-
     cy.visit('http://localhost:3000')
     cy.contains('CONNEXION')
       .click()
     cy.contains('Log In')
-
   })
 
   it('Log in as admin redirects to admin dashboard', function () {
-
     cy.visit('http://localhost:3000')
     cy.contains('CONNEXION')
       .click()
@@ -51,7 +48,6 @@ describe('Loging in', function () {
   })
 
   it('Log in as student redirects to his personnalized content', function () {
-
     cy.visit('http://localhost:3000')
     cy.contains('CONNEXION')
       .click()
@@ -63,5 +59,4 @@ describe('Loging in', function () {
       .click()
     cy.contains('Accueil')
   })
-
 })
