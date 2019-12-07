@@ -31,11 +31,12 @@ class Admin extends Component {
   render () {
     moment.locale('fr')
     return (
-      <Page title="Admin Accueil" contextePage="Promotions en cours">
+      <Page title="Admin Accueil" >
         <article id="admin-page">
           {/* <section className="search-bar-promo d-flex flex-row">
             <input className="form-control" type="text" placeholder="Rechercher" />
           </section> */}
+          <h1 className="h1-promotion-style" >Promotions en cours</h1>
           <section className="col-md-12 col-sm-12 col-xs-12">
             <table className="col-md-12 col-sm-12 col-xs-12 table table-hover show-table-media">
               <thead className="col-md-12 col-sm-12 col-xs-12 t-head-style">
