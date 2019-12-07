@@ -10,29 +10,33 @@ const Footer = () => (
     <section className="col-md-4 col-sm-6 col-xs-12  row1-position">
       <p>
         <span>Contact</span>:&nbsp;
-        <a title="Envoyer un mail" href=" mailto:info@zenika.com" className="footer-link-customization"> info@zenika.com
-        </a> &nbsp; +33(0)1 45 26 19 15
+        <a title="Envoyer un mail" href=" mailto:info@zenika.com" className="footer-link-customization">
+          info@zenika.com
+        </a>
+        &nbsp;  <span>+33(0)1 45 26 19 15</span>
       </p>
     </section>
     {/* ROW 2 */}
     <section className="col-md-4 col-sm-6 col-xs-12 row2-position">
       <h1 className="footer-titre-h1 align-center">Zenika Academy</h1>
-      <section className="footer-socialIcon">
+      <div className="footer-socialIcon">
         {SocialMedia.twitter}
         {SocialMedia.linkedin}
         {SocialMedia.facebook}
         {SocialMedia.github}
         {SocialMedia.youtube}
-      </section>
+      </div>
     </section>
     {/* ROW 3 */}
     <section className="col-md-4 col-sm-6 col-xs-12 row3-position">
-      <small> &copy; Copyright 2006-2019 Zenika. &shy;Tous droits réservés.
-        <section>
-          <Link href="/mentions-legales"><a title="Consulter les mentions légales" className="footer-link-customization">Mentions légales
-          </a></Link>
-        </section>
+      <small>
+        &copy; Copyright 2006-2019 Zenika. &shy;Tous droits réservés.
       </small>
+      <div>
+        <Link href="/mentions-legales"><a title="Consulter les mentions légales" className="footer-link-customization">Mentions légales
+        </a></Link>
+      </div>
+
     </section>
   </footer>
 )
