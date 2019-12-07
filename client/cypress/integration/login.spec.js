@@ -1,27 +1,26 @@
 /* eslint-disable no-undef */
-before(function () {
-  cy.request('POST', 'http://localhost:3333/api/testing/reset')
-  const admin = {
-    firstName: 'norbert',
-    lastName: 'nadir',
-    email: 'norbert@zenika.com',
-    password: 'norbert',
-    phone: '0626262626',
-    role: 'superadmin'
-  }
-  const student = {
-    firstName: 'nattan',
-    lastName: 'drake',
-    email: 'nattan@zenika.com',
-    password: 'nattan',
-    phone: '0626262626',
-    role: 'eleve'
-  }
-  cy.request('POST', 'http://localhost:3333/api/users/', admin)
-  cy.request('POST', 'http://localhost:3333/api/users/', student)
-})
-
-describe('Loging in', function () {
+describe.skip('Loging in', function () {
+  before(function () {
+    cy.request('POST', 'http://localhost:3333/api/testing/reset')
+    const admin = {
+      firstName: 'norbert',
+      lastName: 'nadir',
+      email: 'norbert@zenika.com',
+      password: 'norbert',
+      phone: '0626262626',
+      role: 'superadmin'
+    }
+    const student = {
+      firstName: 'nattan',
+      lastName: 'drake',
+      email: 'nattan@zenika.com',
+      password: 'nattan',
+      phone: '0626262626',
+      role: 'eleve'
+    }
+    cy.request('POST', 'http://localhost:3333/api/users/', admin)
+    cy.request('POST', 'http://localhost:3333/api/users/', student)
+  })
   it('front page can be opened', function () {
     cy.visit('http://localhost:3000')
     cy.contains('CONNEXION')
