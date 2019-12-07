@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/admin'
 import { getPromotionByID } from '../../../services/creation-promotion'
+import { capitalize } from '../../index_connecte'
+import moment from 'moment'
 
 class GetPromotionByID extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -12,11 +14,11 @@ class GetPromotionByID extends Component {
     }
   }
 
-  static getInitialProps({ query }) {
+  static getInitialProps ({ query }) {
     return { query }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     getPromotionByID(this.props.query.promotions)
       .then(promotion => {
         this.setState({ promotion: promotion.data, programmes: promotion.data.programmes[0].title })
@@ -26,17 +28,10 @@ class GetPromotionByID extends Component {
       })
   }
 
-  render() {
-    const start = this.state.promotion.start ? JSON.stringify(this.state.promotion.start) : null
-    const end = this.state.promotion.end ? JSON.stringify(this.state.promotion.end) : null
-    const dayStart = start ? start.toString().slice(9, 11) : start
-    const monthStart = start ? start.toString().slice(6, 8) : start
-    const yearStart = start ? start.toString().slice(1, 5) : start
-    const dayEnd = end ? end.toString().slice(9, 11) : end
-    const monthEnd = end ? end.toString().slice(6, 8) : end
-    const yearEnd = end ? end.toString().slice(1, 5) : end
-    const dateStart = `${dayStart}-${monthStart}-${yearStart}`
-    const dateEnd = `${dayEnd}-${monthEnd}-${yearEnd}`
+  render () {
+    moment.locale('fr')
+    const start = this.state.promotion.start ? capitalize(moment(this.state.promotion.start).format('MMMM YYYY')) : null
+    const end = this.state.promotion.end ? capitalize(moment(this.state.promotion.end).format('MMMM YYYY')) : null
     const formateurs = this.state.promotion.formateurs ? this.state.promotion.formateurs.map(el => <p> {el.lastName.concat(' ', el.firstName)}</p>) : null
     const eleves = this.state.promotion.eleves ? this.state.promotion.eleves.map(el => <p> {el.lastName.concat(' ', el.firstName)}</p>) : null
     return (
@@ -44,8 +39,8 @@ class GetPromotionByID extends Component {
         <article className="col-md-10 col-sm-12 col-xs-12  ml-auto mr-auto  " id="promotionByID">
           <div className="col-md-12 col-sm-12 col-xs-12 d-flex section-style-promotion">
             <section>
-              <p> <span className="promotion-p-style"> Début formation:</span> &nbsp;{dateStart}</p>
-              <p> <span className="promotion-p-style"> Fin formation:</span> &nbsp;{dateEnd}</p>
+              <p> <span className="promotion-p-style"> Début formation:</span> &nbsp;{start}</p>
+              <p> <span className="promotion-p-style"> Fin formation:</span> &nbsp;{end}</p>
               <p ><span className="promotion-p-style">Ville:</span> &nbsp;{this.state.promotion.city}</p>
               <p> <span className="promotion-p-style">Programme:</span>&nbsp;{this.state.programmes}</p>
               <p> <span className="promotion-p-style">Formateurs:</span> &nbsp;{formateurs}</p>

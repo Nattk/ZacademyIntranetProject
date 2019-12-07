@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/admin'
-import Button from '../../../components/Boutons/Boutons'
-import Alert from '../../../components/Modal/alert'
 import { getModules } from '../../../services/creation-programme'
 import Link from 'next/link'
 

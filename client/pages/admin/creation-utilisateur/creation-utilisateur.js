@@ -45,7 +45,7 @@ class CreaUtilisateur extends Component {
     this.setState({ phone: event.value })
   }
 
-  handleroleChange(event) {
+  handleroleChange (event) {
     this.setState({ role: event.target.value })
   }
 
@@ -53,7 +53,7 @@ class CreaUtilisateur extends Component {
     this.setState({ help: event.value })
   }
 
-  handlepromotionChange(event) {
+  handlepromotionChange (event) {
     fetch(`http://localhost:3333/api/promotions/${event.target.value}`)
       .then(response => response.json())
       .then(data => this.setState({ promotionName: data.title }))
@@ -61,7 +61,7 @@ class CreaUtilisateur extends Component {
     this.setState({ promotion: event.target.value })
   }
 
-  componentDidMount() {
+  componentDidMount () {
     fetch('http://localhost:3333/api/promotions')
       .then(response => response.json())
       .then(data => this.setState({ promotions: data }))
@@ -109,7 +109,7 @@ class CreaUtilisateur extends Component {
     window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
   }
 
-  render() {
+  render () {
     const villes = [...new Set(this.state.promotions.map(promo => promo.city))]
     const papaparseOptions = {
       header: true,

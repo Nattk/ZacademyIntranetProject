@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import Page from '../../../layouts/admin'
 import axios from 'axios'
 import Link from 'next/link'
+import moment from 'moment'
+import { capitalize } from '../../index_connecte'
+
 class Admin extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -22,7 +25,7 @@ class Admin extends Component {
     alert('profil supprimé')
   }
 
-  componentDidMount() {
+  componentDidMount () {
     axios.get('http://localhost:3333/api/promotions')
       .then((promotions) => {
         this.setState({ promotions: promotions.data })
@@ -30,7 +33,8 @@ class Admin extends Component {
       })
   }
 
-  render() {
+  render () {
+    moment.locale('fr')
     return (
       <Page title="Admin Accueil" contextePage="Promotions en cours">
         <article id="admin-page">
@@ -60,8 +64,8 @@ class Admin extends Component {
                       <td>{promo.city}</td>
                       <td>{promo.programmes.map(el => el.title)}</td>
                       <td className="date-style d-column">
-                        <span className="date-style">Début: {promo.start ? promo.start.slice(0, 10) : promo.start}</span>
-                        <span className="date-style"> Fin: {promo.end ? promo.end.slice(0, 10) : promo.end} </span>
+                        <span className="date-style">Début: {promo.start ? capitalize(moment(promo.start).format('MMMM YYYY')) : promo.start}</span>
+                        <span className="date-style"> Fin: {promo.end ? capitalize(moment(promo.end).format('MMMM YYYY')) : promo.end} </span>
                       </td>
                       <td>
 

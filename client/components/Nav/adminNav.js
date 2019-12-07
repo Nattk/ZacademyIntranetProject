@@ -40,7 +40,7 @@ const AdminNav = () => {
           </div>
         </div>
         <div id="end-of-navbar">
-        <a className="btn btn-danger bouton-navbar" role="button" alt="Lien déconnexion" onClick={offlineClick}>LOGOUT</a>
+          <a className="btn btn-danger bouton-navbar" role="button" alt="Lien déconnexion" onClick={offlineClick}>LOGOUT</a>
         </div>
       </div>
     </nav>
