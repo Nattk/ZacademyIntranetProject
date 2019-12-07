@@ -6,7 +6,7 @@ import moment from 'moment'
 import { capitalize } from '../../index_connecte'
 
 class Admin extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -16,16 +16,16 @@ class Admin extends Component {
   }
 
   filtre = (type) => {
-    const arrayFiltered = [...this.state.Promotions]
+    const arrayFiltered = [...this.state.promotions]
     arrayFiltered.sort((a, b) => a[type] > b[type] ? 1 : -1)
-    this.setState({ Promotions: arrayFiltered })
+    this.setState({ promotions: arrayFiltered })
   }
 
   handleDelete = () => {
     alert('profil supprimé')
   }
 
-  componentDidMount () {
+  componentDidMount() {
     axios.get('http://localhost:3333/api/promotions')
       .then((promotions) => {
         this.setState({ promotions: promotions.data })
@@ -33,7 +33,7 @@ class Admin extends Component {
       })
   }
 
-  render () {
+  render() {
     moment.locale('fr')
     return (
       <Page title="Admin Accueil" contextePage="Promotions en cours">
@@ -64,8 +64,8 @@ class Admin extends Component {
                       <td>{promo.city}</td>
                       <td>{promo.programmes.map(el => el.title)}</td>
                       <td className="date-style d-column">
-                        <span className="date-style">Début: {promo.start ? capitalize(moment(promo.start).format('MMMM YYYY')) : promo.start}</span>
-                        <span className="date-style"> Fin: {promo.end ? capitalize(moment(promo.end).format('MMMM YYYY')) : promo.end} </span>
+                        <span className="date-style">Début: {promo.start ? capitalize(moment(promo.start).format('DD MMMM YYYY')) : promo.start}</span>
+                        <span className="date-style"> Fin: {promo.end ? capitalize(moment(promo.end).format('DD MMMM YYYY')) : promo.end} </span>
                       </td>
                       <td>
 

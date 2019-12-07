@@ -7,9 +7,10 @@ import axios from 'axios'
 import { getAllFormateurs, getAllStudents, getAllProgrammes, optionsCity } from '../../../services/creation-promotion'
 import Input from '../../../components/Formulaire/input'
 import Select from 'react-select'
-
+import { capitalize } from '../../index_connecte'
+import moment from 'moment'
 class CreaPromotion extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -44,19 +45,19 @@ class CreaPromotion extends Component {
     this.onChange = this.onChange.bind(this)
   }
 
-  handleStudents (studentsOption) {
+  handleStudents(studentsOption) {
     this.setState({ studentsOption })
   }
 
-  handleClose () {
+  handleClose() {
     this.setState({ showModal: false })
   }
 
-  handleFormateurs (formateursOption) {
+  handleFormateurs(formateursOption) {
     this.setState({ formateursOption })
   }
 
-  onCreatePromotion () {
+  onCreatePromotion() {
     const eleveSelected = { eleveId: this.state.studentsOption.map(el => el.id) }
     const formateurSelected = { formateurId: this.state.formateursOption.map(el => el.id) }
 
@@ -82,7 +83,7 @@ class CreaPromotion extends Component {
     }, 1000)
   }
 
-  componentWillUpdate () {
+  componentWillUpdate() {
     const eleveSelected = { eleveId: this.state.studentsOption ? this.state.studentsOption.map(el => el.id) : null }
     const formateurSelected = { formateurId: this.state.formateursOption ? this.state.formateursOption.map(el => el.id) : null }
 
@@ -92,13 +93,13 @@ class CreaPromotion extends Component {
     }
   }
 
-  onShowRecapForm () {
+  onShowRecapForm() {
     if (this.state.title && this.state.selectedProgramme && this.state.selectedCity && this.state.formateursOption && this.state.studentsOption && this.state.endDate && this.state.startDate !== '') {
       this.setState({ showModal: true })
     } this.handleValidation()
   }
 
-  handleValidation () {
+  handleValidation() {
     this.state.title === '' ? this.setState({ titreValidation: 'Un titre est réquis' }) : this.setState({ titreValidation: '' })
     this.state.selectedProgramme === '' ? this.setState({ programmeValidation: 'Un programme est réquis' }) : this.setState({ programmeValidation: '' })
     this.state.formateursOption === '' ? this.setState({ formateursValidation: 'Veuillez selectionné un ou plusieurs formateurs ' }) : this.setState({ formateursValidation: '' })
@@ -109,50 +110,42 @@ class CreaPromotion extends Component {
     this.state.startDate === undefined && this.state.endDate === undefined ? this.setState({ dateValidation: 'Veuillez selectionné une période de formation ' }) : this.setState({ dateValidation: '' })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     axios.all([getAllFormateurs(), getAllStudents(), getAllProgrammes()])
       .then(axios.spread((formateurs, students, programmes) => {
         this.setState({ formateurs: formateurs.data, eleves: students.data, programmes: programmes.data })
       }))
   }
 
-  handleChange (selectedCity) {
+  handleChange(selectedCity) {
     this.setState({ selectedCity })
   }
 
-  onChangeProgramme (selectedProgramme) {
+  onChangeProgramme(selectedProgramme) {
     this.setState({ selectedProgramme })
   }
 
-  onChange (e) {
+  onChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  render () {
-    console.log(this.state)
+  render() {
+    moment.locale('fr')
     const { selectedCity, selectedProgramme, formateursOption, studentsOption } = this.state
-    const start = this.state.startDate ? JSON.stringify(this.state.startDate) : null
-    const end = this.state.endDate ? JSON.stringify(this.state.endDate) : null
-    const dayStart = start ? start.toString().slice(9, 11) : start
-    const monthStart = start ? start.toString().slice(6, 8) : start
-    const yearStart = start ? start.toString().slice(1, 5) : start
-    const dayEnd = end ? end.toString().slice(9, 11) : end
-    const monthEnd = end ? end.toString().slice(6, 8) : end
-    const yearEnd = end ? end.toString().slice(1, 5) : end
-    const dateStart = `${dayStart}-${monthStart}-${yearStart}`
-    const dateEnd = `${dayEnd}-${monthEnd}-${yearEnd}`
-    const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => <p>{el.firstName.concat(' ', el.lastName, ' ')}</p>) : this.state.formateursOption
-    const students = this.state.studentsOption ? this.state.studentsOption.map(el => el.firstName.concat(' ', el.lastName, ' \n ')) : this.state.studentsOption
+    const start = this.state.startDate ? capitalize(moment(this.state.startDate).format('DD MMMM YYYY')) : null
+    const end = this.state.endDate ? capitalize(moment(this.state.endDate).format('DD MMMM YYYY')) : null
+    const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => <p>{el.firstName.concat(' ', el.lastName, ', ')}</p>) : this.state.formateursOption
+    const students = this.state.studentsOption ? this.state.studentsOption.map(el => el.firstName.concat(' ', el.lastName, ', ')) : this.state.studentsOption
 
     const recapPromotion =
       <article>
         <section className="title-style-modal">
           <p><span className="promotion-p-style">Nom de promotion:</span> {this.state.title}</p>
           <p><span className="promotion-p-style">Ville:</span>&nbsp; {this.state.selectedCity.value}</p>
-          <p><span className="promotion-p-style">Début formation:</span>&nbsp; {dateStart}</p>
-          <p><span className="promotion-p-style">Fin formation:</span>&nbsp; {dateEnd}</p>
+          <p><span className="promotion-p-style">Début formation:</span>&nbsp; {start}</p>
+          <p><span className="promotion-p-style">Fin formation:</span>&nbsp; {end}</p>
           <p><span className="promotion-p-style">Formateurs:</span>&nbsp; {formateurs}</p>
-          <p><span className="promotion-p-style">Programme :</span>&nbsp;       {this.state.selectedProgramme.title} </p>
+          <p><span className="promotion-p-style">Programme :</span>&nbsp; {this.state.selectedProgramme.title} </p>
           <p><span className="promotion-p-style">Futur consultants:</span>&nbsp; {students} </p>
         </section>
         <footer className="text-right">

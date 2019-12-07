@@ -5,7 +5,7 @@ import { capitalize } from '../../index_connecte'
 import moment from 'moment'
 
 class GetPromotionByID extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -14,11 +14,11 @@ class GetPromotionByID extends Component {
     }
   }
 
-  static getInitialProps ({ query }) {
+  static getInitialProps({ query }) {
     return { query }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     getPromotionByID(this.props.query.promotions)
       .then(promotion => {
         this.setState({ promotion: promotion.data, programmes: promotion.data.programmes[0].title })
@@ -28,10 +28,10 @@ class GetPromotionByID extends Component {
       })
   }
 
-  render () {
+  render() {
     moment.locale('fr')
-    const start = this.state.promotion.start ? capitalize(moment(this.state.promotion.start).format('MMMM YYYY')) : null
-    const end = this.state.promotion.end ? capitalize(moment(this.state.promotion.end).format('MMMM YYYY')) : null
+    const start = this.state.promotion.start ? capitalize(moment(this.state.promotion.start).format('DD MMMM YYYY')) : null
+    const end = this.state.promotion.end ? capitalize(moment(this.state.promotion.end).format('DD MMMM YYYY')) : null
     const formateurs = this.state.promotion.formateurs ? this.state.promotion.formateurs.map(el => <p> {el.lastName.concat(' ', el.firstName)}</p>) : null
     const eleves = this.state.promotion.eleves ? this.state.promotion.eleves.map(el => <p> {el.lastName.concat(' ', el.firstName)}</p>) : null
     return (
