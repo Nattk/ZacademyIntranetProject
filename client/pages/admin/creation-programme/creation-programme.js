@@ -4,6 +4,7 @@ import Button from '../../../components/Boutons/Boutons'
 import axios from 'axios'
 import CreationProgramme from '../../../components/Creation-programme/creation-programme'
 import Modal from '../../../components/Modal/modal'
+import Router from 'next/router'
 
 class CreaProgramme extends Component {
   state = {
@@ -58,7 +59,7 @@ class CreaProgramme extends Component {
 
   handleConfirmForm = () => {
     event.preventDefault()
-    window.location.assign('/admin/gestion-programme/gestion-programme')
+    Router.push('/admin/gestion-programme/gestion-programme')
   }
 
   handleStep = (event) => {
