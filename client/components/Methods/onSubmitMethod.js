@@ -68,6 +68,5 @@ export default class OnSubmitMethod extends Component {
     } else {
       this.handleValidation()
     }
-    console.log(this.state.contact)
   }
 }

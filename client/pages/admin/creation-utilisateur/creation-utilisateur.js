@@ -162,7 +162,7 @@ class CreaUtilisateur extends Component {
               </div>
               <div className="form-group">
                 <label htmlFor="choices-groups">Selectionner une promotion</label>
-                <select className="form-control" name="choices-groups" id="choices-groups" multiple value={this.props.promotion} onChange={e => this.handlepromotionChange(e)} required>
+                <select className="form-control" name="choices-groups" id="choices-groups" multiple value={this.props.promotion} onChange={e => this.handlepromotionChange(e)}>
                   {villes.map(ville => {
                     const promoOfVille = this.state.promotions.filter(promo => promo.city === ville)
                     return (<optgroup label={ville} key={ville}>{promoOfVille.map(promo => {

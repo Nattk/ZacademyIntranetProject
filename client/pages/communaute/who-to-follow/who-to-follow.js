@@ -80,7 +80,6 @@ class Follow extends ValidationMethod {
     } else {
       this.handleValidation()
     }
-    console.log(this.state.contact)
   }
 
   render () {

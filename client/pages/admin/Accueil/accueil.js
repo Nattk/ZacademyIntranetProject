@@ -25,7 +25,6 @@ class Admin extends Component {
     axios.get('http://localhost:3333/api/promotions')
       .then((promotions) => {
         this.setState({ promotions: promotions.data })
-        console.log('formateurs axios ', this.state.promotions)
       })
   }
 

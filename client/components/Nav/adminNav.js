@@ -4,7 +4,7 @@ import { useLocalStorage } from '../Login/LoginForm'
 import Router from 'next/router'
 
 const AdminNav = () => {
-  const [, setUser] = useLocalStorage('user', '')
+  const [user, setUser] = useLocalStorage('user', '')
   const offlineClick = () => {
     Router.push('/')
     setUser('')
@@ -40,6 +40,9 @@ const AdminNav = () => {
           </div>
         </div>
         <div id="end-of-navbar">
+          {user.role === 'admin' || user.role === 'superadmin'
+            ? <Link href="/admin/Accueil/accueil"><a className="btn btn-danger bouton-navbar" role="button" >ADMINISTRATION</a></Link>
+            : null }
           <a className="btn btn-danger bouton-navbar" role="button" alt="Lien déconnexion" onClick={offlineClick}>LOGOUT</a>
         </div>
       </div>

@@ -69,7 +69,6 @@ class Follow extends ValidationMethod {
       this.state.titleRss === '' ? this.setState({ titleValidation: 'Un titre  est requis' }) : this.setState({ titleValidation: '' })
       this.state.linkFluxRss === '' ? this.setState({ linkFluxRssValidation: 'Un lien est requis' }) : this.setState({ linkFluxRssValidation: '' })
     }
-    console.log(this.state.contact)
   }
 
   handleUpdate (id) {
@@ -80,7 +79,6 @@ class Follow extends ValidationMethod {
       id: this.state.id
 
     }
-    console.log(elements)
     const index = this.state.fakeData.findIndex((e) => e.id === id)
     if (index === -1) {
       this.state.fakeData.push(elements)

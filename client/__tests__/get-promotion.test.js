@@ -19,7 +19,6 @@ describe('Admin  get promotions', () => {
 
     axios.get('/api/promotions')
       .then(function (response) {
-        console.log(response.data)
       })
   })
   it('calls componentDidMount', () => {

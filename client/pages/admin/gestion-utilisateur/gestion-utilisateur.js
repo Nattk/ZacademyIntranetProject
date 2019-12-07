@@ -16,7 +16,6 @@ class UtilisateursGestion extends Component {
 	  }
 
 	handleModal = (id) => {
-	  console.log('id', id)
 	  this.setState({ userToDelete: id })
 	  this.setState({ modalShow: true })
 	  event.preventDefault()
@@ -24,7 +23,6 @@ class UtilisateursGestion extends Component {
 
 	handleDelete = (e, id) => {
 	  e.preventDefault()
-	  console.log('id', id)
 	  userService.remove(this.state.userToDelete)
 	  userService.getAll().then(data => this.setState({ utilisateurs: data }))
 	  this.setState({ modalShow: false })
@@ -46,7 +44,6 @@ class UtilisateursGestion extends Component {
 	        <section className="card-body">
 	          <ul>
 	            {this.state.utilisateurs.map((utilisateur, index) => {
-	              console.log('utilisateur.id', utilisateur.id)
 	              return (
 	              <li key={index} className="d-flex flex- justify-content-around align-items-baseline">
 	                <a href="#">
