@@ -10,7 +10,6 @@ class CreationProgramme extends Component {
     }
 
     componentDidMount () {
-      console.log('did mount')
       getModules(this.props.name).then(reponse => {
         this.setState({ items: reponse.data })
       }).catch(err => {
@@ -29,7 +28,6 @@ class CreationProgramme extends Component {
     }
 
     handleChange = (event) => {
-      console.log(event)
       this.setState({ title: event.value })
     }
 
@@ -47,9 +45,7 @@ class CreationProgramme extends Component {
 
     handleAdd = () => {
       event.preventDefault()
-      console.table(this.props.selected)
       addToProgram(this.props.selected.id, this.props.name, this.props.parentId, this.props.selected.title).then(response => {
-        console.table(response.data)
       }).catch(err => {
         alert(err, 'handleAdd')
       })
@@ -57,15 +53,17 @@ class CreationProgramme extends Component {
 
     render () {
       return (
-        <form className="container" >
+        <form className="container">
           <h2>Ajouter un {this.props.name}</h2>
           <section className="d-flex flex-row">
             <input type="text" placeholder={this.state.name} onChange={() => this.handleChange(event.target)}/>
-            <button onClick={this.handleCreate} className="btn btn-primary text-center"
+            <button onClick={this.handleCreate} className="btn valider text-center"
             >Créer votre {this.props.name}
             </button>
           </section>
+          <section>
           <h2>Selectionner votre {this.props.name}</h2>
+          <div className="d-flex flex-row"> 
           <Select className="select-component" options={this.state.items}
             formatCreateLabel={(inputValue) => this.props.name}
             placeholder={this.props.name}
@@ -74,7 +72,9 @@ class CreationProgramme extends Component {
             onChange={this.props.select}
             name={this.props.name}
           />
-          <Button clicked={this.handleAdd}>Ajouter au programme</Button>
+          <Button  btnType="valider" className="add-item" clicked={this.handleAdd}>Ajouter au {this.props.parent}</Button>
+          </div>
+          </section>
         </form>
 
       )

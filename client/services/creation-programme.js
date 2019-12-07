@@ -6,7 +6,6 @@ export const getItem = (name, id) => {
 }
 
 export const getModules = (name) => {
-  console.log(`${baseUrl}${name}`)
   return axios.get(`${baseUrl}${name}`)
 }
 

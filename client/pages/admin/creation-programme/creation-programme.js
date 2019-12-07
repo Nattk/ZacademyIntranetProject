@@ -31,7 +31,7 @@ class CreaProgramme extends Component {
   }
 
   handleSelect = (newValue, action) => {
-    console.log('selected', newValue.id)
+    console.log(newValue, action)
     switch (action.action) {
       case 'select-option':
         if (action.name === 'modules') {
@@ -91,7 +91,7 @@ class CreaProgramme extends Component {
   }
 
   handleChange = (event) => {
-    if (event.name === 'programmeTitle') {
+    if (event.name === 'titre') {
       this.setState({ title: event.value })
     }
   }
@@ -106,7 +106,7 @@ class CreaProgramme extends Component {
       })
   }
 
-  endProgram = () => {
+  endProgram = (event) => {
     event.preventDefault()
     axios.get(`http://localhost:3333/api/programmes/${this.state.programmeId}`)
       .then(programme => {
@@ -127,8 +127,8 @@ class CreaProgramme extends Component {
     let modalConfirm = null
     if (this.state.programme !== '') {
       modalConfirm = (
-        <React.Fragment>
-          <h2>{this.state.programme.title}</h2>
+        <div className="modal-contenu d-flex flex-column">
+          <h2>Création du programme : {this.state.programme.title}</h2>
           <ul>
             {
               this.state.programme.modules.map(mod => (
@@ -149,18 +149,18 @@ class CreaProgramme extends Component {
             }
           </ul>
           <Button clicked={this.handleRedirection} btnType="valider">Valider</Button>
-        </React.Fragment>
+        </div>
       )
     }
-
+    
     if (this.state.etapes === 1) {
       creationProgramme = (
         <React.Fragment>
           <form className="container" >
             <section className="section">
               <div className="form-group">
-                <label htmlFor="programtitle">Titre</label><br></br>
-                <input type="text" name="programmeTitle" required className="form-control" id="exampleFormControlInput1" onChange={e => this.handleChange(e.target)}
+                <label htmlFor="titre">Titre</label><br></br>
+                <input type="text" name="titre" required className="form-control" id="exampleFormControlInput1" onChange={e => this.handleChange(e.target)}
                   placeholder="Intitulé du programme" />
               </div>
             </section>
@@ -169,20 +169,20 @@ class CreaProgramme extends Component {
       )
     } else if (this.state.etapes === 2) {
       creationProgramme = (
-        <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="modules" step={this.state.etapes} parentId={this.state.programmeId}/>
+        <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="modules" step={this.state.etapes} parent="Programme" parentId={this.state.programmeId}/>
       )
     } else if (this.state.etapes === 3) {
       creationProgramme = (
-        <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="sousmodules" step={this.state.etapes} parentId={this.state.moduleId}/>
+        <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="sousmodules" step={this.state.etapes} parent="Module" parentId={this.state.moduleId}/>
       )
     } else if (this.state.etapes === 4) {
       creationProgramme = (
-        <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="sequences" step={this.state.etapes} parentId={this.state.smoduleId}/>
+        <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="sequences" step={this.state.etapes} parent="Sous Module" parentId={this.state.smoduleId}/>
       )
     }
 
     return (
-      <Page title="Création programme">
+      <Page title="Création programme" contextePage="Création programme">
         <article className="card" id="creation-programme">
           <header className="card-header text-center">
             Etape {this.state.etapes}
@@ -208,18 +208,18 @@ class CreaProgramme extends Component {
               this.state.etapes > 1 &&
               <Button
                 btnType="valider"
-                clicked={this.endProgram}
+                clicked={(event) => this.endProgram(event)}
+                className="terminer-programme"
               >
                 Terminer programme
               </Button>
             }
-
           </section>
 
           <Modal
             show={this.state.modalShow}
 	        onClose={this.handleClose}
-	        titleModal="Confirmation">{modalConfirm}</Modal>
+	        titleModal="Demande de confirmation">{modalConfirm}</Modal>
         </article>
       </Page>
     )

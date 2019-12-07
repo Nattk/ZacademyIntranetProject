@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/admin'
+import Spinner from '../../../components/Spinner/spinner'
 import { getItem } from '../../../services/creation-programme'
 
 class Programme extends Component {
@@ -27,8 +28,10 @@ class Programme extends Component {
 	  let programme = null
 	  if (this.state.programme.length > 0) {
 	    programme = (
+		<Page title="Modification programme" contextePage={this.state.programme[0].title}>
+		<article id="Programme" className="d-flex flex-column align-items-center">
 	      <div className="card">
-	       <header className="card-header text-center">{this.state.programme[0].title}</header>
+	       <header className="card-header text-center">Détails</header>
 	        {this.state.programme[0].modules.map(mod => (
 	          <li key={mod.id}>{mod.title}
 	            <ul>
@@ -45,14 +48,17 @@ class Programme extends Component {
 	          </li>
 	        ))}
 	      </div>
-	    )
-	  }
-	  return (
-	    <Page title="Modification programme">
-	      <article id="Programme" className="d-flex flex-column align-items-center">
-	        {programme}
 	      </article>
 	    </Page>
+	    )
+	  }
+	  else {
+		  programme = <Spinner className="spinner"/>
+	  }
+	  return (
+		<React.Fragment>
+			{programme}
+		</React.Fragment>
 	  )
 	}
 }
