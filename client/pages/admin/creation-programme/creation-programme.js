@@ -31,7 +31,6 @@ class CreaProgramme extends Component {
   }
 
   handleSelect = (newValue, action) => {
-    console.log(newValue, action)
     switch (action.action) {
       case 'select-option':
         if (action.name === 'modules') {

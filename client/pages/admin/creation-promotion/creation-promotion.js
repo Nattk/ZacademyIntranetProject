@@ -77,7 +77,6 @@ class CreaPromotion extends Component {
         const IdPromotion = data.data.id
         return this.setState({ promotion: IdPromotion })
       })
-      .catch(error => { console.log(error.response) })
     setTimeout(() => {
       window.location.assign('/admin/Accueil/accueil')
     }, 1000)

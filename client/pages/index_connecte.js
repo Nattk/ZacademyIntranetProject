@@ -35,7 +35,7 @@ export const capitalize = (s) => {
 }
 
 export default function IndexConnected () {
-  const [promotion, Setpromotion] = useState()
+  const [promo, Setpromotion] = useState()
   const [user] = useLocalStorage('user')
   useEffect(() => {
     if (user.promotion) {
@@ -45,45 +45,20 @@ export default function IndexConnected () {
     }
   }, [])
 
-  const promo = user.promotion
-
   moment.locale('fr')
-
-  console.log('promotion', promotion)
-  if (!promo) {
-    return (
-      <Page title="Accueil" contextePage="Accueil">
-        <article className="col-md-10 col-sm-12 col-xs-12  ml-auto mr-auto  " id="promotionByID">
-          <div className="col-md-12 col-sm-12 col-xs-12 d-flex section-style-promotion">
-            <section>
-              <p> <span className="promotion-p-style">Début formation:</span> &nbsp;{promotion ? capitalize(moment(promotion.start).format('MMMM YYYY')) : null}</p>
-              <p> <span className="promotion-p-style">Fin formation:</span> &nbsp;{promotion ? capitalize(moment(promotion.end).format('MMMM YYYY')) : null}</p>
-              <p ><span className="promotion-p-style">Ville:</span> &nbsp;{promotion ? promotion.city : null}</p>
-              <p> <span className="promotion-p-style">Programme:</span>&nbsp;{promotion ? promotion.programmes.map(x => x.title) : null}</p>
-              <p> <span className="promotion-p-style">Formateurs:</span> &nbsp;{promotion ? promotion.formateurs.map(x => `${x.firstName} ${x.lastName}`) : null}</p>
-            </section>
-            <section className="ml-auto mr-auto">
-              <p > <span className="promotion-p-style">Futur consultants:</span> &nbsp; {promotion ? promotion.eleves.map(x => <div>{`${x.firstName} ${x.lastName}`}</div>) : null}</p>
-            </section>
-          </div>
-        </article>
-      </Page>
-    )
-  }
-
   return (
     <Page title="Accueil" contextePage="Accueil">
       <article className="col-md-10 col-sm-12 col-xs-12  ml-auto mr-auto  " id="promotionByID">
         <div className="col-md-12 col-sm-12 col-xs-12 d-flex section-style-promotion">
           <section>
-            <p> <span className="promotion-p-style">Début formation:</span> &nbsp;{promotion ? capitalize(moment(promotion.start).format('MMMM YYYY')) : null}</p>
-            <p> <span className="promotion-p-style">Fin formation:</span> &nbsp;{promotion ? capitalize(moment(promotion.end).format('MMMM YYYY')) : null}</p>
-            <p ><span className="promotion-p-style">Ville:</span> &nbsp;{promotion ? promotion.city : null}</p>
-            <p> <span className="promotion-p-style">Programme:</span>&nbsp;{promotion ? promotion.programmes.map(x => x.title) : null}</p>
-            <p> <span className="promotion-p-style">Formateurs:</span> &nbsp;{promotion ? promotion.formateurs.map(x => `${x.firstName} ${x.lastName}`) : null}</p>
+            <p> <span className="promotion-p-style">Début formation:</span> &nbsp;{promo ? capitalize(moment(promo.start).format('MMMM YYYY')) : null}</p>
+            <p> <span className="promotion-p-style">Fin formation:</span> &nbsp;{promo ? capitalize(moment(promo.end).format('MMMM YYYY')) : null}</p>
+            <p ><span className="promotion-p-style">Ville:</span> &nbsp;{promo ? promo.city : null}</p>
+            <p> <span className="promotion-p-style">Programme:</span>&nbsp;{promo ? promo.programmes.map(x => x.title) : null}</p>
+            <p> <span className="promotion-p-style">Formateurs:</span> &nbsp;{promo ? promo.formateurs.map(x => `${x.firstName} ${x.lastName}`) : null}</p>
           </section>
           <section className="ml-auto mr-auto">
-            <p > <span className="promotion-p-style">Futur consultants:</span> &nbsp; {promotion ? promotion.eleves.map(x => <div>{`${x.firstName} ${x.lastName}`}</div>) : null}</p>
+            <p > <span className="promotion-p-style">Futur consultants:</span> &nbsp; {promo ? promo.eleves.map(x => <div>{`${x.firstName} ${x.lastName}`}</div>) : null}</p>
           </section>
         </div>
       </article>
