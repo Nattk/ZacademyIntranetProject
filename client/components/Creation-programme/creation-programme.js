@@ -10,9 +10,9 @@ class CreationProgramme extends Component {
     }
 
     componentDidMount () {
-      console.log('did mount')
       getModules(this.props.name).then(reponse => {
         this.setState({ items: reponse.data })
+        console.log(reponse.data)
       }).catch(err => {
         alert(err, 'getModules')
       })
@@ -57,7 +57,7 @@ class CreationProgramme extends Component {
 
     render () {
       return (
-        <form className="container" >
+        <form className="container">
           <h2>Ajouter un {this.props.name}</h2>
           <section className="d-flex flex-row">
             <input type="text" placeholder={this.state.name} onChange={() => this.handleChange(event.target)}/>
@@ -65,7 +65,9 @@ class CreationProgramme extends Component {
             >Créer votre {this.props.name}
             </button>
           </section>
+          <section>
           <h2>Selectionner votre {this.props.name}</h2>
+          <div className="d-flex flex-row"> 
           <Select className="select-component" options={this.state.items}
             formatCreateLabel={(inputValue) => this.props.name}
             placeholder={this.props.name}
@@ -74,7 +76,9 @@ class CreationProgramme extends Component {
             onChange={this.props.select}
             name={this.props.name}
           />
-          <Button clicked={this.handleAdd}>Ajouter au programme</Button>
+          <Button  btnType="valider" className="add-item" clicked={this.handleAdd}>Ajouter au {this.props.parent}</Button>
+          </div>
+          </section>
         </form>
 
       )
