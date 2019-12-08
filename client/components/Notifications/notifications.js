@@ -16,6 +16,15 @@ export const NotificationDelete = (props) => {
     </section>
   )
 }
+export const NotificationError = (props) => {
+  return (
+    <section className="col-md-3 col-sm-12 col-xs-12 ml-auto" >
+      <div className="alert alert-danger" role="alert" >
+        {props.title}
+      </div>
+    </section>
+  )
+}
 export const NotificationUpdate = (props) => {
   return (
     <section className="col-md-3 col-sm-12 col-xs-12 ml-auto" >

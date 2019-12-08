@@ -3,6 +3,7 @@ import userService from '../../../services/users'
 import Page from '../../../layouts/classic'
 import Button from '../../../components/Boutons/Boutons'
 import Modal from '../../../components/Modal/modal'
+import { NotificationSuccess, NotificationError } from '../../../components/Notifications/notifications'
 import axios from 'axios'
 import Router from 'next/router'
 import { getAllFormateurs, getAllStudents, getAllProgrammes, optionsCity } from '../../../services/creation-promotion'
@@ -23,6 +24,7 @@ class CreaPromotion extends Component {
       startdateValidation: '',
       enddateValidation: '',
       titreValidation: '',
+      titreUniqueValidation: '',
       programmeValidation: '',
       cityValidation: '',
       dateValidation: '',
@@ -32,7 +34,9 @@ class CreaPromotion extends Component {
       formateursOption: '',
       studentsOption: '',
       selectedProgramme: '',
-      formateursSelected: ''
+      formateursSelected: '',
+      showAlertSuccess: false,
+      showAlertError: false
     }
 
     this.handleClose = this.handleClose.bind(this)
@@ -74,13 +78,14 @@ class CreaPromotion extends Component {
 
     axios.post('http://localhost:3333/api/promotions', elements)
       .then((data) => {
-        this.setState({ showModal: false, promotions: data, promotion: data.data.id })
+        this.setState({ showModal: false, promotions: data, promotion: data.data.id, showAlertSuccess: true })
         const IdPromotion = data.data.id
         return this.setState({ promotion: IdPromotion })
       })
+
     setTimeout(() => {
       Router.push('/admin/Accueil/accueil')
-    }, 1000)
+    }, 2000)
   }
 
   componentWillUpdate () {
@@ -95,12 +100,36 @@ class CreaPromotion extends Component {
 
   onShowRecapForm () {
     if (this.state.title && this.state.selectedProgramme && this.state.selectedCity && this.state.formateursOption && this.state.studentsOption && this.state.endDate && this.state.startDate !== '') {
-      this.setState({ showModal: true })
+      axios.get('http://localhost:3333/api/promotions')
+        .then((data) => {
+          if (this.state.title === '') {
+            this.setState({
+              titreUniqueValidation: 'Le titre  doit être unique', showModal: false
+            })
+          }
+          if (data.data.filter(el => el.title === this.state.title).length > 0) {
+            this.setState({ titreUniqueValidation: 'Le titre  doit être unique', showModal: false })
+          }
+          if (data.data.filter(el => el.title === this.state.title).length === 0 && this.state.title !== '') {
+            this.setState({ showModal: true })
+          }
+        })
     } this.handleValidation()
+    axios.get('http://localhost:3333/api/promotions')
+      .then((data) => {
+        if (this.state.title === '') {
+          this.setState({
+            titreUniqueValidation: 'Le titre  doit être unique', showModal: false
+          })
+        }
+        if (data.data.filter(el => el.title === this.state.title).length > 0) {
+          this.setState({ titreUniqueValidation: 'Le titre  doit être unique', showModal: false })
+        }
+      })
   }
 
   handleValidation () {
-    this.state.title === '' ? this.setState({ titreValidation: 'Un titre est réquis' }) : this.setState({ titreValidation: '' })
+    this.state.title === '' ? this.setState({ titreValidation: 'Un titre est réquis', titreUniqueValidation: 'Le titre  doit être unique' }) : this.setState({ titreValidation: '', titreUniqueValidation: '' })
     this.state.selectedProgramme === '' ? this.setState({ programmeValidation: 'Un programme est réquis' }) : this.setState({ programmeValidation: '' })
     this.state.formateursOption === '' ? this.setState({ formateursValidation: 'Veuillez selectionné un ou plusieurs formateurs ' }) : this.setState({ formateursValidation: '' })
     this.state.studentsOption === '' ? this.setState({ studentsValidation: 'Veuillez selectionné des futurs consultants ' }) : this.setState({ studentsValidation: '' })
@@ -148,9 +177,13 @@ class CreaPromotion extends Component {
           <p><span className="promotion-p-style">Programme :</span>&nbsp; {this.state.selectedProgramme.title} </p>
           <p><span className="promotion-p-style">Futur consultants:</span>&nbsp; {students} </p>
         </section>
+        <section>
+          <p>Vous êtes sur le point de quitter votre espace création promotion.</p>
+          <p> Vous seriez redirigé vers votre espace accueil promotion.
+              Êtes vous sur de vouloir créer cette promotion  ?</p>  </section>
         <footer className="text-right">
           <Button clicked={this.onCreatePromotion} id="confirm-creation-promotion" btnType="valider">
-            Confirmer la Création de cette promotion
+            Confirmer
           </Button>
         </footer>
       </article>
@@ -160,8 +193,12 @@ class CreaPromotion extends Component {
     const optionProgramme = this.state.programmes ? this.state.programmes.filter(el => el.title) : this.state.programmes
     return (
       <Page title="Création promotion" >
-        <article className="col-md-12 col-sm-12 col-xs-12 " id="form_creation_promotion">
-          <h1 className="h1-promotion-style" >Création Promotions </h1>
+
+        <article className="col-md-12 col-sm-12 col-xs-12 " id="form_creation_promotion" >
+          {this.state.showAlertSuccess ? <NotificationSuccess title={`${this.state.title} a été rajouté avec succès`} /> : null}
+          {this.state.showAlertError ? <NotificationError title={'Le titre de la promotion doit être unique'} /> : null}
+
+          <h1 className="h1-promotion-style" > Création Promotions </h1>
           <form className="form-group-who-to-follow " role="form" data-toggle="validator" >
 
             <section className="col-md-12 col-sm-12 col-xs-12  d-flex section-style justify-content-center" >
@@ -226,6 +263,7 @@ class CreaPromotion extends Component {
                   value={this.state.title}
                   onChange={(e) => this.setState({ title: e.target.value })}
                 />
+                <p className="validation-style"> <small>{this.state.titreUniqueValidation}</small></p>
               </div>
               <div className="col-md-4 col-sm-12 col-xs-12">
 
@@ -240,6 +278,7 @@ class CreaPromotion extends Component {
                   placeholder="Selectionner un programme"
                 />
                 <p className="validation-style"> <small>{this.state.programmeValidation}</small></p>
+
               </div>
             </section>
             <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style justify-content-center " >
@@ -288,10 +327,12 @@ class CreaPromotion extends Component {
             </section>
 
           </form>
+
           <section className=" col-md-10 col-sm-12 col-xs-12  d-flex mt-5 justify-content-end">
             <Button clicked={this.onShowRecapForm} id="recap-button" btnType="valider" >
               Valider le formulaire
             </Button>
+
           </section>
           <section className="col-md-12 col-sm-12 col-xs-12 text-right" >
             <Modal titleModal="Demande de confirmation" show={this.state.showModal} onClose={this.handleClose} recapitulation={recapPromotion} />
