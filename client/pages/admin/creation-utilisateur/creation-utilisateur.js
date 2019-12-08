@@ -45,7 +45,7 @@ class CreaUtilisateur extends Component {
     this.setState({ phone: event.value })
   }
 
-  handleroleChange (event) {
+  handleroleChange(event) {
     this.setState({ role: event.target.value })
   }
 
@@ -53,7 +53,7 @@ class CreaUtilisateur extends Component {
     this.setState({ help: event.value })
   }
 
-  handlepromotionChange (event) {
+  handlepromotionChange(event) {
     fetch(`http://localhost:3333/api/promotions/${event.target.value}`)
       .then(response => response.json())
       .then(data => this.setState({ promotionName: data.title }))
@@ -61,7 +61,7 @@ class CreaUtilisateur extends Component {
     this.setState({ promotion: event.target.value })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     fetch('http://localhost:3333/api/promotions')
       .then(response => response.json())
       .then(data => this.setState({ promotions: data }))
@@ -94,10 +94,12 @@ class CreaUtilisateur extends Component {
       })
       // window.alert(`L'utilisateur ${this.state.firstName} a bien été créé`)
       // this.handleClose()
-      Router.push(`/admin/promotion/promotion?promotions=${this.state.promotion}`)
+      this.handleNotif(null, `L'utilisateur ${this.state.firstName} ${this.state.lastName} a bien été créé`)
+      setTimeout(() => Router.push(`/admin/promotion/promotion?promotions=${this.state.promotion}`), 4000)
+
     } catch (error) {
-      this.handleClose()
       this.handleNotif(error)
+      setTimeout(() => this.handleClose(), 4000)
     }
   }
 
@@ -109,7 +111,7 @@ class CreaUtilisateur extends Component {
     window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
   }
 
-  render () {
+  render() {
     const villes = [...new Set(this.state.promotions.map(promo => promo.city))]
     const papaparseOptions = {
       header: true,
@@ -202,27 +204,24 @@ class CreaUtilisateur extends Component {
             <CSVReader label="Ajouter plusieurs utilisateurs par CSV" parserOptions={papaparseOptions} cssClass="csv-reader-input" onFileLoaded={usersCSV => {
               try {
                 usersCSV.map(async userCSV => {
-                  await userService.create({
-                    firstName: userCSV.pr_nom,
-                    lastName: userCSV.nom,
-                    email: userCSV.mail,
-                    password: userCSV.mdp_academy,
-                    role: 'eleve',
-                    phone: `0${userCSV.tel}`,
-                    help: userCSV.description,
-                    promotionId: '5de8caf7246bfc3574c0b334'
-                  })
-                  // window.alert(`L'utilisateur ${this.state.firstName} a bien été créé`)
-                  // this.handleClose()
+                  if (userCSV) {
+                    await userService.create({
+                      firstName: userCSV.pr_nom,
+                      lastName: userCSV.nom,
+                      email: userCSV.mail,
+                      password: userCSV.mdp_academy,
+                      role: 'eleve',
+                      phone: `0${userCSV.tel}`,
+                      help: userCSV.description
+                    })
+                  }
                 })
-                this.handleNotif(null, 'Les utilisateurs ont bién été ajoutés.')
+                window.alert(`Les utilisateurs de la promotion ${usersCSV[0].promo} ont bien été créés`)
               } catch (error) {
                 this.handleNotif(error)
               }
             }} > </CSVReader>
-            {this.state.notifShow
-              ? <AllNotification alertType={this.state.errorStyle ? 'danger' : 'success'} notifMessage={this.state.notifMessage} />
-              : null}
+
           </form>
         </article>
       </Page>
