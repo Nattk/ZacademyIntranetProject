@@ -5,7 +5,6 @@ import userService from '../../../services/users'
 import UserModal from '../../../components/Modal/UserModal'
 import Router from 'next/router'
 import CSVReader from 'react-csv-reader'
-import AllNotification from '../../../components/Notifications/notifications'
 
 class CreaUtilisateur extends Component {
   state = {
@@ -45,7 +44,7 @@ class CreaUtilisateur extends Component {
     this.setState({ phone: event.value })
   }
 
-  handleroleChange(event) {
+  handleroleChange (event) {
     this.setState({ role: event.target.value })
   }
 
@@ -53,7 +52,7 @@ class CreaUtilisateur extends Component {
     this.setState({ help: event.value })
   }
 
-  handlepromotionChange(event) {
+  handlepromotionChange (event) {
     fetch(`http://localhost:3333/api/promotions/${event.target.value}`)
       .then(response => response.json())
       .then(data => this.setState({ promotionName: data.title }))
@@ -61,7 +60,7 @@ class CreaUtilisateur extends Component {
     this.setState({ promotion: event.target.value })
   }
 
-  componentDidMount() {
+  componentDidMount () {
     fetch('http://localhost:3333/api/promotions')
       .then(response => response.json())
       .then(data => this.setState({ promotions: data }))
@@ -96,7 +95,6 @@ class CreaUtilisateur extends Component {
       // this.handleClose()
       this.handleNotif(null, `L'utilisateur ${this.state.firstName} ${this.state.lastName} a bien été créé`)
       setTimeout(() => Router.push(`/admin/promotion/promotion?promotions=${this.state.promotion}`), 4000)
-
     } catch (error) {
       this.handleNotif(error)
       setTimeout(() => this.handleClose(), 4000)
@@ -111,7 +109,7 @@ class CreaUtilisateur extends Component {
     window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
   }
 
-  render() {
+  render () {
     const villes = [...new Set(this.state.promotions.map(promo => promo.city))]
     const papaparseOptions = {
       header: true,
