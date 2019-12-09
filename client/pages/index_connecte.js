@@ -55,7 +55,7 @@ export default function IndexConnected () {
             <p> <span className="promotion-p-style">Fin formation:</span> &nbsp;{promo ? capitalize(moment(promo.end).format('MMMM YYYY')) : null}</p>
             <p ><span className="promotion-p-style">Ville:</span> &nbsp;{promo ? promo.city : null}</p>
             <p> <span className="promotion-p-style">Programme:</span>&nbsp;{promo ? promo.programmes.map(x => x.title) : null}</p>
-            <p> <span className="promotion-p-style">Formateurs:</span> &nbsp;{promo ? promo.formateurs.map(x => `${x.firstName} ${x.lastName}`) : null}</p>
+            <p> <span className="promotion-p-style">Formateurs:</span> &nbsp;{promo ? promo.formateurs.map(x => <div>{`${x.firstName} ${x.lastName}`}</div>) : null}</p>
           </section>
           <section className="ml-auto mr-auto">
             <p > <span className="promotion-p-style">Futur consultants:</span> &nbsp; {promo ? promo.eleves.map(x => <div>{`${x.firstName} ${x.lastName}`}</div>) : null}</p>
