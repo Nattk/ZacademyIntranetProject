@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-describe.skip('Loging in', function () {
+describe('Loging in', function () {
   before(function () {
     cy.request('POST', 'http://localhost:3333/api/testing/reset')
     const admin = {
