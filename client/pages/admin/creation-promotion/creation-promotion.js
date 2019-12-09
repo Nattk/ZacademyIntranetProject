@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import userService from '../../../services/users'
-import Page from '../../../layouts/classic'
+import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
 import Modal from '../../../components/Modal/modal'
 import { NotificationSuccess, NotificationError } from '../../../components/Notifications/notifications'
