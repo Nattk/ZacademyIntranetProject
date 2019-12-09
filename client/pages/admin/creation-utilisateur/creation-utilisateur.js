@@ -216,7 +216,7 @@ class CreaUtilisateur extends Component {
                     })
                   }
                 })
-                window.alert(`Les utilisateurs de la promotion ${usersCSV[0].promo} ont bien été créés`)
+                window.alert('Les utilisateurs ont bien été créés')
               } catch (error) {
                 this.handleNotif(error)
               }
