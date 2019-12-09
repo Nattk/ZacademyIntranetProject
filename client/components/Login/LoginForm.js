@@ -63,7 +63,6 @@ const LoginForm = () => {
     <Fragment>
 
       <form className="login-wrapper" onSubmit={handleLogin}>
-        <Notification message={errorMessage} />
         <div className="first">
           <img src="/zenika_icon.png" className="icon" alt="User Icon" />
           <div></div>
@@ -73,6 +72,7 @@ const LoginForm = () => {
           <input type="password" id="password" className="login-form" name="login" placeholder="Veuillez entrer votre mdp" value={password} onChange={({ target }) => setPassword(target.value)} required />
           *Champs obligatoires
           <input type="submit" id="submit-login" className="login-form" value="Log In" />
+          <Notification message={errorMessage} />
         </div>
       </form>
     </Fragment>
