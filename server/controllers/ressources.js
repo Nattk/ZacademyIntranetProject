@@ -1,6 +1,7 @@
 const ressourcesRouter = require('express').Router()
 const Ressource = require('../models/ressource')
 const User = require('../models/user')
+const Promotion = require('../models/promotion')
 const jwt = require('jsonwebtoken')
 
 const getTokenFrom = request => {
@@ -12,7 +13,7 @@ const getTokenFrom = request => {
 }
 
 ressourcesRouter.get('/', async (req, res) => {
-  const allRessources = await Ressource.find({}).populate('user', { firstName: 1, lastName: 1 })
+  const allRessources = await Ressource.find({}).populate('promotion', { title: 1 })
   res.json(allRessources.map(ressource => ressource.toJSON()))
 })
 
@@ -30,11 +31,10 @@ ressourcesRouter.get('/:id', async (req, res, next) => {
 })
 
 ressourcesRouter.post('/', async (request, response, next) => {
+  const promotion = await Promotion.findById(request.body.promotionId)
   if (!request.body.title || !request.body.url) {
     return response.status(400).json({ error: 'content missing!' })
   }
-  console.log('request.body', request.body)
-
   const token = getTokenFrom(request)
 
   try {
@@ -44,11 +44,9 @@ ressourcesRouter.post('/', async (request, response, next) => {
     }
 
     const user = await User.findById(decodedToken.id)
-    const newRessource = new Ressource({ ...request.body, user: user.id })
+    const newRessource = new Ressource({ ...request.body, user: user.id, promotion: promotion.id, date: new Date() })
 
     const savedRessource = await newRessource.save()
-    user.ressources = user.ressources.concat(savedRessource._id)
-    await user.save()
     response.json(savedRessource.toJSON())
   } catch (exception) {
     next(exception)
@@ -68,7 +66,7 @@ ressourcesRouter.put('/:id', async (request, response, next) => {
   const body = request.body
 
   try {
-    const ressourceToUpdate = await Ressource.findByIdAndUpdate(request.params.id, body, { new: true })
+    const ressourceToUpdate = await Ressource.findByIdAndUpdate(request.params.id, { ...body, date: new Date() }, { new: true })
     response.json(ressourceToUpdate.toJSON())
   } catch (error) {
     next(error)

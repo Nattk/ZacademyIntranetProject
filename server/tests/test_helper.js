@@ -54,6 +54,28 @@ const initialUsers = [
   }
 ]
 
+const initialFollows = [
+  {
+    title: 'jeremie patonier',
+    content: `Le web à la vanille c'est bon, mangez-en 🍦😍 Actuellement Web Advocat chez 
+    @ZenikaIT`,
+    avatar: 'https://pbs.twimg.com/profile_images/1731588715/jeremie-patonnier-150_400x400.jpg',
+    twitter: 'https://twitter.com/JeremiePat',
+    github: 'https://github.com/zephimir?tab=repositories',
+    medium: 'https://medium.com/crowdbotics/build-a-react-native-app-with-react-hooks-5498e1d5fdf6'
+  },
+  {
+    title: 'Jean Robert',
+    content: `How creative can you be with one single SVG square and a bunch of CSS? I'll give my own answer during my lightning talk at 
+    @dotCSS
+     on Wednesday. In the meantime, share your experiments. I'm looking forwards to see your awesome creation.`,
+    avatar: 'https://pbs.twimg.com/profile_images/1080056824345358337/Edqyb2g1_400x400.jpg',
+    twitter: 'https://twitter.com/Zephimir',
+    github: 'https://gitlab.com/zacademy-paris-2019',
+    medium: 'https://medium.com/@prajramesh93/getting-started-with-node-express-and-mysql-using-sequelize-ed1225afc3e0'
+  }
+]
+
 const nonExistingId = async () => {
   const ressource = new Ressource({ title: 'willremovethissoon' })
   await ressource.save()
@@ -78,5 +100,6 @@ module.exports = {
   ressourcesInDb,
   usersInDb,
   initialUsers,
-  initialmodules
+  initialmodules,
+  initialFollows
 }

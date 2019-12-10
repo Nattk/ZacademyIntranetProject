@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const ressourceSchema = new mongoose.Schema({
+const rssSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -13,10 +13,6 @@ const ressourceSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
   date: {
     type: Date
   },
@@ -27,7 +23,7 @@ const ressourceSchema = new mongoose.Schema({
   }
 })
 
-ressourceSchema.set('toJSON', {
+rssSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -35,4 +31,4 @@ ressourceSchema.set('toJSON', {
   }
 })
 
-module.exports = mongoose.model('Ressource', ressourceSchema)
+module.exports = mongoose.model('Rss', rssSchema)
