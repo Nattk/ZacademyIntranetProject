@@ -45,7 +45,6 @@ const promotionSchema = mongoose.Schema({
 
 promotionSchema.plugin(uniqueValidator)
 
-
 promotionSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()

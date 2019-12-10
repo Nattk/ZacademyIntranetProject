@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const cors = require('cors')
 const ressourcesRouter = require('./controllers/ressources')
+const carouselsRouter = require('./controllers/carousels')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 const promotionsRouter = require('./controllers/promotions')
@@ -43,6 +44,7 @@ if (process.env.NODE_ENV === 'test') {
   app.use('/api/testing', testingRouter)
 }
 
+app.use('/api/carousels', carouselsRouter)
 app.use('/api/ressources', ressourcesRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)
