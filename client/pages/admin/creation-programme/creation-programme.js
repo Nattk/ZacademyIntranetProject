@@ -6,14 +6,17 @@ import CreationProgramme from '../../../components/Creation-programme/creation-p
 import Modal from '../../../components/Modal/modal'
 import Router from 'next/router'
 import { Collapse } from 'react-collapse'
-import Select from 'react-select'
-import { getAll } from '../../../services/creation-programme'
+// import Select from 'react-select'
+import { getAll, create, getModules, addToProgram, getItem } from '../../../services/creation-programme'
 
 class CreaProgramme extends Component {
   state = {
     programmeId: '',
     programme: '',
     title: '',
+    titleMod: '',
+    titleSmod: '',
+    titleSeq: '',
     moduleId: '',
     smoduleId: '',
     modules: '',
@@ -76,9 +79,6 @@ class CreaProgramme extends Component {
       this.handleProgram()
       this.setState({ etapes: this.state.etapes + 1 })
       getAll().then(axios.spread((modules, sousModules, sequences) => {
-        console.table(modules.data)
-        console.table(sousModules.data)
-        console.table(sequences.data)
         this.setState({ modules: modules.data })
         this.setState({ sousmodules: sousModules.data })
         this.setState({ sequences: sequences.data })
@@ -92,23 +92,55 @@ class CreaProgramme extends Component {
     window.location.assign('/admin/gestion-programme/gestion-programme')
   }
 
-  // handleModule = () => {
-  //   event.preventDefault()
-  //   axios.post('http://localhost:3333/api/modules', { title: this.state.moduleTitle })
-  //     .then(response => {
-  //       return axios.get('http://localhost:3333/api/modules')
-  //     })
-  //     .then(modules => {
-  //       this.setState({ modules: modules.data })
-  //     })
-  //     .catch(err => {
-  //       alert(err, 'Une erreur est survenue')
-  //     })
-  // }
+  handleCreate = (name) => {
+    event.preventDefault()
+    if (name === 'modules') {
+      create(name, this.state.titleMod)
+        .then(response => {
+          return addToProgram(response.data.id, name, this.state.programmeId)
+        }).then(response => {
+          return getItem('programmes', this.state.programmeId)
+        })
+        .then(programme => {
+          this.setState({ programme: programme.data })
+        })
+        .catch(err => {
+          alert(err, 'handleCreate')
+        })
+    } else if (name === 'sousmodules') {
+      create(name, this.state.titleMod)
+        .then(response => {
+          return addToProgram(response.data.id, name, this.state.moduleId)
+        }).then(response => {
+          return getItem('programmes', this.state.programmeId)
+        })
+        .then(programme => {
+          this.setState({ programme: programme.data })
+        })
+        .catch(err => {
+          alert(err, 'handleCreate')
+        })
+    } else if (name === 'sequences') {
+      create(name, this.state.titleMod)
+        .then(response => {
+          return addToProgram(response.data.id, name, this.state.smoduleId)
+        }).then(response => {
+          return getItem('programmes', this.state.programmeId)
+        })
+        .then(programme => {
+          this.setState({ programme: programme.data })
+        })
+        .catch(err => {
+          alert(err, 'handleCreate')
+        })
+    }
+  }
 
   handleChange = (event) => {
     if (event.name === 'titre') {
       this.setState({ title: event.value })
+    } else if (event.name === 'modules') {
+      this.setState({ titleMod: event.value })
     }
   }
 
@@ -136,6 +168,10 @@ class CreaProgramme extends Component {
 
   handleClose = () => {
 	  this.setState({ modalShow: false })
+  }
+
+  handleChangeRadio = (event) => {
+    this.setState({ moduleId: event.target.value })
   }
 
   render () {
@@ -186,23 +222,20 @@ class CreaProgramme extends Component {
     } else if (this.state.etapes === 2) {
       creationProgramme = (
         <React.Fragment>
-
           <button onClick={(type) => this.handleCollapse('module') }>Modules</button>
           <Collapse isOpened={this.state.collapse}>
             <form className="container">
-              <h2>Ajouter un {this.props.name}</h2>
+              <h2>Créer un module</h2>
               <section className="d-flex flex-row">
-                <input type="text" placeholder={this.state.name} onChange={() => this.handleChange(event.target)}/>
-                <button onClick={this.handleCreate} className="btn valider text-center"
-                >Créer votre {this.props.name}
-                </button>
+                <input type="text" placeholder="module" name="modules" onChange={() => this.handleChange(event.target)}/>
+                <Button btnType="valider" className="add-item" clicked={(name) => this.handleCreate('modules')}>Ajouter au programme</Button>
               </section>
-              <section>
-                <h2>Selectionner votre {this.props.name}</h2>
+              {/* <section>
+                <h2>Selectionner votre modules</h2>
                 <div className="d-flex flex-row">
                   <Select className="select-component" options={this.state.modules}
                     formatCreateLabel={(inputValue) => 'modules'}
-                    placeholder={this.props.name}
+                    placeholder="modules"
                     getOptionLabel={(option) => option.title}
                     getOptionValue={(option) => option.title}
                     onChange={this.props.select}
@@ -210,21 +243,80 @@ class CreaProgramme extends Component {
                   />
                   <Button btnType="valider" className="add-item" clicked={this.handleAdd}>Ajouter au {this.props.parent}</Button>
                 </div>
-              </section>
+              </section> */}
             </form>
           </Collapse>
 
+          <button onClick={(type) => this.handleCollapse('module') }>Sous Modules</button>
+          <Collapse isOpened={this.state.collapse}>
+            <form className="container">
+              <h2>Selctionner un module</h2>
+              <section className="d-flex flex-row">
+                { this.state.programme !== '' && this.state.programme.modules.map(modules => (
+                  <div key={modules.id}>
+                    <input type="radio" id={modules.title} name={modules.title} value={modules.id} onChange={(event) => this.handleChangeRadio(event)} checked={this.state.moduleId === modules.id}/>
+                    <label htmlFor={modules.title}>{modules.title}</label>
+                  </div>
+                ))}
+              </section>
+              <h2>Créer un Sous Module</h2>
+              <section className="d-flex flex-row">
+                <input type="text" placeholder="Sous module" name="sousModules" onChange={() => this.handleChange(event.target)}/>
+                <Button btnType="valider" className="add-item" clicked={(name) => this.handleCreate('sousmodules')}>Ajouter au module</Button>
+              </section>
+              {/* <section>
+                <h2>Selectionner votre modules</h2>
+                <div className="d-flex flex-row">
+                  <Select className="select-component" options={this.state.modules}
+                    formatCreateLabel={(inputValue) => 'modules'}
+                    placeholder="modules"
+                    getOptionLabel={(option) => option.title}
+                    getOptionValue={(option) => option.title}
+                    onChange={this.props.select}
+                    name={this.props.name}
+                  />
+                  <Button btnType="valider" className="add-item" clicked={this.handleAdd}>Ajouter au {this.props.parent}</Button>
+                </div>
+              </section> */}
+            </form>
+          </Collapse>
+
+          <button onClick={(type) => this.handleCollapse('module') }>Séquences</button>
+          <Collapse isOpened={this.state.collapse}>
+            <form className="container">
+              <h2>Selctionner un sous module</h2>
+              <section className="d-flex flex-row">
+                { this.state.programme !== '' && this.state.programme.modules[0].sousModules.map(sousModules => (
+                  <div key={sousModules.id}>
+                    <input type="radio" id={sousModules.title} name={sousModules.title} value={sousModules.id} onChange={(event) => this.handleChangeRadio(event)} checked={this.state.smoduleId === sousModules.id}/>
+                    <label htmlFor={sousModules.title}>{sousModules.title}</label>
+                  </div>
+                ))}
+              </section>
+              <h2>Créer une Séquences</h2>
+              <section className="d-flex flex-row">
+                <input type="text" placeholder="Sous module" name="sousModules" onChange={() => this.handleChange(event.target)}/>
+                <Button btnType="valider" className="add-item" clicked={(name) => this.handleCreate('sousmodules')}>Ajouter au module</Button>
+              </section>
+              {/* <section>
+                <h2>Selectionner votre modules</h2>
+                <div className="d-flex flex-row">
+                  <Select className="select-component" options={this.state.modules}
+                    formatCreateLabel={(inputValue) => 'modules'}
+                    placeholder="modules"
+                    getOptionLabel={(option) => option.title}
+                    getOptionValue={(option) => option.title}
+                    onChange={this.props.select}
+                    name={this.props.name}
+                  />
+                  <Button btnType="valider" className="add-item" clicked={this.handleAdd}>Ajouter au {this.props.parent}</Button>
+                </div>
+              </section> */}
+            </form>
+          </Collapse>
         </React.Fragment>
 
         // <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="modules" step={this.state.etapes} parent="Programme" parentId={this.state.programmeId}/>
-      )
-    } else if (this.state.etapes === 3) {
-      creationProgramme = (
-        <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="sousmodules" step={this.state.etapes} parent="Module" parentId={this.state.moduleId}/>
-      )
-    } else if (this.state.etapes === 4) {
-      creationProgramme = (
-        <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="sequences" step={this.state.etapes} parent="Sous Module" parentId={this.state.smoduleId}/>
       )
     }
 
