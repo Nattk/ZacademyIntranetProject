@@ -4,30 +4,12 @@ const Promotion = require('../models/promotion')
 
 followsRouter.get('/', async (req, res) => {
   const allFollows = await Follow.find({})
-    .populate({
-      path: 'modules',
-      populate: {
-        path: 'sousmodules',
-        populate: {
-          path: 'sequences'
-        }
-      }
-    })
   res.json(allFollows.map(follow => follow.toJSON()))
 })
 
 followsRouter.get('/:id', async (req, res, next) => {
   try {
     const foundfollow = await Follow.findById(req.params.id)
-      .populate({
-        path: 'modules',
-        populate: {
-          path: 'sousmodules',
-          populate: {
-            path: 'sequences'
-          }
-        }
-      })
     if (foundfollow) {
       res.json(foundfollow.toJSON())
     } else {

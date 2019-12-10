@@ -4,30 +4,12 @@ const Promotion = require('../models/promotion')
 
 carouselsRouter.get('/', async (req, res) => {
   const allCarousels = await Carousel.find({})
-    .populate({
-      path: 'modules',
-      populate: {
-        path: 'sousmodules',
-        populate: {
-          path: 'sequences'
-        }
-      }
-    })
   res.json(allCarousels.map(carousel => carousel.toJSON()))
 })
 
 carouselsRouter.get('/:id', async (req, res, next) => {
   try {
     const foundcarousel = await Carousel.findById(req.params.id)
-      .populate({
-        path: 'modules',
-        populate: {
-          path: 'sousmodules',
-          populate: {
-            path: 'sequences'
-          }
-        }
-      })
     if (foundcarousel) {
       res.json(foundcarousel.toJSON())
     } else {
