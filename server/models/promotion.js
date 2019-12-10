@@ -16,6 +16,10 @@ const promotionSchema = mongoose.Schema({
   end: {
     type: Date
   },
+  slack: {
+    type: String,
+    match: [/(app.slack.com)/, 'Veuillez entrer une url slack valide.']
+  },
   programmes: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -40,7 +44,6 @@ const promotionSchema = mongoose.Schema({
 })
 
 promotionSchema.plugin(uniqueValidator)
-
 
 promotionSchema.set('toJSON', {
   transform: (document, returnedObject) => {

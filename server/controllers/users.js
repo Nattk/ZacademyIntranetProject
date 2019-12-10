@@ -39,6 +39,9 @@ usersRouter.post('/', async (request, response, next) => {
       email: body.email,
       role: body.role,
       help: body.help,
+      avatar: request.body.avatar,
+      important: request.body.utile || false,
+      date: new Date(),
       promotion: promotion ? promotion._id : null
     })
 
@@ -71,6 +74,9 @@ usersRouter.put('/:id', async (request, response, next) => {
         email: request.body.email,
         role: request.body.role,
         help: request.body.help,
+        avatar: request.body.avatar,
+        important: request.body.utile || false,
+        date: new Date(),
         promotion: promotion ? promotion._id : null
       })
     }

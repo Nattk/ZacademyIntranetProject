@@ -1,24 +1,18 @@
 const mongoose = require('mongoose')
 
-const ressourceSchema = new mongoose.Schema({
-  title: {
+const carouselSchema = new mongoose.Schema({
+  photo1: {
     type: String,
     required: true
   },
-  content: {
-    type: String,
-    required: true
+  photo2: {
+    type: String
   },
-  url: {
-    type: String,
-    required: true
+  photo3: {
+    type: String
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  date: {
-    type: Date
+  photo4: {
+    type: String
   },
   promotion: {
     type: mongoose.Schema.Types.ObjectId,
@@ -27,7 +21,7 @@ const ressourceSchema = new mongoose.Schema({
   }
 })
 
-ressourceSchema.set('toJSON', {
+carouselSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -35,4 +29,4 @@ ressourceSchema.set('toJSON', {
   }
 })
 
-module.exports = mongoose.model('Ressource', ressourceSchema)
+module.exports = mongoose.model('Carouselgit', carouselSchema)
