@@ -1,6 +1,11 @@
 import axios from 'axios'
 const baseUrl = 'http://localhost:3333/api/carousels'
 
+const getAll = async () => {
+  const response = await axios.get(`${baseUrl}`)
+  return response.data
+}
+
 const getOne = async id => {
   const response = await axios.get(`${baseUrl}/${id}`)
   return response.data
@@ -21,4 +26,4 @@ const remove = async id => {
   return response.data
 }
 
-export default { getOne, create, update, remove }
+export default { getAll, getOne, create, update, remove }
