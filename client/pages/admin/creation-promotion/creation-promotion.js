@@ -78,14 +78,11 @@ class CreaPromotion extends Component {
 
     axios.post('http://localhost:3333/api/promotions', elements)
       .then((data) => {
-        this.setState({ showModal: false, promotions: data, promotion: data.data.id, showAlertSuccess: true })
+        this.setState({ promotions: data, promotion: data.data.id, showAlertSuccess: true })
         const IdPromotion = data.data.id
-        return this.setState({ promotion: IdPromotion })
+        this.setState({ promotion: IdPromotion })
+        return Router.push('/admin/Accueil/accueil')
       })
-
-    setTimeout(() => {
-      Router.push('/admin/Accueil/accueil')
-    }, 2000)
   }
 
   componentWillUpdate () {
@@ -144,6 +141,11 @@ class CreaPromotion extends Component {
       .then(axios.spread((formateurs, students, programmes) => {
         this.setState({ formateurs: formateurs.data, eleves: students.data, programmes: programmes.data })
       }))
+
+    // localStorage.getItem()
+    const user = window.localStorage.getItem('user')
+    const role = JSON.parse(user).role
+    console.log(role)
   }
 
   handleChange (selectedCity) {

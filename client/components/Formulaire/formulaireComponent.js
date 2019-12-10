@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import Input from './input'
-import Upload from './uploadInput'
 import Textarea from './textAreaInput'
 const FormulaireComponent = (props) => {
   return (
@@ -43,7 +42,7 @@ const FormulaireComponent = (props) => {
           </div>
 
           <div className="col-md-6 col-sm-12 col-xs-12 custom-file section-style upload-style">
-            <Upload label="Upload image" id="inputGroupFile02" description="Choisir une photo" validation={props.pictureValidation} value={props.uploadPicture} />
+            <Input label="Lien avatar" type="text" name="image" placeholder="Inserer un lien d'image " value={props.image} onChange={props.onChange} />
           </div>
 
         </section>) : null}

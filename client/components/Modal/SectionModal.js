@@ -14,6 +14,8 @@ export const ShowCard = (props) => (
     description={props.description ? props.description.length > 80 ? props.description.charAt(1).toUpperCase() + props.description.slice(2).toLowerCase().substring(0, 80) + '...' : props.description.charAt(0).toUpperCase() + props.description.slice(1).toLowerCase() : ''}
     mail={props.mail ? props.mail : ''}
     phone={props.phone ? props.phone : ''}
+    showButton={props.showButton}
+    picture={props.picture}
     remove={props.remove}
     update={props.update}
     linkTwitter={props.linkTwitter ? props.linkTwitter : ''}
@@ -31,7 +33,7 @@ export const Form = (props) => (
     clicked={props.clicked}
     buttonName={props.buttonName}
     onChange={props.onChange}
-    uploadPicture={props.img}
+    image={props.image}
     firstName={props.firstName}
     lastName={props.lastName}
     fonction={props.fonction}
@@ -53,7 +55,6 @@ export const Form = (props) => (
     phoneValidation={props.phoneValidation}
     mailValidation={props.mailValidation}
     contact={props.contact}
-    picture={props.picture}
     influenceur={props.influenceur}
     contactDetail={props.contactDetail}
   />

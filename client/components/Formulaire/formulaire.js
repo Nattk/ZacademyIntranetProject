@@ -17,13 +17,12 @@ class Formulaire extends Component {
           contactDetail={this.props.contactDetail}
           influenceur={this.props.influenceur}
           rss={this.props.rss}
-          picture={this.props.picture}
+          image={this.props.image}
           titleRss={this.props.titleRss}
           linkGithub={this.props.linkGithub}
           linkTwitter={this.props.linkTwitter}
           linkLinkedin={this.props.linkLinkedin}
           linkFluxRss={this.props.linkFluxRss}
-          uploadPicture={this.props.uploadPicture}
           onChange={this.props.onChange}
           titleValidation={this.props.titleValidation}
           firstNameValidation={this.props.firstNameValidation}
