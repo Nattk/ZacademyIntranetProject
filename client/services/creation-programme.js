@@ -22,3 +22,10 @@ export const addToProgram = (nameId, name, parentId, title) => {
 export const create = (name, title) => {
   return axios.post(`${baseUrl}${name}`, { title: title })
 }
+
+export const getAll = () => {
+  console.log('lol')
+  const tabPromises = []
+  tabPromises.push(getModules('modules'), getModules('sousmodules'), getModules('sequences'))
+  return axios.all(tabPromises)
+}
