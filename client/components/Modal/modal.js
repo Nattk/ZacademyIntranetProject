@@ -13,10 +13,7 @@ const Modals = (props) => {
         </header>
         <main>
           <section>
-            {props.formulaire ? (
-              props.formulaire) : null}
-            {props.deleteDescription ? (
-              props.deleteDescription) : null}
+
             {props.calendar ? (props.calendar) : null}
             {props.children}
             {props.recapitulation ? (props.recapitulation) : null}
