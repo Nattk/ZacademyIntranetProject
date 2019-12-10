@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3333/'
+const baseUrl = 'http://localhost:3333/api/'
 
 export const getAllRessources = () => {
   return axios.get(baseUrl + 'ressources')
@@ -15,4 +15,12 @@ export const getAllSequences = () => {
 
 export const getAllPromotions = () => {
   return axios.get(baseUrl + 'promotions')
+}
+
+export const getAllRSS = () => {
+  return axios.get(baseUrl + 'rss')
+}
+
+export const getAllFollows = () => {
+  return axios.get(baseUrl + 'follows')
 }
