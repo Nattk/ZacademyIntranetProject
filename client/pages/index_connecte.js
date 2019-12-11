@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { getAllRSS, getAllFollows, getAllRessources } from '../services/ressources'
 import Page from '../layouts/classic'
-import { useLocalStorage } from '../components/Login/LoginForm'
+// import { useLocalStorage } from '../components/Login/LoginForm'
 import Carousel from '../components/Carousel/carousel'
-import CarouselForm from '../components/Carousel/CarouselForm'
+// import CarouselForm from '../components/Carousel/CarouselForm'
 // import moment from 'moment'
 
 export default function IndexConnected () {

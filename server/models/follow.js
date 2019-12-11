@@ -24,6 +24,9 @@ const followSchema = new mongoose.Schema({
     type: String,
     match: [/(medium.com)/, 'Veuillez entrer une URL github ou gitlab valide.']
   },
+  date: {
+    type: Date
+  },
   promotion: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Promotion',
