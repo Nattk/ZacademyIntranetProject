@@ -60,7 +60,12 @@ export default function IndexConnected () {
   }, [])
   return (
     <Page title="Accueil" contextePage="Accueil">
-      <div>{user.role === 'admin' || user.role === 'superadmin' ? <button className="btn valider" onClick={carouselAdminClick} >Changer le carousel</button> : null }{showCarouselForm ? <CarouselForm {...userInput} handleCarouselChange={handleCarouselChange} confirm={e => handleConfirmCarousel(e)}></CarouselForm> : <Carousel {...carouselFromPromo}></Carousel> }</div>
+      <div>{(user.role === 'admin' || user.role === 'superadmin') && user.promotion
+        ? <button className="btn valider" onClick={carouselAdminClick} >Changer le carousel</button>
+        : null }
+      {showCarouselForm
+        ? <CarouselForm {...userInput} handleCarouselChange={handleCarouselChange} confirm={e => handleConfirmCarousel(e)}></CarouselForm>
+        : <Carousel {...carouselFromPromo}></Carousel> }</div>
       <div>
         <article className="card" id="newsfeed_accueil">
           <section className="card-header">
