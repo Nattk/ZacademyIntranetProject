@@ -1,6 +1,7 @@
 const rssRouter = require('express').Router()
 const Rss = require('../models/rss')
 const Promotion = require('../models/promotion')
+const security = require('./security')
 
 rssRouter.get('/', async (req, res) => {
   const allRss = await Rss.find({})

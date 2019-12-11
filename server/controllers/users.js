@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 const Promotion = require('../models/promotion')
+const security = require('./security')
 
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({}).populate('promotion', { title: 1 })
@@ -22,16 +23,16 @@ usersRouter.get('/:id', async (req, res, next) => {
 })
 
 usersRouter.post('/', async (request, response, next) => {
-  console.log('request.body', request.body)
   const promotion = await Promotion.findById(request.body.promotionId)
 
   try {
+    const user = await security.checkUser(request)
     const body = request.body
 
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.password, saltRounds)
 
-    const user = new User({
+    const newUser = new User({
       firstName: body.firstName,
       lastName: body.lastName,
       passwordHash,
@@ -44,13 +45,14 @@ usersRouter.post('/', async (request, response, next) => {
       date: new Date(),
       promotion: promotion ? promotion._id : null
     })
-
-    const savedUser = await user.save()
-    if (promotion) {
-      savedUser.role === 'eleve' ? promotion.eleves = promotion.eleves.concat(savedUser._id) : promotion.formateurs = promotion.formateurs.concat(savedUser._id)
-      await promotion.save()
-    }
-    response.json(savedUser)
+    if (user.role === 'admin' || user.role === 'superadmin') {
+      const savedUser = await newUser.save()
+      if (promotion) {
+        savedUser.role === 'eleve' ? promotion.eleves = promotion.eleves.concat(savedUser._id) : promotion.formateurs = promotion.formateurs.concat(savedUser._id)
+        await promotion.save()
+      }
+      response.json(savedUser)
+    } else return response.status(401).json({ error: "Vous n'avez pas les droits suffisants" })
   } catch (exception) {
     next(exception)
   }
@@ -58,7 +60,6 @@ usersRouter.post('/', async (request, response, next) => {
 
 usersRouter.put('/:id', async (request, response, next) => {
   const promotion = await Promotion.findById(request.body.promotionId)
-  console.log('request.body', request.body)
 
   try {
     let user = request.body
@@ -97,9 +98,12 @@ usersRouter.put('/:id', async (request, response, next) => {
 })
 
 usersRouter.delete('/:id', async (request, response, next) => {
+  const user = await security.checkUser(request)
   try {
-    await User.findByIdAndRemove(request.params.id)
-    response.status(204).end()
+    if (user.role === 'admin' || user.role === 'superadmin') {
+      await User.findByIdAndRemove(request.params.id)
+      response.status(204).end()
+    } else return response.status(401).json({ error: "Vous n'avez pas les droits suffisants" })
   } catch (error) {
     next(error)
   }

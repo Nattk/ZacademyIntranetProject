@@ -1,6 +1,7 @@
 const modulesRouter = require('express').Router()
 const Module = require('../models/module')
 const Programme = require('../models/programme')
+const security = require('./security')
 
 modulesRouter.get('/', async (req, res) => {
   const allModules = await Module.find({})

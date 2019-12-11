@@ -15,23 +15,10 @@ beforeEach(async () => {
   }
 })
 
+
 describe('Login tests', () => {
   test('A user can login ', async () => {
-    const newUser = {
-      firstName: 'martin',
-      lastName: 'bequin',
-      phone: '0101010101',
-      email: 'salainen@salainen.com',
-      role: 'eleve',
-      password: 'salainen'
-    }
-
-    await api
-      .post('/api/users')
-      .send(newUser)
-      .expect(200)
-
-    const credentials = { email: newUser.email, password: newUser.password }
+    const credentials = { email: 'norbert@zenika.com', password: 'norbert' }
 
     await api
       .post('/api/login')
@@ -39,7 +26,7 @@ describe('Login tests', () => {
       .expect(200)
   })
 
-  test('A user with wrong login will receive 401 error', async () => {
+  test.skip('A user with wrong login will receive 401 error', async () => {
     const newUser = {
       firstName: 'martin',
       lastName: 'bequin',

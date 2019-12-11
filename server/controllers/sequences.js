@@ -2,6 +2,7 @@ const sequencesRouter = require('express').Router()
 const Sequence = require('../models/sequence')
 const Sousmodule = require('../models/sousmodule')
 const Module = require('../models/module')
+const security = require('./security')
 
 sequencesRouter.get('/', async (req, res) => {
   const allSequences = await Sequence.find({})

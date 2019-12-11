@@ -1,6 +1,7 @@
 const followsRouter = require('express').Router()
 const Follow = require('../models/follow')
 const Promotion = require('../models/promotion')
+const security = require('./security')
 
 followsRouter.get('/', async (req, res) => {
   const allFollows = await Follow.find({})
@@ -25,8 +26,9 @@ followsRouter.post('/', async (request, response, next) => {
   const follow = new Follow({ ...request.body, promotion: promotion.id, date: new Date() })
 
   try {
-    const savedFollow = await follow.save()
-    response.json(savedFollow.toJSON())
+    await follow.save()
+    const allFollows = await Follow.find({})
+    response.json(allFollows.map(follow => follow.toJSON()))
   } catch (exception) {
     next(exception)
   }

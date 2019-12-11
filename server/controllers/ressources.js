@@ -1,16 +1,7 @@
 const ressourcesRouter = require('express').Router()
 const Ressource = require('../models/ressource')
-const User = require('../models/user')
 const Promotion = require('../models/promotion')
-const jwt = require('jsonwebtoken')
-
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
-  }
-  return null
-}
+const security = require('./security')
 
 ressourcesRouter.get('/', async (req, res) => {
   const allRessources = await Ressource.find({}).populate('promotion', { title: 1 })
@@ -35,39 +26,41 @@ ressourcesRouter.post('/', async (request, response, next) => {
   if (!request.body.title || !request.body.url) {
     return response.status(400).json({ error: 'content missing!' })
   }
-  const token = getTokenFrom(request)
+  const user = await security.checkUser(request)
 
   try {
-    const decodedToken = jwt.verify(token, process.env.SECRET)
-    if (!token || !decodedToken.id) {
-      return response.status(401).json({ error: 'token missing or invalid' })
-    }
+    if (user.role === 'admin' || user.role === 'superadmin') {
+      const newRessource = new Ressource({ ...request.body, user: user.id, promotion: promotion.id, date: new Date() })
 
-    const user = await User.findById(decodedToken.id)
-    const newRessource = new Ressource({ ...request.body, user: user.id, promotion: promotion.id, date: new Date() })
-
-    const savedRessource = await newRessource.save()
-    response.json(savedRessource.toJSON())
+      const savedRessource = await newRessource.save()
+      response.json(savedRessource.toJSON())
+    } else return response.status(401).json({ error: "Vous n'avez pas les droits suffisants" })
   } catch (exception) {
     next(exception)
   }
 })
 
 ressourcesRouter.delete('/:id', async (request, response, next) => {
+  const user = await security.checkUser(request)
   try {
-    await Ressource.findByIdAndRemove(request.params.id)
-    response.status(204).end()
+    if (user.role === 'admin' || user.role === 'superadmin') {
+      await Ressource.findByIdAndRemove(request.params.id)
+      response.status(204).end()
+    } else return response.status(401).json({ error: "Vous n'avez pas les droits suffisants" })
   } catch (error) {
     next(error)
   }
 })
 
 ressourcesRouter.put('/:id', async (request, response, next) => {
+  const user = await security.checkUser(request)
   const body = request.body
 
   try {
-    const ressourceToUpdate = await Ressource.findByIdAndUpdate(request.params.id, { ...body, date: new Date() }, { new: true })
-    response.json(ressourceToUpdate.toJSON())
+    if (user.role === 'admin' || user.role === 'superadmin') {
+      const ressourceToUpdate = await Ressource.findByIdAndUpdate(request.params.id, { ...body, date: new Date() }, { new: true })
+      response.json(ressourceToUpdate.toJSON())
+    } else return response.status(401).json({ error: "Vous n'avez pas les droits suffisants" })
   } catch (error) {
     next(error)
   }

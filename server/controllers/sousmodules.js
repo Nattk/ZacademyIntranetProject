@@ -1,6 +1,7 @@
 const sousmodulesRouter = require('express').Router()
 const Module = require('../models/module')
 const Sousmodule = require('../models/sousmodule')
+const security = require('./security')
 
 sousmodulesRouter.get('/', async (req, res) => {
   const allSousmodules = await Sousmodule.find({})

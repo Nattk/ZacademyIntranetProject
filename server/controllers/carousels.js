@@ -1,6 +1,7 @@
 const carouselsRouter = require('express').Router()
 const Carousel = require('../models/carousel')
 const Promotion = require('../models/promotion')
+const security = require('./security')
 
 carouselsRouter.get('/', async (req, res) => {
   const allCarousels = await Carousel.find({})

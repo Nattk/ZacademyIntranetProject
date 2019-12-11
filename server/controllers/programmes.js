@@ -1,6 +1,7 @@
 const programmesRouter = require('express').Router()
 const Programme = require('../models/programme')
 const Promotion = require('../models/promotion')
+const security = require('./security')
 
 programmesRouter.get('/', async (req, res) => {
   const allProgrammes = await Programme.find({})

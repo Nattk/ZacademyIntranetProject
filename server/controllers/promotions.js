@@ -1,5 +1,6 @@
 const promotionsRouter = require('express').Router()
 const Promotion = require('../models/promotion')
+const security = require('./security')
 
 promotionsRouter.get('/', async (req, res) => {
   const allPromotions = await Promotion.find({})
