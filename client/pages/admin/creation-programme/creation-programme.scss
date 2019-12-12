@@ -4,11 +4,26 @@
     flex-grow: 1;
     margin: 0.5rem;
 
+    .container {
+        
+    }
+
     .select-component{
         width: 15rem;
     }
+
+    .collapse-button{
+        background-color: rgb(178, 30, 62);
+        cursor: pointer;
+        font-size: 2rem;
+        color: white;
+        padding: 0.5rem;
+    }
 }
 
+.ReactCollapse--collapse {
+    transition: height 500ms;
+}
 .modal-contenu{
     width:100%;
 }

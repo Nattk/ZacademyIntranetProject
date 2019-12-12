@@ -24,7 +24,6 @@ export const create = (name, title) => {
 }
 
 export const getAll = () => {
-  console.log('lol')
   const tabPromises = []
   tabPromises.push(getModules('modules'), getModules('sousmodules'), getModules('sequences'))
   return axios.all(tabPromises)
