@@ -8,10 +8,8 @@ export const ShowCard = (props) => (
     key={props.key ? props.key : ''}
     picture={props.picture ? props.picture : ''}
     titleRss={props.titleRss ? props.titleRss.charAt(0).toUpperCase() + props.titleRss.slice(1).toLowerCase() : ''}
-    firstName={props.firstName ? props.firstName.charAt(0).toUpperCase() + props.firstName.slice(1).toLowerCase() : ''}
-    lastName={props.lastName ? props.lastName.toUpperCase() : ''}
-    fonction={props.fonction ? props.fonction.length > 80 ? props.fonction.charAt(0).toUpperCase() + props.fonction.slice(2).toLowerCase().substring(0, 80) + '...' : props.fonction.charAt(0).toUpperCase() + props.fonction.slice(1).toLowerCase() : ''}
-    description={props.description ? props.description.length > 80 ? props.description.charAt(1).toUpperCase() + props.description.slice(2).toLowerCase().substring(0, 80) + '...' : props.description.charAt(0).toUpperCase() + props.description.slice(1).toLowerCase() : ''}
+    title={props.title}
+    content={props.content ? props.content.length > 80 ? props.content.charAt(0).toUpperCase() + props.content.slice(2).toLowerCase().substring(0, 80) + '...' : props.content.charAt(0).toUpperCase() + props.content.slice(1).toLowerCase() : ''}
     mail={props.mail ? props.mail : ''}
     phone={props.phone ? props.phone : ''}
     showButton={props.showButton}
@@ -19,11 +17,10 @@ export const ShowCard = (props) => (
     remove={props.remove}
     update={props.update}
     linkTwitter={props.linkTwitter ? props.linkTwitter : ''}
-    linkLinkedin={props.linkLinkedin ? props.linkLinkedin : ''}
+    linkMedium={props.linkMedium ? props.linkMedium : ''}
     linkGithub={props.linkGithub ? props.linkGithub : ''}
     linkFluxRss={props.linkFluxRss ? props.linkFluxRss : ''}
     rss={props.rss}
-
   />
 )
 
