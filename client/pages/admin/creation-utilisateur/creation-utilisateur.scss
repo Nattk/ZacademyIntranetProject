@@ -1,8 +1,10 @@
-article#form_creation_utilisateur{
-    width: 100rem;
-    margin-top: 2rem;
-    button{
-        background: rgb(178, 30, 62);
-        border: rgb(178, 30, 62);
+form{
+    section {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        * {
+            flex: 1 0 40%;
+        }
     }
 }
