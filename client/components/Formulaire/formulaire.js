@@ -10,7 +10,7 @@ class Formulaire extends Component {
           firstName={this.props.firstName}
           lastName={this.props.lastName}
           fonction={this.props.fonction}
-          description={this.props.description}
+          content={this.props.content}
           phone={this.props.phone}
           mail={this.props.mail}
           contact={this.props.contact}

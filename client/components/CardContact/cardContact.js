@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../Boutons/Boutons'
 
 const CardContact = (props) => (
 
@@ -17,16 +18,24 @@ const CardContact = (props) => (
     </header>
     <section className="section-user-card" style={{ borderTop: 'none' }}>
       <header>
-        <h1 className="name-user-card">{props.firstName} {props.lastName}</h1>
-        {props.titleRss ? (<h1 className="name-user-card">{props.titleRss}</h1>) : null}
+        <h1 className="name-user-card">{props.title}</h1>
+
+        {props.titleRss ? (<h1 className="name-user-card">{props.titleRss.charAt(0).toUpperCase() + props.titleRss.slice(1).toLowerCase()}</h1>) : null}
       </header>
       <section>
-        <p className="fonction-user-card">{props.fonction} </p>
-        <p className="description-user-card" >{props.description}</p>
+
+        <p className="description-user-card" style={{ height: '8vh' }}>{props.content}</p>
         {props.mail ? (<p className="description-user-card" ><i className="far fa-envelope"></i>&nbsp; &nbsp;{props.mail}</p>) : null}
         {props.phone ? (<p className="description-user-card" ><i className="fas fa-phone-alt"></i>&nbsp; &nbsp;{props.phone}</p>) : null}
       </section>
+      <section className="text-center" >
+
+        <Button clicked={props.showDetails} btnType="valider">
+          détails
+        </Button>
+      </section>
       <footer className="footer-card button-follow" >
+
         <section className="section-footer-card">
           {props.linkTwitter ? (
             <a href={props.linkTwitter} title="Aller sur son twitter" target="_blank">
