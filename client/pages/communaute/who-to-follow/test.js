@@ -130,14 +130,12 @@ class Follow extends ValidationMethod {
           <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
             {this.state.fakeData.map((user, id) => (
 
-              <ShowCard
+              <CardContact
                 key={id}
                 picture={user.image}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                fonction={user.fonction}
-                description={user.description}
-                linkLinkedin={user.linkLinkedin}
+                title={user.title}
+                content={user.content}
+                linkMedium={user.linkMedium}
                 linkGithub={user.linkGithub}
                 linkTwitter={user.linkTwitter}
 
