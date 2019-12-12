@@ -36,17 +36,21 @@ export default function IndexConnected () {
 
   const handleConfirmCarousel = async (e) => {
     e.preventDefault()
-    const carousel = {
-      photo1: userInput.photo1,
-      photo2: userInput.photo2,
-      photo3: userInput.photo3,
-      photo4: userInput.photo4,
-      promotionId: user.promotion
-    }
-    if (carouselFromPromo) {
-      carouselService.update(carouselFromPromo.id, carousel)
-    } else {
-      carouselService.create(carousel)
+    try {
+      const carousel = {
+        photo1: userInput.photo1,
+        photo2: userInput.photo2,
+        photo3: userInput.photo3,
+        photo4: userInput.photo4,
+        promotionId: user.promotion
+      }
+      if (carouselFromPromo) {
+        carouselService.update(carouselFromPromo.id, carousel)
+      } else {
+        carouselService.create(carousel)
+      }
+    } catch (error) {
+      console.log('error', error)
     }
   }
 
