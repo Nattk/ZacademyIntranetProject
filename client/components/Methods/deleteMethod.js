@@ -1,5 +1,7 @@
 
 import UpdateMethod from './updateMethod'
+import DeleteCard from '../Modal/sectionDeleteModal'
+import { Fragment } from 'react'
 export default class DeleteMethod extends UpdateMethod {
   constructor (props) {
     super(props)
@@ -7,14 +9,14 @@ export default class DeleteMethod extends UpdateMethod {
   }
 
   handleDelete (id) {
-    const users = this.state.fakeData.filter((user) => user.id !== id)
-    const index = this.state.fakeData.findIndex((user) => user.id === id)
-    if (index === -1) { this.state.fakeData.push('something') } else {
+    const contact = this.state.contacts.filter((user) => user.id !== id)
+    const index = this.state.contact.findIndex((user) => user.id === id)
+    if (index === -1) { this.state.contact.push('something') } else {
       this.setState({
-        fakeData: users,
-        lastName: this.state.fakeData[index].lastName,
-        firstName: this.state.fakeData[index].firstName,
-        titleRss: this.state.fakeData[index].titleRss,
+        contact: contact,
+        title: this.state.contact[index].title,
+        content: this.state.contact[index].content,
+        titleRss: this.state.contact[index].titleRss,
         showModal: false,
         showAlertDelete: true
       })
@@ -22,5 +24,16 @@ export default class DeleteMethod extends UpdateMethod {
     setTimeout(() => {
       this.setState({ showAlertDelete: false })
     }, 5000)
+  }
+
+  render () {
+    return (
+      <Fragment>
+        <DeleteCard
+          handleDelete={this.handleDelete(this.state.id)}
+          handleClose={this.props.handleClose}
+          title={this.props.title} />
+      </Fragment>
+    )
   }
 }
