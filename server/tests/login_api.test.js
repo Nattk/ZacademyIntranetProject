@@ -68,4 +68,3 @@ describe('Login tests', () => {
 afterAll(() => {
   mongoose.connection.close()
 })
-

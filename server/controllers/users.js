@@ -57,37 +57,21 @@ usersRouter.post('/', async (request, response, next) => {
 })
 
 usersRouter.put('/:id', async (request, response, next) => {
-  const promotion = await Promotion.findById(request.body.promotionId)
-  console.log('request.body', request.body)
-
   try {
-    let user = request.body
+    const promotion = await Promotion.findById(request.body.promotion)
+    const user = request.body
 
-    if (request.body.password) {
-      const saltRounds = 10
-      const passwordHash = await bcrypt.hash(request.body.password, saltRounds)
-      user = new User({
-        firstName: request.body.firstName,
-        lastName: request.body.lastName,
-        passwordHash,
-        phone: request.body.phone,
-        email: request.body.email,
-        role: request.body.role,
-        help: request.body.help,
-        avatar: request.body.avatar,
-        important: request.body.utile || false,
-        date: new Date(),
-        promotion: promotion ? promotion._id : null
-      })
-    }
+    console.log('user', user)
 
     const userToUpdate = await User.findByIdAndUpdate(request.params.id, user, { new: true })
-    if (promotion &&
-      (promotion.eleves.filter(x => x.toString() === userToUpdate.id).length === 0 ||
-      promotion.formateurs.filter(x => x.toString() === userToUpdate.id).length === 0)) {
-      userToUpdate.role === 'eleve'
-        ? promotion.eleves = promotion.eleves.concat(userToUpdate._id)
-        : promotion.formateurs = promotion.formateurs.concat(userToUpdate._id)
+
+    if (userToUpdate.role === 'formateur' && promotion && promotion.formateurs.filter(x => x.toString() === userToUpdate.id).length === 0) {
+      promotion.formateurs = promotion.formateurs.concat(userToUpdate._id)
+      await promotion.save()
+    }
+
+    if (userToUpdate.role === 'eleve' && promotion && promotion.eleves.filter(x => x.toString() === userToUpdate.id).length === 0) {
+      promotion.eleves = promotion.eleves.concat(userToUpdate._id)
       await promotion.save()
     }
     response.json(userToUpdate)
