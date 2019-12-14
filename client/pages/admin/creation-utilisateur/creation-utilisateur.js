@@ -201,22 +201,35 @@ class CreaUtilisateur extends Component {
             </div>
             <div className="form-group">
               <Button
-                btnType="annuler"
-                type="button"
-                clicked={this.previousPage}
-                className="btn btn-primary text-center button-cancel-programme"
-              >
-                Annuler
-              </Button>
-            </div>
-            <div className="form-group">
-              <Button
                 btnType="valider"
                 clicked={this.handleOpenModal}
 
               >
                 Ajout utilisateur
               </Button>
+            </div>
+            <div className="form-group">
+
+              <CSVReader label="Ajouter plusieurs utilisateurs par CSV" parserOptions={papaparseOptions} cssClass="csv-reader-input" onFileLoaded={usersCSV => {
+                try {
+                  usersCSV.map(async userCSV => {
+                    if (userCSV) {
+                      await userService.create({
+                        firstName: userCSV.pr_nom,
+                        lastName: userCSV.nom,
+                        email: userCSV.mail,
+                        password: userCSV.mdp_academy,
+                        role: 'eleve',
+                        phone: `0${userCSV.tel}`,
+                        help: userCSV.description
+                      })
+                    }
+                  })
+                  window.alert('Les utilisateurs ont bien été créés')
+                } catch (error) {
+                  this.handleNotif(error)
+                }
+              }} > </CSVReader>
             </div>
             <div className="form-group">
 
@@ -227,26 +240,6 @@ class CreaUtilisateur extends Component {
             </div>
 
           </section>
-          <CSVReader label="Ajouter plusieurs utilisateurs par CSV" parserOptions={papaparseOptions} cssClass="csv-reader-input" onFileLoaded={usersCSV => {
-            try {
-              usersCSV.map(async userCSV => {
-                if (userCSV) {
-                  await userService.create({
-                    firstName: userCSV.pr_nom,
-                    lastName: userCSV.nom,
-                    email: userCSV.mail,
-                    password: userCSV.mdp_academy,
-                    role: 'eleve',
-                    phone: `0${userCSV.tel}`,
-                    help: userCSV.description
-                  })
-                }
-              })
-              window.alert('Les utilisateurs ont bien été créés')
-            } catch (error) {
-              this.handleNotif(error)
-            }
-          }} > </CSVReader>
         </form>
       </Page>
     )

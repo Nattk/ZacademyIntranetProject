@@ -40,7 +40,7 @@ usersRouter.post('/', async (request, response, next) => {
       role: body.role,
       help: body.help,
       avatar: request.body.avatar,
-      important: request.body.utile || false,
+      important: request.body.important || false,
       date: new Date(),
       promotion: promotion ? promotion._id : null
     })

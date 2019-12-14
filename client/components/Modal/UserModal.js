@@ -28,8 +28,8 @@ const userModal = (props) => {
       </main>
 
       <footer className='footerStyle'>
-        <Button btnType="Annuler" btnType={'btn-danger'} clicked={props.onClose} > Annuler </Button>
-        <Button btnType="valider" type="submit" btnType={'btn-danger'} clicked={props.onSubmit} > Valider les choix </Button>
+        <Button btnType="valider" clicked={props.onClose} > Fermer </Button>
+        <Button btnType="valider" type="submit" clicked={props.onSubmit} > Valider les choix </Button>
 
       </footer>
 
