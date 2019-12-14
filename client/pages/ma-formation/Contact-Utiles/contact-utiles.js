@@ -2,6 +2,7 @@
 import Page from '../../../layouts/classic'
 import React from 'react'
 import Modal from '../../../components/Modal/modal'
+import axios from 'axios'
 import CardContact from '../../../components/CardContact/cardContact'
 import Button from '../../../components/Boutons/Boutons'
 import { handleClose, handleModalAdd } from '../../../components/Modal/function-modal'
@@ -12,7 +13,16 @@ class ContactsUtiles extends React.Component {
     this.state = {}
   }
 
+  componentDidMount () {
+    axios.get('http://localhost:3333/api/users')
+      .then((data) => {
+        this.setState({ contacts: data.data })
+      })
+      .catch(err => console.log(err))
+  }
+
   render () {
+    console.log(this.state)
     const { showModal } = this.state
     const showDetails =
       <article>
