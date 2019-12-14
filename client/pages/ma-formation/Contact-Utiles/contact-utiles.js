@@ -1,81 +1,59 @@
 
 import Page from '../../../layouts/classic'
 import React from 'react'
-import Header from '../../../components/Header/header-button-add'
 import Modal from '../../../components/Modal/modal'
-import ValidationMethod from '../../../components/Methods/ValidationMethod'
 import CardContact from '../../../components/CardContact/cardContact'
-import { Form, DeleteDescription } from '../../../components/Modal/SectionModal'
+import Button from '../../../components/Boutons/Boutons'
+import { handleClose, handleModalAdd } from '../../../components/Modal/function-modal'
 import '../../../styles/sass/styles.scss'
-class ContactsUtiles extends ValidationMethod {
+class ContactsUtiles extends React.Component {
   constructor (props) {
     super(props)
-    this.handleModalAdd = this.handleModalAdd.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-  }
-
-  handleModalAdd () {
-    this.setState({
-      showModal: true, formulaire: true, contactDetail: true, formulaireTitleAdd: true, formulaireUpdate: false, descriptionDelete: false, firstName: '', lastName: '', fonction: '', description: '', phone: '', mail: ''
-    })
-  }
-
-  handleClose () {
-    this.setState({ showModal: false, firstNameValidation: '', lastNameValidation: '', fonctionValidation: '', descriptionValidation: '', mailValidation: '', phoneValidation: '' })
+    this.state = {}
   }
 
   render () {
-    const Formul = (
-      <Form handleClose={this.handleClose}
-        buttonName={this.state.formulaireUpdate ? 'Mettre à jour' : 'Ajouter'}
-        clicked={this.state.formulaireUpdate ? () => this.handleUpdate(this.state.id) : this.handleSubmit}
-        onChange={this.onChange} lastName={this.state.lastName}
-        contact
-        contactDetail
-        picture
-        firstName={this.state.firstName}
-        lastName={this.state.lastName}
-        fonction={this.state.fonction}
-        description={this.state.description}
-        mail={this.state.mail}
-        phone={this.state.phone}
-        firstNameValidation={this.state.firstNameValidation}
-        lastNameValidation={this.state.lastNameValidation}
-        fonctionValidation={this.state.fonctionValidation}
-        descriptionValidation={this.state.descriptionValidation}
-        phoneValidation={this.state.phoneValidation}
-        mailValidation={this.state.mailValidation}
-      />
-    )
+    const { showModal } = this.state
+    const showDetails =
+      <article>
+        <section className="title-style-modal " >
+          <p><span className="promotion-p-style"></span> {this.state.title}</p>
+          <p><span className="promotion-p-style">Description</span>&nbsp; {this.state.content}</p>
+          {this.state.github ? <p><span className="promotion-p-style">Lien Github</span>&nbsp; {this.state.github}</p> : null}
+          {this.state.twitter ? <p><span className="promotion-p-style">Lien Twitter</span>&nbsp; {this.state.twitter}</p> : null}
+          {this.state.medium ? <p><span className="promotion-p-style">Lien Medium</span>&nbsp; {this.state.medium}</p> : null}
+        </section>
+
+        <footer className="text-right">
+          <Button clicked={() => handleClose(this.setState.bind(this))}
+            id="confirm-creation-promotion" btnType="valider">
+            Revenir
+          </Button>
+        </footer>
+      </article>
     return (
       <Page title="Contact Utiles" contextePage="Contact Utiles">
         <article id="contact-utiles" className="col-md-12 col-sm-12 col-xs-12 section-card" >
-          <Header clicked={this.handleModalAdd} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} firstName={this.state.firstName} lastName={this.state.lastName} title="Ajouter un contact" />
+
           <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
-            {this.state.fakeData.map((user, id) => (
+            {/* {this.state.fakeData.map((user, id) => (
               <CardContact
                 key={id}
                 image
                 avatar={user.avatar}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                fonction={user.fonction}
-                description={user.description}
+                title={user.title}
+                content={user.content}
                 mail={user.mail}
                 phone={user.phone}
-                remove={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, id: user.id })}
-                update={() => this.setState({
-                  showModal: true, formulaire: true, formulaireUpdate: true, descriptionDelete: false, formulaireTitleAdd: false, id: user.id, firstName: user.firstName, lastName: user.lastName, fonction: user.fonction, description: user.description, mail: user.mail, phone: user.phone
-                })}
+
               />
-            ))}
+            ))} */}
             <Modal
-              show={this.state.showModal}
-              onClose={this.handleClose}
-              titleModal={this.state.formulaireTitleAdd ? "Ajout d'un contact" : '' || this.state.formulaireUpdate ? 'Modification du contact' : ''}
-              formulaire={this.state.formulaire
-                ? Formul : false}
-              deleteDescription={this.state.descriptionDelete ? <DeleteDescription handleDelete={() => this.handleDelete(this.state.id)} handleClose={this.handleClose} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false} />
+              show={showModal}
+              onClose={() => handleClose(this.setState.bind(this))}
+            >
+              {this.state.showDetails ? showDetails : null}
+            </Modal>
           </section>
         </article>
       </Page>
