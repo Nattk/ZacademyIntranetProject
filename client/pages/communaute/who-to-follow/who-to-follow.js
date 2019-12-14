@@ -6,7 +6,9 @@ import CardContact from '../../../components/CardContact/cardContact'
 import Modal from '../../../components/Modal/modal'
 import FormulaireComponent from '../../../components/Formulaire/formulaireComponent'
 import { DeleteDescription } from '../../../components/Modal/SectionModal'
-import { handleUpdate, handleSubmit, handleRemove, handleClose, handleModalAdd, onShowRecapForm } from './file'
+import { onShowRecapForm } from '../../../components/Methods/function-validation'
+import { handleClose, handleModalAdd } from '../../../components/Methods/function-modal'
+import { handleUpdate, handleSubmit, handleRemove } from './file'
 import Button from '../../../components/Boutons/Boutons'
 class WhoFollow extends React.Component {
   constructor (props) {
@@ -74,6 +76,7 @@ class WhoFollow extends React.Component {
         <section className="title-style-modal">
           <p><span className="promotion-p-style"></span> {this.state.title}</p>
           <p><span className="promotion-p-style">Description</span>&nbsp; {this.state.content}</p>
+          <p><span className="promotion-p-style">Lien Avatar</span>&nbsp; {this.state.avatar}</p>
         </section>
         <section>
           {this.state.formulaireUpdate
