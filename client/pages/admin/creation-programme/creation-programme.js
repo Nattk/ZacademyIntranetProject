@@ -95,7 +95,8 @@ class CreaProgramme extends Component {
   }
 
   handleRedirection = () => {
-    window.location.assign('/admin/gestion-programme/gestion-programme')
+    event.preventDefault()
+    Router.push('/admin/gestion-programme/gestion-programme')
   }
 
   handleCreate = (name) => {
@@ -108,7 +109,8 @@ class CreaProgramme extends Component {
           return getItem('programmes', this.state.programmeId)
         })
         .then(programme => {
-          const notifMessage = `Le module ${this.state.titleMod} a été ajouté au programme`
+          const notifMessage = `Le module ${this.state.titleMod} a été ajouté au programme.
+                                il est sélectionnable dans la partie sous module`
           this.setState({ programme: programme.data })
           this.setState({ message: notifMessage })
           this.setState({ notifShow: true })
@@ -124,7 +126,8 @@ class CreaProgramme extends Component {
           return getItem('programmes', this.state.programmeId)
         })
         .then(programme => {
-          const notifMessage = `Le Sous Module ${this.state.titleSmod} a bien été ajouté au module`
+          const notifMessage = `Le Sous Module ${this.state.titleSmod} a bien été ajouté au module
+                                il est sélectionnable dans la partie Séquence `
           this.setState({ programme: programme.data })
           this.setState({ message: notifMessage })
           this.setState({ notifShow: true })
@@ -223,7 +226,7 @@ class CreaProgramme extends Component {
               ))
             }
           </ul>
-          <Button clicked={this.handleRedirection} btnType="valider">Valider</Button>
+          <Button clicked={this.handleRedirection} btnType="valider">Creér le programme</Button>
         </div>
       )
     }
@@ -240,6 +243,13 @@ class CreaProgramme extends Component {
               </div>
             </section>
           </form>
+          <Button
+            btnType="valider"
+            clicked={(event) => this.handleStep(event)}
+            className="step-button"
+          >
+            Etape suivante
+          </Button>
         </React.Fragment>
       )
     } else if (this.state.etapes === 2) {
@@ -310,7 +320,6 @@ class CreaProgramme extends Component {
           </Collapse>
         </React.Fragment>
 
-        // <CreationProgramme selected={this.state.selected} select={(newValue, action) => this.handleSelect(newValue, action)} name="modules" step={this.state.etapes} parent="Programme" parentId={this.state.programmeId}/>
       )
     }
 
@@ -318,9 +327,9 @@ class CreaProgramme extends Component {
       <Page title="Création programme" contextePage="Création programme">
         <article id="creation-programme">
           <AllNotification show={this.state.notifShow} alertType="success">
-            <aside className="d-flex flex-row">
+            <aside className="d-flex flex-row justify-content-between">
               {this.state.message}
-              <button onClick={() => { this.setState({ notifShow: false }) }}>Close</button>
+              <button className="notification-close" onClick={() => { this.setState({ notifShow: false }) }}>X</button>
             </aside>
           </AllNotification>
 
@@ -329,30 +338,15 @@ class CreaProgramme extends Component {
           </header>
           {creationProgramme}
           <section className="d-flex flex-row footer-programme-formulaire">
-            {/* <Button
-              btnType="annuler"
-              type="button"
-              clicked={this.previousPage}
-              className="btn btn-primary text-center button-cancel-programme"
-            >
-            Annuler
-            </Button> */}
-            <Button
-              btnType="valider"
-              clicked={(event) => this.handleStep(event)}
-              className="step-button"
-            >
-            Etape suivante
-            </Button>
             {
               this.state.etapes > 1 &&
-              <Button
-                btnType="valider"
-                clicked={(event) => this.endProgram(event)}
-                className="terminer-programme"
-              >
-                Terminer programme
-              </Button>
+                <Button
+                  btnType="valider"
+                  clicked={(event) => this.endProgram(event)}
+                  className="terminer-programme"
+                >
+                Voir et terminer le programme
+                </Button>
             }
           </section>
 
