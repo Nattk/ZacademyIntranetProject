@@ -4,7 +4,8 @@ import React from 'react'
 import Header from '../../../components/Header/header-button-add'
 import Modal from '../../../components/Modal/modal'
 import ValidationMethod from '../../../components/Methods/ValidationMethod'
-import { Form, ShowCard, DeleteDescription } from '../../../components/Modal/SectionModal'
+import CardContact from '../../../components/CardContact/cardContact'
+import { Form, DeleteDescription } from '../../../components/Modal/SectionModal'
 import '../../../styles/sass/styles.scss'
 class ContactsUtiles extends ValidationMethod {
   constructor (props) {
@@ -52,9 +53,10 @@ class ContactsUtiles extends ValidationMethod {
           <Header clicked={this.handleModalAdd} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} firstName={this.state.firstName} lastName={this.state.lastName} title="Ajouter un contact" />
           <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
             {this.state.fakeData.map((user, id) => (
-              <ShowCard
+              <CardContact
                 key={id}
-                picture
+                image
+                avatar={user.avatar}
                 firstName={user.firstName}
                 lastName={user.lastName}
                 fonction={user.fonction}
