@@ -9,10 +9,10 @@ const FormulaireComponent = (props) => {
       {props.contact ? (
         <section className="col-md-12 col-sm-12 col-xs-12 d-flex  section-style" >
           <div className="col-md-6 col-sm-12 col-xs-12" >
-            <Input label="Titre" type="text" name="title" placeholder='Inserer un titre' validation={props.titleValidation} value={props.title} onChange={props.onChange} />
+            <Input label="Titre *" type="text" name="title" placeholder='Inserer un titre ' validation={props.titleValidation} value={props.title} onChange={props.onChange} />
           </div>
           <div className="col-md-6 col-sm-12 col-xs-12">
-            <Input label="Lien avatar" type="text" name="image" placeholder="Inserer un lien d'image " value={props.image} onChange={props.onChange} />
+            <Input label="Lien avatar" type="text" name="avatar" placeholder="Inserer un lien d'image  " value={props.avatar} onChange={props.onChange} />
           </div>
         </section>) : null}
       {props.contactDetail ? (
@@ -26,33 +26,39 @@ const FormulaireComponent = (props) => {
         </section>) : null}
       {props.rss ? (
         <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style">
-          <div className="col-md-6 col-sm-12 col-xs-12 ">
-            <Input label="Titre flux rss" type="text" name="titleRss" placeholder="Inserer un titre " value={props.titleRss} validation={props.titleValidation} onChange={props.onChange} />
+          <div className="col-md-6 col-sm-12 col-xs-12" >
+            <Input label="Titre *" type="text" name="title" placeholder='Inserer un titre ' validation={props.titleValidation} value={props.title} onChange={props.onChange} />
           </div>
           <div className="col-md-6 col-sm-12 col-xs-12 ">
-            <Input label="Lien flux rss" type="text" name="linkFluxRss" placeholder="Inserer un lien flux rss" value={props.linkFluxRss} validation={props.linkFluxRssValidation} onChange={props.onChange} />
+            <Input label="Lien flux rss *" type="text" name="url" id="urlRss" placeholder="Inserer un lien flux rss " value={props.url} validation={props.urlValidation} onChange={props.onChange} />
           </div>
         </section>) : null}
 
       <section className="col-md-12 col-sm-12 col-xs-12 section-style">
         <div className="col-md-12 col-sm-12 col-xs-12  section-style ">
-          <Textarea label="Description" type="text" name="content" placeholder="description de l'utilisateur" rows="2" validation={props.contentValidation} content={props.content}
+          <Textarea label="Description *" type="text" name="content" placeholder="description" rows="2" validation={props.contentValidation} content={props.content}
             onChange={props.onChange} />
         </div>
+        <hr></hr>
       </section>
+
       {props.influenceur ? (
         <Fragment>
           <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style">
+            <p className="col-md-12 col-sm-12 col-xs-12 " id="influenceur">Veuillez insérer un ou plusieurs liens *</p>
+          </section>
+          <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style">
+
             <div className="col-md-6 col-sm-12 col-xs-12 ">
-              <Input label="Lien GitHub" type="text" name="linkGithub" placeholder="Inserer l'adresse Github" value={props.linkGithub} onChange={props.onChange} />
+              <Input label="Lien GitHub" type="text" name="github" placeholder="Inserer l'adresse Github" value={props.github} onChange={props.onChange} />
             </div>
             <div className="col-md-6 col-sm-12 col-xs-12 ">
-              <Input label="Lien Medium" type="text" name="linkMedium" placeholder="Inserer l'adresse Medium" value={props.linkMedium} onChange={props.onChange} />
+              <Input label="Lien Medium" type="text" name="medium" placeholder="Inserer l'adresse Medium" value={props.medium} onChange={props.onChange} />
             </div>
           </section>
           <section className="col-md-12 col-sm-12 col-xs-12 section-style">
             <div className="col-md-12 col-sm-12 col-xs-12 ">
-              <Input label="Lien Twitter" type="text" name="linkTwitter" placeholder="Inserer l'adresse Twitter" value={props.linkTwitter} onChange={props.onChange} />
+              <Input label="Lien Twitter" type="text" name="twitter" placeholder="Inserer l'adresse Twitter" value={props.twitter} onChange={props.onChange} />
             </div>
           </section>
         </Fragment>) : null}
