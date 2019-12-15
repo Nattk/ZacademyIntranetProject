@@ -19,7 +19,8 @@ const CardContact = (props) => (
     <section className="section-user-card" style={{ borderTop: 'none' }}>
       <header>
         <h1 className="name-user-card">{props.title}</h1>
-
+        {props.firstName && props.lastName
+          ? <h1 className="name-user-card">{props.firstName.concat(' ', props.lastName)}</h1> : null}
         {props.titleRss ? (<h1 className="name-user-card">{props.titleRss.charAt(0).toUpperCase() + props.titleRss.slice(1).toLowerCase()}</h1>) : null}
       </header>
       <section>

@@ -1,4 +1,7 @@
 export const handleClose = (updateState) => {
+  updateState({ showModal: false })
+}
+export const handleCloseSwitch = (updateState) => {
   updateState({ showModal: false, title: '', content: '', titleValidation: '', contentValidation: '' })
 }
 export const handleModalAdd = (updateState) => {
