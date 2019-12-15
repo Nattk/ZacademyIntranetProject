@@ -6,9 +6,8 @@ import CardContact from '../../../components/CardContact/cardContact'
 import Modal from '../../../components/Modal/modal'
 import FormulaireComponent from '../../../components/Formulaire/formulaireComponent'
 import { DeleteDescription } from '../../../components/Modal/SectionModal'
+import { handleUpdate, handleSubmit, handleRemove, handleClose, handleModalAdd, onShowRecapForm, ConfirmationDetails, ContentDetails } from './function-rss'
 
-import { handleUpdate, handleSubmit, handleRemove, handleClose, handleModalAdd, onShowRecapForm } from './method-rss'
-import Button from '../../../components/Boutons/Boutons'
 class Follow extends React.Component {
   constructor (props) {
     super(props)
@@ -36,8 +35,7 @@ class Follow extends React.Component {
   }
 
   render () {
-    const { showButtons, rss, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete } = this.state
-
+    const { showButtons, showDetails, rss, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, url, title, content } = this.state
     const card = (
       rss ? rss.map((user) =>
         <CardContact
@@ -70,44 +68,6 @@ class Follow extends React.Component {
       />
     )
 
-    const recap =
-      <article>
-        <section className="title-style-modal">
-          <p><span className="promotion-p-style"></span> {this.state.title}</p>
-          <p><span className="promotion-p-style">Description</span>&nbsp; {this.state.content}</p>
-          <p><span className="promotion-p-style">Lien</span>&nbsp; {this.state.url}</p>
-        </section>
-        <section>
-          {this.state.formulaireUpdate
-            ? <p>Êtes vous sur de vouloir modifier ce flux rss  ?</p>
-            : <p>Êtes vous sur de vouloir créer ce flux rss  ?</p>}
-        </section>
-        <footer className="text-right">
-          <Button clicked={() => handleClose(this.setState.bind(this))}
-            id="confirm-creation-promotion" btnType="valider">
-            Revenir
-          </Button>
-          <Button clicked={this.state.formulaireUpdate
-            ? () => handleUpdate(this.state, this.state.id, this.setState.bind(this)) : () => handleSubmit(this.state, this.setState.bind(this))} id="confirm-creation-promotion" btnType="valider">
-            Confirmer
-          </Button>
-        </footer>
-      </article>
-    const showDetails =
-      <article>
-        <section className="title-style-modal">
-          <p><span className="promotion-p-style"></span> {this.state.title}</p>
-          <p><span className="promotion-p-style">Description</span>&nbsp; {this.state.content}</p>
-          <p><span className="promotion-p-style">Lien</span>&nbsp; {this.state.url}</p>
-        </section>
-
-        <footer className="text-right">
-          <Button clicked={() => handleClose(this.setState.bind(this))}
-            id="confirm-creation-promotion" btnType="valider">
-            Revenir
-          </Button>
-        </footer>
-      </article>
     return (
       <Page title="Rss" contextePage="Rss" >
         <article id="who-to-follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
@@ -116,8 +76,14 @@ class Follow extends React.Component {
             {card}
             <Modal show={showModal} onClose={() => handleClose(this.setState.bind(this))} titleModal={formulaireTitleAdd ? "Ajout d'un flux rss" : '' || formulaireUpdate ? 'Modification du flux rss' : '' || showDetails ? this.state.title : ''}>
               {this.state.formulaire ? formulaire : ''}
-              {this.state.recap ? recap : null}
-              {this.state.showDetails ? showDetails : null}
+              {this.state.recap
+                ? <ConfirmationDetails title={title} content={content} url={url}
+                  onClose={() => handleClose(this.setState.bind(this))}
+                  clicked={this.state.formulaireUpdate
+                    ? () => handleUpdate(this.state, this.state.id, this.setState.bind(this)) : () => handleSubmit(this.state, this.setState.bind(this))}
+                /> : null}
+
+              {showDetails ? <ContentDetails title={title} content={content} url={url} onClose={() => handleClose(this.setState.bind(this))} /> : null}
               {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleClose(this.setState.bind(this))} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false}
             </Modal>
 

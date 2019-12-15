@@ -127,6 +127,7 @@ class CreaUtilisateur extends Component {
 
   render () {
     const villes = [...new Set(this.state.promotions.map(promo => promo.city))]
+    console.log(villes)
     const papaparseOptions = {
       header: true,
       dynamicTyping: true,

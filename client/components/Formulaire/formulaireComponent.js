@@ -41,7 +41,7 @@ const FormulaireComponent = (props) => {
         </div>
         <hr></hr>
       </section>
-
+      {props.city}
       {props.influenceur ? (
         <Fragment>
           <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style">
