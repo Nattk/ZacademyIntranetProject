@@ -18,8 +18,6 @@ class CreaPromotion extends Component {
     super(props)
 
     this.state = {
-      title: '',
-      slack: '',
       selectedCity: '',
       formateursOption: '',
       studentsOption: '',
@@ -41,7 +39,7 @@ class CreaPromotion extends Component {
     this.setState({ formateursOption })
   }
 
-  componentDidUpdate () {
+  componentWillUpdate () {
     const eleveSelected = { eleveId: this.state.studentsOption ? this.state.studentsOption.map(el => el.id) : null }
     const formateurSelected = { formateurId: this.state.formateursOption ? this.state.formateursOption.map(el => el.id) : null }
 
@@ -73,7 +71,7 @@ class CreaPromotion extends Component {
   render () {
     console.log(this.state)
     moment.locale('fr')
-    const { selectedCity, selectedProgramme, formateursOption, studentsOption, title, slack } = this.state
+    const { selectedCity, selectedProgramme, formateursOption, studentsOption, title } = this.state
     const start = this.state.startDate ? capitalize(moment(this.state.startDate).format('DD MMMM YYYY')) : null
     const end = this.state.endDate ? capitalize(moment(this.state.endDate).format('DD MMMM YYYY')) : null
     const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => <p>{el.firstName.concat(' ', el.lastName, ', ')}</p>) : this.state.formateursOption
@@ -208,30 +206,18 @@ class CreaPromotion extends Component {
                   classNamePrefix="select"
                 />
                 <p className="validation-style"> <small>{this.state.studentsValidation}</small></p>
+
               </div>
+
             </section>
-            <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style  " >
-              <div className="col-md-4 col-sm-12 col-xs-12">
-                <Input
-                  label="Lien Slack de la promotion"
-                  type="text"
-                  name="slack"
-                  id="slackInput"
-                  placeholder='Insérer un lien slack'
-                  value={this.state.slack}
-                  onChange={(e) => this.setState({ slack: e.target.value })}
-                />
+            <section className="col-md-6 col-sm-12 col-xs-12 d-flex obligatoire-style justify-content-center  " >
 
-              </div>
-              <section className="col-md-4 col-sm-12 col-xs-12 d-flex obligatoire-style justify-content-center  " >
-
-                <small>*  Champs obligatoires</small>
-              </section>
+              <small>*  Champs obligatoires</small>
             </section>
 
           </form>
 
-          <section className=" col-md-10 col-sm-12 col-xs-12  d-flex justify-content-end">
+          <section className=" col-md-10 col-sm-12 col-xs-12  d-flex mt-5 justify-content-end">
             <Button clicked={() => onShowRecapCreationPromotion(this.state, this.setState.bind(this))} id="recap-button" btnType="valider" >
               Valider le formulaire
             </Button>
@@ -239,7 +225,7 @@ class CreaPromotion extends Component {
           </section>
           <section className="col-md-12 col-sm-12 col-xs-12 text-right" >
             <Modal titleModal="Demande de confirmation" show={this.state.showModal} onClose={() => handleClose(this.setState.bind(this))} >
-              <RecapPromotion title={title} start={start} end={end} formateurs={formateurs} students={students} slack={slack} selectedCity={selectedCity.value} selectedProgramme={selectedProgramme.title} clicked={() => onCreatePromotion(this.state, this.setState.bind(this))} />
+              <RecapPromotion title={title} start={start} end={end} formateurs={formateurs} students={students} selectedCity={selectedCity.value} selectedProgramme={selectedProgramme.title} clicked={() => onCreatePromotion(this.state, this.setState.bind(this))} />
             </Modal>
           </section>
         </article>

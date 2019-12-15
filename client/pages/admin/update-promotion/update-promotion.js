@@ -1,24 +1,25 @@
 import React, { Component } from 'react'
-import userService from '../../../services/users'
 import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
 import Modal from '../../../components/Modal/modal'
 import { NotificationSuccess, NotificationError } from '../../../components/Notifications/notifications'
 import axios from 'axios'
-import { getAllFormateurs, getAllStudents, getAllProgrammes, optionsCity } from '../../../services/creation-promotion'
+import { getAllFormateurs, getAllStudents, getAllProgrammes, optionsCity, getPromotionByID } from '../../../services/creation-promotion'
 import Input from '../../../components/Formulaire/input'
 import Select from 'react-select'
 import { capitalize } from '../../index_connecte'
 import moment from 'moment'
 import { handleClose } from '../../../components/Modal/function-modal'
-import { onShowRecapCreationPromotion } from '../../../components/Methods/function-validation'
-import { onCreatePromotion, RecapPromotion } from './function-creation-promotions'
-class CreaPromotion extends Component {
+import { onShowRecapUpdatePromotion } from '../../../components/Methods/function-validation'
+import { handleUpdate, RecapPromotion } from './function-update-promotion'
+
+class UpdatePromotion extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      title: '',
+      promotion: [],
+
       slack: '',
       selectedCity: '',
       formateursOption: '',
@@ -41,23 +42,6 @@ class CreaPromotion extends Component {
     this.setState({ formateursOption })
   }
 
-  componentDidUpdate () {
-    const eleveSelected = { eleveId: this.state.studentsOption ? this.state.studentsOption.map(el => el.id) : null }
-    const formateurSelected = { formateurId: this.state.formateursOption ? this.state.formateursOption.map(el => el.id) : null }
-
-    if (this.state.promotion) {
-      eleveSelected.eleveId.map(eleveID => userService.update(eleveID, { promotion: this.state.promotion }))
-      formateurSelected.formateurId.map(formateurID => userService.update(formateurID, { promotion: this.state.promotion }))
-    }
-  }
-
-  componentDidMount () {
-    axios.all([getAllFormateurs(), getAllStudents(), getAllProgrammes()])
-      .then(axios.spread((formateurs, students, programmes) => {
-        this.setState({ formateurs: formateurs.data, eleves: students.data, programmes: programmes.data })
-      }))
-  }
-
   handleChange (selectedCity) {
     this.setState({ selectedCity })
   }
@@ -66,30 +50,51 @@ class CreaPromotion extends Component {
     this.setState({ selectedProgramme })
   }
 
+  static getInitialProps ({ query }) {
+    return { query }
+  }
+
+  componentDidMount () {
+    getPromotionByID(this.props.query.promotions)
+      .then(promotion => {
+        return this.setState({ promotion: promotion.data, selectedProgramme: promotion.data.programmes, programmeSelected: promotion.data.programmes[0].title, formateursOption: promotion.data.formateurs, studentsOption: promotion.data.eleves, title: promotion.data.title, startDate: promotion.data.start, endDate: promotion.data.end, selectedCity: promotion.data.city, citySelected: promotion.data.city, id: promotion.data.id })
+      })
+    axios.all([getAllFormateurs(), getAllStudents(), getAllProgrammes()])
+      .then(axios.spread((formateurs, students, programmes) => {
+        return this.setState({ formateurs: formateurs.data, eleves: students.data, programmes: programmes.data })
+      }))
+  }
+
   onChange (e) {
     this.setState({ [e.target.name]: e.target.value })
   }
 
   render () {
     console.log(this.state)
+    const startDate = this.state.startDate ? this.state.startDate.substring(0, 10) : this.state.startDate
+    const endDate = this.state.endDate ? this.state.endDate.substring(0, 10) : this.state.endDate
+    // console.log(this.state.selectedProgramme ? this.state.selectedProgramme[0].title : this.state.selectedProgramme)
+    console.log(this.state.selectedProgramme ? this.state.selectedProgramme : this.state.programmeSelected)
     moment.locale('fr')
-    const { selectedCity, selectedProgramme, formateursOption, studentsOption, title, slack } = this.state
+    const { selectedCity, slack, selectedProgramme } = this.state
     const start = this.state.startDate ? capitalize(moment(this.state.startDate).format('DD MMMM YYYY')) : null
     const end = this.state.endDate ? capitalize(moment(this.state.endDate).format('DD MMMM YYYY')) : null
     const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => <p>{el.firstName.concat(' ', el.lastName, ', ')}</p>) : this.state.formateursOption
+    console.log(formateurs)
+    // const programme = this.state.selectedProgramme ? this.state.selectedProgramme[0].title : this.state.selectedProgramme
     const students = this.state.studentsOption ? this.state.studentsOption.map(el => el.firstName.concat(' ', el.lastName, ', ')) : this.state.studentsOption
-
     const optionsEleve = this.state.eleves ? this.state.eleves.filter(el => el.role === 'eleve') : this.state.eleves
     const optionsFormateurs = this.state.formateurs ? this.state.formateurs.filter(el => el.role === 'formateur') : this.state.formateurs
     const optionProgramme = this.state.programmes ? this.state.programmes.filter(el => el.title) : this.state.programmes
+    console.log(formateurs)
     return (
-      <Page title="Création promotion" >
+      <Page title={this.state.promotion ? this.state.promotion.title : null} >
 
         <article className="col-md-12 col-sm-12 col-xs-12 " id="form_creation_promotion" >
           {this.state.showAlertSuccess ? <NotificationSuccess title={`${this.state.title} a été rajouté avec succès`} /> : null}
           {this.state.showAlertError ? <NotificationError title={'Le titre de la promotion doit être unique'} /> : null}
 
-          <h1 className="h1-promotion-style" > Création Promotions </h1>
+          <h1 className="h1-promotion-style" > {this.state.promotion ? this.state.promotion.title : null} </h1>
           <form className="form-group-who-to-follow " role="form" data-toggle="validator" >
 
             <section className="col-md-12 col-sm-12 col-xs-12  d-flex section-style justify-content-center" >
@@ -100,10 +105,10 @@ class CreaPromotion extends Component {
                   label="Début de formation *"
                   type="date"
                   name="date-start"
-                  max={this.state.endDate}
+                  max={endDate}
                   id="date-start"
                   validation={this.state.startdateValidation}
-                  value={this.state.startDate}
+                  value={startDate}
                   onChange={(e) => this.setState({ startDate: e.target.value })}
                 />
 
@@ -115,31 +120,29 @@ class CreaPromotion extends Component {
                   label="Fin de formation *"
                   type="date"
                   name="date-end"
-                  min={this.state.startDate}
+                  min={startDate}
                   id="date-end"
                   validation={this.state.enddateValidation}
-                  value={this.state.endDate}
+                  value={endDate}
                   onChange={(e) => this.setState({ endDate: e.target.value })}
                 />
 
                 {this.state.enddateValidation && !this.state.startdateValidation ? <p className="validation-style"> <small>{this.state.enddateValidation}</small></p> : null}
               </div>
-
               <div className="col-md-4 col-sm-12 col-xs-12 custom-file section-style upload-style ">
                 <label htmlFor="ville" className="label-style">Ville * </label>
                 <Select
-                  value={selectedCity}
+                  value={this.state.selectedCity}
                   onChange={this.handleChange}
                   name="city"
                   id="cityInput"
                   options={optionsCity}
                   className={this.state.cityValidation ? ' error-input' : ' '}
-                  placeholder="Selectionner une ville"
+                  placeholder={this.state.selectedCity}
 
                 />
                 <p className="validation-style" id="cityValidation"> <small>{this.state.cityValidation}</small></p>
               </div>
-
             </section>
             <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style justify-content-center" >
 
@@ -160,13 +163,13 @@ class CreaPromotion extends Component {
 
                 <label htmlFor="programme" className="label-style">Programme * </label>
                 <Select
-                  value={selectedProgramme}
+                  value={this.state.selectedProgramme}
                   onChange={this.onChangeProgramme}
                   options={optionProgramme}
                   getOptionLabel={(option) => option.title}
                   getOptionValue={(option) => option.id}
                   className={this.state.programmeValidation ? ' error-input' : ' '}
-                  placeholder="Selectionner un programme"
+                  placeholder={this.state.selectedProgramme}
                 />
                 <p className="validation-style"> <small>{this.state.programmeValidation}</small></p>
 
@@ -177,10 +180,10 @@ class CreaPromotion extends Component {
               <div className="col-md-4 col-sm-12 col-xs-12">
                 <label htmlFor="programme" className="label-style">Choix formateur(s) * </label>
                 <Select
-                  placeholder="Formateur(s)"
+                  placeholder={this.state.formateursOption}
                   isMulti={true}
                   name="colors"
-                  value={formateursOption}
+                  value={this.state.formateursOption}
                   options={optionsFormateurs}
                   noOptionsMessage={(inputValues) => `${inputValues.inputValue} n'est pas répertorié`}
                   getOptionLabel={(option) => option.firstName.concat(' ', option.lastName)}
@@ -195,10 +198,10 @@ class CreaPromotion extends Component {
               <div className="col-md-4 col-sm-12 col-xs-12 ">
                 <label htmlFor="programme" className="label-style">Élèves * </label>
                 <Select
-                  placeholder="Élèves(s)"
+                  placeholder={this.state.studentsOption}
                   isMulti={true}
                   name="colors"
-                  value={studentsOption}
+                  value={this.state.studentsOption}
                   options={optionsEleve}
                   noOptionsMessage={(inputValues) => `${inputValues.inputValue} n'est pas répertorié`}
                   getOptionLabel={option => option.firstName.concat(' ', option.lastName)}
@@ -223,6 +226,7 @@ class CreaPromotion extends Component {
                 />
 
               </div>
+
               <section className="col-md-4 col-sm-12 col-xs-12 d-flex obligatoire-style justify-content-center  " >
 
                 <small>*  Champs obligatoires</small>
@@ -232,15 +236,16 @@ class CreaPromotion extends Component {
           </form>
 
           <section className=" col-md-10 col-sm-12 col-xs-12  d-flex justify-content-end">
-            <Button clicked={() => onShowRecapCreationPromotion(this.state, this.setState.bind(this))} id="recap-button" btnType="valider" >
+            <Button clicked={() => onShowRecapUpdatePromotion(this.state, this.setState.bind(this))} id="recap-button" btnType="valider" >
               Valider le formulaire
             </Button>
 
           </section>
           <section className="col-md-12 col-sm-12 col-xs-12 text-right" >
             <Modal titleModal="Demande de confirmation" show={this.state.showModal} onClose={() => handleClose(this.setState.bind(this))} >
-              <RecapPromotion title={title} start={start} end={end} formateurs={formateurs} students={students} slack={slack} selectedCity={selectedCity.value} selectedProgramme={selectedProgramme.title} clicked={() => onCreatePromotion(this.state, this.setState.bind(this))} />
+              <RecapPromotion title={this.state.title} start={start} end={end} slack={slack} formateurs={formateurs} students={students} selectedCity={selectedCity.value ? selectedCity.value : this.state.citySelected} selectedProgramme={selectedProgramme.title ? selectedProgramme.title : this.state.programmeSelected} clicked={() => handleUpdate(this.state, this.setState.bind(this))} />
             </Modal>
+
           </section>
         </article>
       </Page>
@@ -248,4 +253,4 @@ class CreaPromotion extends Component {
   }
 }
 
-export default CreaPromotion
+export default UpdatePromotion

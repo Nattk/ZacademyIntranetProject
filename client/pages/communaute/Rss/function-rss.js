@@ -1,6 +1,5 @@
 import axios from 'axios'
-import UpdateMethod from '../../../components/Methods/updateMethod'
-
+import Button from '../../../components/Boutons/Boutons'
 export const configuration = (state) => {
   const user = window.localStorage.getItem('user')
 
@@ -81,3 +80,41 @@ export const onShowRecapForm = (state, updateState) => {
     handleValidation(state, updateState)
   }
 }
+export const ConfirmationDetails = (state) => (
+  <article>
+    <section className="title-style-modal">
+      <p><span className="promotion-p-style"></span> {state.title}</p>
+      <p><span className="promotion-p-style">Description</span>&nbsp; {state.content}</p>
+      <p><span className="promotion-p-style">Lien</span>&nbsp; {state.url}</p>
+    </section>
+    <section>
+      {state.formulaireUpdate
+        ? <p>Êtes vous sur de vouloir modifier ce flux rss  ?</p>
+        : <p>Êtes vous sur de vouloir créer ce flux rss  ?</p>}
+    </section>
+    <footer className="text-right">
+      <Button clicked={state.onClose}
+        id="confirm-creation-promotion" btnType="valider">
+        Revenir
+      </Button>
+      <Button clicked={state.clicked} id="confirm-creation-promotion" btnType="valider">
+        Confirmer
+      </Button>
+    </footer>
+  </article>
+)
+export const ContentDetails = (state) =>
+  <article>
+    <section className="title-style-modal">
+      <p><span className="promotion-p-style"></span> {state.title}</p>
+      <p><span className="promotion-p-style">Description</span>&nbsp; {state.content}</p>
+      <p><span className="promotion-p-style">Lien</span>&nbsp; {state.url}</p>
+    </section>
+
+    <footer className="text-right">
+      <Button clicked={state.onClose}
+        id="confirm-creation-promotion" btnType="valider">
+        Revenir
+      </Button>
+    </footer>
+  </article>
