@@ -15,7 +15,7 @@ export const handleCloseSwitch = (updateState) => {
     titleValidation: '',
     contentValidation: '',
     phoneValidation: '',
-    mailValidation: '',
+    emailValidation: '',
     lastNameValidation: '',
     firstNameValidation: ''
   })
@@ -40,7 +40,7 @@ export const handleModalAdd = (updateState) => {
     titleValidation: '',
     contentValidation: '',
     phoneValidation: '',
-    mailValidation: '',
+    emailValidation: '',
     lastNameValidation: '',
     firstNameValidation: ''
 
