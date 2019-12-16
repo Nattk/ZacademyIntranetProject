@@ -19,7 +19,7 @@ export const configuration = (state) => {
 export const handleSubmit = (state, updateState) => {
   axios.post('http://localhost:3333/api/follows', configuration(state))
     .then((data) => {
-      updateState({ showModal: false, contacts: [...state.contacts, data.data], showAlertSuccess: true })
+      updateState({ showModal: false, contacts: [...state.contacts, data.data], showAlertSuccess: true, recap: true })
     })
     .catch((err) => console.log('err', err))
   setTimeout(() => {
