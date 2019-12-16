@@ -76,7 +76,7 @@ class ContactsUtiles extends React.Component {
         firstNameValidation={this.state.firstNameValidation}
         phoneValidation={this.state.phoneValidation}
         contentValidation={this.state.contentValidation}
-        mailValidation={this.state.mailValidation}
+        emailValidation={this.state.emailValidation}
 
       />
     )
@@ -110,7 +110,7 @@ class ContactsUtiles extends React.Component {
             >
               {this.state.formulaire ? formulaire : ''}
               {this.state.recap
-                ? <ConfirmationDetails firstName={firstName} lastName={lastName} help={help} email={email} phone={phone}
+                ? <ConfirmationDetails firstName={firstName} lastName={lastName} help={help} email={email} phone={phone} avatar={this.state.avatar}
                   onClose={() => handleClose(this.setState.bind(this))}
                   clicked={
                     () => handleUpdate(this.state, this.state.id, this.setState.bind(this))}
@@ -122,6 +122,7 @@ class ContactsUtiles extends React.Component {
                   help={this.state.help}
                   phone={this.state.phone}
                   email={this.state.email}
+                  avatar={this.state.avatar}
                   onClose={() => handleCloseSwitch(this.setState.bind(this))}
                 /> : null}
               {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleClose(this.setState.bind(this))} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false}

@@ -28,10 +28,10 @@ const FormulaireComponent = (props) => {
       {props.contactDetail ? (
         <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style">
           <div className="col-md-6 col-sm-12 col-xs-12 ">
-            <Input label="Adresse email" type="email" name="email" placeholder="Inserer une adresse email" value={props.mail} validation={props.mailValidation} onChange={props.onChange} />
+            <Input label="Adresse email *" type="email" name="email" placeholder="Inserer une adresse email" value={props.mail} validation={props.emailValidation} onChange={props.onChange} />
           </div>
           <div className="col-md-6 col-sm-12 col-xs-12 ">
-            <Input label="Telephone" type="number" name="phone" placeholder="Inserer un numéro de téléphone" value={props.phone} validation={props.phoneValidation} onChange={props.onChange} />
+            <Input label="Telephone *" type="number" name="phone" placeholder="Inserer un numéro de téléphone" value={props.phone} validation={props.phoneValidation} onChange={props.onChange} />
           </div>
         </section>) : null}
       {props.rss ? (
