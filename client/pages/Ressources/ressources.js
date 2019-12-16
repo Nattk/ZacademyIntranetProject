@@ -27,13 +27,20 @@ class Ressources extends Component {
 
   // Get des ressources, modules et séquences dans la base de donnée
   componentDidMount () {
-    axios.all([getAllRessources(), getAllModules(), getAllSequences(), getAllPromotions()])
-      .then(axios.spread((ressources, modules, sequences, promotions) => {
-        this.setState({ Modules: modules.data })
-        this.setState({ Sequences: sequences.data })
-        this.setState({ Promotions: promotions.data })
-        this.setState({ ressources: ressources.data })
-      }))
+    // axios.all([getAllRessources(), getAllModules(), getAllSequences(), getAllPromotions()])
+    //   .then(axios.spread((ressources, modules, sequences, promotions) => {
+    //     this.setState({ Modules: modules.data })
+    //     this.setState({ Sequences: sequences.data })
+    //     this.setState({ Promotions: promotions.data })
+    //     this.setState({ ressources: ressources.data })
+    //   }))
+    getAllRessources().then(ress => {
+      this.setState({ ressources: ress.data })
+    })
+      .catch(err => {
+        alert('une erreur est survenue', err)
+      })
+    console.log(localStorage.getItem('user'))
   }
 
   // Renvoi false si il y'a un doublon entre la ressource selectionné et les ressources déjà sélectionné et filtrés
@@ -157,8 +164,8 @@ class Ressources extends Component {
     let ressourcesCartes = null
     if (ressources.length) {
       ressourcesCartes = (
-        ressources.map((ressource, index) => (
-          <Card styleName="ressource-carte d-flex flex-column" key={index}>
+        ressources.map(ressource => (
+          <Card styleName="ressource-carte d-flex flex-column" key={ressource.id}>
             <div className="d-flex flex-row">
               <div>
                 <img
@@ -169,11 +176,11 @@ class Ressources extends Component {
                 />
               </div>
               <section className="d-flex flex-column ressource-details">
-                <Link href={ressource.lien}>
-                  <h2><a tabindex="0" title="Accéder à la ressource">{ressource.titre}</a></h2>
+                <Link href={ressource.url}>
+                  <h2><a tabindex="0" title="Accéder à la ressource">{ressource.title}</a></h2>
                 </Link>
-                <i>{ressource.auteur} . 12 Nov 2019 . {ressource.promotion}</i>
-                <i>#{this.state.Modules[ressource.modId].name}</i>
+                <i>{ressource.user} . 12 Nov 2019 . {ressource.promotion}</i>
+                {/* <i>#{this.state.Modules[ressource.modId].name}</i> */}
               </section>
             </div>
             <aside className="d-flex flex-row justify-content-end">
@@ -189,8 +196,7 @@ class Ressources extends Component {
       <Page title="Ressources" contextePage="Ressources">
         <article className="ressources d-flex flex-column">
           <header className="d-flex flex-row justify-content-between align-items-center">
-            {/* select filtre */}
-            <Select className="select-component" options={this.state.Promotions} isMulti={true}
+            {/* <Select className="select-component" options={this.state.Promotions} isMulti={true}
               formatCreateLabel={(inputValue) => 'Promotion'}
               noOptionsMessage={(inputValues) => `${inputValues.inputValue} n'est pas disponible`}
               defaultValue="Promotion"
@@ -219,7 +225,7 @@ class Ressources extends Component {
               getOptionValue={(option) => option.id}
               onChange={(selecteur, event) => this.filtre(selecteur, event)}
               name='Sequences'
-            ></Select>
+            ></Select> */}
             <Link href="./ajouter-ressource">
               <a title="Ajouter une ressource" className="btn btn-success">
                 Ajouter une ressource
