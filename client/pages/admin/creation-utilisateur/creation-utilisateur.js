@@ -5,6 +5,7 @@ import userService from '../../../services/users'
 import UserModal from '../../../components/Modal/UserModal'
 import Router from 'next/router'
 import CSVReader from 'react-csv-reader'
+import AllNotification from '../../../components/Notifications/notifications'
 
 class CreaUtilisateur extends Component {
   state = {
@@ -107,22 +108,21 @@ class CreaUtilisateur extends Component {
         avatar: this.state.avatar,
         promotionId: this.state.promotion
       })
-      // window.alert(`L'utilisateur ${this.state.firstName} a bien été créé`)
-      // this.handleClose()
+      this.setState({ firstName: '' })
+      this.setState({ lastName: '' })
+      this.setState({ email: '' })
+      this.setState({ password: '' })
+      this.setState({ help: '' })
+      this.handleClose()
       this.handleNotif(null, `L'utilisateur ${this.state.firstName} ${this.state.lastName} a bien été créé`)
-      setTimeout(() => Router.push(`/admin/promotion/promotion?promotions=${this.state.promotion}`), 4000)
     } catch (error) {
+      this.handleClose()
       this.handleNotif(error)
-      setTimeout(() => this.handleClose(), 4000)
     }
   }
 
   handleClose = () => {
     this.setState({ modalShow: false })
-  }
-
-  previousPage = () => {
-    window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
   }
 
   render () {
@@ -200,6 +200,7 @@ class CreaUtilisateur extends Component {
               </select>
             </div>
             <div className="form-group">
+            * Champs obligatoires 
               <Button
                 btnType="valider"
                 clicked={this.handleOpenModal}
@@ -240,6 +241,7 @@ class CreaUtilisateur extends Component {
             </div>
 
           </section>
+          <AllNotification alertType={this.state.errorStyle ? 'danger' : 'success'} show={this.state.notifShow} notifMessage={this.state.notifMessage} />
         </form>
       </Page>
     )

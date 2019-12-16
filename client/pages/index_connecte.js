@@ -24,7 +24,6 @@ export default function IndexConnected () {
     }
   )
   const carouselFromPromo = carousels.find(x => x.promotion === user.promotion)
-
   const handleCarouselChange = e => {
     const { name, value } = e.target
     setUserInput({ [name]: value })
@@ -45,8 +44,10 @@ export default function IndexConnected () {
         promotionId: user.promotion
       }
       if (carouselFromPromo) {
+        console.log('updating carousel', carousel)
         carouselService.update(carouselFromPromo.id, carousel)
       } else {
+        console.log('creating carousel', carousel)
         carouselService.create(carousel)
       }
     } catch (error) {
@@ -78,7 +79,7 @@ export default function IndexConnected () {
           {allData
             ? allData.map(x => {
               return (
-                <section className="card-body" alt="dernière actualité formation">
+                <section key={x.id} className="card-body" alt="dernière actualité formation">
                   <p className="card-title">{x.title}</p>
                   <p>{x.content}</p>
                 </section>

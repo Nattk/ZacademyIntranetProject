@@ -9,9 +9,6 @@ const userModal = (props) => {
       <main>
 
         <article>
-          {props.notifShow
-            ? <AllNotification alertType={props.errorStyle ? 'danger' : 'success'} notifMessage={props.notifMessage} />
-            : null}
           <h2>L'utilisateur suivant sera créé</h2>
           <p>Prénom : {props.firstName}</p>
           <p>Nom : {props.lastName}</p>
