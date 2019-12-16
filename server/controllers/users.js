@@ -58,10 +58,9 @@ usersRouter.post('/', async (request, response, next) => {
 
 usersRouter.put('/:id', async (request, response, next) => {
   try {
-    const promotion = await Promotion.findById(request.body.promotion)
+    const promotion = await Promotion.findById(request.body.promotionId)
     const user = request.body
-
-    console.log('user', user)
+    user.promotion = request.body.promotionId
 
     const userToUpdate = await User.findByIdAndUpdate(request.params.id, user, { new: true })
 

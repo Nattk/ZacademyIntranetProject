@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
     minlength: 3,
     required: true,
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Veuillez utiliser un email valide.'],
-    unique: [true, 'email déjà existant']
+    unique: [true, 'Email déjà existant']
   },
   role: {
     type: String,
