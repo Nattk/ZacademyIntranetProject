@@ -10,25 +10,27 @@ import { onShowRecapForm } from '../../../components/Methods/function-validation
 import { handleModalAdd, handleCloseSwitch } from '../../../components/Modal/function-modal'
 import { getAllPromotions, getWhoFollow } from '../../../services/creation-promotion'
 import { handleUpdate, handleSubmit, handleRemove, ContentDetails, ConfirmationDetails } from './function-who-to-follow'
-import Select from 'react-select'
+
 class WhoFollow extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { recap: false }
+    this.state = { recap: false, contacts: '', promotions: '' }
     this.onChangePromotion = this.onChangePromotion.bind(this)
   }
 
   componentDidMount () {
     const user = window.localStorage.getItem('user')
     const role = JSON.parse(user).role
+    const PromotionID = JSON.parse(user).promotion
 
     if (role === 'admin' || role === 'superadmin') {
       this.setState({ showButtons: true })
     }
     axios.all([getWhoFollow(), getAllPromotions()])
       .then(axios.spread((follow, promotions) => {
-        this.setState({ contacts: follow.data, promotions: promotions.data })
+        this.setState({ contacts: follow.data.filter(el => el.promotion === PromotionID), promotions: promotions.data })
       }))
+
       .catch(err => console.log(err))
   }
 
@@ -41,35 +43,13 @@ class WhoFollow extends React.Component {
   }
 
   render () {
-    const villes = this.state.promotions ? this.state.promotions : this.state.promotions
     const { showButtons, showDetails, contacts, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, github, medium, twitter, title, content, avatar, selectedPromotion } = this.state
-    console.log(this.state.promotion)
-    console.log(this.state.contacts ? this.state.contacts.promotion : this.state.contacts)
-    console.log(this.state.contacts)
-    const optionProgramme = this.state.promotions ? this.state.promotions.filter(el => el.title) : this.state.promotions
-    const cityPromo =
-
-      <div className="col-md-4 col-sm-12 col-xs-12">
-
-        <label htmlFor="programme" className="label-style">Promotions * </label>
-        <Select
-          value={this.state.selectedPromotion}
-          onChange={this.onChangePromotion}
-          options={optionProgramme}
-          getOptionLabel={(option) => option.title}
-          getOptionValue={(option) => option.id}
-          className={this.state.selectedPromotionValidation ? ' error-input' : ' '}
-          placeholder={this.state.selectedPromotion}
-        />
-        <p className="validation-style"> <small>{this.state.programmeValidation}</small></p>
-
-      </div>
 
     const card = (
       contacts ? contacts.map((user) =>
         <CardContact
           key={user.id}
-          title={user.promotion} image
+          title={user.title} image
           avatar={user.avatar}
           content={user.content.length > 70 ? user.content.substring(0, 70) + '...' : user.content}
           showButton={showButtons}
@@ -87,12 +67,12 @@ class WhoFollow extends React.Component {
         clicked={() => onShowRecapForm(this.state, this.setState.bind(this))}
         onChange={this.onChange.bind(this)}
         title={this.state.title}
+        contentDescription
         content={this.state.content}
         avatar={this.state.avatar}
         twitter={this.state.twitter}
         github={this.state.github}
         medium={this.state.medium}
-        city={cityPromo}
         titleValidation={this.state.titleValidation}
         contentValidation={this.state.contentValidation}
         influenceur contact identity
@@ -108,12 +88,12 @@ class WhoFollow extends React.Component {
             <Modal show={showModal} onClose={() => handleCloseSwitch(this.setState.bind(this))} titleModal={formulaireTitleAdd ? "Ajout d'un contact" : '' || formulaireUpdate ? 'Modification du contact' : '' || showDetails ? this.state.title : ''}>
               {this.state.formulaire ? formulaire : ''}
               {this.state.recap
-                ? <ConfirmationDetails title={title} content={contacts.promotion} avatar={avatar} medium={medium} github={github} twitter={twitter}
+                ? <ConfirmationDetails title={title} content={content} avatar={avatar} medium={medium} github={github} twitter={twitter} promotion={selectedPromotion.title}
                   onClose={() => handleCloseSwitch(this.setState.bind(this))}
                   clicked={this.state.formulaireUpdate
                     ? () => handleUpdate(this.state, this.state.id, this.setState.bind(this)) : () => handleSubmit(this.state, this.setState.bind(this))}
                 /> : null}
-              {showDetails ? <ContentDetails title={title} content={content} github={github} medium={medium} twitter={twitter} promotion={this.state.contacts.promotion} selectedPromotion={selectedPromotion ? selectedPromotion.title : selectedPromotion} onClose={() => handleCloseSwitch(this.setState.bind(this))} /> : null}
+              {showDetails ? <ContentDetails title={title} content={content} github={github} medium={medium} twitter={twitter} promotion={selectedPromotion ? selectedPromotion.title : selectedPromotion} onClose={() => handleCloseSwitch(this.setState.bind(this))} /> : null}
               {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleCloseSwitch(this.setState.bind(this))} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false}
             </Modal>
 

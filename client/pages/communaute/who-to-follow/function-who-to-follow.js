@@ -11,7 +11,7 @@ export const configuration = (state) => {
     medium: state.medium,
     github: state.github,
 
-    promotionId: state.selectedPromotion
+    promotionId: JSON.parse(user).promotion
   }
   return elements
 }
@@ -60,7 +60,6 @@ export const ContentDetails = (state) => (
       {state.github ? <p><span className="promotion-p-style">Lien Github</span>&nbsp; {state.github}</p> : null}
       {state.twitter ? <p><span className="promotion-p-style">Lien Twitter</span>&nbsp; {state.twitter}</p> : null}
       {state.medium ? <p><span className="promotion-p-style">Lien Medium</span>&nbsp; {state.medium}</p> : null}
-      {state.selectedPromotion ? <p><span className="promotion-p-style">promotion</span>&nbsp; {state.selectedPromotion}</p> : null}
     </section>
 
     <footer className="text-right">
@@ -80,7 +79,6 @@ export const ConfirmationDetails = (state) => (
       {state.github ? <p><span className="promotion-p-style">Lien Github</span>&nbsp; {state.github}</p> : null}
       {state.medium ? <p><span className="promotion-p-style">Lien Medium</span>&nbsp; {state.medium}</p> : null}
       {state.twitter ? <p><span className="promotion-p-style">Lien Twitter</span>&nbsp; {state.twitter}</p> : null}
-      {state.selectedPromotion ? <p><span className="promotion-p-style">promotion</span>&nbsp; {state.selectedPromotion}</p> : null}
     </section>
     <section>
       {state.formulaireUpdate
