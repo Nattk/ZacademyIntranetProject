@@ -3,13 +3,39 @@
     margin-top: 2rem;
     flex-grow: 1;
     margin: 0.5rem;
-    height: 25rem;
 
     .select-component{
         width: 15rem;
     }
+
+    .collapse-button{
+        background-color: #343a40;
+        cursor: pointer;
+        font-size: 2rem;
+        color: white;
+        padding: 0.5rem;
+    }
 }
 
+.notification-close{
+    background: none;
+    color: green;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    transition : 300ms background;
+    &:hover{
+        background:#b2e2be;
+    }
+}
+
+.ReactCollapse--content {
+    padding: 1rem;
+}
+
+.ReactCollapse--collapse {
+    transition: height 500ms;
+}
 .modal-contenu{
     width:100%;
 }
