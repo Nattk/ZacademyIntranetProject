@@ -1,5 +1,6 @@
 import Button from '../../../components/Boutons/Boutons'
 import axios from 'axios'
+import { Router } from 'next/router'
 
 export const configuration = (state) => {
   const user = window.localStorage.getItem('user')
@@ -16,20 +17,9 @@ export const configuration = (state) => {
   console.log(elements)
   return elements
 }
-export const handleUpdate = (state, id, updateState) => {
-  axios.put(`http://localhost:3333/api/users/${id}`, configuration(state))
-    .then((data) => {
-      const index = state.contacts.findIndex((e) => e.id === id)
-      state.contacts[index] = data.data
-      updateState({ showModal: false, contacts: [...state.contacts], showAlertUpdate: true })
-    })
-    .catch((err) => console.log('err', err))
-  setTimeout(() => {
-    updateState({ showAlertUpdate: false })
-  }, 3000)
-}
-export const handleRemove = (state, id, updateState) => {
+export const configuration2 = (state) => {
   const user = window.localStorage.getItem('user')
+
   const elements = {
     firstName: state.firstName,
     lastName: state.lastName,
@@ -40,12 +30,32 @@ export const handleRemove = (state, id, updateState) => {
     promotionId: JSON.parse(user).promotion,
     important: false
   }
-  axios.put(`http://localhost:3333/api/users/${id}`, elements)
+  console.log(elements)
+  return elements
+}
+
+export const handleUpdate = (state, id, updateState) => {
+  axios.put(`http://localhost:3333/api/users/${id}`, configuration(state))
+    .then((data) => {
+      const index = state.contacts.findIndex((e) => e.id === id)
+      state.contacts[index] = data.data
+
+      updateState({ showModal: false, contacts: [...state.contacts], showAlertUpdate: true })
+    })
+    .catch((err) => console.log('err', err))
+  setTimeout(() => {
+    updateState({ showAlertUpdate: false })
+  }, 3000)
+}
+export const handleRemove = (state, id, updateState) => {
+  axios.put(`http://localhost:3333/api/users/${id}`, configuration2(state))
 
     .then((data) => {
       const index = state.contacts.findIndex((e) => e.id === id)
       state.contacts[index] = data.data
-      updateState({ showModal: false, contacts: [...state.contacts], showAlertDelete: true, showDetails: false })
+      const dataUpdated = state.contacts.filter(el => el.important === true)
+
+      updateState({ showModal: false, contacts: dataUpdated, showAlertDelete: true, showDetails: false })
     })
     .catch((err) => console.log('err', err))
 
@@ -60,9 +70,9 @@ export const ContentDetails = (state) => (
       <p><span className="promotion-p-style"></span>Nom:  {state.lastName}</p>
       <p><span className="promotion-p-style"></span>Prénom: {state.firstName}</p>
       <p><span className="promotion-p-style">Description</span>&nbsp; {state.help}</p>
-      {state.phone ? <p><span className="promotion-p-style">Numero de téléphone</span>&nbsp; {state.phone}</p> : null}
-      {state.email ? <p><span className="promotion-p-style">Email</span>&nbsp; {state.email}</p> : null}
-
+      <p><span className="promotion-p-style">Numero de téléphone</span>&nbsp; {state.phone}</p>
+      <p><span className="promotion-p-style">Email</span>&nbsp; {state.email}</p>
+      {state.avatar ? <p><span className="promotion-p-style">Lien avatar</span>&nbsp; {state.avatar}</p> : null}
     </section>
 
     <footer className="text-right">
@@ -82,6 +92,7 @@ export const ConfirmationDetails = (state) => (
       <p><span className="promotion-p-style">Description</span>&nbsp; {state.help}</p>
       <p><span className="promotion-p-style">Numero de téléphone</span>&nbsp; {state.phone}</p>
       <p><span className="promotion-p-style">Email</span>&nbsp; {state.email}</p>
+      {state.avatar ? <p><span className="promotion-p-style">Lien avatar</span>&nbsp; {state.avatar}</p> : null}
 
     </section>
     <section>
@@ -103,9 +114,9 @@ export const ConfirmationDetails = (state) => (
 export const handleValidation = (state, updateState) => {
   state.firstName === '' ? updateState({ firstNameValidation: 'Un prénom est requis' }) : updateState({ firstNameValidation: '' })
   state.lastName === '' ? updateState({ lastNameValidation: 'Un nom est requis' }) : updateState({ lastNameValidation: '' })
-  state.content === '' ? updateState({ contentValidation: 'Une description est requise' }) : updateState({ contentValidation: '' })
+  state.help === '' ? updateState({ contentValidation: 'Une description est requise' }) : updateState({ contentValidation: '' })
   state.phone === '' ? updateState({ phoneValidation: 'Un téléphone est réquis' }) : updateState({ phoneValidation: '' })
-  state.mail === '' ? updateState({ mailValidation: 'Insérer un email valide' }) : updateState({ mailValidation: '' })
+  state.email === '' ? updateState({ emailValidation: 'Insérer un email valide' }) : updateState({ emailValidation: '' })
 }
 
 export const onShowRecapForm = (state, updateState) => {
