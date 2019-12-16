@@ -19,7 +19,6 @@ class UpdatePromotion extends Component {
 
     this.state = {
       promotion: [],
-
       slack: '',
       selectedCity: '',
       formateursOption: '',
@@ -70,23 +69,19 @@ class UpdatePromotion extends Component {
   }
 
   render () {
-    console.log(this.state)
     const startDate = this.state.startDate ? this.state.startDate.substring(0, 10) : this.state.startDate
     const endDate = this.state.endDate ? this.state.endDate.substring(0, 10) : this.state.endDate
-    // console.log(this.state.selectedProgramme ? this.state.selectedProgramme[0].title : this.state.selectedProgramme)
-    console.log(this.state.selectedProgramme ? this.state.selectedProgramme : this.state.programmeSelected)
+
     moment.locale('fr')
     const { selectedCity, slack, selectedProgramme } = this.state
     const start = this.state.startDate ? capitalize(moment(this.state.startDate).format('DD MMMM YYYY')) : null
     const end = this.state.endDate ? capitalize(moment(this.state.endDate).format('DD MMMM YYYY')) : null
     const formateurs = this.state.formateursOption ? this.state.formateursOption.map(el => <p>{el.firstName.concat(' ', el.lastName, ', ')}</p>) : this.state.formateursOption
-    console.log(formateurs)
-    // const programme = this.state.selectedProgramme ? this.state.selectedProgramme[0].title : this.state.selectedProgramme
+
     const students = this.state.studentsOption ? this.state.studentsOption.map(el => el.firstName.concat(' ', el.lastName, ', ')) : this.state.studentsOption
     const optionsEleve = this.state.eleves ? this.state.eleves.filter(el => el.role === 'eleve') : this.state.eleves
     const optionsFormateurs = this.state.formateurs ? this.state.formateurs.filter(el => el.role === 'formateur') : this.state.formateurs
     const optionProgramme = this.state.programmes ? this.state.programmes.filter(el => el.title) : this.state.programmes
-    console.log(formateurs)
     return (
       <Page title={this.state.promotion ? this.state.promotion.title : null} >
 
@@ -135,9 +130,9 @@ class UpdatePromotion extends Component {
                   value={this.state.selectedCity}
                   onChange={this.handleChange}
                   name="city"
-                  id="cityInput"
+                  id={this.state.cityValidation ? 'villes' : 'cityInput'}
                   options={optionsCity}
-                  className={this.state.cityValidation ? ' error-input' : ' '}
+                  className={this.state.cityValidation ? 'error-input' : ' '}
                   placeholder={this.state.selectedCity}
 
                 />
@@ -165,10 +160,11 @@ class UpdatePromotion extends Component {
                 <Select
                   value={this.state.selectedProgramme}
                   onChange={this.onChangeProgramme}
+                  id={this.state.programmeValidation ? 'programmes' : 'programmeId'}
                   options={optionProgramme}
                   getOptionLabel={(option) => option.title}
                   getOptionValue={(option) => option.id}
-                  className={this.state.programmeValidation ? ' error-input' : ' '}
+                  className={this.state.programmeValidation ? 'error-input' : ' '}
                   placeholder={this.state.selectedProgramme}
                 />
                 <p className="validation-style"> <small>{this.state.programmeValidation}</small></p>
@@ -177,20 +173,21 @@ class UpdatePromotion extends Component {
             </section>
             <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style justify-content-center " >
 
-              <div className="col-md-4 col-sm-12 col-xs-12">
+              <div className="col-md-4 col-sm-12 col-xs-12 formateurs-select">
                 <label htmlFor="programme" className="label-style">Choix formateur(s) * </label>
                 <Select
                   placeholder={this.state.formateursOption}
                   isMulti={true}
                   name="colors"
+                  id={this.state.formateursValidation ? 'formateurs' : 'idformateurs'}
                   value={this.state.formateursOption}
                   options={optionsFormateurs}
                   noOptionsMessage={(inputValues) => `${inputValues.inputValue} n'est pas répertorié`}
                   getOptionLabel={(option) => option.firstName.concat(' ', option.lastName)}
                   getOptionValue={(option) => option.id}
                   onChange={this.handleFormateurs}
-                  className={this.state.formateursValidation ? ' error-input' : 'basic-multi-select'}
-                  classNamePrefix="select"
+                  className={this.state.formateursValidation ? 'formateurs-select' : 'basic-multix-select'}
+                  classNamePrefix='select'
                 />
                 <p className="validation-style"> <small>{this.state.formateursValidation}</small></p>
 
@@ -202,18 +199,19 @@ class UpdatePromotion extends Component {
                   isMulti={true}
                   name="colors"
                   value={this.state.studentsOption}
+                  id={this.state.studentsValidation ? 'eleves' : 'eleveId'}
                   options={optionsEleve}
                   noOptionsMessage={(inputValues) => `${inputValues.inputValue} n'est pas répertorié`}
                   getOptionLabel={option => option.firstName.concat(' ', option.lastName)}
                   getOptionValue={option => option.id}
                   onChange={this.handleStudents}
-                  className={this.state.studentsValidation ? ' error-input' : 'basic-multi-select'}
+                  className={this.state.studentsValidation ? 'error-select' : 'basic-multi-select'}
                   classNamePrefix="select"
                 />
                 <p className="validation-style"> <small>{this.state.studentsValidation}</small></p>
               </div>
             </section>
-            <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style  " >
+            <section className="col-md-12 col-sm-12 col-xs-12 d-flex justify-content-center  " >
               <div className="col-md-4 col-sm-12 col-xs-12">
                 <Input
                   label="Lien Slack de la promotion"
