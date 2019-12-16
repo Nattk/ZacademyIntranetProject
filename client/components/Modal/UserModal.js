@@ -1,7 +1,6 @@
 import React from 'react'
 import Modal from 'react-responsive-modal'
 import Button from '../Boutons/Boutons'
-import AllNotification from '../Notifications/notifications'
 
 const userModal = (props) => {
   return (

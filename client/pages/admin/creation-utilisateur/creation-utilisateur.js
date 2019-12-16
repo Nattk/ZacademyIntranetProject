@@ -3,7 +3,6 @@ import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
 import userService from '../../../services/users'
 import UserModal from '../../../components/Modal/UserModal'
-import Router from 'next/router'
 import CSVReader from 'react-csv-reader'
 import AllNotification from '../../../components/Notifications/notifications'
 
@@ -200,7 +199,7 @@ class CreaUtilisateur extends Component {
               </select>
             </div>
             <div className="form-group">
-            * Champs obligatoires 
+            * Champs obligatoires
               <Button
                 btnType="valider"
                 clicked={this.handleOpenModal}
