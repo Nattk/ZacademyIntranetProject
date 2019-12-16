@@ -3,8 +3,8 @@ import Page from '../../../layouts/admin'
 import Button from '../../../components/Boutons/Boutons'
 import userService from '../../../services/users'
 import UserModal from '../../../components/Modal/UserModal'
-import Router from 'next/router'
 import CSVReader from 'react-csv-reader'
+import AllNotification from '../../../components/Notifications/notifications'
 
 class CreaUtilisateur extends Component {
   state = {
@@ -107,22 +107,23 @@ class CreaUtilisateur extends Component {
         avatar: this.state.avatar,
         promotionId: this.state.promotion
       })
-      // window.alert(`L'utilisateur ${this.state.firstName} a bien été créé`)
-      // this.handleClose()
+      this.handleClose()
       this.handleNotif(null, `L'utilisateur ${this.state.firstName} ${this.state.lastName} a bien été créé`)
-      setTimeout(() => Router.push(`/admin/promotion/promotion?promotions=${this.state.promotion}`), 4000)
     } catch (error) {
+      this.handleClose()
       this.handleNotif(error)
-      setTimeout(() => this.handleClose(), 4000)
     }
+    this.setState({ firstName: '' })
+    this.setState({ lastName: '' })
+    this.setState({ email: '' })
+    this.setState({ password: '' })
+    this.setState({ help: '' })
+    this.setState({ phone: '' })
+    this.setState({ avatar: '' })
   }
 
   handleClose = () => {
     this.setState({ modalShow: false })
-  }
-
-  previousPage = () => {
-    window.location.assign('/admin/gestion-utilisateur/gestion-utilisateur')
   }
 
   render () {
@@ -145,27 +146,27 @@ class CreaUtilisateur extends Component {
           <section className="section">
             <div className="form-group">
               <label htmlFor="userfirstname">Prénom*</label>
-              <input type="text" name="userfirstname" className="form-control" id="exampleFormControlInput1" placeholder="Prénom" onChange={e => this.handlefirstnameChange(e.target)} required></input>
+              <input type="text" name="userfirstname" className="form-control" id="exampleFormControlInput1" value={this.state.firstName} placeholder="Prénom" onChange={e => this.handlefirstnameChange(e.target)} required></input>
             </div>
             <div className="form-group">
               <label htmlFor="username">Nom*</label>
-              <input type="text" name="username" className="form-control" id="exampleFormControlInput1" placeholder="Nom" onChange={e => this.handlelastnameChange(e.target)} required></input>
+              <input type="text" name="username" className="form-control" id="exampleFormControlInput1" value={this.state.lastName} placeholder="Nom" onChange={e => this.handlelastnameChange(e.target)} required></input>
             </div>
             <div className="form-group">
               <label htmlFor="useremail">Email*</label>
-              <input type="email" name="useremail" className="form-control" id="exampleFormControlInput1" placeholder="Email" onChange={e => this.handleemailChange(e.target)} required></input>
+              <input type="email" name="useremail" className="form-control" id="exampleFormControlInput1" value={this.state.email} placeholder="Email" onChange={e => this.handleemailChange(e.target)} required></input>
             </div>
             <div className="form-group">
               <label htmlFor="userpwd">Mot de Passe*</label>
-              <input type="password" name="userpwd" className="form-control" id="exampleFormControlInput1" placeholder="Mot de Passe" onChange={e => this.handlepasswordChange(e.target)} required></input>
+              <input type="password" name="userpwd" className="form-control" id="exampleFormControlInput1" value={this.state.password} placeholder="Mot de Passe" onChange={e => this.handlepasswordChange(e.target)} required></input>
             </div>
             <div className="form-group">
               <label htmlFor="userphone">Téléphone</label>
-              <input type="Telephone" name="userphone" className="form-control" id="exampleFormControlInput1" placeholder="Telephone" onChange={e => this.handlephoneChange(e.target)}></input>
+              <input type="Telephone" name="userphone" className="form-control" id="exampleFormControlInput1" value={this.state.phone} placeholder="Telephone" onChange={e => this.handlephoneChange(e.target)}></input>
             </div>
             <div className="form-group">
               <label htmlFor="userdescription">Description</label>
-              <textarea className="form-control" name="userdescription" onChange={e => this.handlehelpChange(e.target)} ></textarea>
+              <textarea className="form-control" name="userdescription" value={this.state.help} onChange={e => this.handlehelpChange(e.target)} ></textarea>
             </div><div> Contact Utile ?
               <div className="form-check form-check-inline">
                 <input className="form-check-input" type="checkbox" name="checkbox" id="inlineRadio1" value={this.state.important} onChange={e => this.handleChangeChk(e)} />
@@ -174,7 +175,7 @@ class CreaUtilisateur extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="profileimg">Image de profil</label>
-              <input type="text" name="profileimg" className="form-control" id="exampleFormControlInput1" placeholder="Image de profil" onChange={e => this.handleProfileImgChange(e.target)} />
+              <input type="text" name="profileimg" className="form-control" id="exampleFormControlInput1" value={this.state.avatar} placeholder="Image de profil" onChange={e => this.handleProfileImgChange(e.target)} />
             </div>
             <div className="form-group">
               <label htmlFor="role">Role*</label>
@@ -200,6 +201,7 @@ class CreaUtilisateur extends Component {
               </select>
             </div>
             <div className="form-group">
+            * Champs obligatoires
               <Button
                 btnType="valider"
                 clicked={this.handleOpenModal}
@@ -225,7 +227,7 @@ class CreaUtilisateur extends Component {
                       })
                     }
                   })
-                  window.alert('Les utilisateurs ont bien été créés')
+                  this.handleNotif(null, 'Les utilisateurs ont bien été créés')
                 } catch (error) {
                   this.handleNotif(error)
                 }
@@ -240,6 +242,7 @@ class CreaUtilisateur extends Component {
             </div>
 
           </section>
+          <AllNotification alertType={this.state.errorStyle ? 'danger' : 'success'} show={this.state.notifShow} notifMessage={this.state.notifMessage} />
         </form>
       </Page>
     )
