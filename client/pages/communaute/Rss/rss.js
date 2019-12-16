@@ -15,14 +15,15 @@ class Follow extends React.Component {
   }
 
   componentDidMount () {
-    axios.get('http://localhost:3333/api/rss')
-      .then((data) => {
-        this.setState({ rss: data.data })
-      })
-      .catch(err => console.log(err))
-
     const user = window.localStorage.getItem('user')
     const role = JSON.parse(user).role
+    const PromotionId = JSON.parse(user).promotion
+
+    axios.get('http://localhost:3333/api/rss')
+      .then((data) => {
+        this.setState({ rss: data.data.filter(el => el.promotion === PromotionId) })
+      })
+      .catch(err => console.log(err))
 
     if (role !== 'eleve' || role !== 'formateur') {
       this.setState({ showButtons: true })
@@ -58,6 +59,7 @@ class Follow extends React.Component {
         clicked={() => onShowRecapForm(this.state, this.setState.bind(this))}
         onChange={this.onChange.bind(this)}
         rss
+        contentDescription
         title={this.state.title}
         content={this.state.content}
         url={this.state.url}
