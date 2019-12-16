@@ -44,7 +44,8 @@ class WhoFollow extends React.Component {
 
   render () {
     const { showButtons, showDetails, contacts, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, github, medium, twitter, title, content, avatar, selectedPromotion } = this.state
-
+    console.log(title)
+    console.log(this.state)
     const card = (
       contacts ? contacts.map((user) =>
         <CardContact
@@ -67,6 +68,7 @@ class WhoFollow extends React.Component {
         clicked={() => onShowRecapForm(this.state, this.setState.bind(this))}
         onChange={this.onChange.bind(this)}
         title={this.state.title}
+
         contentDescription
         content={this.state.content}
         avatar={this.state.avatar}
@@ -88,7 +90,7 @@ class WhoFollow extends React.Component {
             <Modal show={showModal} onClose={() => handleCloseSwitch(this.setState.bind(this))} titleModal={formulaireTitleAdd ? "Ajout d'un contact" : '' || formulaireUpdate ? 'Modification du contact' : '' || showDetails ? this.state.title : ''}>
               {this.state.formulaire ? formulaire : ''}
               {this.state.recap
-                ? <ConfirmationDetails title={title} content={content} avatar={avatar} medium={medium} github={github} twitter={twitter} promotion={selectedPromotion.title}
+                ? <ConfirmationDetails title={title} content={content} avatar={avatar} medium={medium} github={github} twitter={twitter}
                   onClose={() => handleCloseSwitch(this.setState.bind(this))}
                   clicked={this.state.formulaireUpdate
                     ? () => handleUpdate(this.state, this.state.id, this.setState.bind(this)) : () => handleSubmit(this.state, this.setState.bind(this))}
