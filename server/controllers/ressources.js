@@ -13,13 +13,13 @@ const getTokenFrom = request => {
 }
 
 ressourcesRouter.get('/', async (req, res) => {
-  const allRessources = await Ressource.find({}).populate('promotion', { title: 1 })
+  const allRessources = await Ressource.find({}).populate('promotion', { title: 1 }).populate('user')
   res.json(allRessources.map(ressource => ressource.toJSON()))
 })
 
 ressourcesRouter.get('/:id', async (req, res, next) => {
   try {
-    const foundressource = await Ressource.findById(req.params.id)
+    const foundressource = await Ressource.findById(req.params.id).populate('promotion', { title: 1 }).populate('user')
     if (foundressource) {
       res.json(foundressource.toJSON())
     } else {

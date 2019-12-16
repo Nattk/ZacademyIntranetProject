@@ -21,10 +21,11 @@ carouselsRouter.get('/:id', async (req, res, next) => {
 })
 
 carouselsRouter.post('/', async (request, response, next) => {
+  console.log('request.body.promotionId', request.body.promotionId)
   const promotion = await Promotion.findById(request.body.promotionId)
   const carousel = new Carousel({ ...request.body, promotion: promotion.id })
-
   try {
+
     const savedCarousel = await carousel.save()
     response.json(savedCarousel.toJSON())
   } catch (exception) {

@@ -29,4 +29,4 @@ carouselSchema.set('toJSON', {
   }
 })
 
-module.exports = mongoose.model('Carouselgit', carouselSchema)
+module.exports = mongoose.model('Carousel', carouselSchema)
