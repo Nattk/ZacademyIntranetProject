@@ -15,8 +15,8 @@ export const handleValidationPromotion = (state, updateState) => {
   state.title === '' ? updateState({ titreValidation: 'Un titre est réquis', titreUniqueValidation: 'Le titre  doit être unique' }) : updateState({ titreValidation: '', titreUniqueValidation: '' })
   state.content === '' ? updateState({ contentValidation: 'Une description est requise' }) : updateState({ contentValidation: '' })
   state.selectedProgramme === '' ? updateState({ programmeValidation: 'Un programme est réquis' }) : updateState({ programmeValidation: '' })
-  state.formateursOption === '' ? updateState({ formateursValidation: 'Veuillez selectionné un ou plusieurs formateurs ' }) : updateState({ formateursValidation: '' })
-  state.studentsOption === '' ? updateState({ studentsValidation: 'Veuillez selectionné des futurs consultants ' }) : updateState({ studentsValidation: '' })
+  state.formateursOption === '' || state.formateursOption === null ? updateState({ formateursValidation: 'Veuillez selectionné un ou plusieurs formateurs ' }) : updateState({ formateursValidation: '' })
+  state.studentsOption === '' || state.studentsOption === null ? updateState({ studentsValidation: 'Veuillez selectionné des futurs consultants ' }) : updateState({ studentsValidation: '' })
   state.selectedCity === '' ? updateState({ cityValidation: 'Veuillez selectionné une ville ' }) : updateState({ cityValidation: '' })
   state.startDate === undefined || state.startDate === null ? updateState({ startdateValidation: 'Veuillez selectionné une date de début de formation ' }) : updateState({ startdateValidation: '' })
   state.endDate === undefined || state.endDate === null ? updateState({ enddateValidation: 'Veuillez selectionné une date  de fin de formation ' }) : updateState({ enddateValidation: '' })
@@ -53,8 +53,6 @@ export const onShowRecapUpdatePromotion = (state, updateState) => {
   if (state.title && state.selectedProgramme && state.selectedCity && state.formateursOption && state.studentsOption && state.endDate && state.startDate !== '') {
     axios.all([getAllPromotions(), getPromotionByID(state.id)])
       .then(axios.spread((promotions, promotion) => {
-        console.log(promotion.data.title)
-        console.log(state.title)
         if (state.title === '') {
           updateState({
             titreUniqueValidation: 'Le titre  doit être unique', showModal: false

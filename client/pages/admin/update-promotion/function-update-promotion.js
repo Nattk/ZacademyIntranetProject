@@ -3,8 +3,6 @@ import Router from 'next/router'
 import axios from 'axios'
 import { capitalize } from '../../index_connecte'
 import Button from '../../../components/Boutons/Boutons'
-import { handleValidationPromotion } from '../../../components/Methods/function-validation'
-import { getPromotionByID } from '../../../services/creation-promotion'
 import moment from 'moment'
 moment.locale('fr')
 export const configuration = (state) => {

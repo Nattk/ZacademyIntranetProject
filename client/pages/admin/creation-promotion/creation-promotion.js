@@ -132,6 +132,7 @@ class CreaPromotion extends Component {
                   onChange={this.handleChange}
                   name="city"
                   id="cityInput"
+                  id={this.state.cityValidation ? 'villes' : 'cityInput'}
                   options={optionsCity}
                   className={this.state.cityValidation ? ' error-input' : ' '}
                   placeholder="Selectionner une ville"
@@ -163,6 +164,7 @@ class CreaPromotion extends Component {
                   value={selectedProgramme}
                   onChange={this.onChangeProgramme}
                   options={optionProgramme}
+                  id={this.state.programmeValidation ? 'programmes' : 'programmeInput'}
                   getOptionLabel={(option) => option.title}
                   getOptionValue={(option) => option.id}
                   className={this.state.programmeValidation ? ' error-input' : ' '}
@@ -182,6 +184,7 @@ class CreaPromotion extends Component {
                   name="colors"
                   value={formateursOption}
                   options={optionsFormateurs}
+                  id={this.state.formateursValidation ? 'formateurs' : 'formateurInput'}
                   noOptionsMessage={(inputValues) => `${inputValues.inputValue} n'est pas répertorié`}
                   getOptionLabel={(option) => option.firstName.concat(' ', option.lastName)}
                   getOptionValue={(option) => option.id}
@@ -200,6 +203,7 @@ class CreaPromotion extends Component {
                   name="colors"
                   value={studentsOption}
                   options={optionsEleve}
+                  id={this.state.studentsValidation ? 'eleves' : 'studentInput'}
                   noOptionsMessage={(inputValues) => `${inputValues.inputValue} n'est pas répertorié`}
                   getOptionLabel={option => option.firstName.concat(' ', option.lastName)}
                   getOptionValue={option => option.id}
@@ -210,7 +214,7 @@ class CreaPromotion extends Component {
                 <p className="validation-style"> <small>{this.state.studentsValidation}</small></p>
               </div>
             </section>
-            <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style  " >
+            <section className="col-md-12 col-sm-12 col-xs-12 d-flex justify-content-center  " >
               <div className="col-md-4 col-sm-12 col-xs-12">
                 <Input
                   label="Lien Slack de la promotion"
