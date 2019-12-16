@@ -7,13 +7,13 @@ const TextArea = (props) => {
       <label htmlFor="description" className="label-style" >{props.label}</label>
       <textarea
         type="text"
-        name="content"
+        name={props.name}
         required
         cols="40"
         rows={props.rows}
         placeholder={props.placeholder}
         className={props.validation ? 'form-control who-to-follow-input' : 'form-control'}
-        value={props.content}
+        value={props.value}
         onChange={props.onChange}
       />
       <p className="validation-style"><small >&nbsp;{props.validation}</small></p>
