@@ -41,8 +41,12 @@ export const handleUpdate = (state, id, updateState) => {
       state.contacts[index] = data.data
       updateState({ showModal: false, contacts: [...state.contacts], showAlertUpdate: true })
     })
-    .catch((err) => alert(err.response.data.error))
-  // updateState({ slackValidation: err.response.data.error }))
+    .catch((err) => updateState({
+      urlSocialMediaValidation: err.response.data.error,
+      githubValidation: err.response.data.error.match('github') ? ' Veuillez entrer une URL github ou gitlab valide' : '',
+      twitterValidation: err.response.data.error.match('twitter') ? ' Veuillez entrer une URL twitter valide' : '',
+      mediumValidation: err.response.data.error.match('medium') ? ' Veuillez entrer une URL medium valide' : ''
+    }))
   setTimeout(() => {
     updateState({ showAlertUpdate: false })
   }, 3000)

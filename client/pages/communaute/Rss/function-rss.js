@@ -32,7 +32,7 @@ export const handleUpdate = (state, id, updateState) => {
       state.rss[index] = data.data
       updateState({ showModal: false, rss: [...state.rss], showAlertUpdate: true })
     })
-    .catch((err) => console.log('err', err))
+    .catch(() => updateState({ urlValidation: 'Veuillez entrer une url RSS valide' }))
   setTimeout(() => {
     updateState({ showAlertUpdate: false })
   }, 3000)

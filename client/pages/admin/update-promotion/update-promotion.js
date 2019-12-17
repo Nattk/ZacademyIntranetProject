@@ -69,7 +69,6 @@ class UpdatePromotion extends Component {
   }
 
   render () {
-    console.log(this.state)
     const startDate = this.state.startDate ? this.state.startDate.substring(0, 10) : this.state.startDate
     const endDate = this.state.endDate ? this.state.endDate.substring(0, 10) : this.state.endDate
 
