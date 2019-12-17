@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/admin'
 import axios from 'axios'
-import userService from '../../../services/users'
 import Link from 'next/link'
 import moment from 'moment'
 import { capitalize } from '../../index_connecte'
