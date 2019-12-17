@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useLocalStorage } from '../Login/LoginForm'
 import Router from 'next/router'
 
 const Nav = () => {
   const [user, setUser] = useLocalStorage('user', '')
+  const [Promotion, setPromotion] = useState('')
   const offlineClick = () => {
     Router.push('/')
     setUser('')
   }
+
+  useEffect(() => {
+    fetch(`http://localhost:3333/api/promotions/${user.promotion}`).then(res => res.json()).then(res => setPromotion(res) )
+  }, [])
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark" id="navbar">
       <button className="navbar-toggler" type="button" title="menu burger" data-toggle="collapse" data-target="#navbarSupportedContent15"
@@ -46,7 +52,7 @@ const Nav = () => {
           </a>
 
           <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a href="https://app.slack.com/client/TDKLZEH1B/CNCQ57W04" target="_blank" role="button" alt="Lien vers slack academy">Slack academy</a><br></br>
+            <a href={Promotion.slack} target="_blank" role="button" alt="Lien vers slack academy">Slack academy</a><br></br>
             <Link href="/communaute/Rss/rss"><a role="button" alt="Lien vers flux rss">RSS</a></Link><br></br>
             <Link href="/communaute/who-to-follow/who-to-follow"><a role="button" alt="Lien vers who to follow">Who to follow</a></Link><br></br>
           </div>
