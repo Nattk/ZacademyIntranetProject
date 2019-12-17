@@ -10,8 +10,18 @@ export const handleValidation = (state, updateState) => {
   state.startDate === undefined || state.startDate === null ? updateState({ startdateValidation: 'Veuillez selectionné une date de début de formation ' }) : updateState({ startdateValidation: '' })
   state.endDate === undefined || state.endDate === null ? updateState({ enddateValidation: 'Veuillez selectionné une date  de fin de formation ' }) : updateState({ enddateValidation: '' })
   state.startDate === undefined && state.endDate === undefined ? updateState({ dateValidation: 'Veuillez selectionné une période de formation ' }) : updateState({ dateValidation: '' })
+  state.twitter === '' || state.medium === '' || state.github === ''
+    ? updateState({
+      urlSocialMediaValidation: 'Veuillez insérer un ou plusieurs liens ',
+      githubValidation: ' Veuillez entrer une URL github ou gitlab valide',
+      twitterValidation: ' Veuillez entrer une URL twitter valide',
+      mediumValidation: ' Veuillez entrer une URL medium valide'
+    })
+    : updateState({
+      urlSocialMediaValidation: '', githubValidation: ' ', twitterValidation: ' ', mediumValidation: ' '
+    })
 }
-export const handleValidationPromotion = (state, updateState) => {
+export const handleValidationPromotion = (state, updateState, error) => {
   state.title === '' ? updateState({ titreValidation: 'Un titre est réquis', titreUniqueValidation: 'Le titre  doit être unique' }) : updateState({ titreValidation: '', titreUniqueValidation: '' })
   state.content === '' ? updateState({ contentValidation: 'Une description est requise' }) : updateState({ contentValidation: '' })
   state.selectedProgramme === '' ? updateState({ programmeValidation: 'Un programme est réquis' }) : updateState({ programmeValidation: '' })
@@ -29,6 +39,14 @@ export const onShowRecapForm = (state, updateState) => {
     handleValidation(state, updateState)
   }
 }
+export const onShowRecapFormWho2Follow = (state, updateState) => {
+  const socialLink = state.twitter || state.medium || state.github
+  if (state.title && state.content && socialLink !== '') {
+    updateState({ recap: true, formulaire: false, urlSocialMediaValidation: '' })
+  } else {
+    handleValidation(state, updateState)
+  }
+}
 export const onShowRecapCreationPromotion = (state, updateState) => {
   if (state.title && state.selectedProgramme && state.selectedCity && state.formateursOption && state.studentsOption && state.endDate && state.startDate !== '') {
     axios.get('http://localhost:3333/api/promotions')
@@ -42,7 +60,23 @@ export const onShowRecapCreationPromotion = (state, updateState) => {
           updateState({ titreUniqueValidation: 'Le titre  doit être unique', showModal: false })
         }
         if (data.data.filter(el => el.title === state.title).length === 0 && state.title !== '') {
-          updateState({ showModal: true })
+          updateState({
+            showModal: true,
+            slackValidation: '',
+            titreValidation: '',
+            titreUniqueValidation: '',
+            programmeValidation: '',
+            phoneValidation: '',
+            cityValidation: '',
+            emailValidation: '',
+            lastNameValidation: '',
+            firstNameValidation: '',
+            formateursValidation: '',
+            studentsValidation: '',
+            enddateValidation: '',
+            startdateValidation: '',
+            dateValidation: ''
+          })
         }
       })
   } else {
@@ -65,7 +99,23 @@ export const onShowRecapUpdatePromotion = (state, updateState) => {
           updateState({ showModal: true, titreUniqueValidation: '' })
         }
         if (promotion.data.title === state.title) {
-          updateState({ showModal: true, titreUniqueValidation: '' })
+          updateState({
+            showModal: true,
+            slackValidation: '',
+            titreValidation: '',
+            titreUniqueValidation: '',
+            programmeValidation: '',
+            phoneValidation: '',
+            cityValidation: '',
+            emailValidation: '',
+            lastNameValidation: '',
+            firstNameValidation: '',
+            formateursValidation: '',
+            studentsValidation: '',
+            enddateValidation: '',
+            startdateValidation: '',
+            dateValidation: ''
+          })
         }
       })
       )
