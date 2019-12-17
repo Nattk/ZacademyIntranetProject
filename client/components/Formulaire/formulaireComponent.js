@@ -40,7 +40,7 @@ const FormulaireComponent = (props) => {
             <Input label="Titre *" type="text" name="title" placeholder='Inserer un titre ' validation={props.titleValidation} value={props.title} onChange={props.onChange} />
           </div>
           <div className="col-md-6 col-sm-12 col-xs-12 ">
-            <Input label="Lien flux rss *" type="text" name="url" id="urlRss" placeholder="Inserer un lien flux rss " value={props.url} validation={props.urlValidation} onChange={props.onChange} />
+            <Input label="Lien flux rss *" type="text" name="url" id="urlRss" placeholder="Inserer un lien flux rss au format xml " value={props.url} validation={props.urlValidation} onChange={props.onChange} />
           </div>
         </section>) : null}
       {props.contentDescription
