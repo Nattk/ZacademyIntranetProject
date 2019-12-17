@@ -1,6 +1,5 @@
 import Button from '../../../components/Boutons/Boutons'
 import axios from 'axios'
-import { Router } from 'next/router'
 
 export const configuration = (state) => {
   const user = window.localStorage.getItem('user')
