@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Page from '../../../layouts/admin'
 import axios from 'axios'
+import userService from '../../../services/users'
 import Link from 'next/link'
 import moment from 'moment'
 import { capitalize } from '../../index_connecte'
@@ -8,8 +9,8 @@ import { capitalize } from '../../index_connecte'
 class Admin extends Component {
   constructor (props) {
     super(props)
-
     this.state = {
+      user: '',
       promotions: ''
 
     }
@@ -22,10 +23,24 @@ class Admin extends Component {
   }
 
   componentDidMount () {
+    if (window) {
+      this.setState({ user: JSON.parse(localStorage.getItem('user')) })
+    }
     axios.get('http://localhost:3333/api/promotions')
       .then((promotions) => {
         this.setState({ promotions: promotions.data })
       })
+  }
+
+  isover = () => {
+    console.log('', this.state.promotions)
+  }
+
+  handleSeePromo = (id) => {
+    const userUpdate = { ...this.state.user, promotion: id }
+    if (window) {
+      window.localStorage.setItem('user', JSON.stringify(userUpdate))
+    }
   }
 
   render () {
@@ -33,9 +48,6 @@ class Admin extends Component {
     return (
       <Page title="Admin Accueil" >
         <article id="admin-page">
-          {/* <section className="search-bar-promo d-flex flex-row">
-            <input className="form-control" type="text" placeholder="Rechercher" />
-          </section> */}
           <h1 className="h1-promotion-style" >Promotions en cours</h1>
           <section className="col-md-12 col-sm-12 col-xs-12">
             <table className="col-md-12 col-sm-12 col-xs-12 table table-hover show-table-media">
@@ -57,15 +69,16 @@ class Admin extends Component {
                     <tr className="promotion-row t-head-style tr-style" key={promo.id}>
                       <td id="titlePromo">{promo.title}</td>
                       <td>{promo.city}</td>
-                      <td>{promo.programmes.map(el => el.title)}</td>
+                      {promo.programmes.map(el => <td key={el.id}>{el.title}</td>)}
                       <td className="date-style d-column">
                         <span className="date-style">Début: {promo.start ? capitalize(moment(promo.start).format('DD MMMM YYYY')) : promo.start}</span>
                         <span className="date-style"> Fin: {promo.end ? capitalize(moment(promo.end).format('DD MMMM YYYY')) : promo.end} </span>
                       </td>
                       <td>
-
-                        <Link href={{ pathname: '../promotion/promotion', query: { promotions: promo.id } }}>details    </Link>
-
+                        <Link href={{ pathname: '../promotion/promotion', query: { promotions: promo.id } }}><a className="btn btn-danger bouton-navbar">details</a></Link>
+                        <Link href="/index_connecte">
+                          <a className="btn btn-danger bouton-navbar" onClick={() => this.handleSeePromo(promo.id)}>Voir Zone d'activité</a>
+                        </Link>
                       </td>
                     </tr>
                   )) : null}
