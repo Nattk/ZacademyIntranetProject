@@ -124,7 +124,7 @@ class Admin extends Component {
                   <Link href={{ pathname: '../update-promotion/update-promotion', query: { promotions: promo.id } }}>
                     <i className="fa fa-pen update-icon " title="Mettre à jour cette promotion " />
                   </Link>
-                  <i class="fas fa-trash " title="supprimer cette promotion" onClick={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, recap: false, formulaireTitleAdd: '', formulaireUpdate: '', id: promo.id, showDetails: false })}></i>
+                  <i className="fas fa-trash " title="supprimer cette promotion" onClick={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, recap: false, formulaireTitleAdd: '', formulaireUpdate: '', id: promo.id, showDetails: false })}></i>
 
                 </article>
               ))
