@@ -1,143 +1,109 @@
 import React from 'react'
+import axios from 'axios'
 import Page from '../../../layouts/classic'
 import Header from '../../../components/Header/header-button-add'
+import CardContact from '../../../components/CardContact/cardContact'
 import Modal from '../../../components/Modal/modal'
+import FormulaireComponent from '../../../components/Formulaire/formulaireComponent'
+import { DeleteDescription } from '../../../components/Modal/SectionModal'
+import { onShowRecapForm } from '../../../components/Methods/function-validation'
+import { handleModalAdd, handleCloseSwitch } from '../../../components/Modal/function-modal'
+import { getAllPromotions, getWhoFollow } from '../../../services/creation-promotion'
+import { handleUpdate, handleSubmit, handleRemove, ContentDetails, ConfirmationDetails } from './function-who-to-follow'
 
-import ValidationMethod from '../../../components/Methods/ValidationMethod'
-import { Form, ShowCard, DeleteDescription } from '../../../components/Modal/SectionModal'
-import Data from '../../../components/whoToFollow/data.json'
-import '../../../styles/sass/styles.scss'
-class Follow extends ValidationMethod {
+class WhoFollow extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      fakeData: Data,
-      id: '',
-      firstName: '',
-      lastName: '',
-      fonction: '',
-      description: '',
-      linkGithub: '',
-      linkLinkedin: '',
-      linkTwitter: '',
-      img: '',
-      firstNameValidation: '',
-      lastNameValidation: '',
-      fonctionValidation: '',
-      descriptionValidation: '',
-      imgValidation: '',
-      descriptionDelete: false,
-      formulaire: false,
-      showModal: false,
-      showModalDelete: false,
-      showModalUpdate: false,
-      showAlertSuccess: false,
-      showAlertUpdate: false,
-      formulaireUpdate: false,
-      showAlertDelete: false,
-      formulaireTitleAdd: false
-
-    }
-    this.handleModalAdd = this.handleModalAdd.bind(this)
-    this.handleClose = this.handleClose.bind(this)
+    this.state = { recap: false, contacts: '', promotions: '' }
+    this.onChangePromotion = this.onChangePromotion.bind(this)
   }
 
-  handleModalAdd () {
-    this.setState({
-      showModal: true, formulaire: true, formulaireTitleAdd: true, formulaireUpdate: false, descriptionDelete: false, firstName: '', lastName: '', fonction: '', description: '', linkLinkedin: '', linkGithub: '', linkTwitter: ''
-    })
+  componentDidMount () {
+    const user = window.localStorage.getItem('user')
+    const role = JSON.parse(user).role
+    const PromotionID = JSON.parse(user).promotion
+
+    if (role === 'admin' || role === 'superadmin') {
+      this.setState({ showButtons: true })
+    }
+    axios.all([getWhoFollow(), getAllPromotions()])
+      .then(axios.spread((follow, promotions) => {
+        this.setState({ contacts: follow.data.filter(el => el.promotion === PromotionID), promotions: promotions.data })
+      }))
+
+      .catch(err => console.log(err))
   }
 
-  handleClose () {
-    this.setState({
-      showModal: false, firstNameValidation: '', lastNameValidation: '', fonctionValidation: '', descriptionValidation: ''
-    })
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleSubmit () {
-    const elements = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      fonction: this.state.fonction,
-      img: this.state.img,
-      description: this.state.description.length > 70 ? this.state.description.substring(0, 70) + '...' : this.state.description,
-      linkGithub: this.state.linkGithub,
-      linkReddit: this.state.linkReddit,
-      linkLinkedin: this.state.linkLinkedin,
-      linkTwitter: this.state.linkTwitter,
-      id: Math.random().toString(36).substr(2, 9)
-    }
-    const data = this.state.fakeData
-    const newdata = [...data, elements]
-
-    if (this.state.firstName && this.state.lastName && this.state.fonction && this.state.description !== '') {
-      this.setState({ fakeData: newdata, showAlertSuccess: true, showModal: false, firstNameValidaion: '', lastNameValidation: '', fonctionValidation: '', descriptionValidation: '' })
-      setTimeout(() => {
-        this.setState({
-          showAlertSuccess: false
-        })
-      }, 5000)
-    } else {
-      this.handleValidation()
-    }
+  onChangePromotion (selectedPromotion) {
+    this.setState({ selectedPromotion })
   }
 
   render () {
-    const Formul = (
-      <Form handleClose={this.handleClose}
-        buttonName={this.state.formulaireUpdate ? 'Mettre à jour' : 'Ajouter'}
-        clicked={this.state.formulaireUpdate ? () => this.handleUpdate(this.state.id) : this.handleSubmit}
-        onChange={this.onChange} lastName={this.state.lastName}
-        influenceur
-        contact
-        identity
-        firstName={this.state.firstName}
-        lastName={this.state.lastName}
-        fonction={this.state.fonction}
-        description={this.state.description}
-        linkGithub={this.state.linkGithub}
-        linkLinkedin={this.state.linkLinkedin}
-        linkTwitter={this.state.linkTwitter}
-        firstNameValidation={this.state.firstNameValidation}
-        lastNameValidation={this.state.lastNameValidation}
-        fonctionValidation={this.state.fonctionValidation}
-        descriptionValidation={this.state.descriptionValidation}
+    const { showButtons, showDetails, contacts, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, github, medium, twitter, title, content, avatar, selectedPromotion } = this.state
+    console.log(title)
+    console.log(this.state)
+    const card = (
+      contacts ? contacts.map((user) =>
+        <CardContact
+          key={user.id}
+          title={user.title} image
+          avatar={user.avatar}
+          content={user.content.length > 70 ? user.content.substring(0, 70) + '...' : user.content}
+          showButton={showButtons}
+          twitter={user.twitter} github={user.github} medium={user.medium}
+          remove={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, recap: false, formulaireTitleAdd: '', formulaireUpdate: '', id: user.id, showDetails: false })}
+          update={() => this.setState({ showModal: true, formulaire: true, recap: false, formulaireUpdate: true, descriptionDelete: false, formulaireTitleAdd: '', title: user.title, content: user.content, id: user.id, avatar: user.avatar, github: user.github, twitter: user.twitter, medium: user.medium, titleValidation: '', contentValidation: '', showDetails: false })}
+          showDetails={() => this.setState({ showModal: true, formulaire: false, recap: false, showDetails: true, formulaireUpdate: false, descriptionDelete: false, formulaireTitleAdd: '', title: user.title, content: user.content, id: user.id, avatar: user.avatar, github: user.github, twitter: user.twitter, medium: user.medium, titleValidation: '', contentValidation: '' })}
 
+        />) : null
+    )
+    const formulaire = (
+      <FormulaireComponent
+        handleClose={() => handleCloseSwitch(this.setState.bind(this))}
+        buttonName={this.state.formulaireUpdate ? 'Mettre à jour' : 'Ajouter'}
+        clicked={() => onShowRecapForm(this.state, this.setState.bind(this))}
+        onChange={this.onChange.bind(this)}
+        title={this.state.title}
+
+        contentDescription
+        content={this.state.content}
+        avatar={this.state.avatar}
+        twitter={this.state.twitter}
+        github={this.state.github}
+        medium={this.state.medium}
+        titleValidation={this.state.titleValidation}
+        contentValidation={this.state.contentValidation}
+        influenceur contact identity
       />
     )
+
     return (
-      <Page title=" Influenceurs" contextePage="Influenceurs" >
+      <Page title=" Influenceurs" contextePage="Who-to-follows" >
         <article id="who-to-follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
-          <Header clicked={this.handleModalAdd} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} firstName={this.state.firstName} lastName={this.state.lastName} title="Ajouter un influenceur" />
+          {showButtons ? <Header title="Ajouter un contact" clicked={() => handleModalAdd(this.setState.bind(this))} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} /> : null}
           <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
-            {this.state.fakeData.map((user, id) => (
-              <ShowCard
-                key={id}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                fonction={user.fonction}
-                description={user.description}
-                linkLinkedin={user.linkLinkedin}
-                linkGithub={user.linkGithub}
-                linkTwitter={user.linkTwitter}
-                picture
-                remove={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, id: user.id })}
-                update={() => this.setState({
-                  showModal: true, formulaire: true, formulaireUpdate: true, descriptionDelete: false, formulaireTitleAdd: false, id: user.id, firstName: user.firstName, lastName: user.lastName, fonction: user.fonction, description: user.description, linkLinkedin: user.linkLinkedin, linkGithub: user.linkGithub, linkTwitter: user.linkTwitter
-                })}
-              />
-            ))}
-            <Modal
-              show={this.state.showModal}
-              onClose={this.handleClose}
-              titleModal={this.state.formulaireTitleAdd ? "Ajout d'un contact" : '' || this.state.formulaireUpdate ? 'Modification du contact' : ''}
-              formulaire={this.state.formulaire
-                ? Formul : false}
-              deleteDescription={this.state.descriptionDelete ? <DeleteDescription handleDelete={() => this.handleDelete(this.state.id)} handleClose={this.handleClose} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false} />
+            {card}
+            <Modal show={showModal} onClose={() => handleCloseSwitch(this.setState.bind(this))} titleModal={formulaireTitleAdd ? "Ajout d'un contact" : '' || formulaireUpdate ? 'Modification du contact' : '' || showDetails ? this.state.title : ''}>
+              {this.state.formulaire ? formulaire : ''}
+              {this.state.recap
+                ? <ConfirmationDetails title={title} content={content} avatar={avatar} medium={medium} github={github} twitter={twitter}
+                  onClose={() => handleCloseSwitch(this.setState.bind(this))}
+                  clicked={this.state.formulaireUpdate
+                    ? () => handleUpdate(this.state, this.state.id, this.setState.bind(this)) : () => handleSubmit(this.state, this.setState.bind(this))}
+                /> : null}
+              {showDetails ? <ContentDetails title={title} content={content} github={github} medium={medium} twitter={twitter} promotion={selectedPromotion ? selectedPromotion.title : selectedPromotion} onClose={() => handleCloseSwitch(this.setState.bind(this))} /> : null}
+              {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleCloseSwitch(this.setState.bind(this))} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false}
+            </Modal>
+
           </section>
         </article>
       </Page>
     )
   }
 }
-export default Follow
+
+export default WhoFollow

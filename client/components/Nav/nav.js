@@ -19,7 +19,7 @@ const Nav = () => {
         <div className="dropdown show">
           <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false" alt="groupe de liens ma formation">
-          Ma Formation
+            Ma Formation
           </a>
 
           <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -31,7 +31,7 @@ const Nav = () => {
         <div className="dropdown show">
           <a className="btn btn-danger dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-          Ressources
+            Ressources
           </a>
 
           <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -42,7 +42,7 @@ const Nav = () => {
         <div className="dropdown show">
           <a className="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-          Communauté
+            Communauté
           </a>
 
           <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -54,7 +54,7 @@ const Nav = () => {
         <div id="end-of-navbar">
           {user.role === 'admin' || user.role === 'superadmin'
             ? <Link href="/admin/Accueil/accueil"><a className="btn btn-danger bouton-navbar" role="button" >ADMINISTRATION</a></Link>
-            : null }
+            : null}
           <Link href="/utilisateur/mon-profil/mon-profil"><a className="btn btn-danger bouton-navbar" role="button" alt="Lien vers mon profil">PROFIL</a></Link>
           <a className="btn btn-danger bouton-navbar" role="button" alt="Lien déconnexion" onClick={offlineClick}>LOGOUT</a>
         </div>
