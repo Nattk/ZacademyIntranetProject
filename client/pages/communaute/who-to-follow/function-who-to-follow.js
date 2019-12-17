@@ -135,6 +135,7 @@ export const Update = (state, updateState) => {
       promotionId: user.promotionId,
       titleValidation: '',
       contentValidation: '',
+
       showDetails: false
     }))
 }

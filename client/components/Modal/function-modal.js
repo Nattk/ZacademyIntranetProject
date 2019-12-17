@@ -44,7 +44,11 @@ export const handleModalAdd = (updateState) => {
     emailValidation: '',
     lastNameValidation: '',
     firstNameValidation: '',
-    formateursValidation: ''
+    formateursValidation: '',
+    urlSocialMediaValidation: '',
+    githubValidation: '',
+    mediumValidation: '',
+    twitterValidation: ''
 
   })
 }
