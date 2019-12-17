@@ -11,6 +11,7 @@ const rssSchema = new mongoose.Schema({
   },
   url: {
     type: String,
+    match: [/(.xml)/, 'Veuillez entrer une url RSS valide.'],
     required: true
   },
   date: {
