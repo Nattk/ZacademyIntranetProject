@@ -40,7 +40,7 @@ const FormulaireComponent = (props) => {
             <Input label="Titre *" type="text" name="title" placeholder='Inserer un titre ' validation={props.titleValidation} value={props.title} onChange={props.onChange} />
           </div>
           <div className="col-md-6 col-sm-12 col-xs-12 ">
-            <Input label="Lien flux rss *" type="text" name="url" id="urlRss" placeholder="Inserer un lien flux rss " value={props.url} validation={props.urlValidation} onChange={props.onChange} />
+            <Input label="Lien flux rss *" type="text" name="url" id="urlRss" placeholder="Inserer un lien flux rss au format xml " value={props.url} validation={props.urlValidation} onChange={props.onChange} />
           </div>
         </section>) : null}
       {props.contentDescription
@@ -70,21 +70,27 @@ const FormulaireComponent = (props) => {
         </section> : null}
       {props.influenceur ? (
         <Fragment>
-          <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style">
-            <p className="col-md-12 col-sm-12 col-xs-12 " id="influenceur">Veuillez insérer un ou plusieurs liens *</p>
+          <section className="col-md-12 col-sm-12 col-xs-12  section-style">
+            {props.urlSocialMediaValidation
+              ? <p className="col-md-12 col-sm-12 col-xs-12 style-error-social-media-url" id="influenceur"> {props.urlSocialMediaValidation}</p>
+              : <p className="col-md-12 col-sm-12 col-xs-12 " id="influenceur">Veuillez insérer un ou plusieurs liens *</p>
+            }
           </section>
           <section className="col-md-12 col-sm-12 col-xs-12 d-flex section-style">
 
             <div className="col-md-6 col-sm-12 col-xs-12 ">
-              <Input label="Lien GitHub" type="text" name="github" placeholder="Inserer l'adresse Github" value={props.github} onChange={props.onChange} />
+
+              <Input label="Lien GitHub" type="text" name="github" placeholder="Inserer l'adresse Github" value={props.github} onChange={props.onChange} validation={props.githubValidation} />
             </div>
             <div className="col-md-6 col-sm-12 col-xs-12 ">
-              <Input label="Lien Medium" type="text" name="medium" placeholder="Inserer l'adresse Medium" value={props.medium} onChange={props.onChange} />
+              <Input label="Lien Medium" type="text" name="medium" placeholder="Inserer l'adresse Medium" value={props.medium} onChange={props.onChange}
+                validation={props.mediumValidation} />
             </div>
           </section>
           <section className="col-md-12 col-sm-12 col-xs-12 section-style">
             <div className="col-md-12 col-sm-12 col-xs-12 ">
-              <Input label="Lien Twitter" type="text" name="twitter" placeholder="Inserer l'adresse Twitter" value={props.twitter} onChange={props.onChange} />
+              <Input label="Lien Twitter" type="text" name="twitter" placeholder="Inserer l'adresse Twitter" value={props.twitter} onChange={props.onChange}
+                validation={props.twitterValidation} />
             </div>
           </section>
         </Fragment>) : null}

@@ -3,6 +3,7 @@ import Router from 'next/router'
 import axios from 'axios'
 import { capitalize } from '../../index_connecte'
 import Button from '../../../components/Boutons/Boutons'
+import { NotificationErrorBack } from '../../../components/Notifications/notifications'
 import moment from 'moment'
 moment.locale('fr')
 export const onCreatePromotion = (state, updateState) => {
@@ -26,7 +27,10 @@ export const onCreatePromotion = (state, updateState) => {
       const IdPromotion = data.data.id
       updateState({ promotion: IdPromotion })
       return Router.push('/admin/Accueil/accueil')
-    })
+    }).catch(err =>
+      updateState({ slackValidation: err.response.data.error })
+
+    )
 }
 
 export const start = (state) => state.startDate ? capitalize(moment(state.startDate).format('DD MMMM YYYY')) : null
@@ -37,6 +41,7 @@ export const RecapPromotion = (state) =>
 
   <article>
     <section className="title-style-modal">
+      {state.slackValidation ? <NotificationErrorBack title='Veuillez entrer une url slack valide. exemple: https://app.slack.com/client/TDKLZEH1B/CNCQ57W04' /> : null}
       <p><span className="promotion-p-style">Nom de promotion:</span> {state.title}</p>
       <p><span className="promotion-p-style">Ville:</span>&nbsp; {state.selectedCity}</p>
       <p><span className="promotion-p-style">Début formation:</span>&nbsp; {state.start}</p>
@@ -51,6 +56,9 @@ export const RecapPromotion = (state) =>
       <p> Vous seriez redirigé vers votre espace accueil promotion.
             Êtes vous sur de vouloir créer cette promotion  ?</p>  </section>
     <footer className="text-right">
+      <Button clicked={state.onClose} id="confirm-creation-promotion" btnType="valider">
+        Revenir
+      </Button>
       <Button clicked={state.clicked} id="confirm-creation-promotion" btnType="valider">
         Confirmer
       </Button>

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Button from '../../../components/Boutons/Boutons'
+import { NotificationErrorBack } from '../../../components/Notifications/notifications'
 export const configuration = (state) => {
   const user = window.localStorage.getItem('user')
 
@@ -10,7 +11,6 @@ export const configuration = (state) => {
     twitter: state.twitter,
     medium: state.medium,
     github: state.github,
-
     promotionId: JSON.parse(user).promotion
   }
   return elements
@@ -21,7 +21,14 @@ export const handleSubmit = (state, updateState) => {
     .then((data) => {
       updateState({ showModal: false, contacts: [...state.contacts, data.data], showAlertSuccess: true, recap: true })
     })
-    .catch((err) => console.log('err', err))
+    .catch(err =>
+
+      updateState({
+        urlSocialMediaValidation: err.response.data.error,
+        githubValidation: err.response.data.error.match('github') ? ' Veuillez entrer une URL github ou gitlab valide' : '',
+        twitterValidation: err.response.data.error.match('twitter') ? ' Veuillez entrer une URL twitter valide' : '',
+        mediumValidation: err.response.data.error.match('medium') ? ' Veuillez entrer une URL medium valide' : ''
+      }))
   setTimeout(() => {
     updateState({ showAlertSuccess: false })
   }, 3000)
@@ -34,7 +41,8 @@ export const handleUpdate = (state, id, updateState) => {
       state.contacts[index] = data.data
       updateState({ showModal: false, contacts: [...state.contacts], showAlertUpdate: true })
     })
-    .catch((err) => console.log('err', err))
+    .catch((err) => alert(err.response.data.error))
+  // updateState({ slackValidation: err.response.data.error }))
   setTimeout(() => {
     updateState({ showAlertUpdate: false })
   }, 3000)
@@ -45,7 +53,14 @@ export const handleRemove = (state, id, updateState) => {
   const newData = [...data]
   axios.delete(`http://localhost:3333/api/follows/${id}`)
     .then(() => {
-      updateState({ showModal: false, contacts: newData, showAlertDelete: true })
+      updateState({
+        showModal: false,
+        contacts: newData,
+        showAlertDelete: true,
+        contentValidation: '',
+        titleValidation: ''
+
+      })
     }).catch((err) => console.error(err))
   setTimeout(() => {
     updateState({ showAlertDelete: false })
@@ -70,21 +85,27 @@ export const ContentDetails = (state) => (
     </footer>
   </article>)
 
-export const ConfirmationDetails = (state) => (
+export const ConfirmationDetails = (state, err) => (
   <article>
-    <section className="title-style-modal">
-      <p><span className="promotion-p-style"></span> {state.title}</p>
-      <p><span className="promotion-p-style">Description</span>&nbsp; {state.content}</p>
-      {state.avatar ? <p><span className="promotion-p-style">Lien Avatar</span>&nbsp; {state.avatar}</p> : null}
-      {state.github ? <p><span className="promotion-p-style">Lien Github</span>&nbsp; {state.github}</p> : null}
-      {state.medium ? <p><span className="promotion-p-style">Lien Medium</span>&nbsp; {state.medium}</p> : null}
-      {state.twitter ? <p><span className="promotion-p-style">Lien Twitter</span>&nbsp; {state.twitter}</p> : null}
-    </section>
-    <section>
-      {state.formulaireUpdate
-        ? <p>Êtes vous sur de vouloir modifier ce contact "Who-to-follow"  ?</p>
-        : <p>Êtes vous sur de vouloir créer ce contact "Who-to-follow"  ?</p>}
-    </section>
+    {state.urlSocialMediaValidation ? <NotificationErrorBack title={state.urlSocialMediaValidation} /> : null}
+    {state.urlSocialMediaValidation === '' || state.urlSocialMediaValidation === null || state.urlSocialMediaValidation === undefined
+
+      ? <div>
+        <section className="title-style-modal">
+          <p><span className="promotion-p-style"></span> {state.title}</p>
+          <p><span className="promotion-p-style">Description</span>&nbsp; {state.content}</p>
+          {state.avatar ? <p><span className="promotion-p-style">Lien Avatar</span>&nbsp; {state.avatar}</p> : null}
+          {state.github ? <p><span className="promotion-p-style">Lien Github</span>&nbsp; {state.github}</p> : null}
+          {state.medium ? <p><span className="promotion-p-style">Lien Medium</span>&nbsp; {state.medium}</p> : null}
+          {state.twitter ? <p><span className="promotion-p-style">Lien Twitter</span>&nbsp; {state.twitter}</p> : null}
+        </section>
+        <section>
+          {state.formulaireUpdate
+            ? <p>Êtes vous sur de vouloir modifier ce contact "Who-to-follow"  ?</p>
+            : <p>Êtes vous sur de vouloir créer ce contact "Who-to-follow"  ?</p>}
+        </section>
+      </div>
+      : null}
     <footer className="text-right">
       <Button clicked={state.onClose} id="confirm-creation-promotion" btnType="valider">
         Revenir
@@ -114,6 +135,7 @@ export const Update = (state, updateState) => {
       promotionId: user.promotionId,
       titleValidation: '',
       contentValidation: '',
+
       showDetails: false
     }))
 }

@@ -23,7 +23,8 @@ class CreaPromotion extends Component {
       selectedCity: '',
       formateursOption: '',
       studentsOption: '',
-      selectedProgramme: ''
+      selectedProgramme: '',
+      slackValidation: ''
     }
 
     this.handleStudents = this.handleStudents.bind(this)
@@ -220,11 +221,11 @@ class CreaPromotion extends Component {
                   type="text"
                   name="slack"
                   id="slackInput"
-                  placeholder='Insérer un lien slack'
+                  placeholder='Insérer un lien slack: https://app.slack.com/...'
                   value={this.state.slack}
                   onChange={(e) => this.setState({ slack: e.target.value })}
                 />
-
+                <p className="validation-style"> <small>{this.state.slackValidation}</small></p>
               </div>
               <section className="col-md-4 col-sm-12 col-xs-12 d-flex obligatoire-style justify-content-center  " >
 
@@ -242,7 +243,7 @@ class CreaPromotion extends Component {
           </section>
           <section className="col-md-12 col-sm-12 col-xs-12 text-right" >
             <Modal titleModal="Demande de confirmation" show={this.state.showModal} onClose={() => handleClose(this.setState.bind(this))} >
-              <RecapPromotion title={title} start={start} end={end} formateurs={formateurs} students={students} slack={slack} selectedCity={selectedCity.value} selectedProgramme={selectedProgramme.title} clicked={() => onCreatePromotion(this.state, this.setState.bind(this))} />
+              <RecapPromotion title={title} start={start} end={end} formateurs={formateurs} students={students} slack={slack} selectedCity={selectedCity.value} selectedProgramme={selectedProgramme.title} slackValidation={this.state.slackValidation} onClose={() => handleClose(this.setState.bind(this))} clicked={() => onCreatePromotion(this.state, this.setState.bind(this))} />
             </Modal>
           </section>
         </article>

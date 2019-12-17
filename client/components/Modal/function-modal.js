@@ -44,7 +44,24 @@ export const handleModalAdd = (updateState) => {
     emailValidation: '',
     lastNameValidation: '',
     firstNameValidation: '',
-    formateursValidation: ''
+    formateursValidation: '',
+    urlSocialMediaValidation: '',
+    githubValidation: '',
+    mediumValidation: '',
+    twitterValidation: ''
+
+  })
+}
+
+export const handleModalReturnAdd = (updateState) => {
+  updateState({
+    showModal: true,
+    formulaire: true,
+    formulaireTitleAdd: true,
+    recap: false,
+    formulaireUpdate: false,
+    descriptionDelete: false,
+    showDetails: false
 
   })
 }

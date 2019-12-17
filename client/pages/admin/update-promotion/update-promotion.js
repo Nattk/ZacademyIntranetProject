@@ -56,7 +56,7 @@ class UpdatePromotion extends Component {
   componentDidMount () {
     getPromotionByID(this.props.query.promotions)
       .then(promotion => {
-        return this.setState({ promotion: promotion.data, selectedProgramme: promotion.data.programmes, programmeSelected: promotion.data.programmes[0].title, formateursOption: promotion.data.formateurs, studentsOption: promotion.data.eleves, title: promotion.data.title, startDate: promotion.data.start, endDate: promotion.data.end, selectedCity: promotion.data.city, citySelected: promotion.data.city, id: promotion.data.id })
+        return this.setState({ promotion: promotion.data, selectedProgramme: promotion.data.programmes, programmeSelected: promotion.data.programmes[0].title, formateursOption: promotion.data.formateurs, studentsOption: promotion.data.eleves, title: promotion.data.title, startDate: promotion.data.start, endDate: promotion.data.end, selectedCity: promotion.data.city, citySelected: promotion.data.city, slack: promotion.data.slack, id: promotion.data.id })
       })
     axios.all([getAllFormateurs(), getAllStudents(), getAllProgrammes()])
       .then(axios.spread((formateurs, students, programmes) => {
@@ -69,6 +69,7 @@ class UpdatePromotion extends Component {
   }
 
   render () {
+    console.log(this.state)
     const startDate = this.state.startDate ? this.state.startDate.substring(0, 10) : this.state.startDate
     const endDate = this.state.endDate ? this.state.endDate.substring(0, 10) : this.state.endDate
 
@@ -186,8 +187,8 @@ class UpdatePromotion extends Component {
                   getOptionLabel={(option) => option.firstName.concat(' ', option.lastName)}
                   getOptionValue={(option) => option.id}
                   onChange={this.handleFormateurs}
-                  className={this.state.formateursValidation ? 'formateurs-select' : 'basic-multix-select'}
-                  classNamePrefix='select'
+                  className={this.state.formateursValidation ? 'formateurs-select' : 'basic-multi-select'}
+                  classNamePrefix='select '
                 />
                 <p className="validation-style"> <small>{this.state.formateursValidation}</small></p>
 
@@ -218,7 +219,7 @@ class UpdatePromotion extends Component {
                   type="text"
                   name="slack"
                   id="slackInput"
-                  placeholder='Insérer un lien slack'
+                  placeholder='Insérer un lien slack: https://app.slack.com/...'
                   value={this.state.slack}
                   onChange={(e) => this.setState({ slack: e.target.value })}
                 />

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Button from '../../../components/Boutons/Boutons'
+import { NotificationErrorBack } from '../../../components/Notifications/notifications'
 export const configuration = (state) => {
   const user = window.localStorage.getItem('user')
 
@@ -18,7 +19,8 @@ export const handleSubmit = (state, updateState) => {
     .then((data) => {
       updateState({ showModal: false, rss: [...state.rss, data.data], showAlertSuccess: true })
     })
-    .catch((err) => console.log('err', err))
+    .catch(() => updateState({ urlValidation: 'Veuillez entrer une url RSS valide' }))
+
   setTimeout(() => {
     updateState({ showAlertSuccess: false })
   }, 3000)
@@ -75,23 +77,27 @@ export const handleValidation = (state, updateState) => {
 
 export const onShowRecapForm = (state, updateState) => {
   if (state.title && state.content && state.url !== '') {
-    updateState({ recap: true, formulaire: false })
+    updateState({ recap: true, formulaire: false, urlValidation: '', titleValidation: '', contentValidation: '' })
   } else {
     handleValidation(state, updateState)
   }
 }
 export const ConfirmationDetails = (state) => (
   <article>
-    <section className="title-style-modal">
-      <p><span className="promotion-p-style"></span> {state.title}</p>
-      <p><span className="promotion-p-style">Description</span>&nbsp; {state.content}</p>
-      <p><span className="promotion-p-style">Lien</span>&nbsp; {state.url}</p>
-    </section>
-    <section>
-      {state.formulaireUpdate
-        ? <p>Êtes vous sur de vouloir modifier ce flux rss  ?</p>
-        : <p>Êtes vous sur de vouloir créer ce flux rss  ?</p>}
-    </section>
+    {state.urlValidation ? <NotificationErrorBack title={state.urlValidation} />
+
+      : <div>
+        <section className="title-style-modal">
+          <p><span className="promotion-p-style"></span> {state.title}</p>
+          <p><span className="promotion-p-style">Description</span>&nbsp; {state.content}</p>
+          <p><span className="promotion-p-style">Lien</span>&nbsp; {state.url}</p>
+        </section>
+        <section>
+          {state.formulaireUpdate
+            ? <p>Êtes vous sur de vouloir modifier ce flux rss  ?</p>
+            : <p>Êtes vous sur de vouloir créer ce flux rss  ?</p>}
+        </section>
+      </div>}
     <footer className="text-right">
       <Button clicked={state.onClose}
         id="confirm-creation-promotion" btnType="valider">
@@ -101,6 +107,7 @@ export const ConfirmationDetails = (state) => (
         Confirmer
       </Button>
     </footer>
+
   </article>
 )
 export const ContentDetails = (state) =>
