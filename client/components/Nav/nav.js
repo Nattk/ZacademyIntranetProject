@@ -24,7 +24,7 @@ const Nav = () => {
 
           <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <Link href="/ma-formation/Agenda/agenda"><a role="button" alt="Lien vers calendrier">Calendrier</a></Link><br></br>
-            <Link href="/ma-formation/Contact-Utiles/cogitntact-utiles"><a role="button" alt="Lien vers contact utiles">Contact utiles</a></Link><br></br>
+            <Link href="/ma-formation/Contact-Utiles/contact-utiles"><a role="button" alt="Lien vers contact utiles">Contact utiles</a></Link><br></br>
             <Link href="/ma-formation/Livret-Accueil/livret-accueil"><a role="button" alt="Lien vers livret d'accueil">Livret d'accueil</a></Link><br></br>
           </div>
         </div>

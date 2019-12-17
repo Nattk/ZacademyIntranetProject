@@ -11,21 +11,18 @@ const Carousel = ({ photo1, photo2, photo3, photo4 }) => {
             <img src={photo1 || '/slide_1.png'}
               className="d-block w-100 carousel-connected " alt="carousel slide 1" />
             <div className="carousel-caption d-none d-md-block">
-              <p>Description de l'image 1</p>
             </div>
           </div>
           <div className="carousel-item ">
             <img src={photo2 || '/slide_2.png'}
               className="d-block w-100 carousel-connected " alt="carousel slide 2" />
             <div className="carousel-caption d-none d-md-block">
-              <p>Description de l'image 2</p>
             </div>
           </div>
           <div className="carousel-item ">
             <img src={photo3 || '/slide_3.png'}
               className="d-block w-100 carousel-connected " alt="carousel slide 3" />
             <div className="carousel-caption d-none d-md-block">
-              <p>Description de l'image 3</p>
             </div>
           </div>
         </div>
