@@ -11,6 +11,7 @@ import { getAllRessources, getAllModules, getAllSequences, getAllPromotions } fr
 class Ressources extends Component {
   state = {
     ressources: [],
+    user: null,
     Promotions: [],
     Modules: [],
     Sequences: [],
@@ -27,20 +28,15 @@ class Ressources extends Component {
 
   // Get des ressources, modules et séquences dans la base de donnée
   componentDidMount () {
-    // axios.all([getAllRessources(), getAllModules(), getAllSequences(), getAllPromotions()])
-    //   .then(axios.spread((ressources, modules, sequences, promotions) => {
-    //     this.setState({ Modules: modules.data })
-    //     this.setState({ Sequences: sequences.data })
-    //     this.setState({ Promotions: promotions.data })
-    //     this.setState({ ressources: ressources.data })
-    //   }))
+    const user = localStorage.getItem('user')
+
     getAllRessources().then(ress => {
+      console.table(ress.data)
       this.setState({ ressources: ress.data })
     })
       .catch(err => {
         alert('une erreur est survenue', err)
       })
-    console.log(localStorage.getItem('user'))
   }
 
   // Renvoi false si il y'a un doublon entre la ressource selectionné et les ressources déjà sélectionné et filtrés
@@ -179,7 +175,7 @@ class Ressources extends Component {
                 <Link href={ressource.url}>
                   <h2><a tabindex="0" title="Accéder à la ressource">{ressource.title}</a></h2>
                 </Link>
-                <i>{ressource.user} . 12 Nov 2019 . {ressource.promotion}</i>
+                <i>{ressource.user.firstName} . 12 Nov 2019 . {ressource.promotion}</i>
                 {/* <i>#{this.state.Modules[ressource.modId].name}</i> */}
               </section>
             </div>
