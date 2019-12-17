@@ -98,7 +98,10 @@ class Admin extends Component {
                         <span className="date-style"> Fin: {promo.end ? capitalize(moment(promo.end).format('DD MMMM YYYY')) : promo.end} </span>
                       </td>
                       <td >
-                        <Link href={{ pathname: '../promotion/promotion', query: { promotions: promo.id } }}>details    </Link>
+                        <Link href={{ pathname: '../promotion/promotion', query: { promotions: promo.id } }}><a className="btn btn-danger bouton-navbar">details</a></Link>
+                        <Link href="/index_connecte">
+                          <a className="btn btn-danger bouton-navbar" onClick={() => this.handleSeePromo(promo.id)}>Voir Zone d'activité</a>
+                        </Link>
                       </td>
                       <td>
                         <Link href={{ pathname: '../update-promotion/update-promotion', query: { promotions: promo.id } }}>
