@@ -48,3 +48,16 @@ export const handleModalAdd = (updateState) => {
 
   })
 }
+
+export const handleModalReturnAdd = (updateState) => {
+  updateState({
+    showModal: true,
+    formulaire: true,
+    formulaireTitleAdd: true,
+    recap: false,
+    formulaireUpdate: false,
+    descriptionDelete: false,
+    showDetails: false
+
+  })
+}

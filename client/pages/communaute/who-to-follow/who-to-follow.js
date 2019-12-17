@@ -6,15 +6,15 @@ import CardContact from '../../../components/CardContact/cardContact'
 import Modal from '../../../components/Modal/modal'
 import FormulaireComponent from '../../../components/Formulaire/formulaireComponent'
 import { DeleteDescription } from '../../../components/Modal/SectionModal'
-import { onShowRecapForm } from '../../../components/Methods/function-validation'
-import { handleModalAdd, handleCloseSwitch } from '../../../components/Modal/function-modal'
+import { onShowRecapFormWho2Follow } from '../../../components/Methods/function-validation'
+import { handleModalAdd, handleCloseSwitch, handleModalReturnAdd } from '../../../components/Modal/function-modal'
 import { getAllPromotions, getWhoFollow } from '../../../services/creation-promotion'
 import { handleUpdate, handleSubmit, handleRemove, ContentDetails, ConfirmationDetails } from './function-who-to-follow'
 
 class WhoFollow extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { recap: false, contacts: '', promotions: '' }
+    this.state = { recap: false, contacts: '', promotions: '', urlValidation: '' }
     this.onChangePromotion = this.onChangePromotion.bind(this)
   }
 
@@ -43,6 +43,8 @@ class WhoFollow extends React.Component {
   }
 
   render () {
+    console.log(this.state)
+
     const { showButtons, showDetails, contacts, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, github, medium, twitter, title, content, avatar, selectedPromotion } = this.state
     const card = (
       contacts ? contacts.map((user) =>
@@ -63,10 +65,10 @@ class WhoFollow extends React.Component {
       <FormulaireComponent
         handleClose={() => handleCloseSwitch(this.setState.bind(this))}
         buttonName={this.state.formulaireUpdate ? 'Mettre à jour' : 'Ajouter'}
-        clicked={() => onShowRecapForm(this.state, this.setState.bind(this))}
+        clicked={() => onShowRecapFormWho2Follow(this.state, this.setState.bind(this))}
         onChange={this.onChange.bind(this)}
         title={this.state.title}
-
+        urlSocialMediaValidation={this.state.urlSocialMediaValidation}
         contentDescription
         content={this.state.content}
         avatar={this.state.avatar}
@@ -74,6 +76,9 @@ class WhoFollow extends React.Component {
         github={this.state.github}
         medium={this.state.medium}
         titleValidation={this.state.titleValidation}
+        twitterValidation={this.state.twitterValidation}
+        mediumValidation={this.state.mediumValidation}
+        githubValidation={this.state.githubValidation}
         contentValidation={this.state.contentValidation}
         influenceur contact identity
       />
@@ -88,8 +93,8 @@ class WhoFollow extends React.Component {
             <Modal show={showModal} onClose={() => handleCloseSwitch(this.setState.bind(this))} titleModal={formulaireTitleAdd ? "Ajout d'un contact" : '' || formulaireUpdate ? 'Modification du contact' : '' || showDetails ? this.state.title : ''}>
               {this.state.formulaire ? formulaire : ''}
               {this.state.recap
-                ? <ConfirmationDetails title={title} content={content} avatar={avatar} medium={medium} github={github} twitter={twitter}
-                  onClose={() => handleCloseSwitch(this.setState.bind(this))}
+                ? <ConfirmationDetails title={title} content={content} avatar={avatar} medium={medium} github={github} twitter={twitter} urlSocialMediaValidation={this.state.urlSocialMediaValidation}
+                  onClose={() => handleModalReturnAdd(this.setState.bind(this))}
                   clicked={this.state.formulaireUpdate
                     ? () => handleUpdate(this.state, this.state.id, this.setState.bind(this)) : () => handleSubmit(this.state, this.setState.bind(this))}
                 /> : null}
