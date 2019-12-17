@@ -91,7 +91,7 @@ class Admin extends Component {
                         </Link>
                       </td>
                       <td>
-                        <i class="fas fa-trash" title="supprimer cette promotion" onClick={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, recap: false, formulaireTitleAdd: '', formulaireUpdate: '', id: promo.id, showDetails: false })}></i>
+                        <i className="fas fa-trash" title="supprimer cette promotion" onClick={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, recap: false, formulaireTitleAdd: '', formulaireUpdate: '', id: promo.id, showDetails: false })}></i>
                       </td>
                     </tr>
                   )) : null}
