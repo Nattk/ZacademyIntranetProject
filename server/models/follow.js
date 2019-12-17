@@ -18,11 +18,11 @@ const followSchema = new mongoose.Schema({
   },
   github: {
     type: String,
-    match: [/(github.com|gitlab.com)/, 'Veuillez entrer une URL twitter valide.']
+    match: [/(github.com|gitlab.com)/, 'Veuillez entrer une URL github ou gitlab valide']
   },
   medium: {
     type: String,
-    match: [/(medium.com)/, 'Veuillez entrer une URL github ou gitlab valide.']
+    match: [/(medium.com)/, 'Veuillez entrer une URL medium valide.']
   },
   date: {
     type: Date
