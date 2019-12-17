@@ -11,7 +11,7 @@ export default ({ children, title, moclick }) => {
   return (
     <React.Fragment>
       <Meta title={`${title} Zenika Academy`} />
-      {user.role
+      {user
         ? <Nav />
         : <LoginNav moclick={moclick} />}
       <main className="main">{children}</main>

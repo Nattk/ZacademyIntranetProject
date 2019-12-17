@@ -7,7 +7,7 @@ import { Wrongpath } from '../components/Admin/Wrongpath'
 
 export default ({ children, title, contextePage }) => {
   const [user] = useLocalStorage('user', '')
-  if (user.role) {
+  if (user) {
     return (
       <React.Fragment>
         <Meta title={`${title} Zenika Academy`} />

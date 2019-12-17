@@ -28,8 +28,8 @@ rssRouter.post('/', async (request, response, next) => {
     const savedRss = await rss.save()
 
     response.json(savedRss.toJSON())
-  } catch (exception) {
-    next(exception)
+  } catch (e) {
+    next(e)
   }
 })
 
@@ -37,10 +37,10 @@ rssRouter.put('/:id', async (request, response, next) => {
   const body = request.body
 
   try {
-    const rssToUpdate = await Rss.findByIdAndUpdate(request.params.id, { ...body, date: new Date() }, { new: true })
+    const rssToUpdate = await Rss.findOneAndUpdate(request.params.id, { ...body, date: new Date() }, { runValidators: true })
     response.json(rssToUpdate.toJSON())
-  } catch (error) {
-    next(error)
+  } catch (e) {
+    next(e)
   }
 })
 
@@ -48,8 +48,8 @@ rssRouter.delete('/:id', async (request, response, next) => {
   try {
     await Rss.findByIdAndRemove(request.params.id)
     response.status(204).end()
-  } catch (error) {
-    next(error)
+  } catch (e) {
+    next(e)
   }
 })
 

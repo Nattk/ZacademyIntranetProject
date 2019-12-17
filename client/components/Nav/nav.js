@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useLocalStorage } from '../Login/LoginForm'
 import Router from 'next/router'
+import userService from '../../services/users'
 
 const Nav = () => {
+  const [backUser, setbackUser] = useState('')
   const [user, setUser] = useLocalStorage('user', '')
   const [Promotion, setPromotion] = useState('')
   const offlineClick = () => {
@@ -12,7 +14,9 @@ const Nav = () => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:3333/api/promotions/${user.promotion}`).then(res => res.json()).then(res => setPromotion(res) )
+    userService.setToken(user.token)
+    userService.getAll().then(res => setbackUser(res))
+    fetch(`http://localhost:3333/api/promotions/${user.promotion}`).then(res => res.json()).then(res => setPromotion(res))
   }, [])
 
   return (
@@ -58,7 +62,7 @@ const Nav = () => {
           </div>
         </div>
         <div id="end-of-navbar">
-          {user.role === 'admin' || user.role === 'superadmin'
+          {backUser.role === 'admin' || backUser.role === 'superadmin'
             ? <Link href="/admin/Accueil/accueil"><a className="btn btn-danger bouton-navbar" role="button" >ADMINISTRATION</a></Link>
             : null}
           <Link href="/utilisateur/mon-profil/mon-profil"><a className="btn btn-danger bouton-navbar" role="button" alt="Lien vers mon profil">PROFIL</a></Link>

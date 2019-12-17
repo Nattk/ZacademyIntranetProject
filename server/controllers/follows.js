@@ -27,8 +27,8 @@ followsRouter.post('/', async (request, response, next) => {
   try {
     const savedFollow = await follow.save()
     response.json(savedFollow.toJSON())
-  } catch (exception) {
-    next(exception)
+  } catch (e) {
+    next(e)
   }
 })
 
@@ -36,10 +36,10 @@ followsRouter.put('/:id', async (request, response, next) => {
   const body = request.body
 
   try {
-    const followToUpdate = await Follow.findByIdAndUpdate(request.params.id, { ...body, date: new Date() }, { new: true })
+    const followToUpdate = await Follow.findOneAndUpdate(request.params.id, { ...body, date: new Date() }, { runValidators: true })
     response.json(followToUpdate.toJSON())
-  } catch (error) {
-    next(error)
+  } catch (e) {
+    next(e)
   }
 })
 
@@ -47,8 +47,8 @@ followsRouter.delete('/:id', async (request, response, next) => {
   try {
     await Follow.findByIdAndRemove(request.params.id)
     response.status(204).end()
-  } catch (error) {
-    next(error)
+  } catch (e) {
+    next(e)
   }
 })
 

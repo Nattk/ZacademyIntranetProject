@@ -4,10 +4,19 @@ import { useLocalStorage } from '../components/Login/LoginForm'
 import { Wrongpath } from '../components/Admin/Wrongpath'
 import AdminNav from '../components/Nav/adminNav'
 import '../styles/sass/styles.scss'
+import userService from '../services/users'
+import React, { useState, useEffect } from 'react'
 
 export default ({ children, title, contextePage }) => {
+  const [backUser, setbackUser] = useState('')
   const [user] = useLocalStorage('user', '')
-  if (user.role === 'admin' || user.role === 'superadmin') {
+
+  useEffect(() => {
+    userService.setToken(user.token)
+    userService.getAll().then(res => setbackUser(res))
+  }, [])
+
+  if (backUser.role === 'admin' || backUser.role === 'superadmin') {
     return (
       <React.Fragment>
         <Meta title={`${title} Zenika Academy`} />
