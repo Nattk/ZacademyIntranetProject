@@ -9,6 +9,7 @@ import Modal from '../../../components/Modal/modal'
 import { handleClose } from '../../../components/Modal/function-modal'
 import { handleRemove } from './function-promotion'
 import { DeleteDescription } from '../../../components/Modal/SectionModal'
+import { Router } from 'next/router'
 class Admin extends Component {
   constructor (props) {
     super(props)
@@ -38,6 +39,7 @@ class Admin extends Component {
     const userUpdate = { ...this.state.user, promotion: id }
     if (window) {
       window.localStorage.setItem('user', JSON.stringify(userUpdate))
+      Router.push('http://localhost:3000/index_connecte')
     }
   }
 

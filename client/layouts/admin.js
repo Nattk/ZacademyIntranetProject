@@ -15,7 +15,7 @@ export default ({ children, title, contextePage }) => {
     userService.setToken(user.token)
     userService.getAll().then(res => setbackUser(res))
   }, [])
-
+  if (!backUser) return <Wrongpath message={'Chargement en cours...'} />
   if (backUser.role === 'admin' || backUser.role === 'superadmin') {
     return (
       <React.Fragment>
