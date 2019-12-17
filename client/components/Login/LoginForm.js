@@ -44,7 +44,11 @@ const LoginForm = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({ email, password })
-      setUser(user)
+      console.log('res', user)
+      setUser({
+        token: user.token,
+        promotion: user.promotion
+      })
       setEmail('')
       setPassword('')
       if (user.role === 'superadmin' || user.role === 'admin') {

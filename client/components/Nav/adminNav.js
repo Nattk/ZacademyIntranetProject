@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useLocalStorage } from '../Login/LoginForm'
 import Router from 'next/router'
+import userService from '../../services/users'
 
 const AdminNav = () => {
+  const [backUser, setbackUser] = useState('')
   const [user, setUser] = useLocalStorage('user', '')
   const offlineClick = () => {
     Router.push('/')
     setUser('')
   }
+
+  useEffect(() => {
+    userService.setToken(user.token)
+    userService.getAll().then(res => setbackUser(res))
+  }, [])
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark" id="navbar">
       <button className="navbar-toggler" type="button" title="menu burger" data-toggle="collapse" data-target="#navbarSupportedContent15"
@@ -40,7 +48,7 @@ const AdminNav = () => {
           </div>
         </div>
         <div id="end-of-navbar">
-          {user.role === 'admin' || user.role === 'superadmin'
+          {backUser.role === 'admin' || backUser.role === 'superadmin'
             ? <Link href="/admin/Accueil/accueil"><a className="btn btn-danger bouton-navbar" role="button" >ADMINISTRATION</a></Link>
             : null }
           <a className="btn btn-danger bouton-navbar" role="button" alt="Lien déconnexion" onClick={offlineClick}>LOGOUT</a>

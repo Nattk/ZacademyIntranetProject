@@ -5,9 +5,11 @@ import Page from '../layouts/classic'
 import { useLocalStorage } from '../components/Login/LoginForm'
 import Carousel from '../components/Carousel/carousel'
 import CarouselForm from '../components/Carousel/CarouselForm'
+import userService from '../services/users'
 // import moment from 'moment'
 
 export default function IndexConnected () {
+  const [backUser, setbackUser] = useState('')
   const [user] = useLocalStorage('user', '')
   const [showCarouselForm, setshowCarouselForm] = useState(false)
   const [rss, setRss] = useState([])
@@ -60,10 +62,12 @@ export default function IndexConnected () {
     getAllFollows().then(follow => setFollows(follow.data))
     getAllRessources().then(ressources => setRessources(ressources.data))
     carouselService.getAll().then(carousels => setCarousels(carousels))
+    userService.setToken(user.token)
+    userService.getAll().then(res => setbackUser(res))
   }, [])
   return (
     <Page title="Accueil" contextePage="Accueil">
-      <div>{(user.role === 'admin' || user.role === 'superadmin') && user.promotion
+      <div>{(backUser.role === 'admin' || backUser.role === 'superadmin') && backUser.promotion
         ? <button className="btn valider" onClick={carouselAdminClick} >Changer le carousel</button>
         : null }
       {showCarouselForm

@@ -2,10 +2,20 @@ const bcrypt = require('bcryptjs')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 const Promotion = require('../models/promotion')
+const security = require('./_security')
 
-usersRouter.get('/', async (request, response) => {
-  const users = await User.find({}).populate('promotion', { title: 1 })
-  response.json(users.map(u => u.toJSON()))
+usersRouter.get('/', async (req, res, next) => {
+  try {
+    if (req.get('authorization')) {
+      const user = await security.checkUser(req)
+      const foundUser = await User.findById(user.id).populate('promotion', { title: 1 })
+      res.json(foundUser.toJSON())
+    }
+    const users = await User.find({}).populate('promotion', { title: 1 })
+    res.json(users.map(u => u.toJSON()))
+  } catch (e) {
+    next(e)
+  }
 })
 
 usersRouter.get('/:id', async (req, res, next) => {
@@ -21,12 +31,11 @@ usersRouter.get('/:id', async (req, res, next) => {
   }
 })
 
-usersRouter.post('/', async (request, response, next) => {
-  console.log('request.body', request.body)
-  const promotion = await Promotion.findById(request.body.promotionId)
+usersRouter.post('/', async (req, res, next) => {
+  const promotion = await Promotion.findById(req.body.promotionId)
 
   try {
-    const body = request.body
+    const body = req.body
 
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.password, saltRounds)
@@ -39,8 +48,8 @@ usersRouter.post('/', async (request, response, next) => {
       email: body.email,
       role: body.role,
       help: body.help,
-      avatar: request.body.avatar,
-      important: request.body.important || false,
+      avatar: req.body.avatar,
+      important: req.body.important || false,
       date: new Date(),
       promotion: promotion ? promotion._id : null
     })
@@ -50,19 +59,19 @@ usersRouter.post('/', async (request, response, next) => {
       savedUser.role === 'eleve' ? promotion.eleves = promotion.eleves.concat(savedUser._id) : promotion.formateurs = promotion.formateurs.concat(savedUser._id)
       await promotion.save()
     }
-    response.json(savedUser)
+    res.json(savedUser)
   } catch (exception) {
     next(exception)
   }
 })
 
-usersRouter.put('/:id', async (request, response, next) => {
+usersRouter.put('/:id', async (req, res, next) => {
   try {
-    const promotion = await Promotion.findById(request.body.promotionId)
-    const user = request.body
-    user.promotion = request.body.promotionId
+    const promotion = await Promotion.findById(req.body.promotionId)
+    const user = req.body
+    user.promotion = req.body.promotionId
 
-    const userToUpdate = await User.findByIdAndUpdate(request.params.id, user, { new: true })
+    const userToUpdate = await User.findOneAndUpdate(req.params.id, user, { runValidators: true })
 
     if (userToUpdate.role === 'formateur' && promotion && promotion.formateurs.filter(x => x.toString() === userToUpdate.id).length === 0) {
       promotion.formateurs = promotion.formateurs.concat(userToUpdate._id)
@@ -73,16 +82,16 @@ usersRouter.put('/:id', async (request, response, next) => {
       promotion.eleves = promotion.eleves.concat(userToUpdate._id)
       await promotion.save()
     }
-    response.json(userToUpdate)
+    res.json(userToUpdate)
   } catch (exception) {
     next(exception)
   }
 })
 
-usersRouter.delete('/:id', async (request, response, next) => {
+usersRouter.delete('/:id', async (req, res, next) => {
   try {
-    await User.findByIdAndRemove(request.params.id)
-    response.status(204).end()
+    await User.findByIdAndRemove(req.params.id)
+    res.status(204).end()
   } catch (error) {
     next(error)
   }
