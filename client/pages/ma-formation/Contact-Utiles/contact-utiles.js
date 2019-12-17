@@ -48,12 +48,10 @@ class ContactsUtiles extends React.Component {
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
-    console.log(e.target)
   }
 
   render () {
     const { showModal, showButtons, firstName, lastName, help, email, phone, descriptionDelete, showDetails } = this.state
-    console.log(this.state)
 
     const formulaire = (
 

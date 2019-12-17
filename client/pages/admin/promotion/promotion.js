@@ -27,7 +27,6 @@ class GetPromotionByID extends Component {
 
   render () {
     moment.locale('fr')
-    console.log(this.state)
     const start = this.state.promotion.start ? capitalize(moment(this.state.promotion.start).format('DD MMMM YYYY')) : null
     const end = this.state.promotion.end ? capitalize(moment(this.state.promotion.end).format('DD MMMM YYYY')) : null
     const formateurs = this.state.promotion.formateurs ? this.state.promotion.formateurs.map(el => <Fragment> {el.lastName.concat(' ', el.firstName, ', ')}</Fragment>) : null

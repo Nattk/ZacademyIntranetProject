@@ -44,10 +44,8 @@ export default function IndexConnected () {
         promotionId: user.promotion
       }
       if (carouselFromPromo) {
-        console.log('updating carousel', carousel)
         carouselService.update(carouselFromPromo.id, carousel)
       } else {
-        console.log('creating carousel', carousel)
         carouselService.create(carousel)
       }
     } catch (error) {

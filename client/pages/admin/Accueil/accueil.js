@@ -24,18 +24,6 @@ class Admin extends Component {
     this.setState({ promotions: arrayFiltered })
   }
 
-  componentDidUpdate () {
-    // const eleveSelected = { eleveId: this.state.promotions ? this.state.promotions.eleves.map(el => el.id) : null }
-    if (this.state.promotion) {
-      // const formateurSelected = { formateurId: this.state.formateursOption ? this.state.formateursOption.map(el => el.id) : null }
-      console.log(this.state.promotions.eleves.map(el => el.id))
-    }
-    // if (this.state.promotion) {
-    //   eleveSelected.eleveId.map(eleveID => userService.update(eleveID, { promotion: this.state.promotion }))
-    //   formateurSelected.formateurId.map(formateurID => userService.update(formateurID, { promotion: this.state.promotion }))
-    // }
-  }
-
   componentDidMount () {
     if (window) {
       this.setState({ user: JSON.parse(localStorage.getItem('user')) })
@@ -44,10 +32,6 @@ class Admin extends Component {
       .then((promotions) => {
         this.setState({ promotions: promotions.data })
       })
-  }
-
-  isover = () => {
-    console.log('', this.state.promotions)
   }
 
   handleSeePromo = (id) => {
@@ -59,7 +43,6 @@ class Admin extends Component {
 
   render () {
     moment.locale('fr')
-    console.log(this.state)
 
     // const formateurSelected = { formateurId: this.state.formateursOption ? this.state.formateursOption.map(el => el.id) : null }
 

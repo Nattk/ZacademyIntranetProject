@@ -44,8 +44,6 @@ class WhoFollow extends React.Component {
 
   render () {
     const { showButtons, showDetails, contacts, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, github, medium, twitter, title, content, avatar, selectedPromotion } = this.state
-    console.log(title)
-    console.log(this.state)
     const card = (
       contacts ? contacts.map((user) =>
         <CardContact

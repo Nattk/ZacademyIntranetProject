@@ -13,7 +13,6 @@ export const configuration = (state) => {
     avatar: state.avatar,
     promotionId: JSON.parse(user).promotion
   }
-  console.log(elements)
   return elements
 }
 export const configuration2 = (state) => {
@@ -29,7 +28,6 @@ export const configuration2 = (state) => {
     promotionId: JSON.parse(user).promotion,
     important: false
   }
-  console.log(elements)
   return elements
 }
 

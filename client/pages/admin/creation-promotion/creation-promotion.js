@@ -71,7 +71,6 @@ class CreaPromotion extends Component {
   }
 
   render () {
-    console.log(this.state)
     moment.locale('fr')
     const { selectedCity, selectedProgramme, formateursOption, studentsOption, title, slack } = this.state
     const start = this.state.startDate ? capitalize(moment(this.state.startDate).format('DD MMMM YYYY')) : null
