@@ -12,7 +12,7 @@ import { capitalize } from '../../index_connecte'
 import moment from 'moment'
 import { handleClose } from '../../../components/Modal/function-modal'
 import { onShowRecapCreationPromotion } from '../../../components/Methods/function-validation'
-import { onCreatePromotion, RecapPromotion } from './function-creation-promotions'
+import { onCreatePromotion, RecapPromotion } from '../../../components/Methods/function-creation-promotions'
 class CreaPromotion extends Component {
   constructor (props) {
     super(props)

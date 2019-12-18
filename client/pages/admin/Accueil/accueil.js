@@ -7,7 +7,7 @@ import { NotificationDelete } from '../../../components/Notifications/notificati
 import { capitalize } from '../../index_connecte'
 import Modal from '../../../components/Modal/modal'
 import { handleClose } from '../../../components/Modal/function-modal'
-import { handleRemove } from './function-promotion'
+import { handleRemove } from '../../../components/Methods/function-promotion'
 import { DeleteDescription } from '../../../components/Modal/SectionModal'
 import { Router } from 'next/router'
 class Admin extends Component {

@@ -1,4 +1,4 @@
-import Button from '../../../components/Boutons/Boutons'
+import Button from '../Boutons/Boutons'
 import axios from 'axios'
 
 export const configuration = (state) => {

@@ -6,7 +6,7 @@ import axios from 'axios'
 import CardContact from '../../../components/CardContact/cardContact'
 import { handleCloseSwitch, handleClose } from '../../../components/Modal/function-modal'
 import FormulaireComponent from '../../../components/Formulaire/formulaireComponent'
-import { ContentDetails, ConfirmationDetails, handleUpdate, handleRemove, onShowRecapForm } from './function-contact-utile'
+import { ContentDetails, ConfirmationDetails, handleUpdate, handleRemove, onShowRecapForm } from '../../../components/Methods/function-contact-utile'
 import { DeleteDescription } from '../../../components/Modal/SectionModal'
 import '../../../styles/sass/styles.scss'
 class ContactsUtiles extends React.Component {

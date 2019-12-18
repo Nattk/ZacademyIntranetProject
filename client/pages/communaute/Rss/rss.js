@@ -6,8 +6,8 @@ import CardContact from '../../../components/CardContact/cardContact'
 import Modal from '../../../components/Modal/modal'
 import FormulaireComponent from '../../../components/Formulaire/formulaireComponent'
 import { DeleteDescription } from '../../../components/Modal/SectionModal'
-import { handleUpdate, handleSubmit, handleRemove, handleClose, handleModalAdd, onShowRecapForm, ConfirmationDetails, ContentDetails } from './function-rss'
-import { handleModalReturnAdd } from '../../../components/Modal/function-modal'
+import { handleUpdate, handleSubmit, handleRemove, handleClose, handleModalAdd, onShowRecapForm, ConfirmationDetails, ContentDetails } from '../../../components/Methods/function-rss'
+import { handleModalReturnAdd, handleModalReturnUpdate } from '../../../components/Modal/function-modal'
 class Follow extends React.Component {
   constructor (props) {
     super(props)
@@ -80,7 +80,8 @@ class Follow extends React.Component {
               {this.state.formulaire ? formulaire : ''}
               {this.state.recap
                 ? <ConfirmationDetails title={title} content={content} url={url} urlValidation={this.state.urlValidation}
-                  onClose={() => handleModalReturnAdd(this.setState.bind(this))}
+                  onReturnUpdate={() => handleModalReturnUpdate(this.setState.bind(this))}
+                  onReturnAdd={() => handleModalReturnAdd(this.setState.bind(this))}
                   clicked={this.state.formulaireUpdate
                     ? () => handleUpdate(this.state, this.state.id, this.setState.bind(this)) : () => handleSubmit(this.state, this.setState.bind(this))}
                 /> : null}
