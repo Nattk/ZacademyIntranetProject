@@ -44,7 +44,6 @@ const LoginForm = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({ email, password })
-      console.log('res', user)
       setUser({
         token: user.token,
         promotion: user.promotion
