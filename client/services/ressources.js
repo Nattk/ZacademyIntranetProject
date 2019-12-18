@@ -24,3 +24,16 @@ export const getAllRSS = () => {
 export const getAllFollows = () => {
   return axios.get(baseUrl + 'follows')
 }
+
+export const postRessources = (userToken, data) => {
+  const token = `bearer ${userToken}`
+  const config = {
+    headers: { Authorization: token }
+
+  }
+  return axios.post(baseUrl + 'ressources', data, config)
+}
+
+export const getRessource = (id) => {
+  return axios.get(baseUrl + 'ressources/' + id)
+}

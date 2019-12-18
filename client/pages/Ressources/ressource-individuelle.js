@@ -2,27 +2,36 @@ import React, { Component } from 'react'
 import Page from '../../layouts/classic'
 import Card from '../../components/Card/card'
 import Link from 'next/link'
+import { getRessource } from '../../services/ressources'
+import Router from 'next/router'
 
 class RessourceIndividuelle extends Component {
     state = {
-      ressource: {
-        titre: 'Apprendre le HTML en 5min',
-        contenu: 'ressourceIndividuelle',
-        promotion: 'Promo Rennes 2',
-        auteur: 'Nattan Kifoyi',
-        promoId: 1,
-        date: '12/12/19',
-        contributeur: 1
-      }
+      ressource: '',
+      firstName: '',
+      promotion: '',
+      date: ''
+    }
 
+    static getInitialProps ({ query }) {
+      return { query }
+    }
+
+    componentDidMount () {
+      getRessource(this.props.query.id).then(ress => {
+        this.setState({ firstName: ress.data.user.firstName })
+        this.setState({ date: ress.data.date.substring(0, 10) })
+        this.setState({ promotion: ress.data.promotion.title })
+        this.setState({ ressource: ress.data })
+      })
     }
 
     render () {
       return (
-        <Page title={this.state.ressource.titre}>
+        <Page title={this.state.ressource.title} contextePage={this.state.ressource.title} >
           <article className="ressource-individuelle d-flex flex-column">
             <Card styleName="ressource-content">
-              <h1>{this.state.ressource.titre}</h1>
+              <h1>{this.state.ressource.title}</h1>
               <div className="d-flex flex-row">
                 <img
                   src="https://ca.slack-edge.com/TDKLZEH1B-UN6RVVAP3-g00f562b54f1-72"
@@ -30,35 +39,12 @@ class RessourceIndividuelle extends Component {
                   className="img-socialMedia"
                 />
                 <section className="d-flex flex-column ressource-details">
-                  <i>{this.state.ressource.auteur} . 12/12/2019 . {this.state.ressource.promotion}</i>
-                  <i>#HTML #CSS</i>
+                  <i>{this.state.firstName} . {this.state.date}. {this.state.promotion}</i>
                 </section>
               </div>
-              <h2>Partie 1</h2>
-              <p>Incididunt exercitation cillum consequat laboris aliqua minim.<br/>
-            Incididunt sit ut consectetur adipisicing culpa laborum Lorem nostrud pariatur laborum elit commodo commodo ex.<br/>
-            Culpa amet deserunt exercitation cupidatat exercitation Lorem.</p>
-              <p>Incididunt exercitation cillum consequat laboris aliqua minim.<br/>
-            Incididunt sit ut consectetur adipisicing culpa laborum Lorem nostrud pariatur laborum elit commodo commodo ex.<br/>
-            Culpa amet deserunt exercitation cupidatat exercitation Lorem.</p>
-              <p>Incididunt exercitation cillum consequat laboris aliqua minim.<br/>
-            Incididunt sit ut consectetur adipisicing culpa laborum Lorem nostrud pariatur laborum elit commodo commodo ex.<br/>
-            Culpa amet deserunt exercitation cupidatat exercitation Lorem.</p>
-              <p>Incididunt exercitation cillum consequat laboris aliqua minim.<br/>
-            Incididunt sit ut consectetur adipisicing culpa laborum Lorem nostrud pariatur laborum elit commodo commodo ex.<br/>
-            Culpa amet deserunt exercitation cupidatat exercitation Lorem.</p>
-              <p>Incididunt exercitation cillum consequat laboris aliqua minim.<br/>
-            Incididunt sit ut consectetur adipisicing culpa laborum Lorem nostrud pariatur laborum elit commodo commodo ex.<br/>
-            Culpa amet deserunt exercitation cupidatat exercitation Lorem.</p>
-              <h2>Partie 2</h2>
-              <p>Incididunt exercitation cillum consequat laboris aliqua minim.<br/>
-            Incididunt sit ut consectetur adipisicing culpa laborum Lorem nostrud pariatur laborum elit commodo commodo ex.<br/>
-            Culpa amet deserunt exercitation cupidatat exercitation Lorem.</p>
-              <p>Incididunt exercitation cillum consequat laboris aliqua minim.<br/>
-            Incididunt sit ut consectetur adipisicing culpa laborum Lorem nostrud pariatur laborum elit commodo commodo ex.<br/>
-            Culpa amet deserunt exercitation cupidatat exercitation Lorem.</p>
+              <p>{this.state.ressource.content}</p>
             </Card>
-            <Link href="./ressources"><a title="Retour à la liste des ressources">Retour à la liste des ressources</a></Link>
+            <a class="btn btn-danger" onClick={() => Router.back()} title="Retour à la liste des ressources">Retour à la liste des ressources</a>
           </article>
         </Page>
       )
