@@ -67,8 +67,22 @@ export const handleRemove = (state, id, updateState) => {
     .then((data) => {
       const index = state.contacts.findIndex((e) => e.id === id)
       state.contacts[index] = data.data
-      const dataUpdated = state.contacts.filter(el => el.important === true)
 
+      if (index === -1) {
+        state.contacts.push(configuration2(state))
+      } else {
+        state.contacts[index] = configuration2(state)
+      }
+
+      const updatedObj = {
+        ...state.contacts[index]
+      }
+      const updatedContactUtiles = [
+        ...state.contacts.slice(0, index),
+        updatedObj,
+        ...state.contacts.slice(index + 1)
+      ]
+      const dataUpdated = updatedContactUtiles.filter(el => el.important === true)
       updateState({ showModal: false, contacts: dataUpdated, showAlertDelete: true, showDetails: false })
     })
     .catch((err) => console.log('err', err))
