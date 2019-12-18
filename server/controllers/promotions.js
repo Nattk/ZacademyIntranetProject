@@ -61,7 +61,7 @@ promotionsRouter.put('/:id', async (request, response, next) => {
   const body = request.body
 
   try {
-    const promotionToUpdate = await Promotion.findOneAndUpdate({ _id: request.params.id }, body, { runValidators: true })
+    const promotionToUpdate = await Promotion.findOneAndUpdate({ _id: request.params.id }, body, { runValidators: true, context: 'query' })
     response.json(promotionToUpdate.toJSON())
   } catch (error) {
     next(error)
