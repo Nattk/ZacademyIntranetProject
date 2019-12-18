@@ -9,11 +9,25 @@ export const configuration = (state) => {
     content: state.content,
     url: state.url,
     promotionId: JSON.parse(user).promotion
+
   }
 
   return elements
 }
 
+export const configurationUpdate = (state) => {
+  const user = window.localStorage.getItem('user')
+
+  const elements = {
+    title: state.title,
+    content: state.content,
+    url: state.url,
+    promotionId: JSON.parse(user).promotion,
+    id: state.id
+  }
+
+  return elements
+}
 export const handleSubmit = (state, updateState) => {
   axios.post('http://localhost:3333/api/rss', configuration(state))
     .then((data) => {
@@ -26,14 +40,27 @@ export const handleSubmit = (state, updateState) => {
   }, 3000)
 }
 export const handleUpdate = (state, id, updateState) => {
-  axios.put(`http://localhost:3333/api/rss/${id}`, configuration(state))
+  axios.put(`http://localhost:3333/api/rss/${id}`, configurationUpdate(state))
     .then((data) => {
       const index = state.rss.findIndex((e) => e.id === id)
       state.rss[index] = data.data
+      if (index === -1) {
+        state.rss.push(configurationUpdate(state))
+      } else {
+        state.rss[index] = (configurationUpdate(state))
+      }
 
-      updateState({ showModal: false, rss: [...state.rss], showAlertUpdate: true })
+      const updatedObj = {
+        ...state.rss[index]
+      }
+      const updatedRss = [
+        ...state.rss.slice(0, index),
+        updatedObj,
+        ...state.rss.slice(index + 1)
+      ]
+      updateState({ showModal: false, rss: updatedRss, showAlertUpdate: true })
     })
-    .catch((err) => console.log(err))
+    .catch(() => updateState({ urlValidation: 'Veuillez entrer une url RSS valide' }))
   setTimeout(() => {
     updateState({ showAlertUpdate: false })
   }, 3000)

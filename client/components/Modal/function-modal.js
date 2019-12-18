@@ -1,5 +1,11 @@
 export const handleClose = (updateState) => {
-  updateState({ showModal: false })
+  updateState({
+    showModal: false,
+    urlSocialMediaValidation: '',
+    githubValidation: '',
+    mediumValidation: '',
+    twitterValidation: ''
+  })
 }
 export const handleCloseSwitch = (updateState) => {
   updateState({
@@ -18,7 +24,10 @@ export const handleCloseSwitch = (updateState) => {
     emailValidation: '',
     lastNameValidation: '',
     firstNameValidation: '',
-    formateursValidation: ''
+    formateursValidation: '',
+    githubValidation: '',
+    mediumValidation: '',
+    twitterValidation: ''
   })
 }
 export const handleModalAdd = (updateState) => {
@@ -73,7 +82,8 @@ export const handleModalReturnUpdate = (updateState) => {
     recap: false,
     formulaireUpdate: true,
     descriptionDelete: false,
-    showDetails: false
+    showDetails: false,
+    urlSocialMediaValidation: ''
 
   })
 }

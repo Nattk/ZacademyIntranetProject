@@ -30,10 +30,15 @@ class ContactsUtiles extends React.Component {
     ).catch(err => {
       alert(err)
     })
+
     axios.get('http://localhost:3333/api/users')
       .then((data) => {
+        const userImportant = data.data.filter(el => el.important === true && el.promotion !== null)
+        userImportant.filter(el => el.promotion !== null)
+        const ContactsUtiles = userImportant.filter(el => el.promotion.id === JSON.parse(localStorage.getItem('user')).promotion)
+        console.log(data.data.filter(el => el.promotion !== null))
         this.setState({
-          contacts: data.data,
+          contacts: ContactsUtiles,
           id: JSON.parse(localStorage.getItem('user')).promotion
         })
       })
@@ -46,8 +51,7 @@ class ContactsUtiles extends React.Component {
 
   render () {
     console.log(this.state)
-    console.log(this.state.contacts)
-    const contactUtilesByPromotion = (this.state.contacts ? this.state.contacts.filter(el => el.promotion !== null && el.important === true && el.promotion.id === this.state.id) : null)
+
     const { showModal, firstName, lastName, help, email, phone, descriptionDelete, showDetails } = this.state
 
     const formulaire = (
@@ -81,7 +85,7 @@ class ContactsUtiles extends React.Component {
         <article id="contact-utiles" className="col-md-12 col-sm-12 col-xs-12 section-card" >
 
           <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
-            {contactUtilesByPromotion ? contactUtilesByPromotion.map((user, id) => (
+            {this.state.contacts ? this.state.contacts.map((user, id) => (
 
               <CardContact
                 key={user.id}
@@ -120,7 +124,8 @@ class ContactsUtiles extends React.Component {
                   avatar={this.state.avatar}
                   onClose={() => handleCloseSwitch(this.setState.bind(this))}
                 /> : null}
-              {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleClose(this.setState.bind(this))} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false}
+              {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleClose(this.setState.bind(this))} title="Êtes-vous sûr de vouloir retirer ce profil de la liste des contact utiles? 
+                PS:  Il ne sera pas supprimé de la liste des utilisateurs." /> : false}
             </Modal>
           </section>
         </article>
