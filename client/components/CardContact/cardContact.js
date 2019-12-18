@@ -51,7 +51,7 @@ const CardContact = (props) => (
         ) : null}
         {props.medium ? (
           <a href={props.medium} title="Aller sur son linkedin" target="_blank" >
-            <i className="fa fa-linkedin card-button-linkedin" title="Aller sur son linkedin" />
+            <i className="fab fa-medium card-button-medium" title="Aller sur son medium" />
           </a>) : null}
         {props.github ? (
           <a href={props.github} title="Aller sur son github" target="_blank">

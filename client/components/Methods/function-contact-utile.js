@@ -11,7 +11,9 @@ export const configuration = (state) => {
     phone: state.phone,
     email: state.email,
     avatar: state.avatar,
-    promotionId: JSON.parse(user).promotion
+    promotionId: JSON.parse(user).promotion,
+    id: state.id,
+    important: true
   }
   return elements
 }
@@ -27,6 +29,7 @@ export const configuration2 = (state) => {
     avatar: state.avatar,
     promotionId: JSON.parse(user).promotion,
     important: false
+
   }
   return elements
 }
@@ -36,8 +39,22 @@ export const handleUpdate = (state, id, updateState) => {
     .then((data) => {
       const index = state.contacts.findIndex((e) => e.id === id)
       state.contacts[index] = data.data
+      if (index === -1) {
+        state.contacts.push(configuration(state))
+      } else {
+        state.contacts[index] = configuration(state)
+      }
 
-      updateState({ showModal: false, contacts: [...state.contacts], showAlertUpdate: true })
+      const updatedObj = {
+        ...state.contacts[index]
+      }
+      const updatedContactUtiles = [
+        ...state.contacts.slice(0, index),
+        updatedObj,
+        ...state.contacts.slice(index + 1)
+      ]
+
+      updateState({ showModal: false, contacts: updatedContactUtiles, showAlertUpdate: true })
     })
     .catch((err) => console.log('err', err))
   setTimeout(() => {

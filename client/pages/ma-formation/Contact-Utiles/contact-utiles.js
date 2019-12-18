@@ -9,6 +9,7 @@ import FormulaireComponent from '../../../components/Formulaire/formulaireCompon
 import { ContentDetails, ConfirmationDetails, handleUpdate, handleRemove, onShowRecapForm } from '../../../components/Methods/function-contact-utile'
 import { DeleteDescription } from '../../../components/Modal/SectionModal'
 import '../../../styles/sass/styles.scss'
+import userService from '../../../services/users'
 class ContactsUtiles extends React.Component {
   constructor (props) {
     super(props)
@@ -20,28 +21,26 @@ class ContactsUtiles extends React.Component {
   }
 
   componentDidMount () {
-    const user = window.localStorage.getItem('user')
-    const promotionID = JSON.parse(user).promotion
-    const role = JSON.parse(user).role
-    if (role === 'superadmin' || role === 'admin') {
-      this.setState({ showContacts: true })
+    const user = JSON.parse(localStorage.getItem('user'))
+
+    userService.setToken(user.token)
+    userService.getAll().then(res => {
+      this.setState({ user: res.role })
     }
+    ).catch(err => {
+      alert(err)
+    })
+
     axios.get('http://localhost:3333/api/users')
       .then((data) => {
-        const promotionUser = data.data.filter(el => el.promotion !== null)
-        promotionUser.filter(el => el.id === promotionID)
         const userImportant = data.data.filter(el => el.important === true && el.promotion !== null)
         userImportant.filter(el => el.promotion !== null)
-        const ContactsUtiles = userImportant.filter(el => el.promotion.id === promotionID)
-        if (this.state.showContacts === false) {
-          this.setState({ contacts: ContactsUtiles })
-        } else {
-          this.setState({ contacts: userImportant })
-        }
-        if (role !== 'eleve' || role !== 'formateur') {
-          this.setState({ showButtons: true })
-        }
-        return this.state.showButtons
+        const ContactsUtiles = userImportant.filter(el => el.promotion.id === JSON.parse(localStorage.getItem('user')).promotion)
+        console.log(data.data.filter(el => el.promotion !== null))
+        this.setState({
+          contacts: ContactsUtiles,
+          id: JSON.parse(localStorage.getItem('user')).promotion
+        })
       })
       .catch(err => console.log(err))
   }
@@ -51,7 +50,9 @@ class ContactsUtiles extends React.Component {
   }
 
   render () {
-    const { showModal, showButtons, firstName, lastName, help, email, phone, descriptionDelete, showDetails } = this.state
+    console.log(this.state)
+
+    const { showModal, firstName, lastName, help, email, phone, descriptionDelete, showDetails } = this.state
 
     const formulaire = (
 
@@ -95,7 +96,7 @@ class ContactsUtiles extends React.Component {
                 content={user.length && user.help.length > 70 ? user.help.substring(0, 70) + '...' : user.help}
                 mail={user.email}
                 phone={user.phone}
-                showButton={showButtons}
+                showButton={this.state.user === 'admin' || this.state.user === 'superadmin'}
                 remove={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, recap: false, formulaireTitleAdd: '', formulaireUpdate: '', id: user.id, important: false, showDetails: false })}
                 update={() => this.setState({ showModal: true, formulaire: true, recap: false, formulaireUpdate: true, descriptionDelete: false, formulaireTitleAdd: '', lastName: user.lastName, firstName: user.firstName, help: user.help, id: user.id, avatar: user.avatar, phone: user.phone, email: user.email, lastNameValidation: '', firstNameValidation: '', contentValidation: '', phoneValidation: '', mailValidation: '', showDetails: false })}
                 showDetails={() => this.setState({ showModal: true, formulaire: false, recap: false, showDetails: true, formulaireUpdate: false, descriptionDelete: false, formulaireTitleAdd: '', lastName: user.lastName, firstName: user.firstName, help: user.help, id: user.id, avatar: user.avatar, phone: user.phone, email: user.email })}
@@ -123,7 +124,8 @@ class ContactsUtiles extends React.Component {
                   avatar={this.state.avatar}
                   onClose={() => handleCloseSwitch(this.setState.bind(this))}
                 /> : null}
-              {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleClose(this.setState.bind(this))} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false}
+              {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleClose(this.setState.bind(this))} title="Êtes-vous sûr de vouloir retirer ce profil de la liste des contact utiles? 
+                PS:  Il ne sera pas supprimé de la liste des utilisateurs." /> : false}
             </Modal>
           </section>
         </article>

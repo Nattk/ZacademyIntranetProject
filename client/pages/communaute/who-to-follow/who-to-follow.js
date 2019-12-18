@@ -7,31 +7,34 @@ import Modal from '../../../components/Modal/modal'
 import FormulaireComponent from '../../../components/Formulaire/formulaireComponent'
 import { DeleteDescription } from '../../../components/Modal/SectionModal'
 import { onShowRecapFormWho2Follow } from '../../../components/Methods/function-validation'
-import { handleModalAdd, handleClose, handleModalReturnAdd, handleModalReturnUpdate } from '../../../components/Modal/function-modal'
+import { handleModalAdd, handleCloseSwitch, handleModalReturnAdd, handleModalReturnUpdate } from '../../../components/Modal/function-modal'
 import { getAllPromotions, getWhoFollow } from '../../../services/creation-promotion'
 import { handleUpdate, handleSubmit, handleRemove, ContentDetails, ConfirmationDetails } from '../../../components/Methods/function-who-to-follow'
-
+import userService from '../../../services/users'
 class WhoFollow extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { recap: false, contacts: '', promotions: '', urlValidation: '' }
+    this.state = { recap: false, contacts: '', promotions: '', urlValidation: '', showButtons: '' }
     this.onChangePromotion = this.onChangePromotion.bind(this)
   }
 
   componentDidMount () {
-    const user = window.localStorage.getItem('user')
-    const role = JSON.parse(user).role
-    const PromotionID = JSON.parse(user).promotion
+    const user = JSON.parse(localStorage.getItem('user'))
 
-    if (role !== 'eleve' || role !== 'formateur') {
-      this.setState({ showButtons: true })
+    userService.setToken(user.token)
+    userService.getAll().then(res => {
+      this.setState({ user: res.role })
     }
+    ).catch(err => {
+      alert(err)
+    })
+
     axios.all([getWhoFollow(), getAllPromotions()])
       .then(axios.spread((follow, promotions) => {
-        this.setState({ contacts: follow.data.filter(el => el.promotion === PromotionID), promotions: promotions.data })
+        this.setState({
+          contacts: follow.data.filter(el => el.promotion === JSON.parse(localStorage.getItem('user')).promotion), promotions: promotions.data, id: JSON.parse(localStorage.getItem('user'))
+        })
       }))
-
-      .catch(err => console.log(err))
   }
 
   onChange = (e) => {
@@ -43,7 +46,8 @@ class WhoFollow extends React.Component {
   }
 
   render () {
-    const { showButtons, showDetails, contacts, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, github, medium, twitter, title, content, avatar, selectedPromotion } = this.state
+    console.log(this.state)
+    const { showDetails, contacts, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, github, medium, twitter, title, content, avatar, selectedPromotion } = this.state
     const card = (
       contacts ? contacts.map((user) =>
         <CardContact
@@ -51,17 +55,38 @@ class WhoFollow extends React.Component {
           title={user.title} image
           avatar={user.avatar}
           content={user.content.length > 70 ? user.content.substring(0, 70) + '...' : user.content}
-          showButton={showButtons}
+          showButton={this.state.user === 'admin' || this.state.user === 'superadmin'}
           twitter={user.twitter} github={user.github} medium={user.medium}
           remove={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, recap: false, formulaireTitleAdd: '', formulaireUpdate: '', id: user.id, showDetails: false })}
-          update={() => this.setState({ showModal: true, formulaire: true, recap: false, formulaireUpdate: true, descriptionDelete: false, formulaireTitleAdd: '', title: user.title, content: user.content, id: user.id, avatar: user.avatar, github: user.github, twitter: user.twitter, medium: user.medium, titleValidation: '', contentValidation: '', showDetails: false })}
+          update={() => this.setState({
+            showModal: true,
+            formulaire: true,
+            recap: false,
+            formulaireUpdate: true,
+            descriptionDelete: false,
+            formulaireTitleAdd: '',
+            title: user.title,
+            content: user.content,
+            id: user.id,
+            avatar: user.avatar,
+            github: user.github,
+            twitter: user.twitter,
+            medium: user.medium,
+            titleValidation: '',
+            contentValidation: '',
+            githubValidation: '',
+            twitterValidation: '',
+            mediumValidation: '',
+            urlSocialMediaValidation: '',
+            showDetails: false
+          })}
           showDetails={() => this.setState({ showModal: true, formulaire: false, recap: false, showDetails: true, formulaireUpdate: false, descriptionDelete: false, formulaireTitleAdd: '', title: user.title, content: user.content, id: user.id, avatar: user.avatar, github: user.github, twitter: user.twitter, medium: user.medium, titleValidation: '', contentValidation: '' })}
 
         />) : null
     )
     const formulaire = (
       <FormulaireComponent
-        handleClose={() => handleClose(this.setState.bind(this))}
+        handleClose={() => handleCloseSwitch(this.setState.bind(this))}
         buttonName={this.state.formulaireUpdate ? 'Mettre à jour' : 'Ajouter'}
         clicked={() => onShowRecapFormWho2Follow(this.state, this.setState.bind(this))}
         onChange={this.onChange.bind(this)}
@@ -85,10 +110,13 @@ class WhoFollow extends React.Component {
     return (
       <Page title=" Influenceurs" contextePage="Who-to-follows" >
         <article id="who-to-follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
-          {showButtons ? <Header title="Ajouter un contact" clicked={() => handleModalAdd(this.setState.bind(this))} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} /> : null}
+          {this.state.user === 'admin' || this.state.user === 'superadmin'
+
+            ? <Header title="Ajouter un contact" clicked={() => handleModalAdd(this.setState.bind(this))} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} />
+            : null}
           <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
             {card}
-            <Modal show={showModal} onClose={() => handleClose(this.setState.bind(this))} titleModal={formulaireTitleAdd ? "Ajout d'un contact" : '' || formulaireUpdate ? 'Modification du contact' : '' || showDetails ? this.state.title : ''}>
+            <Modal show={showModal} onClose={() => handleCloseSwitch(this.setState.bind(this))} titleModal={formulaireTitleAdd ? "Ajout d'un contact" : '' || formulaireUpdate ? 'Modification du contact' : '' || showDetails ? this.state.title : ''}>
               {this.state.formulaire ? formulaire : ''}
               {this.state.recap
                 ? <ConfirmationDetails title={title} content={content} avatar={avatar} medium={medium} github={github} twitter={twitter} urlSocialMediaValidation={this.state.urlSocialMediaValidation}
@@ -99,8 +127,8 @@ class WhoFollow extends React.Component {
                   clicked={this.state.formulaireUpdate
                     ? () => handleUpdate(this.state, this.state.id, this.setState.bind(this)) : () => handleSubmit(this.state, this.setState.bind(this))}
                 /> : null}
-              {showDetails ? <ContentDetails title={title} content={content} github={github} medium={medium} twitter={twitter} promotion={selectedPromotion ? selectedPromotion.title : selectedPromotion} onClose={() => handleClose(this.setState.bind(this))} /> : null}
-              {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleClose(this.setState.bind(this))} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false}
+              {showDetails ? <ContentDetails title={title} content={content} github={github} medium={medium} twitter={twitter} promotion={selectedPromotion ? selectedPromotion.title : selectedPromotion} onClose={() => handleCloseSwitch(this.setState.bind(this))} /> : null}
+              {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleCloseSwitch(this.setState.bind(this))} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false}
             </Modal>
 
           </section>

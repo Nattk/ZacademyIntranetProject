@@ -42,7 +42,7 @@ export const onShowRecapForm = (state, updateState) => {
 export const onShowRecapFormWho2Follow = (state, updateState) => {
   const socialLink = state.twitter || state.medium || state.github
   if (state.title && state.content && socialLink !== '') {
-    updateState({ recap: true, formulaire: false, urlSocialMediaValidation: '' })
+    updateState({ recap: true, formulaire: false, urlSocialMediaValidation: '', githubValidation: ' ', twitterValidation: ' ', mediumValidation: ' ' })
   } else {
     handleValidation(state, updateState)
   }

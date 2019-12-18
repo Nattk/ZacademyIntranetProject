@@ -15,37 +15,74 @@ export const configuration = (state) => {
   }
   return elements
 }
+export const configurationUpdate = (state) => {
+  const user = window.localStorage.getItem('user')
 
+  const elements = {
+    title: state.title,
+    content: state.content,
+    avatar: state.avatar,
+    twitter: state.twitter,
+    medium: state.medium,
+    github: state.github,
+    id: state.id,
+    promotionId: JSON.parse(user).promotion
+  }
+
+  return elements
+}
 export const handleSubmit = (state, updateState) => {
   axios.post('http://localhost:3333/api/follows', configuration(state))
     .then((data) => {
       updateState({ showModal: false, contacts: [...state.contacts, data.data], showAlertSuccess: true, recap: true })
     })
     .catch(err =>
-
-      updateState({
-        urlSocialMediaValidation: err.response.data.error,
-        githubValidation: err.response.data.error.match('github') ? ' Veuillez entrer une URL github ou gitlab valide' : '',
-        twitterValidation: err.response.data.error.match('twitter') ? ' Veuillez entrer une URL twitter valide' : '',
-        mediumValidation: err.response.data.error.match('medium') ? ' Veuillez entrer une URL medium valide' : ''
-      }))
+      err.response.data.error
+        ? updateState({
+          urlSocialMediaValidation: err.response.data.error,
+          githubValidation: err.response.data.error.match('github') ? ' Veuillez entrer une URL github ou gitlab valide' : '',
+          twitterValidation: err.response.data.error.match('twitter') ? ' Veuillez entrer une URL twitter valide' : '',
+          mediumValidation: err.response.data.error.match('medium') ? ' Veuillez entrer une URL medium valide' : ''
+        }) : updateState({
+          githubValidation: '',
+          twitterValidation: '',
+          mediumValidation: ''
+        }))
   setTimeout(() => {
     updateState({ showAlertSuccess: false })
   }, 3000)
 }
 
 export const handleUpdate = (state, id, updateState) => {
-  axios.put(`http://localhost:3333/api/follows/${id}`, configuration(state))
+  axios.put(`http://localhost:3333/api/follows/${id}`, configurationUpdate(state))
     .then((data) => {
       const index = state.contacts.findIndex((e) => e.id === id)
       state.contacts[index] = data.data
-      updateState({ showModal: false, contacts: [...state.contacts], showAlertUpdate: true })
+      if (index === -1) {
+        state.contacts.push(configurationUpdate(state))
+      } else {
+        state.contacts[index] = configurationUpdate(state)
+      }
+
+      const updatedObj = {
+        ...state.contacts[index]
+      }
+      const updatedWho2follow = [
+        ...state.contacts.slice(0, index),
+        updatedObj,
+        ...state.contacts.slice(index + 1)
+      ]
+      updateState({ showModal: false, contacts: updatedWho2follow, showAlertUpdate: true })
     })
-    .catch((err) => updateState({
+    .catch((err) => err.response.data.error ? updateState({
       urlSocialMediaValidation: err.response.data.error,
       githubValidation: err.response.data.error.match('github') ? ' Veuillez entrer une URL github ou gitlab valide' : '',
       twitterValidation: err.response.data.error.match('twitter') ? ' Veuillez entrer une URL twitter valide' : '',
       mediumValidation: err.response.data.error.match('medium') ? ' Veuillez entrer une URL medium valide' : ''
+    }) : updateState({
+      githubValidation: '',
+      twitterValidation: '',
+      mediumValidation: ''
     }))
   setTimeout(() => {
     updateState({ showAlertUpdate: false })
@@ -143,7 +180,10 @@ export const Update = (state, updateState) => {
       promotionId: user.promotionId,
       titleValidation: '',
       contentValidation: '',
-
+      urlSocialMediaValidation: '',
+      githubValidation: '',
+      mediumValidation: '',
+      twitterValidation: '',
       showDetails: false
     }))
 }

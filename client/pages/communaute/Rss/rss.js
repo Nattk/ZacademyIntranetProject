@@ -8,6 +8,7 @@ import FormulaireComponent from '../../../components/Formulaire/formulaireCompon
 import { DeleteDescription } from '../../../components/Modal/SectionModal'
 import { handleUpdate, handleSubmit, handleRemove, handleClose, handleModalAdd, onShowRecapForm, ConfirmationDetails, ContentDetails } from '../../../components/Methods/function-rss'
 import { handleModalReturnAdd, handleModalReturnUpdate } from '../../../components/Modal/function-modal'
+import userService from '../../../services/users'
 class Follow extends React.Component {
   constructor (props) {
     super(props)
@@ -15,20 +16,21 @@ class Follow extends React.Component {
   }
 
   componentDidMount () {
-    const user = window.localStorage.getItem('user')
-    const role = JSON.parse(user).role
-    const PromotionId = JSON.parse(user).promotion
+    const user = JSON.parse(localStorage.getItem('user'))
+
+    userService.setToken(user.token)
+    userService.getAll().then(res => {
+      this.setState({ user: res.role })
+    }
+    ).catch(err => {
+      alert(err)
+    })
 
     axios.get('http://localhost:3333/api/rss')
       .then((data) => {
-        this.setState({ rss: data.data.filter(el => el.promotion === PromotionId) })
+        this.setState({ rss: data.data.filter(el => el.promotion === JSON.parse(localStorage.getItem('user')).promotion) })
       })
       .catch(err => console.log(err))
-
-    if (role !== 'eleve' || role !== 'formateur') {
-      this.setState({ showButtons: true })
-    }
-    return this.state.showButtons
   }
 
   onChange = (e) => {
@@ -36,14 +38,15 @@ class Follow extends React.Component {
   }
 
   render () {
-    const { showButtons, showDetails, rss, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, url, title, content } = this.state
+    console.log(this.state)
+    const { showDetails, rss, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, url, title, content } = this.state
     const card = (
       rss ? rss.map((user) =>
         <CardContact
           key={user.id}
           title={user.title}
           content={user.content.length > 70 ? user.content.substring(0, 70) + '...' : user.content}
-          showButton={!!showButtons}
+          showButton={this.state.user === 'admin' || this.state.user === 'superadmin'}
           linkFluxRss={user.url}
           remove={() => this.setState({ showModal: true, descriptionDelete: true, formulaire: false, recap: false, formulaireTitleAdd: '', formulaireUpdate: '', id: user.id, showDetails: false })}
           update={() => this.setState({ showModal: true, formulaire: true, recap: false, formulaireUpdate: true, descriptionDelete: false, formulaireTitleAdd: '', title: user.title, content: user.content, id: user.id, url: user.url, titleValidation: '', contentValidation: '', urlValidation: '', showDetails: false })}
@@ -73,13 +76,14 @@ class Follow extends React.Component {
     return (
       <Page title="Rss" contextePage="Rss" >
         <article id="who-to-follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
-          {showButtons ? <Header title="Ajouter un contact" clicked={() => handleModalAdd(this.setState.bind(this))} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} /> : null}
+          {this.state.user === 'admin' || this.state.user === 'superadmin' ? <Header title="Ajouter un contact" clicked={() => handleModalAdd(this.setState.bind(this))} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} /> : null}
           <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
             {card}
             <Modal show={showModal} onClose={() => handleClose(this.setState.bind(this))} titleModal={formulaireTitleAdd ? "Ajout d'un flux rss" : '' || formulaireUpdate ? 'Modification du flux rss' : '' || showDetails ? this.state.title : ''}>
               {this.state.formulaire ? formulaire : ''}
               {this.state.recap
                 ? <ConfirmationDetails title={title} content={content} url={url} urlValidation={this.state.urlValidation}
+                  formulaireUpdate={this.state.formulaireUpdate}
                   onReturnUpdate={() => handleModalReturnUpdate(this.setState.bind(this))}
                   onReturnAdd={() => handleModalReturnAdd(this.setState.bind(this))}
                   clicked={this.state.formulaireUpdate
