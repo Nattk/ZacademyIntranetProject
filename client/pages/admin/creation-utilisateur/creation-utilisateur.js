@@ -223,6 +223,8 @@ class CreaUtilisateur extends Component {
                         password: userCSV.mdp_academy,
                         role: 'eleve',
                         phone: `0${userCSV.tel}`,
+                        important: !!userCSV.important,
+                        avatar: userCSV.avatar,
                         help: userCSV.description
                       })
                     }
