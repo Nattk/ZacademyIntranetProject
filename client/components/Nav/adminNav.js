@@ -27,7 +27,7 @@ const AdminNav = () => {
         <Link href="/index_connecte"><a className="btn btn-danger bouton-navbar" role="button" >ACCUEIL</a></Link>
         {IsOpen1
           ? <div className="dropdown show">
-            <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink"
               aria-haspopup="true" aria-expanded="true" onClick={() => setIsOpen1(!IsOpen1)}>
           Créer
             </a>
@@ -38,20 +38,15 @@ const AdminNav = () => {
             </div>
           </div>
           : <div className="dropdown">
-            <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink"
               aria-haspopup="true" aria-expanded="false" onClick={() => setIsOpen1(!IsOpen1)}>
           Créer
             </a>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <Link href="/admin/creation-programme/creation-programme"><a role="button">Creation Programme</a></Link><br></br>
-              <Link href="/admin/creation-promotion/creation-promotion"><a role="button">Creation Promotion</a></Link><br></br>
-              <Link href="/admin/creation-utilisateur/creation-utilisateur"><a role="button">Creation Utilisateur</a></Link><br></br>
-            </div>
           </div>
         }
         {IsOpen2
           ? <div className="dropdown show">
-            <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink"
               aria-haspopup="true" aria-expanded="true" onClick={() => setIsOpen2(!IsOpen1)}>
           Modifier
             </a>
@@ -63,16 +58,10 @@ const AdminNav = () => {
             </div>
           </div>
           : <div className="dropdown">
-            <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink"
               aria-haspopup="true" aria-expanded="false" onClick={() => setIsOpen2(!IsOpen1)}>
           Modifier
             </a>
-
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <Link href="/admin/gestion-programme/gestion-programme"><a role="button" alt="Lien pour gérer les programmes">Liste programme</a></Link><br></br>
-              <Link href="/admin/gestion-promotion/gestion-promotion"><a role="button" alt="Lien pour gérer les promotions">Gestion Promotion</a></Link><br></br>
-              <Link href="/admin/gestion-utilisateur/gestion-utilisateur"><a role="button" alt="Lien pour gérer les utilisateurs">Gestion Utilisateur</a></Link><br></br>
-            </div>
           </div>
         }
         <div id="end-of-navbar">
