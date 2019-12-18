@@ -36,7 +36,6 @@ ressourcesRouter.post('/', async (request, response, next) => {
     return response.status(400).json({ error: 'content missing!' })
   }
   const token = getTokenFrom(request)
-
   try {
     const decodedToken = jwt.verify(token, process.env.SECRET)
     if (!token || !decodedToken.id) {
@@ -44,7 +43,7 @@ ressourcesRouter.post('/', async (request, response, next) => {
     }
 
     const user = await User.findById(decodedToken.id)
-    const newRessource = new Ressource({ ...request.body, user: user.id, promotion: promotion.id, date: new Date() })
+    const newRessource = new Ressource({ ...request.body, user: user.id, promotion: promotion, date: new Date() })
 
     const savedRessource = await newRessource.save()
     response.json(savedRessource.toJSON())
