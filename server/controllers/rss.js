@@ -37,7 +37,7 @@ rssRouter.put('/:id', async (request, response, next) => {
   const body = request.body
 
   try {
-    const rssToUpdate = await Rss.findOneAndUpdate(request.params.id, { ...body, date: new Date() }, { runValidators: true })
+    const rssToUpdate = await Rss.findOneAndUpdate({ _id: request.params.id }, { ...body, date: new Date() }, { runValidators: true })
     response.json(rssToUpdate.toJSON())
   } catch (e) {
     next(e)

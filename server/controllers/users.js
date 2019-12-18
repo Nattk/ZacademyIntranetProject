@@ -71,7 +71,7 @@ usersRouter.put('/:id', async (req, res, next) => {
     const user = req.body
     user.promotion = req.body.promotionId
 
-    const userToUpdate = await User.findOneAndUpdate(req.params.id, user, { runValidators: true })
+    const userToUpdate = await User.findOneAndUpdate({ _id: req.params.id }, user, { runValidators: true })
 
     if (userToUpdate.role === 'formateur' && promotion && promotion.formateurs.filter(x => x.toString() === userToUpdate.id).length === 0) {
       promotion.formateurs = promotion.formateurs.concat(userToUpdate._id)

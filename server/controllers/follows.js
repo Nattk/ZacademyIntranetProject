@@ -36,7 +36,7 @@ followsRouter.put('/:id', async (request, response, next) => {
   const body = request.body
 
   try {
-    const followToUpdate = await Follow.findOneAndUpdate(request.params.id, { ...body, date: new Date() }, { runValidators: true })
+    const followToUpdate = await Follow.findOneAndUpdate({ _id: request.params.id }, { ...body, date: new Date() }, { runValidators: true })
     response.json(followToUpdate.toJSON())
   } catch (e) {
     next(e)
