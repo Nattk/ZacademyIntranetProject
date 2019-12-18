@@ -36,6 +36,7 @@ class Follow extends React.Component {
   }
 
   render () {
+    console.log(this.state)
     const { showButtons, showDetails, rss, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, url, title, content } = this.state
     const card = (
       rss ? rss.map((user) =>
@@ -80,6 +81,7 @@ class Follow extends React.Component {
               {this.state.formulaire ? formulaire : ''}
               {this.state.recap
                 ? <ConfirmationDetails title={title} content={content} url={url} urlValidation={this.state.urlValidation}
+                  formulaireUpdate={this.state.formulaireUpdate}
                   onReturnUpdate={() => handleModalReturnUpdate(this.setState.bind(this))}
                   onReturnAdd={() => handleModalReturnAdd(this.setState.bind(this))}
                   clicked={this.state.formulaireUpdate
