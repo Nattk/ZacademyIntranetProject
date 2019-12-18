@@ -1,6 +1,6 @@
 import axios from 'axios'
-import Button from '../../../components/Boutons/Boutons'
-import { NotificationErrorBack } from '../../../components/Notifications/notifications'
+import Button from '../Boutons/Boutons'
+import { NotificationErrorBack } from '../Notifications/notifications'
 export const configuration = (state) => {
   const user = window.localStorage.getItem('user')
 
@@ -111,9 +111,13 @@ export const ConfirmationDetails = (state, err) => (
       </div>
       : null}
     <footer className="text-right">
-      <Button clicked={state.onClose} id="confirm-creation-promotion" btnType="valider">
-        Revenir
-      </Button>
+      {state.formulaireUpdate
+        ? <Button clicked={state.onReturnUpdate} id="confirm-creation-promotion" btnType="valider">
+          Revenir
+        </Button>
+        : <Button clicked={state.onReturnAdd} id="confirm-creation-promotion" btnType="valider">
+          Revenir
+        </Button>}
       <Button clicked={state.clicked} id="confirm-creation-promotion" btnType="valider">
         Confirmer
       </Button>

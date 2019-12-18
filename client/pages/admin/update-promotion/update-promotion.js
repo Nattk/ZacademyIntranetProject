@@ -11,7 +11,7 @@ import { capitalize } from '../../index_connecte'
 import moment from 'moment'
 import { handleClose } from '../../../components/Modal/function-modal'
 import { onShowRecapUpdatePromotion } from '../../../components/Methods/function-validation'
-import { handleUpdate, RecapPromotion } from './function-update-promotion'
+import { handleUpdate, RecapPromotion } from '../../../components/Methods/function-update-promotion'
 
 class UpdatePromotion extends Component {
   constructor (props) {

@@ -7,9 +7,9 @@ import Modal from '../../../components/Modal/modal'
 import FormulaireComponent from '../../../components/Formulaire/formulaireComponent'
 import { DeleteDescription } from '../../../components/Modal/SectionModal'
 import { onShowRecapFormWho2Follow } from '../../../components/Methods/function-validation'
-import { handleModalAdd, handleCloseSwitch, handleModalReturnAdd } from '../../../components/Modal/function-modal'
+import { handleModalAdd, handleClose, handleModalReturnAdd, handleModalReturnUpdate } from '../../../components/Modal/function-modal'
 import { getAllPromotions, getWhoFollow } from '../../../services/creation-promotion'
-import { handleUpdate, handleSubmit, handleRemove, ContentDetails, ConfirmationDetails } from './function-who-to-follow'
+import { handleUpdate, handleSubmit, handleRemove, ContentDetails, ConfirmationDetails } from '../../../components/Methods/function-who-to-follow'
 
 class WhoFollow extends React.Component {
   constructor (props) {
@@ -23,7 +23,7 @@ class WhoFollow extends React.Component {
     const role = JSON.parse(user).role
     const PromotionID = JSON.parse(user).promotion
 
-    if (role === 'admin' || role === 'superadmin') {
+    if (role !== 'eleve' || role !== 'formateur') {
       this.setState({ showButtons: true })
     }
     axios.all([getWhoFollow(), getAllPromotions()])
@@ -61,7 +61,7 @@ class WhoFollow extends React.Component {
     )
     const formulaire = (
       <FormulaireComponent
-        handleClose={() => handleCloseSwitch(this.setState.bind(this))}
+        handleClose={() => handleClose(this.setState.bind(this))}
         buttonName={this.state.formulaireUpdate ? 'Mettre à jour' : 'Ajouter'}
         clicked={() => onShowRecapFormWho2Follow(this.state, this.setState.bind(this))}
         onChange={this.onChange.bind(this)}
@@ -88,16 +88,19 @@ class WhoFollow extends React.Component {
           {showButtons ? <Header title="Ajouter un contact" clicked={() => handleModalAdd(this.setState.bind(this))} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} /> : null}
           <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
             {card}
-            <Modal show={showModal} onClose={() => handleCloseSwitch(this.setState.bind(this))} titleModal={formulaireTitleAdd ? "Ajout d'un contact" : '' || formulaireUpdate ? 'Modification du contact' : '' || showDetails ? this.state.title : ''}>
+            <Modal show={showModal} onClose={() => handleClose(this.setState.bind(this))} titleModal={formulaireTitleAdd ? "Ajout d'un contact" : '' || formulaireUpdate ? 'Modification du contact' : '' || showDetails ? this.state.title : ''}>
               {this.state.formulaire ? formulaire : ''}
               {this.state.recap
                 ? <ConfirmationDetails title={title} content={content} avatar={avatar} medium={medium} github={github} twitter={twitter} urlSocialMediaValidation={this.state.urlSocialMediaValidation}
-                  onClose={() => handleModalReturnAdd(this.setState.bind(this))}
+
+                  formulaireUpdate={this.state.formulaireUpdate}
+                  onReturnUpdate={() => handleModalReturnUpdate(this.setState.bind(this))}
+                  onReturnAdd={() => handleModalReturnAdd(this.setState.bind(this))}
                   clicked={this.state.formulaireUpdate
                     ? () => handleUpdate(this.state, this.state.id, this.setState.bind(this)) : () => handleSubmit(this.state, this.setState.bind(this))}
                 /> : null}
-              {showDetails ? <ContentDetails title={title} content={content} github={github} medium={medium} twitter={twitter} promotion={selectedPromotion ? selectedPromotion.title : selectedPromotion} onClose={() => handleCloseSwitch(this.setState.bind(this))} /> : null}
-              {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleCloseSwitch(this.setState.bind(this))} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false}
+              {showDetails ? <ContentDetails title={title} content={content} github={github} medium={medium} twitter={twitter} promotion={selectedPromotion ? selectedPromotion.title : selectedPromotion} onClose={() => handleClose(this.setState.bind(this))} /> : null}
+              {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleClose(this.setState.bind(this))} title="Êtes-vous sûr de vouloir supprimer ce profil" /> : false}
             </Modal>
 
           </section>

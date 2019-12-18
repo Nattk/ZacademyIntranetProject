@@ -1,15 +1,13 @@
 
 import Router from 'next/router'
 import axios from 'axios'
-import { capitalize } from '../../index_connecte'
-import Button from '../../../components/Boutons/Boutons'
-import { NotificationErrorBack } from '../../../components/Notifications/notifications'
+import { capitalize } from '../../pages/index_connecte'
+import Button from '../Boutons/Boutons'
 import moment from 'moment'
 moment.locale('fr')
-export const onCreatePromotion = (state, updateState) => {
+export const configuration = (state) => {
   const eleveSelected = { eleveId: state.studentsOption.map(el => el.id) }
   const formateurSelected = { formateurId: state.formateursOption.map(el => el.id) }
-
   const elements = {
     title: state.title,
     city: state.selectedCity.value,
@@ -20,17 +18,15 @@ export const onCreatePromotion = (state, updateState) => {
     eleves: eleveSelected.eleveId,
     slack: state.slack
   }
-
-  axios.post('http://localhost:3333/api/promotions', elements)
+  return elements
+}
+export const handleUpdate = (state, updateState) => {
+  axios.put(`http://localhost:3333/api/promotions/${state.id}`, configuration(state))
     .then((data) => {
-      updateState({ promotions: data, promotion: data.data.id, showAlertSuccess: true })
-      const IdPromotion = data.data.id
-      updateState({ promotion: IdPromotion })
+      updateState({ showModal: false, promotion: data, showAlertUpdate: true })
       return Router.push('/admin/Accueil/accueil')
-    }).catch(err =>
-      updateState({ slackValidation: err.response.data.error })
-
-    )
+    })
+    .catch((err) => console.log('err', err))
 }
 
 export const start = (state) => state.startDate ? capitalize(moment(state.startDate).format('DD MMMM YYYY')) : null
@@ -41,7 +37,6 @@ export const RecapPromotion = (state) =>
 
   <article>
     <section className="title-style-modal">
-      {state.slackValidation ? <NotificationErrorBack title='Veuillez entrer une url slack valide. exemple: https://app.slack.com/client/TDKLZEH1B/CNCQ57W04' /> : null}
       <p><span className="promotion-p-style">Nom de promotion:</span> {state.title}</p>
       <p><span className="promotion-p-style">Ville:</span>&nbsp; {state.selectedCity}</p>
       <p><span className="promotion-p-style">Début formation:</span>&nbsp; {state.start}</p>
@@ -52,13 +47,10 @@ export const RecapPromotion = (state) =>
       {state.slack ? <p><span className="promotion-p-style">Lien Slack:</span>&nbsp; {state.slack} </p> : null}
     </section>
     <section>
-      <p>Vous êtes sur le point de quitter votre espace création promotion.</p>
+      <p>Vous êtes sur le point de quitter votre espace modification promotion.</p>
       <p> Vous seriez redirigé vers votre espace accueil promotion.
-            Êtes vous sur de vouloir créer cette promotion  ?</p>  </section>
+            Êtes vous sur de vouloir modifier cette promotion  ?</p>  </section>
     <footer className="text-right">
-      <Button clicked={state.onClose} id="confirm-creation-promotion" btnType="valider">
-        Revenir
-      </Button>
       <Button clicked={state.clicked} id="confirm-creation-promotion" btnType="valider">
         Confirmer
       </Button>
