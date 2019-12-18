@@ -55,7 +55,7 @@ export default function IndexConnected () {
     }
   }
 
-  const allData = [...rss, ...follows, ...ressources].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
+  const allData = [...rss, ...follows, ...ressources].filter(x => x.promotion === user.promotion).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
 
   useEffect(() => {
     getAllRSS().then(rss => setRss(rss.data))
