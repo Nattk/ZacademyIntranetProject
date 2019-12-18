@@ -47,7 +47,7 @@ const AdminNav = () => {
         {IsOpen2
           ? <div className="dropdown show">
             <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink"
-              aria-haspopup="true" aria-expanded="true" onClick={() => setIsOpen2(!IsOpen1)}>
+              aria-haspopup="true" aria-expanded="true" onClick={() => setIsOpen2(!IsOpen2)}>
           Modifier
             </a>
 
@@ -59,7 +59,7 @@ const AdminNav = () => {
           </div>
           : <div className="dropdown">
             <a className="btn btn-danger dropdown-toggle bouton-navbar" role="button" id="dropdownMenuLink"
-              aria-haspopup="true" aria-expanded="false" onClick={() => setIsOpen2(!IsOpen1)}>
+              aria-haspopup="true" aria-expanded="false" onClick={() => setIsOpen2(!IsOpen2)}>
           Modifier
             </a>
           </div>
