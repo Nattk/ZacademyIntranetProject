@@ -9,7 +9,7 @@ usersRouter.get('/', async (req, res, next) => {
     if (req.get('authorization')) {
       const user = await security.checkUser(req)
       const foundUser = await User.findById(user.id).populate('promotion', { title: 1 })
-      res.json(foundUser.toJSON())
+      return res.json(foundUser.toJSON())
     }
     const users = await User.find({}).populate('promotion', { title: 1 })
     res.json(users.map(u => u.toJSON()))
