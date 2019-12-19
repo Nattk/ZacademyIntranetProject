@@ -108,7 +108,7 @@ class WhoFollow extends React.Component {
     )
 
     return (
-      <Page title=" Influenceurs" contextePage="Who-to-follows" >
+      <Page title="Who to follow" contextePage="Who to follow" >
         <article id="who-to-follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
           {this.state.user === 'admin' || this.state.user === 'superadmin'
 
