@@ -90,6 +90,9 @@ usersRouter.put('/:id', async (req, res, next) => {
 
 usersRouter.delete('/:id', async (req, res, next) => {
   try {
+    if (req.params.id === '5debdf3a42f653337cedcd4f') {
+      return res.status(400).json({ error: 'Impossible de supprimer Dieu.' })
+    }
     await User.findByIdAndRemove(req.params.id)
     res.status(204).end()
   } catch (error) {

@@ -27,24 +27,27 @@ const UtilisateursGestion = () => {
 
 	  const handleNotif = (error, message) => {
 		  if (error) {
-      seterrorStyle(true)
-      setnotifMessage(`${error.response.data.error}`)
-		  }
+	  seterrorStyle(true)
+	  setnotifMessage(`${error.response.data.error}`)
+		  } else {
 		  seterrorStyle(false)
 		  setnotifMessage(`${message}`)
-
-		  setnotifShow(true)
+    }
+    setnotifShow(true)
     setTimeout(() => setnotifShow(false), 10000)
 	  }
 
 	  const handleDelete = async (e) => {
     e.preventDefault()
-    await userService.remove(userToDelete)
-    await userService.getUsers().then(data => setutilisateurs(data))
-    setmodalShow(false)
-    handleNotif(null, 'L\'utilisateur a bien été supprimé')
-
-    event.preventDefault()
+    try {
+      await userService.remove(userToDelete)
+      await userService.getUsers().then(data => setutilisateurs(data))
+      setmodalShow(false)
+      handleNotif(null, 'L\'utilisateur a bien été supprimé')
+    } catch (e) {
+      setmodalShow(false)
+      handleNotif(e, e.response.data.error)
+    }
 	  }
 
 	  const handleClose = (event) => {

@@ -124,7 +124,7 @@ class ContactsUtiles extends React.Component {
                   avatar={this.state.avatar}
                   onClose={() => handleCloseSwitch(this.setState.bind(this))}
                 /> : null}
-              {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleClose(this.setState.bind(this))} title="Êtes-vous sûr de vouloir retirer ce profil de la liste des contact utiles? 
+              {descriptionDelete ? <DeleteDescription handleDelete={() => handleRemove(this.state, this.state.id, this.setState.bind(this))} handleClose={() => handleClose(this.setState.bind(this))} title="Êtes-vous sûr de vouloir retirer ce profil de la liste des contact utiles?
                 PS:  Il ne sera pas supprimé de la liste des utilisateurs." /> : false}
             </Modal>
           </section>

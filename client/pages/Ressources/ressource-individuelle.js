@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Page from '../../layouts/classic'
 import Card from '../../components/Card/card'
-import Link from 'next/link'
 import { getRessource } from '../../services/ressources'
 import Router from 'next/router'
 
