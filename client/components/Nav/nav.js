@@ -55,7 +55,7 @@ const Nav = () => {
             Ressources
             </a>
 
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <div className="dropdown-menu show" aria-labelledby="dropdownMenuLink">
               <Link href='/ressources/formateurs/ressources'>
                 <a role="button" alt="Lien vers ressources formateurs">Formateurs</a>
               </Link><br></br>
