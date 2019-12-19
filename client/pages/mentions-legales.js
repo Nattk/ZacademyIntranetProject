@@ -50,8 +50,8 @@ Service Marketing<br/>
         </section>
         <section><h2>Contact
         </h2>
-        Telephone :
-        Email :
+        Telephone : 06 06 06 06 06
+        Email : norbertqzd.qzd@zenika.com
         </section>
 
       </article>
