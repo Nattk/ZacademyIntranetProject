@@ -19,25 +19,25 @@ const UtilisateursGestion = () => {
     })
   }, [])
 
-	  const handleModal = (id) => {
+  const handleModal = (id) => {
     setuserToDelete(id)
     setmodalShow(true)
     event.preventDefault()
-	  }
+  }
 
-	  const handleNotif = (error, message) => {
-		  if (error) {
-	  seterrorStyle(true)
-	  setnotifMessage(`${error.response.data.error}`)
-		  } else {
-		  seterrorStyle(false)
-		  setnotifMessage(`${message}`)
+  const handleNotif = (error, message) => {
+    if (error) {
+      seterrorStyle(true)
+      setnotifMessage(`${error.response.data.error}`)
+    } else {
+      seterrorStyle(false)
+      setnotifMessage(`${message}`)
     }
     setnotifShow(true)
     setTimeout(() => setnotifShow(false), 10000)
-	  }
+  }
 
-	  const handleDelete = async (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault()
     try {
       await userService.remove(userToDelete)
@@ -48,54 +48,54 @@ const UtilisateursGestion = () => {
       setmodalShow(false)
       handleNotif(e, e.response.data.error)
     }
-	  }
+  }
 
-	  const handleClose = (event) => {
+  const handleClose = (event) => {
     setmodalShow(false)
 
     event.preventDefault()
-	  }
+  }
 
   return (
     <Page title="gestion Utilisateur">
-	      <article className="gestionProgramme card">
-	        <header className="card-header">Liste des Utilisateurs</header>
+      <article className="gestionProgramme card">
+        <header className="card-header">Liste des Utilisateurs</header>
         <AllNotification alertType={errorStyle ? 'danger' : 'success'} show={notifShow} notifMessage={notifMessage} />
-	        <section className="card-body">
-	            {utilisateurs ? Array.from(utilisateurs).map((utilisateur, index) => (
-	              <div key={index} className="d-flex flex- justify-content-around align-items-baseline">
-	                <a href="#">
-	                  {utilisateur.firstName} {utilisateur.lastName}
-	                </a>
-	                <Button btnType="annuler" clicked={() => handleModal(utilisateur.id)}>
-										Supprimer
+        <section className="card-body">
+          {utilisateurs ? Array.from(utilisateurs).map((utilisateur, index) => (
+            <div key={index} className="d-flex flex- justify-content-around align-items-baseline">
+              <a href="#">
+                {utilisateur.firstName} {utilisateur.lastName}
+              </a>
+              <Button btnType="annuler" clicked={() => handleModal(utilisateur.id)}>
+								Supprimer
 	                </Button>
-	                {modalShow ? (
-	                  <Alert
-	                    show={modalShow}
-	                    handleClose={handleClose}
-	                    handleDelete={e => handleDelete(e)}
-	                    headerTitle="Suppression utilisateur"
-	                    modalDescription="Etes vous sûr de vouloir supprimer cet utilisateur ?"
-	                    modalHeader={true}
-	                    modalBody={true}
-	                    modalFooter={true}
-	                  />
-	                ) : null}
+              {modalShow ? (
+                <Alert
+                  show={modalShow}
+                  handleClose={handleClose}
+                  handleDelete={e => handleDelete(e)}
+                  headerTitle="Suppression utilisateur"
+                  modalDescription="Etes vous sûr de vouloir supprimer cet utilisateur ?"
+                  modalHeader={true}
+                  modalBody={true}
+                  modalFooter={true}
+                />
+              ) : null}
 
-	              </div>
-	            )
-	           ) : null}
-	        </section>
-	        <footer className="d-flex flex-row align-items-end justify-content-center">
+            </div>
+          )
+          ) : null}
+        </section>
+        <footer className="d-flex flex-row align-items-end justify-content-center">
 
-	          <a href="/admin/creation-utilisateur/creation-utilisateur" title="modification-utlisateur" className="link-button-creation" >
-							Ajouter un utilisateur
+          <a href="/admin/creation-utilisateur/creation-utilisateur" title="modification-utlisateur" className="link-button-creation" >
+						Ajouter un utilisateur
 	          </a>
 
-	        </footer>
-	      </article>
-	    </Page>
+        </footer>
+      </article>
+    </Page>
   )
 }
 

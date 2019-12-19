@@ -15,7 +15,10 @@ export default function IndexConnected () {
   const [rss, setRss] = useState([])
   const [follows, setFollows] = useState([])
   const [ressources, setRessources] = useState([])
-  const [carousels, setCarousels] = useState([])
+  const [carousel, setCarousel] = useState([])
+  const [notifShow, setnotifShow] = useState(false)
+  const [errorStyle, seterrorStyle] = useState(false)
+  const [notifMessage, setnotifMessage] = useState('')
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -25,7 +28,6 @@ export default function IndexConnected () {
       photo4: ''
     }
   )
-  const carouselFromPromo = carousels.find(x => x.promotion === user.promotion)
   const handleCarouselChange = e => {
     const { name, value } = e.target
     setUserInput({ [name]: value })
@@ -35,23 +37,39 @@ export default function IndexConnected () {
     setshowCarouselForm(!showCarouselForm)
   }
 
+  const handleNotif = (error, message) => {
+    if (error) {
+      seterrorStyle(true)
+      setnotifMessage(`${error.response.data.error}`)
+    } else {
+      seterrorStyle(false)
+      setnotifMessage(`${message}`)
+    }
+    setnotifShow(true)
+    setTimeout(() => setnotifShow(false), 10000)
+  }
+
   const handleConfirmCarousel = async (e) => {
     e.preventDefault()
     try {
-      const carousel = {
+      const carouselUpdate = {
         photo1: userInput.photo1,
         photo2: userInput.photo2,
         photo3: userInput.photo3,
         photo4: userInput.photo4,
         promotionId: user.promotion
       }
-      if (carouselFromPromo) {
-        carouselService.update(carouselFromPromo.id, carousel)
+      if (carousel) {
+        carouselService.update(carousel.id, carouselUpdate)
       } else {
-        carouselService.create(carousel)
+        carouselService.create(carouselUpdate)
       }
-    } catch (error) {
-      console.log('error', error)
+      setshowCarouselForm(false)
+      handleNotif(null, 'Le carousel a bien été mis à jour')
+      setCarousel(carouselUpdate)
+    } catch (e) {
+      setshowCarouselForm(false)
+      handleNotif(e, "Une erreur s'est produite")
     }
   }
 
@@ -61,10 +79,11 @@ export default function IndexConnected () {
     getAllRSS().then(rss => setRss(rss.data))
     getAllFollows().then(follow => setFollows(follow.data))
     getAllRessources().then(ressources => setRessources(ressources.data))
-    carouselService.getAll().then(carousels => setCarousels(carousels))
+    carouselService.getAll().then(carousels => setCarousel(carousels.find(x => x.promotion === user.promotion)))
     userService.setToken(user.token)
     userService.getAll().then(res => setbackUser(res))
   }, [])
+
   return (
     <Page title="Accueil" contextePage="Accueil">
       <div>{(backUser.role === 'admin' || backUser.role === 'superadmin') && backUser.promotion
@@ -72,7 +91,7 @@ export default function IndexConnected () {
         : null }
       {showCarouselForm
         ? <CarouselForm {...userInput} handleCarouselChange={handleCarouselChange} confirm={e => handleConfirmCarousel(e)}></CarouselForm>
-        : <Carousel {...carouselFromPromo}></Carousel> }</div>
+        : <Carousel {...carousel} alertType={errorStyle ? 'danger' : 'success'} show={notifShow} notifMessage={notifMessage}></Carousel> }</div>
       <div>
         <article className="card" id="newsfeed_accueil">
           <section className="card-header">
