@@ -76,7 +76,7 @@ class Follow extends React.Component {
     return (
       <Page title="Rss" contextePage="Rss" >
         <article id="who-to-follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
-          {this.state.user === 'admin' || this.state.user === 'superadmin' ? <Header title="Ajouter un contact" clicked={() => handleModalAdd(this.setState.bind(this))} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} /> : null}
+          {this.state.user === 'admin' || this.state.user === 'superadmin' ? <Header title="Ajouter un Flux RSS" clicked={() => handleModalAdd(this.setState.bind(this))} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} /> : null}
           <section className="col-md-12 col-sm-12 col-xs-12 section-article" >
             {card}
             <Modal show={showModal} onClose={() => handleClose(this.setState.bind(this))} titleModal={formulaireTitleAdd ? "Ajout d'un flux rss" : '' || formulaireUpdate ? 'Modification du flux rss' : '' || showDetails ? this.state.title : ''}>
