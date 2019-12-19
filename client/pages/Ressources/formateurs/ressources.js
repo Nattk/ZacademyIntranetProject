@@ -32,7 +32,7 @@ class Ressources extends Component {
     }).then(ress => {
       const ressForm = ress.data.filter(data => {
         if (data.user) {
-          return data.user.role === 'formateur'
+          return data.user.role !== 'eleve'
         }
       })
       this.setState({ ressources: ressForm })
