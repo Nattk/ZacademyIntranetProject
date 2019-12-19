@@ -64,6 +64,18 @@
 
 .ressource-individuelle{
     flex-grow : 1;
+    margin: 1rem;
+
+    .btn.btn-danger{
+        color:white;
+       
+        &:hover{
+            color:white;
+        }
+    }
+    p{
+        margin: 1rem
+    }
 }
 
 .ressources select {

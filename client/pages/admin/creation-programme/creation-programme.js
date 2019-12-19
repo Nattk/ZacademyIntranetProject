@@ -76,6 +76,7 @@ class CreaProgramme extends Component {
 
   handleConfirmForm = () => {
     event.preventDefault()
+    console.log('handle')
     Router.push('/admin/gestion-programme/gestion-programme')
   }
 
@@ -92,11 +93,6 @@ class CreaProgramme extends Component {
         alert(err, 'err')
       })
     }
-  }
-
-  handleRedirection = () => {
-    event.preventDefault()
-    Router.push('/admin/gestion-programme/gestion-programme')
   }
 
   handleCreate = (name) => {
@@ -226,7 +222,7 @@ class CreaProgramme extends Component {
               ))
             }
           </ul>
-          <Button clicked={this.handleRedirection} btnType="valider">Creér le programme</Button>
+          <a title="créer le programme" href="/admin/gestion-programme/gestion-programme" className="btn btn-danger">Creér le programme</a>
         </div>
       )
     }

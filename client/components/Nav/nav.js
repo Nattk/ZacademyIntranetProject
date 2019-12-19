@@ -56,8 +56,12 @@ const Nav = () => {
             </a>
 
             <div className="dropdown-menu show" aria-labelledby="dropdownMenuLink">
-              <Link href="/ressources/ressources"><a role="button" alt="Lien vers ressources formateur">Formateurs</a></Link><br></br>
-              <Link href="/ressources/ressources"><a role="button" alt="Lien vers ressources élèves">Élèves</a></Link><br></br>
+              <Link href='/ressources/formateurs/ressources'>
+                <a role="button" alt="Lien vers ressources formateurs">Formateurs</a>
+              </Link><br></br>
+              <Link href='/ressources/eleves/ressources'>
+                <a role="button" alt="Lien vers ressources élèves">Élèves</a>
+              </Link>
             </div>
           </div>
           : <div className="dropdown">

@@ -53,24 +53,6 @@ class ProgrammeGestion extends Component {
                 <Link as={`/admin/gestion-programme/programme/${programme.title}`} href={{ pathname: './programme', query: { id: programme.id } }}>
                   <a title={`Voir les détails de ${programme.title}`}>{programme.title}</a>
                 </Link>
-                {/* <Button btnType="dupliquer" clicked={(progId) => this.handleDuplication(programme.progId)}><a>Dupliquer</a></Button>
-            <Button btnType="annuler" clicked={this.handleModal}>Supprimer</Button>
-            <a href="/admin/gestion-programme/modification-programme" title="modification-programme" className="link-button-valider" >
-              Modifier
-            </a>
-            {this.state.show ? (
-              <Alert
-                show={this.state.show}
-                handleClose={this.handleClose}
-                handleDelete={() => this.handleDelete(programme.progId)}
-                headerTitle="Suppression programme"
-                modalDescription="Etes vous sûr de vouloir supprimer ce programme ?"
-                modalHeader={true}
-                modalBody={true}
-                modalFooter={true}
-              />
-            ) : null
-            } */}
               </li>
             ))}
           </ul>
@@ -87,11 +69,6 @@ class ProgrammeGestion extends Component {
             Liste des programmes
             </header>
             {listeProgramme}
-            {/* <footer className="d-flex flex-row align-items-end justify-content-center">
-              <a href="/admin/creation-programme/creation-programme" title="creation-programme" className="link-button-creation" >
-              Ajouter un programme
-              </a>
-            </footer> */}
           </div>
         </article>
       </Page>
