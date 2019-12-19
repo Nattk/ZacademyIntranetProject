@@ -28,7 +28,7 @@ const Carousel = ({ photo1, photo2, photo3, photo4, alertType, show, notifMessag
             </div>
           </div>
           <div className="carousel-item ">
-            <img src={photo4 || '/slide_3.jpg'}
+            <img src={photo4 || '/slide_4.jpg'}
               className="d-block w-100 carousel-connected " alt="carousel slide 4" />
             <div className="carousel-caption d-none d-md-block">
             </div>
