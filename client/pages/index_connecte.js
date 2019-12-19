@@ -6,6 +6,7 @@ import { useLocalStorage } from '../components/Login/LoginForm'
 import Carousel from '../components/Carousel/carousel'
 import CarouselForm from '../components/Carousel/CarouselForm'
 import userService from '../services/users'
+import axios from 'axios'
 // import moment from 'moment'
 
 export default function IndexConnected () {
@@ -28,6 +29,20 @@ export default function IndexConnected () {
       photo4: ''
     }
   )
+
+  useEffect(() => {
+    axios.all([getAllRSS(), getAllFollows(), getAllRessources()])
+      .then(axios.spread((rss, follows, ressources) => {
+        setRss(rss.data)
+        setFollows(follows.data.filter(x => x.promotion === user.promotion))
+        setRessources(ressources.data.filter(x => x.promotion.id === user.promotion))
+      }))
+
+    carouselService.getAll().then(carousels => setCarousel(carousels.find(x => x.promotion === user.promotion)))
+    userService.setToken(user.token)
+    userService.getAll().then(res => setbackUser(res))
+  }, [])
+
   const handleCarouselChange = e => {
     const { name, value } = e.target
     setUserInput({ [name]: value })
@@ -73,12 +88,19 @@ export default function IndexConnected () {
     }
   }
 
-  const allData = [...rss, ...follows, ...ressources].filter(x => x.promotion === user.promotion).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
+  const allData = [...ressources, ...rss, ...follows].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
 
   useEffect(() => {
-    getAllRSS().then(rss => setRss(rss.data))
-    getAllFollows().then(follow => setFollows(follow.data))
-    getAllRessources().then(ressources => setRessources(ressources.data))
+    axios.all([getAllRSS(), getAllFollows(), getAllRessources()])
+      .then(axios.spread((rss, follows, ressources) => {
+        setRss(rss.data)
+        console.log('rss', rss)
+        setFollows(follows.data)
+        console.log('follows', follows)
+        setRessources(ressources.data)
+        console.log('ressources', ressources)
+      }))
+
     carouselService.getAll().then(carousels => setCarousel(carousels.find(x => x.promotion === user.promotion)))
     userService.setToken(user.token)
     userService.getAll().then(res => setbackUser(res))
