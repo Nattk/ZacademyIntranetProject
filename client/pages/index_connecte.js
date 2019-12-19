@@ -85,7 +85,7 @@ export default function IndexConnected () {
   }, [])
 
   return (
-    <Page title="Accueil" contextePage="Accueil">
+    <Page title={`Accueil ${backUser ? backUser.promotion.title : null}`} contextePage={`Accueil ${backUser ? backUser.promotion.title : null}`}>
       <div>{(backUser.role === 'admin' || backUser.role === 'superadmin') && backUser.promotion
         ? <button className="btn valider" onClick={carouselAdminClick} >Changer le carousel</button>
         : null }
