@@ -4,8 +4,9 @@ import Card from '../../../components/Card/card'
 import Button from '../../../components/Boutons/Boutons'
 import Link from 'next/link'
 import Spinner from '../../../components/Spinner/spinner'
-import { getAllRessources } from '../../../services/ressources'
+import { getAllRessources, deleteRessource } from '../../../services/ressources'
 import userService from '../../../services/users'
+import Modal from '../../../components/Modal/modal'
 
 class Ressources extends Component {
   state = {
@@ -25,29 +26,50 @@ class Ressources extends Component {
       if (this.state.user.role === 'formateur' || this.state.user.role === 'admin' || this.state.user.role === 'superadmin') {
         this.setState({ formateurs: true })
       }
-    }).catch(err => {
-      alert(err)
-    })
-
-    getAllRessources().then(ress => {
+      return getAllRessources()
+    }).then(ress => {
       const ressEleve = ress.data.filter(data => {
-        if (data.user) {
-          return data.user.role === 'eleve'
+        if (data.user && data.user.promotion) {
+          return data.user.role === 'eleve' && data.user.promotion === this.state.user.promotion.id
         }
       })
       this.setState({ ressources: ressEleve })
     })
+      .catch(err => {
+        alert(err)
+      })
+  }
+
+  handleClose = () => {
+    this.setState({ modalShow: false })
   }
 
   handleDelete = (ressId) => {
-    alert('ressource supprimé')
-    const ress = this.state.ressources.filter(item => item.ressId !== ressId)
-    this.setState({ ressources: ress })
+    this.setState({ modalShow: true })
+    this.setState({ ressourceId: ressId })
+  }
+
+  delete = (id) => {
+    let ressCopy = this.state.ressources
+    deleteRessource(id).then(ressource => {
+      ressCopy = ressCopy.filter(ress => ress.id !== id)
+      this.setState({ ressources: ressCopy })
+      this.setState({ modalShow: false })
+      this.setState({ ressourceId: '' })
+    }).catch(err => {
+      console.log('une erreur est survenue', err)
+    })
   }
 
   render () {
     const ressources = this.state.ressourcesFiltered.length ? this.state.ressourcesFiltered : this.state.ressources
     let ressourcesCartes = null
+    const confirm = (
+      <div>
+        <p>Etes vous sur de vouloir supprimer la ressource ?</p>
+        <Button btnType="annuler" clicked={() => this.delete(this.state.ressourceId)}>Suppimer la ressource</Button>
+      </div>
+    )
     if (ressources.length) {
       ressourcesCartes = (
         ressources.map(ressource => (
@@ -71,7 +93,7 @@ class Ressources extends Component {
             {
               this.state.formateurs &&
               <aside className="d-flex flex-row justify-content-end">
-                <Button btnType="annuler" title="Supprimer la ressource" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
+                <Button btnType="annuler" title="Supprimer la ressource" clicked={(ressId) => this.handleDelete(ressource.id)}>Supprimer</Button>
               </aside>
             }
           </Card>)))
@@ -103,6 +125,10 @@ class Ressources extends Component {
             </Link>
           </footer>
         </article>
+        <Modal
+          show={this.state.modalShow}
+	        onClose={this.handleClose}
+	        titleModal="Demande de confirmation">{confirm}</Modal>
       </Page>
     )
   }

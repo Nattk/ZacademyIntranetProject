@@ -5,7 +5,6 @@ import axios from 'axios'
 import Modal from '../../../components/Modal/modal'
 import Router from 'next/router'
 import { Collapse } from 'react-collapse'
-// import Select from 'react-select'
 import { getAll, create, addToProgram, getItem } from '../../../services/creation-programme'
 import AllNotification from '../../../components/Notifications/notifications'
 

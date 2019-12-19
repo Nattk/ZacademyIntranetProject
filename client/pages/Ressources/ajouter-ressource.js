@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import Page from '../../layouts/classic'
 import Button from '../../components/Boutons/Boutons'
 import Modal from '../../components/Modal/modal'
-import Link from 'next/link'
 import { postRessources } from '../../services/ressources'
 import userService from '../../services/users'
+import Router from 'next/router'
 
 class AjouterRessources extends Component {
     state = {
@@ -51,10 +51,10 @@ class AjouterRessources extends Component {
         promotionId: this.state.user.promotion.id
       }
       postRessources(token, data).then(response => {
-        console.log(response)
+        Router.back()
       })
         .catch(err => {
-          console.log(err)
+          alert('une erreur est survenue', err)
         })
     }
 
@@ -85,7 +85,7 @@ class AjouterRessources extends Component {
                 </div>
                 <div className="d-flex flex-row justify-content-end">
                   <Button btnType="valider" title="Ajouter une ressource" clicked={this.handleValidation}>Ajouter</Button>
-                  <Link href="./ressources"><a title="Annuler la modification" className="btn btn-danger">Annuler</a></Link>
+                  <a onClick={() => { Router.back() }} title="Annuler la modification" className="btn btn-danger">Annuler</a>
                 </div>
               </form>
             </section>
