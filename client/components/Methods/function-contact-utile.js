@@ -56,7 +56,7 @@ export const handleUpdate = (state, id, updateState) => {
 
       updateState({ showModal: false, contacts: updatedContactUtiles, showAlertUpdate: true })
     })
-    .catch((err) => console.log('err', err))
+    .catch((err) => alert('err', err))
   setTimeout(() => {
     updateState({ showAlertUpdate: false })
   }, 3000)
@@ -85,7 +85,7 @@ export const handleRemove = (state, id, updateState) => {
       const dataUpdated = updatedContactUtiles.filter(el => el.important === true)
       updateState({ showModal: false, contacts: dataUpdated, showAlertDelete: true, showDetails: false })
     })
-    .catch((err) => console.log('err', err))
+    .catch((err) => alert('err', err))
 
   setTimeout(() => {
     updateState({ showAlertDelete: false })

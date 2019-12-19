@@ -26,7 +26,7 @@ export const handleUpdate = (state, updateState) => {
       updateState({ showModal: false, promotion: data, showAlertUpdate: true })
       return Router.push('/admin/Accueil/accueil')
     })
-    .catch((err) => console.log('err', err))
+    .catch((err) => alert('err', err))
 }
 
 export const start = (state) => state.startDate ? capitalize(moment(state.startDate).format('DD MMMM YYYY')) : null

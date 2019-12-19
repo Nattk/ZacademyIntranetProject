@@ -60,11 +60,11 @@ class AjouterRessources extends Component {
 
     render () {
       const modalConfirm = (
-        <div>
+        <React.Fragment>
           <p>{this.state.titre}</p>
           <p>{this.state.contenu}</p>
           <Button clicked={this.handleCreate} btnType="valider">Créer la ressource</Button>
-        </div>
+        </React.Fragment>
       )
 
       return (

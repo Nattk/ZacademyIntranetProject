@@ -65,24 +65,7 @@ export const handleUpdate = (state, id, updateState) => {
     updateState({ showAlertUpdate: false })
   }, 3000)
 }
-// console.log(data.data)
-// const index = state.rss.findIndex((e) => e.id === id)
-// state.rss[index] = data.data
 
-// if (index === -1) {
-//   state.rss.push(configuration(state))
-// } else {
-//   state.rss[index] = configuration(state)
-// }
-
-// const updatedObj = {
-//   ...state.rss[index]
-// }
-// const updatedRss = [
-//   ...state.rss.slice(0, index),
-//   updatedObj,
-//   ...state.rss.slice(index + 1)
-// ]
 export const handleRemove = (state, id, updateState) => {
   const data = state.rss.filter(el => el.id !== id)
   const newData = [...data]
