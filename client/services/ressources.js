@@ -37,3 +37,7 @@ export const postRessources = (userToken, data) => {
 export const getRessource = (id) => {
   return axios.get(baseUrl + 'ressources/' + id)
 }
+
+export const deleteRessource = (id) => {
+  return axios.delete(baseUrl + 'ressources/' + id)
+}
