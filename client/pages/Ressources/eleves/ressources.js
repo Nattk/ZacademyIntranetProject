@@ -22,7 +22,7 @@ class Ressources extends Component {
     userService.setToken(user.token)
     userService.getAll().then(res => {
       this.setState({ user: res })
-      if (this.state.user.role === 'formateur') {
+      if (this.state.user.role === 'formateur' || this.state.user.role === 'admin' || this.state.user.role === 'superadmin') {
         this.setState({ formateurs: true })
       }
     }).catch(err => {
@@ -65,13 +65,12 @@ class Ressources extends Component {
                 <Link href={{ pathname: '../ressource-individuelle', query: { id: ressource.id } }}>
                   <h2><a tabIndex="0" title="Accéder à la ressource">{ressource.title}</a></h2>
                 </Link>
-                <i>{ressource.user ? ressource.user.firstName : ''} . 12 Nov 2019 . {ressource.promotion.title}</i>
+                <i>{ressource.user ? ressource.user.firstName : ''} . {ressource.date.substring(0, 10)}. {ressource.promotion.title}</i>
               </section>
             </div>
             {
               this.state.formateurs &&
               <aside className="d-flex flex-row justify-content-end">
-                <Link href="./modifier-ressource"><a title="Modifier la ressource" className="btn btn-warning">Modifier</a></Link>
                 <Button btnType="annuler" title="Supprimer la ressource" clicked={(ressId) => this.handleDelete(ressource.ressId)}>Supprimer</Button>
               </aside>
             }
