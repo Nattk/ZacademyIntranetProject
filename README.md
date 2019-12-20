@@ -10,9 +10,10 @@ Then, from the server, run npm run start to start the server and serve the stati
 You can then access the app from localhost:3333 and all the api routes from localhost:3333/api/****
 
 ## TECHNOLOGIES
-Designed with nextJS, you can find the pages in ./pages. They are composed of : 
-- layouts (from ./layouts) which are made from global components
-- specific components to personalize each page
+Designed with nextJS, this project was made with React in front-end and node.js express in backend. 
+You can find the pages inside the client/pages directory. They are composed of : 
+- layouts (from client/layouts) which are made from global components
+- specific components to personalize each page from client/components
 
 ## STYLING
 Each component is with its own sass stylesheet.
