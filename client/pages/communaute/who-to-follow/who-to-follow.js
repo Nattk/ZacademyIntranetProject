@@ -109,7 +109,7 @@ class WhoFollow extends React.Component {
     return (
       <Page title="Who to follow" contextePage="Who to follow" >
         <article id="who-to-follow" className="col-md-12 col-sm-12 col-xs-12 section-card" >
-          {this.state.user === 'admin' || this.state.user === 'superadmin'
+          {this.state.user === 'admin' || this.state.user === 'superadmin' || this.state.user === 'formateur'
 
             ? <Header title="Ajouter un contact" clicked={() => handleModalAdd(this.setState.bind(this))} showAlertSuccess={this.state.showAlertSuccess} showAlertDelete={this.state.showAlertDelete} showAlertUpdate={this.state.showAlertUpdate} />
             : null}
