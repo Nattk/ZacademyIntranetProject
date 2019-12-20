@@ -34,8 +34,8 @@ export default function IndexConnected () {
     axios.all([getAllRSS(), getAllFollows(), getAllRessources()])
       .then(axios.spread((rss, follows, ressources) => {
         setRss(rss.data)
-        setFollows(follows.data.filter(x => x.promotion === user.promotion))
-        setRessources(ressources.data.filter(x => x.promotion.id === user.promotion))
+        setFollows(follows.data)
+        setRessources(ressources.data)
       }))
 
     carouselService.getAll().then(carousels => setCarousel(carousels.find(x => x.promotion === user.promotion)))
@@ -88,7 +88,14 @@ export default function IndexConnected () {
     }
   }
 
-  const allData = [...ressources, ...rss, ...follows].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
+  const filterData = (rs, f, re) => {
+    const follows = f.filter(x => x.promotion === user.promotion)
+    const ressources = re.filter(x => x.promotion.id === user.promotion)
+    const rss = rs.filter(x => x.promotion === user.promotion)
+    return [...ressources, ...rss, ...follows].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
+  }
+
+  const allData = filterData(rss, follows, ressources)
 
   useEffect(() => {
     axios.all([getAllRSS(), getAllFollows(), getAllRessources()])
