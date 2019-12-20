@@ -57,7 +57,7 @@ class Ressources extends Component {
       this.setState({ modalShow: false })
       this.setState({ ressourceId: '' })
     }).catch(err => {
-      console.log('une erreur est survenue', err)
+      alert('une erreur est survenue', err)
     })
   }
 

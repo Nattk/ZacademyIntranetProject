@@ -17,4 +17,18 @@
         min-height: 10rem;
         max-height: 20rem;
     }
+
+    .btn.btn-danger{
+        color:white;
+        background-color:#b21e3e ;
+
+        &:hover{
+            color:white;
+            background-color:#470514
+        }
+    }
+}
+
+.modal-ajouter-ressource{
+    width:100%;
 }

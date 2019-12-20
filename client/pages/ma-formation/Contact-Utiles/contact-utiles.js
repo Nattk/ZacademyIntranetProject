@@ -36,13 +36,12 @@ class ContactsUtiles extends React.Component {
         const userImportant = data.data.filter(el => el.important === true && el.promotion !== null)
         userImportant.filter(el => el.promotion !== null)
         const ContactsUtiles = userImportant.filter(el => el.promotion.id === JSON.parse(localStorage.getItem('user')).promotion)
-        console.log(data.data.filter(el => el.promotion !== null))
         this.setState({
           contacts: ContactsUtiles,
           id: JSON.parse(localStorage.getItem('user')).promotion
         })
       })
-      .catch(err => console.log(err))
+      .catch(err => alert(err))
   }
 
   onChange = (e) => {
@@ -50,8 +49,6 @@ class ContactsUtiles extends React.Component {
   }
 
   render () {
-    console.log(this.state)
-
     const { showModal, firstName, lastName, help, email, phone, descriptionDelete, showDetails } = this.state
 
     const formulaire = (

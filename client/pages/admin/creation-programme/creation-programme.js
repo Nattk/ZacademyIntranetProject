@@ -75,7 +75,6 @@ class CreaProgramme extends Component {
 
   handleConfirmForm = () => {
     event.preventDefault()
-    console.log('handle')
     Router.push('/admin/gestion-programme/gestion-programme')
   }
 

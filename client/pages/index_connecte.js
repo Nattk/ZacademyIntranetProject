@@ -94,11 +94,8 @@ export default function IndexConnected () {
     axios.all([getAllRSS(), getAllFollows(), getAllRessources()])
       .then(axios.spread((rss, follows, ressources) => {
         setRss(rss.data)
-        console.log('rss', rss)
         setFollows(follows.data)
-        console.log('follows', follows)
         setRessources(ressources.data)
-        console.log('ressources', ressources)
       }))
 
     carouselService.getAll().then(carousels => setCarousel(carousels.find(x => x.promotion === user.promotion)))

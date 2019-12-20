@@ -30,7 +30,7 @@ class Follow extends React.Component {
       .then((data) => {
         this.setState({ rss: data.data.filter(el => el.promotion === JSON.parse(localStorage.getItem('user')).promotion) })
       })
-      .catch(err => console.log(err))
+      .catch(err => alert.log(err))
   }
 
   onChange = (e) => {
@@ -38,7 +38,6 @@ class Follow extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     const { showDetails, rss, formulaireTitleAdd, formulaireUpdate, showModal, descriptionDelete, url, title, content } = this.state
     const card = (
       rss ? rss.map((user) =>
