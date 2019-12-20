@@ -47,8 +47,8 @@ class CreaPromotion extends Component {
     const formateurSelected = { formateurId: this.state.formateursOption ? this.state.formateursOption.map(el => el.id) : null }
 
     if (this.state.promotion) {
-      eleveSelected.eleveId.map(eleveID => userService.update(eleveID, { promotion: this.state.promotion }))
-      formateurSelected.formateurId.map(formateurID => userService.update(formateurID, { promotion: this.state.promotion }))
+      eleveSelected.eleveId.map(eleveID => userService.update(eleveID, { promotionId: this.state.promotion }))
+      formateurSelected.formateurId.map(formateurID => userService.update(formateurID, { promotionId: this.state.promotion }))
     }
   }
 
